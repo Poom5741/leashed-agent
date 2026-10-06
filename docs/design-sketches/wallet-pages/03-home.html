@@ -6,15 +6,16 @@
 <title>Leashed Wallet — Home · design sketch</title>
 <style>
   :root {
-    --paper: #E9EBEC; --card: #F4F5F5; --card-2: #E9EBEC;
+    --paper: #E9EBEC; --card: #F5F6F6; --card-2: #ECEEEF; --panel: #F0F2F2;
     --blue: #1F4E79; --blue-pale: #4A7BA6; --blue-soft: rgba(31,78,121,.08);
-    --ink: #17222E; --muted: #5C6B7A; --border: rgba(31,78,121,.35);
-    --hairline: rgba(31,78,121,.18);
-    --success: #2E7D46; --warn: #B0761A; --danger: #A33B2E;
+    --ink: #17222E; --body: #33414F; --muted: #5C6B7A; --faint: #8394A3;
+    --border: rgba(31,78,121,.4); --hairline: rgba(31,78,121,.16);
+    --success: #23663C; --warn: #96620F; --danger: #9C3B2C;
     --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
     --mono: "Roboto Mono", ui-monospace, monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
   body {
     background: var(--paper);
     background-image:
@@ -22,12 +23,14 @@
       linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
     background-size: 32px 32px;
     font-family: var(--sans); color: var(--ink);
-    min-height: 100vh; padding: 40px 20px 48px; position: relative;
+    font-size: 13.5px; line-height: 1.5;
+    min-height: 100vh; padding: 44px 24px 48px; position: relative;
   }
-  .wrap { max-width: 1020px; margin: 0 auto; position: relative; }
+  .wrap { max-width: 1060px; margin: 0 auto; position: relative; }
+  .ic { flex-shrink: 0; display: block; }
   .ruler { position: fixed; left: 18px; top: 0; bottom: 0; width: 1px; background: var(--border); }
   .ruler::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0 15px, var(--border) 15px 16px); }
-  .crosshair { position: fixed; width: 14px; height: 14px; pointer-events: none; }
+  .crosshair { position: fixed; width: 14px; height: 14px; pointer-events: none; z-index: 5; }
   .crosshair::before, .crosshair::after { content: ""; position: absolute; background: var(--border); }
   .crosshair::before { left: 50%; top: 0; bottom: 0; width: 1px; }
   .crosshair::after { top: 50%; left: 0; right: 0; height: 1px; }
@@ -40,20 +43,51 @@
   .head-bar {
     display: flex; justify-content: space-between; align-items: baseline;
     font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 18px;
     border-bottom: 1.5px solid var(--blue); padding-bottom: 10px;
   }
   .head-bar .right { color: var(--muted); }
-  .layout { display: flex; gap: 22px; align-items: flex-start; }
-  .sidenav { width: 168px; flex-shrink: 0; display: flex; flex-direction: column; gap: 2px; }
-  .sidenav a {
-    display: flex; align-items: center; gap: 8px; text-decoration: none;
-    font-size: 12.5px; color: var(--muted); padding: 8px 10px;
-    border-left: 2px solid transparent;
+  .layout { display: flex; gap: 24px; align-items: flex-start; }
+
+  /* ---- sidebar ---- */
+  .sidenav {
+    width: 216px; flex-shrink: 0; position: sticky; top: 24px;
+    background: var(--panel); border: 1.5px solid var(--blue);
+    box-shadow: 5px 5px 0 rgba(31,78,121,.1);
   }
-  .sidenav a.active { color: var(--blue); font-weight: 600; border-left-color: var(--blue); background: var(--blue-soft); }
-  .sidenav a:hover { color: var(--blue); }
-  .sidenav .nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--blue-pale); margin: 10px 10px 4px; }
+  .sidenav .who { padding: 14px 14px 12px; border-bottom: 1px solid var(--hairline); }
+  .sidenav .who .row { display: flex; align-items: center; gap: 10px; }
+  .sidenav .who .avatar {
+    width: 34px; height: 34px; background: var(--blue); color: var(--paper);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .sidenav .who .addr { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--ink); }
+  .sidenav .who .net { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .sidenav .guard {
+    margin-top: 10px; display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--success); border: 1px solid var(--success); padding: 3px 8px;
+  }
+  .sidenav .sec {
+    font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--faint); padding: 12px 14px 5px;
+  }
+  .sidenav a.nav {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    font-size: 13.5px; font-weight: 500; color: var(--body);
+    padding: 9px 14px; border-left: 3px solid transparent;
+  }
+  .sidenav a.nav .ic { color: var(--faint); }
+  .sidenav a.nav:hover { color: var(--blue); background: var(--blue-soft); }
+  .sidenav a.nav:hover .ic { color: var(--blue); }
+  .sidenav a.nav.active {
+    color: var(--blue); font-weight: 600; border-left-color: var(--blue); background: var(--blue-soft);
+  }
+  .sidenav a.nav.active .ic { color: var(--blue); }
+  .sidenav a.nav.danger, .sidenav a.nav.danger .ic { color: var(--danger); }
+  .sidenav .pad { height: 10px; }
+
+  /* ---- content ---- */
   .content { flex: 1; min-width: 0; position: relative; }
   .card {
     background: var(--card); border: 1.5px solid var(--blue);
@@ -68,28 +102,27 @@
     font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
     color: var(--blue-pale); text-transform: uppercase;
   }
-  .page-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-  .lede { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 18px; }
+  .page-title { font-size: 21px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 4px; }
+  .lede { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 18px; max-width: 60ch; }
   .lede strong { color: var(--ink); }
   .mono { font-family: var(--mono); }
   .label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue-pale); margin-bottom: 6px; }
   .total { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
-  .total .amt { font-family: var(--mono); font-size: 34px; font-weight: 600; letter-spacing: -.01em; }
+  .total .amt { font-family: var(--mono); font-size: 36px; font-weight: 600; letter-spacing: -.02em; }
   .total .unit { font-family: var(--mono); font-size: 13px; color: var(--muted); }
-  .delta { font-family: var(--mono); font-size: 12px; color: var(--success); }
+  .delta { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 12px; color: var(--success); }
   .addr-row { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); padding: 9px 12px; background: var(--card); }
   .addr-row code { font-family: var(--mono); font-size: 12px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .copy { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .08em; cursor: pointer; white-space: nowrap; }
-  .tok-row { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-top: 1px solid var(--hairline); }
-  .tok-row:first-child { border-top: none; }
+  .copy { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .08em; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
   .badge {
-    width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .04em;
     color: var(--paper); background: var(--blue); border-radius: 4px;
   }
-  .badge.thc { background: #5B6B8A; }
-  .badge.tusdm { background: #2E7D46; }
-  .badge.usdm { background: #1F4E79; }
+  .badge.thc { background: #56617A; }
+  .badge.tusdm { background: #23663C; }
+  .tok-row { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-top: 1px solid var(--hairline); }
+  .tok-row:first-child { border-top: none; }
   .tok-main { flex: 1; min-width: 0; }
   .tok-name { font-size: 13.5px; font-weight: 600; }
   .tok-sub { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
@@ -97,48 +130,67 @@
   .tok-amt .v { font-family: var(--mono); font-size: 13.5px; font-weight: 600; }
   .tok-amt .u { font-family: var(--mono); font-size: 10.5px; color: var(--muted); display: block; }
   .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 12px 18px; border: 1.5px solid var(--blue); background: var(--blue); color: var(--paper);
     font-family: var(--sans); font-size: 13.5px; font-weight: 600; cursor: pointer;
-    box-shadow: 3px 3px 0 rgba(31,78,121,.25); text-decoration: none; display: inline-block;
+    box-shadow: 3px 3px 0 rgba(31,78,121,.25); text-decoration: none;
+    transition: transform 100ms ease, box-shadow 100ms ease;
   }
+  .btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 rgba(31,78,121,.3); }
   .btn.ghost { background: transparent; color: var(--blue); box-shadow: none; }
-  .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .btn.danger { background: transparent; color: var(--danger); border-color: var(--danger); box-shadow: none; }
+  .btn.sm { padding: 7px 12px; font-size: 12px; }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
   .qr {
-    width: 168px; height: 168px; background:
-      repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0/22px 22px,
-      var(--card); border: 1.5px solid var(--blue); position: relative;
+    width: 176px; height: 176px; background:
+      conic-gradient(var(--ink) 25%, transparent 0 50%, var(--ink) 0 75%, transparent 0) 0 0/28px 28px,
+      linear-gradient(90deg, var(--ink) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(var(--ink) 1px, transparent 1px) 0 0/28px 28px,
+      var(--card);
+    border: 1.5px solid var(--blue); position: relative; padding: 10px;
   }
-  .qr::after {
-    content: ""; position: absolute; inset: 62px; background: var(--card);
-    border: 3px solid var(--blue); display: flex;
+  .qr .core {
+    position: absolute; inset: 0; margin: auto; width: 56px; height: 56px;
+    background: var(--card); border: 2.5px solid var(--blue);
+    display: flex; align-items: center; justify-content: center; color: var(--blue);
   }
-  .qr-tag { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--blue); letter-spacing: .08em; }
   .split { display: flex; gap: 24px; flex-wrap: wrap; }
   .split > * { flex: 1; min-width: 220px; }
-  .stamp { border: 1.5px dashed var(--border); padding: 12px 14px; font-size: 11.5px; color: var(--muted); line-height: 1.5; position: relative; margin-top: 16px; }
-  .stamp .fig2 { position: absolute; top: -8px; left: 10px; background: var(--card); padding: 0 6px; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; color: var(--blue-pale); text-transform: uppercase; }
-  table.ledger { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .stamp { border: 1.5px dashed var(--border); padding: 13px 15px; font-size: 12px; color: var(--muted); line-height: 1.55; position: relative; margin-top: 18px; display: flex; gap: 10px; }
+  .stamp .ic { color: var(--blue-pale); margin-top: 1px; }
+  .stamp .fig2 { position: absolute; top: -8px; left: 12px; background: var(--card); padding: 0 6px; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: var(--blue-pale); text-transform: uppercase; }
+  table.ledger { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   table.ledger th {
     font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
     color: var(--blue-pale); text-align: left; padding: 6px 8px; border-bottom: 1.5px solid var(--border);
   }
-  table.ledger td { padding: 9px 8px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  table.ledger td { padding: 11px 8px; border-bottom: 1px solid var(--hairline); vertical-align: top; color: var(--body); }
   table.ledger .mono { font-size: 11px; }
-  .dir-in { color: var(--success); font-weight: 600; }
-  .dir-out { color: var(--danger); font-weight: 600; }
-  .pill { font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--border); color: var(--muted); }
+  table.ledger tr:hover td { background: var(--blue-soft); }
+  .dir { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; font-weight: 600; }
+  .dir.in { color: var(--success); } .dir.out { color: var(--danger); }
+  .pill { display: inline-flex; align-items: center; gap: 4px; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--border); color: var(--muted); }
   .pill.ok { border-color: var(--success); color: var(--success); }
+  .pill.bad { border-color: var(--danger); color: var(--danger); }
   .foot { margin-top: 14px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
   .foot .trust { color: var(--blue); }
-  .field { margin-bottom: 16px; }
+  .field { margin-bottom: 18px; }
   .field input, .field textarea {
     width: 100%; border: 1.5px solid var(--border); background: var(--card); color: var(--ink);
     font-family: var(--mono); font-size: 13px; padding: 11px 12px; outline: none;
   }
-  .field input:focus, .field textarea:focus { border-color: var(--blue); }
+  .field input:focus, .field textarea:focus { border-color: var(--blue); box-shadow: 2px 2px 0 rgba(31,78,121,.15); }
   .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-  .chip { font-family: var(--mono); font-size: 11px; padding: 5px 10px; border: 1px solid var(--border); color: var(--muted); cursor: pointer; }
+  .chip { font-family: var(--mono); font-size: 11px; padding: 6px 11px; border: 1px solid var(--border); color: var(--muted); cursor: pointer; background: transparent; }
   .chip.active { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); font-weight: 600; }
+  .method { display: flex; gap: 12px; }
+  .method-opt { flex: 1; border: 1.5px solid var(--border); padding: 18px 16px; cursor: pointer; background: transparent; transition: background 120ms ease; }
+  .method-opt.active { border-color: var(--blue); background: var(--blue-soft); box-shadow: 3px 3px 0 rgba(31,78,121,.15); }
+  .method-opt .glyph { width: 36px; height: 36px; border: 1.5px solid var(--blue); display: flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: 10px; }
+  .method-opt .t { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .method-opt .d { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  .method-opt .badge2 { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 7px; background: var(--blue); color: var(--paper); }
+  .method-opt .badge2.rec { background: var(--success); }
 </style>
 </head>
 <body>
@@ -148,34 +200,50 @@
   
 <div class="head-bar"><span>Trust Layer · Leashed Wallet</span><span class="right">SHEET 03 / HOME</span></div>
 <div class="layout"><nav class="sidenav">
-      <div class="nav-label">WALLET · 0x7fA3…9cE2</div><a href="02-unlock.html" class="">▸ Unlock</a><a href="03-home.html" class="active">▸ Home</a><a href="04-agents.html" class="">▸ Agents</a><a href="05-activity.html" class="">▸ Activity</a><a href="06-send.html" class="">▸ Send</a><a href="07-receive.html" class="">▸ Receive</a><a href="08-sign.html" class="">▸ Sign</a><a href="09-apps.html" class="">▸ Authorized Apps</a>
-      <div class="nav-label">MENU</div>
-      <a href="#">◐ Theme</a><a href="#">⤓ Export backup</a><a href="#">✕ Remove wallet</a>
+      <div class="who">
+        <div class="row">
+          <div class="avatar"><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M11 12l9-9"/><path d="M17 6l3 3"/><path d="M14 9l2 2"/></svg></div>
+          <div>
+            <div class="addr">0x7fA3…9cE2</div>
+            <div class="net">ThaiFi · chain 17</div>
+          </div>
+        </div>
+        <span class="guard"><svg class="ic" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Passkey guard</span>
+      </div>
+      <div class="sec">Wallet</div>
+      <a class="nav" href="02-unlock.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg> Unlock</a><a class="nav active" href="03-home.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg> Home</a><a class="nav" href="04-agents.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4"/><path d="M9 16h.01M15 16h.01"/><path d="M2 14h2M20 14h2"/></svg> Agents</a><a class="nav" href="05-activity.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Activity</a><a class="nav" href="06-send.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> Send</a><a class="nav" href="07-receive.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Receive</a><a class="nav" href="08-sign.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"/></svg> Sign</a><a class="nav" href="09-apps.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Authorized Apps</a>
+      <div class="sec">Actions</div>
+      <a class="nav" href="#"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> Export backup</a>
+      <a class="nav" href="#"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg> Theme</a>
+      <a class="nav danger" href="#"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> Remove wallet</a>
+      <div class="pad"></div>
     </nav>
 <div class="content">
   <div class="card"><span class="fig">FIG. 3 — PASSBOOK</span>
     <div class="page-title">Passbook</div>
     <div class="total"><span class="amt">1,284.62</span><span class="unit">pathUSD est.</span></div>
-    <div class="delta">▲ +12.40 today · 0x7fA3…9cE2 · <span class="pill ok">passkey guard</span></div>
+    <span class="delta"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7L7 17"/><path d="M17 17H7V7"/></svg> +12.40 today</span>
+    <span class="mono" style="font-size:12px;color:var(--muted)"> · 0x7fA3…9cE2</span>
     <div style="margin-top:16px" class="addr-row">
       <code>0x7fA3c41B02Ee5D19a8bC7f60241E3d94aa0F9cE2</code>
-      <span class="copy">⧉ COPY</span><span class="copy">QR</span>
+      <span class="copy"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPY</span>
+      <span class="copy"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM21 14v.01M14 21v.01M21 21v.01"/></svg> QR</span>
     </div>
     <div class="btn-row">
-      <a class="btn" href="06-send.html">Send</a>
-      <a class="btn ghost" href="07-receive.html">Receive</a>
-      <a class="btn ghost" href="04-agents.html">Agent marketplace</a>
+      <a class="btn" href="06-send.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> Send</a>
+      <a class="btn ghost" href="07-receive.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Receive</a>
+      <a class="btn ghost" href="04-agents.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4"/><path d="M9 16h.01M15 16h.01"/><path d="M2 14h2M20 14h2"/></svg> Agent marketplace</a>
     </div>
   </div>
   <div class="card"><span class="fig">FIG. 3.1 — BALANCES</span>
     <div class="label">Token ledger</div>
-    <div class="tok-row"><span class="badge">pUSD</span><span class="tok-main"><span class="tok-name">pathUSD</span><span class="tok-sub">TIP-20 · gas + payments</span></span><span class="tok-amt"><span class="v">1,152.408912</span><span class="u">≈ $1,152.41</span></span></div>
-    <div class="tok-row"><span class="badge thc">THC</span><span class="tok-main"><span class="tok-name">THCFI</span><span class="tok-sub">ThaiFi Chain native · MPP rail</span></span><span class="tok-amt"><span class="v">96.250000</span><span class="u">≈ $96.25</span></span></div>
-    <div class="tok-row"><span class="badge tusdm">tU</span><span class="tok-main"><span class="tok-name">tUSDM</span><span class="tok-sub">Cardano x402 rail · test</span></span><span class="tok-amt"><span class="v">24.000000</span><span class="u">≈ $24.00</span></span></div>
-    <div class="tok-row"><span class="badge">US</span><span class="tok-main"><span class="tok-name">USDM</span><span class="tok-sub">Cardano x402 rail</span></span><span class="tok-amt"><span class="v">12.00</span><span class="u">≈ $12.00</span></span></div>
-    <div class="stamp"><span class="fig2">AUDIT</span>Balances are read directly from ThaiFi RPC — no custodian, no index in between. Audit stamp: <span class="mono">CRE-2026-10-06 · PASS</span></div>
+    <div class="tok-row"><span class="badge">pUSD</span><span class="tok-main"><span class="tok-name">pathUSD</span><br><span class="tok-sub">TIP-20 · gas + payments</span></span><span class="tok-amt"><span class="v">1,152.408912</span><span class="u">≈ $1,152.41</span></span></div>
+    <div class="tok-row"><span class="badge thc">THC</span><span class="tok-main"><span class="tok-name">THCFI</span><br><span class="tok-sub">ThaiFi native · MPP rail</span></span><span class="tok-amt"><span class="v">96.250000</span><span class="u">≈ $96.25</span></span></div>
+    <div class="tok-row"><span class="badge tusdm">tU</span><span class="tok-main"><span class="tok-name">tUSDM</span><br><span class="tok-sub">Cardano x402 rail · test</span></span><span class="tok-amt"><span class="v">24.000000</span><span class="u">≈ $24.00</span></span></div>
+    <div class="tok-row"><span class="badge">US</span><span class="tok-main"><span class="tok-name">USDM</span><br><span class="tok-sub">Cardano x402 rail</span></span><span class="tok-amt"><span class="v">12.00</span><span class="u">≈ $12.00</span></span></div>
+    <div class="stamp"><span class="fig2">AUDIT</span><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Balances are read directly from ThaiFi RPC — no custodian in between. Audit stamp: <span class='mono'>CRE-2026-10-06 · PASS</span>.</span></div>
   </div>
-  <div class="foot"><span>leashed-agent · v2 · draft 003</span><span class="trust">trust layer · verifiable</span></div>
+  <div class="foot"><span>leashed-agent · v2 · draft 004</span><span class="trust">trust layer · verifiable</span></div>
 </div></div>
 </div>
 </body>
