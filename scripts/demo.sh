@@ -8,11 +8,15 @@ export LEDGER_PATH=/tmp/leashed-test-ledger.json
 
 echo "══ 1/4 · AGENT JOB (leash-checked, on-chain payments) ══"
 cd "$ROOT/apps/agent"
-# full journey when the LLM upstream is healthy; poster-only otherwise
-if curl -s -o /dev/null -w '' --max-time 20 -X POST https://mpp.thaifi.com/llm/chat -H 'content-type: application/json' -d '{"messages":[{"role":"user","content":"ping"}]}' 2>/dev/null; then
-  npm run job --silent -- "$BRIEF" || npm run job --silent
+# full journey when the LLM upstream is healthy (HTTP 200); poster-only otherwise
+if curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST https://mpp.thaifi.com/llm/chat \
+     -H 'content-type: application/json' -d '{"messages":[{"role":"user","content":"ping"}]}' 2>/dev/null \
+     | grep -q '^200$'; then
+  echo "(LLM upstream healthy → full mode)"
+  npm run job --silent -- "$BRIEF" || JOB_MODE=poster-only npm run job --silent
 else
-  JOB_MODE=poster-only npm run job --silent
+  echo "(LLM upstream 503 → poster-only fallback, still pays 1.5 THCFI real on-chain)"
+  JOB_MODE=poster-only npm run job --silent -- "$BRIEF"
 fi
 
 echo
