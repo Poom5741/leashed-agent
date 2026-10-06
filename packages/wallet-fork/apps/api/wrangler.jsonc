@@ -1,0 +1,59 @@
+{
+  // ThaiFi Wallet — one Worker serving the SPA (static assets) + /api routes.
+  "name": "thaifi-wallet",
+  "compatibility_date": "2026-03-01",
+  "main": "src/index.ts",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+
+  "assets": {
+    "directory": "../web/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    // Requests matching these globs hit the Worker before the asset layer —
+    // without this, the SPA fallback would swallow /api/* and /line-callback.
+    // /SKILL.md goes worker-first too so we can send Cache-Control: no-store
+    // (the zone's edge cache ignores query strings — asset edits would be
+    // invisible for hours otherwise).
+    "run_worker_first": ["/api/*", "/line-callback", "/SKILL.md"]
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "thaifi-wallet",
+      "database_id": "cb693b16-88d5-4e4a-ac30-4ea7032b120c",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Send Email Workers binding — sender address is set in the EmailMessage
+  // "From" header (EMAIL_SENDER). Requires Email Routing enabled on the
+  // thaifi.com zone.
+  "send_email": [{ "name": "EMAIL" }],
+
+  "vars": {
+    "LINE_CHANNEL_ID": "2011666256",
+    "EMAIL_SENDER": "noreply@thaifi.com",
+    "TIDX_URL": "https://tidx.pakxe.net",
+    "THAIFI_CHAIN_ID": "17",
+    "THAIFI_RPC_URL": "https://rpc.thaifi.com",
+    "APP_NAME": "ThaiFi Wallet",
+    "PAYSO_MERCHANT_ID": "72600138",
+    // payso callbacks whose referenceNo isn't one of OUR deposit orders belong
+    // to the ThaiFi Pay gateway — forward them (guarded by INTERNAL_CALLBACK_SECRET).
+    "PAY_FORWARD_URL": "https://pay.thaifi.com/internal/payso/callback"
+  },
+
+  // Secrets (wrangler secret put): JWT_SECRET, LINE_CHANNEL_SECRET, PAYSO_AUTH_KEY,
+  // INTERNAL_CALLBACK_SECRET (same value as the pay worker's)
+  // Hot wallet private key lives in Secrets Store (only MINTER_ROLE on-chain).
+  "secrets_store_secrets": [
+    {
+      "binding": "PAYSO_HOT_KEY",
+      "store_id": "43785d219f6a4e9f84f2ce36ec85cff2",
+      "secret_name": "payso_hot_wallet_key"
+    }
+  ],
+  "routes": [{ "custom_domain": true, "pattern": "wallet.thaifi.com" }]
+}

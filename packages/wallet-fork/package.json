@@ -1,0 +1,20 @@
+{
+  "name": "thaifi-wallet",
+  "version": "0.2.0",
+  "private": true,
+  "description": "ThaiFi non-custodial passkey wallet (chain 17)",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @thaifi-wallet/web",
+    "dev:api": "npm run dev -w @thaifi-wallet/api",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "deploy": "npm run build -w @thaifi-wallet/web && npm run deploy -w @thaifi-wallet/api"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

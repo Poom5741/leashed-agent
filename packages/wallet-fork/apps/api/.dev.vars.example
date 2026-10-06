@@ -1,0 +1,14 @@
+# Copy to .dev.vars (gitignored) for local `wrangler dev`.
+JWT_SECRET=dev-secret-change-me
+LINE_CHANNEL_ID=2011666256
+LINE_CHANNEL_SECRET=
+EMAIL_SENDER=noreply@thaifi.com
+TIDX_URL=https://tidx.pakxe.net
+THAIFI_CHAIN_ID=17
+APP_NAME=ThaiFi Wallet
+
+# PaySolutions PromptPay API bearer (merchant portal → Auth Key)
+PAYSO_AUTH_KEY=
+
+# Hot wallet private key (holds only MINTER_ROLE on THCFI/THCOC)
+PAYSO_HOT_KEY=

@@ -4,6 +4,13 @@ dist/
 .env.local
 *.tsbuildinfo
 
+# wallet-cli npm pack output — keep the source tree, not the tarball
+packages/wallet-cli-fork/*.tgz
+packages/wallet-cli-fork/pnpm-lock.yaml
+
+# wrangler dev artifacts
+apps/api-agents/.wrangler/
+
 # Super-SpecKit harness internals (per-run state, not project history)
 .super-speckit/bugs/
 .super-speckit/qa/
