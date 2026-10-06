@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280" font-family="IBM Plex Sans, Segoe UI, sans-serif">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1F4E79" stroke-opacity="0.14" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="280" fill="#E9EBEC"/>
+  <rect width="1200" height="280" fill="url(#grid)"/>
+  <rect x="18" y="0" width="2" height="280" fill="#1F4E79" opacity="0.5"/>
+  <path d="M18 18 M1182 262" stroke="none"/>
+  <!-- corner crosshairs -->
+  <path d="M1178 14 v16 M1170 22 h16" stroke="#1F4E79" stroke-width="1.5" opacity="0.6"/>
+  <path d="M22 250 v16 M14 258 h16" stroke="#1F4E79" stroke-width="1.5" opacity="0.6"/>
+  <!-- headline card -->
+  <rect x="60" y="52" width="760" height="150" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2.5"/>
+  <rect x="52" y="44" width="12" height="12" fill="none" stroke="#1F4E79" stroke-width="2.5"/>
+  <rect x="816" y="198" width="12" height="12" fill="none" stroke="#1F4E79" stroke-width="2.5"/>
+  <text x="96" y="108" font-size="40" font-weight="700" fill="#17222E" letter-spacing="0.5">Leashed Agent</text>
+  <text x="96" y="148" font-size="19" fill="#1F4E79" font-weight="600">The trust layer for AI agents</text>
+  <text x="96" y="178" font-size="13.5" fill="#5C6B7A">One chain-enforced spending cap · receipted per-call payments · an independent CRE auditor</text>
+  <!-- FIG tag -->
+  <text x="792" y="76" font-size="11" fill="#4A7BA6" font-family="Roboto Mono, monospace" letter-spacing="2" text-anchor="end">FIG. 0 — TRUST LAYER</text>
+  <!-- badge stack right -->
+  <g font-family="Roboto Mono, monospace" font-size="12.5" font-weight="700">
+    <rect x="880" y="66" width="240" height="44" fill="#1F4E79"/>
+    <text x="1000" y="93" fill="#E9EBEC" text-anchor="middle">CARDANO · x402</text>
+    <rect x="880" y="118" width="240" height="44" fill="#56617A"/>
+    <text x="1000" y="145" fill="#E9EBEC" text-anchor="middle">THAIFI · MPP</text>
+    <rect x="880" y="170" width="240" height="44" fill="#23663C"/>
+    <text x="1000" y="197" fill="#E9EBEC" text-anchor="middle">CHAINLINK · CRE</text>
+  </g>
+  <!-- footer strip -->
+  <text x="60" y="246" font-size="12" fill="#5C6B7A" font-family="Roboto Mono, monospace" letter-spacing="1">TOKEN2049 ORIGINS HACKATHON · 6–8 OCT 2026 · BUILT IN 48H</text>
+</svg>

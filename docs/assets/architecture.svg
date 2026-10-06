@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" font-family="IBM Plex Sans, Segoe UI, sans-serif">
+  <defs>
+    <pattern id="grid2" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1F4E79" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F4E79"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" fill="#E9EBEC"/>
+  <rect width="1200" height="620" fill="url(#grid2)"/>
+  <text x="600" y="34" font-size="13" fill="#4A7BA6" font-family="Roboto Mono, monospace" letter-spacing="2" text-anchor="middle">FIG. 1 — SYSTEM ARCHITECTURE · AS DEPLOYED</text>
+
+  <!-- Human -->
+  <rect x="40" y="80" width="200" height="90" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="140" y="115" font-size="15" font-weight="600" fill="#17222E" text-anchor="middle">Human owner</text>
+  <text x="140" y="138" font-size="11.5" fill="#5C6B7A" text-anchor="middle">sets the leash · revoke anytime</text>
+  <text x="140" y="156" font-size="11.5" fill="#5C6B7A" text-anchor="middle">passkey-gated wallet</text>
+
+  <!-- Agent -->
+  <rect x="40" y="240" width="200" height="120" fill="#1F4E79"/>
+  <text x="140" y="278" font-size="15" font-weight="700" fill="#E9EBEC" text-anchor="middle">AI Agent</text>
+  <text x="140" y="300" font-size="11.5" fill="#D5E1ED" text-anchor="middle">plans the job · pays per call</text>
+  <text x="140" y="318" font-size="11.5" fill="#D5E1ED" text-anchor="middle">budgets itself · no human in loop</text>
+  <text x="140" y="336" font-size="10" fill="#D5E1ED" text-anchor="middle" font-family="Roboto Mono, monospace">leashed-wallet-cli@0.5.1</text>
+
+  <!-- leash arrow -->
+  <path d="M140 170 L140 240" stroke="#9C3B2C" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="150" y="190" width="150" height="26" fill="none" stroke="#9C3B2C" stroke-width="1.5" transform="rotate(-2 150 190)"/>
+  <text x="222" y="208" font-size="11" fill="#9C3B2C" font-weight="600" text-anchor="middle" transform="rotate(-2 222 208)">ON-CHAIN SPEND CAP</text>
+
+  <!-- Rails -->
+  <rect x="320" y="86" width="260" height="96" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="450" y="114" font-size="13.5" font-weight="600" fill="#17222E" text-anchor="middle">Cardano preprod · x402</text>
+  <text x="450" y="136" font-size="11" fill="#5C6B7A" text-anchor="middle" font-family="Roboto Mono, monospace">tUSDM · HTTP 402 → pay → 200</text>
+  <text x="450" y="154" font-size="11" fill="#23663C" text-anchor="middle">tx d0534724…58b6f2 proven</text>
+  <text x="450" y="170" font-size="10" fill="#8394A3" text-anchor="middle">faucet: /faucet grants 10 tUSDM</text>
+
+  <rect x="320" y="216" width="260" height="96" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="450" y="244" font-size="13.5" font-weight="600" fill="#17222E" text-anchor="middle">ThaiFi chain 17 · MPP</text>
+  <text x="450" y="266" font-size="11" fill="#5C6B7A" text-anchor="middle" font-family="Roboto Mono, monospace">THCFI · per-call agent payments</text>
+  <text x="450" y="284" font-size="11" fill="#23663C" text-anchor="middle">tx 0xf6e953e1 proven</text>
+
+  <!-- Services marketplace -->
+  <rect x="320" y="346" width="260" height="90" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="450" y="374" font-size="13.5" font-weight="600" fill="#17222E" text-anchor="middle">Seller endpoints</text>
+  <text x="450" y="396" font-size="11" fill="#5C6B7A" text-anchor="middle" font-family="Roboto Mono, monospace">x402 quotes · receipt-verified jobs</text>
+  <text x="450" y="414" font-size="11" fill="#5C6B7A" text-anchor="middle">registered via CLI marketplace</text>
+
+  <!-- receipts ledger -->
+  <rect x="640" y="216" width="240" height="96" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="760" y="244" font-size="13.5" font-weight="600" fill="#17222E" text-anchor="middle">Receipts ledger</text>
+  <text x="760" y="266" font-size="11" fill="#5C6B7A" text-anchor="middle" font-family="Roboto Mono, monospace">packages/receipts · policy engine</text>
+  <text x="760" y="284" font-size="11" fill="#5C6B7A" text-anchor="middle">every payment → signed receipt</text>
+
+  <!-- CRE auditor -->
+  <rect x="640" y="360" width="240" height="110" fill="#23663C"/>
+  <text x="760" y="392" font-size="14" font-weight="700" fill="#E9EBEC" text-anchor="middle">Chainlink CRE auditor</text>
+  <text x="760" y="414" font-size="11" fill="#D5E1ED" text-anchor="middle">cron-triggered · reads ledger + on-chain</text>
+  <text x="760" y="432" font-size="11" fill="#D5E1ED" text-anchor="middle">verdict PASS/WARN/FAIL</text>
+  <text x="760" y="452" font-size="10" fill="#D5E1ED" text-anchor="middle" font-family="Roboto Mono, monospace">workflows/leashed-auditor</text>
+
+  <!-- Platform (Cloudflare) big card -->
+  <rect x="940" y="80" width="230" height="300" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="1055" y="108" font-size="13.5" font-weight="600" fill="#17222E" text-anchor="middle">Cloudflare (deployed)</text>
+  <g font-size="11" fill="#33414F">
+    <text x="956" y="136" font-family="Roboto Mono, monospace">pages.dev — SPA v2</text>
+    <text x="968" y="156">/agents · passbook</text>
+    <text x="968" y="174">/services · marketplace</text>
+    <text x="968" y="192">/faucet · tUSDM on-ramp</text>
+    <text x="968" y="210">/wallet · passkey wallet</text>
+    <text x="956" y="240" font-family="Roboto Mono, monospace">workers.dev — Hono API</text>
+    <text x="968" y="260">/api/agents · passbook</text>
+    <text x="968" y="278">/api/audit · rerun · revoke</text>
+    <text x="968" y="296">/v1/services · registry</text>
+    <text x="968" y="314">/v1/faucet/cardano</text>
+    <text x="956" y="344" font-family="Roboto Mono, monospace">D1 · agents + services</text>
+    <text x="968" y="362" font-family="Roboto Mono, monospace">+ faucet_claims</text>
+  </g>
+
+  <!-- auditor to sepolia -->
+  <rect x="640" y="510" width="240" height="70" fill="#F5F6F6" stroke="#1F4E79" stroke-width="2"/>
+  <text x="760" y="538" font-size="13" font-weight="600" fill="#17222E" text-anchor="middle">Sepolia attestation</text>
+  <text x="760" y="558" font-size="11" fill="#5C6B7A" text-anchor="middle" font-family="Roboto Mono, monospace">verdict written on-chain (NOWNodes RPC)</text>
+
+  <path d="M240 280 L320 134" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M240 300 L320 264" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M450 182 L450 216" stroke="#1F4E79" stroke-width="1.5" opacity="0.6"/>
+  <path d="M580 134 L640 250" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M580 264 L640 264" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M880 264 L940 264" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M760 312 L760 360" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M760 470 L760 510" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M580 391 L640 400" stroke="#1F4E79" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M140 360 C 90 480, 480 540, 640 545" stroke="#1F4E79" stroke-width="1.2" stroke-dasharray="5 4" fill="none" opacity="0.5"/>
+  <text x="300" y="560" font-size="10.5" fill="#8394A3" font-family="Roboto Mono, monospace">ledger feeds the auditor · verdicts back to the passbook</text>
+</svg>
