@@ -1,6 +1,6 @@
 # HANDOFF — Leashed Agent Platform, slice 2 SPA verification pending
 
-> Status as of 2026-10-06 evening (Singapore time). Deadline: **23:59 SGT 7 Oct 2026** (~36h remaining).
+> Status as of 2026-10-06 evening (Singapore time). Deadline: **~23:59 SGT 8 Oct 2026** (user-confirmed: 22h remaining as of Oct 7 morning) (~36h remaining).
 > Builder: Poom (Jirayu Charoenyost, solo). Submission branch: `main` of `leashed-agent/`.
 
 ## TL;DR for the next agent
