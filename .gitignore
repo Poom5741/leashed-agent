@@ -3,8 +3,32 @@ dist/
 .env
 .env.local
 
-# Super-SpecKit harness (tooling, not project; installer reads project state separately)
-.super-speckit/
+# Super-SpecKit harness internals (per-run state, not project history)
+.super-speckit/bugs/
+.super-speckit/qa/
+.super-speckit/state/
+.super-speckit/atlas/
+.super-speckit/spec-grills/
+.super-speckit/purpose/
+.super-speckit/install-receipt.json
+.super-speckit/sources.lock.json
+.super-speckit/continuation.yml
+.super-speckit/SKILL.md
+.super-speckit/commands/
+.super-speckit/adapters/
+.super-speckit/docs/
+.super-speckit/schemas/
+.super-speckit/templates/
+.super-speckit/workflows/
+.super-speckit/skills/
+.super-speckit/vendor/
+.super-speckit/scripts/
+
+# Keep these — project-owned:
+#   super-speckit.yml  (the harness config — commit it)
+#   .super-speckit/verification/  (harness + feature map — commit it)
+#   .super-speckit/config/  (other kit-installed configs)
+
+# Agent skill entry points (just symlinks, not project history)
 .agents/skills/
 .codex/skills/
-super-speckit.yml
