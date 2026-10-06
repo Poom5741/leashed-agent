@@ -98,3 +98,41 @@ export async function deliveredThbLast24h(c: Ctx, address: string): Promise<numb
     .first<{ sum: number }>();
   return row?.sum ?? 0;
 }
+
+
+/**
+ * Faucet: mint `amountThb` of `token` directly to `address` — no order row,
+ * no payment. Used by the judge/demo faucet (rate-limited by the caller via
+ * D1). Same hot-wallet path as paid orders; returns the tx hash.
+ */
+export async function mintDirect(
+  c: Context<{ Bindings: Env }>,
+  address: string,
+  token: DepositToken,
+  amountThb: number,
+): Promise<string> {
+  const raw = c.env.PAYSO_HOT_KEY;
+  if (!raw) throw new Error("hot wallet key not configured");
+  const key = typeof raw === "string" ? raw : await raw.get();
+  if (!key) throw new Error("hot wallet key empty");
+
+  const account = privateKeyToAccount(key.startsWith("0x") ? (key as `0x${string}`) : (`0x${key}` as `0x${string}`));
+  const chain = thaiFiChain(c.env.THAIFI_RPC_URL || "https://rpc.thaifi.com");
+  const rpc = chain.rpcUrls.default.http[0];
+  const walletClient = createWalletClient({ account, chain, transport: http(rpc) });
+  const publicClient = createPublicClient({ chain, transport: http(rpc) });
+
+  const amountRaw = parseUnits(String(amountThb), 6);
+  const memo = toHex(BigInt(Date.now()), { size: 32 });
+
+  const hash = await walletClient.writeContract({
+    address: DEPOSIT_TOKENS[token],
+    abi: MINT_ABI,
+    functionName: "mintWithMemo",
+    args: [address as `0x${string}`, amountRaw, memo],
+    chain,
+  });
+  const receipt = await publicClient.waitForTransactionReceipt({ hash });
+  if (receipt.status !== "success") throw new Error(`faucet mint tx ${hash} reverted`);
+  return hash;
+}

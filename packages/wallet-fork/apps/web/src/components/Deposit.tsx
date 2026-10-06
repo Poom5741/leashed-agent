@@ -31,6 +31,8 @@ export function Deposit() {
 // ---------------------------------------------------------------------------
 // Receive — show address + QR for inbound on-chain transfers
 
+const FAUCET_API = "https://leashed-api-agents.poom-a1d.workers.dev";
+
 function ReceiveSection({
   address,
   copied,
@@ -40,6 +42,31 @@ function ReceiveSection({
   copied: boolean;
   onCopy: () => void;
 }) {
+  const [faucetState, setFaucetState] = useState<"idle" | "pending" | "done" | "error">("idle");
+  const [faucetMsg, setFaucetMsg] = useState<string | null>(null);
+  const [faucetTx, setFaucetTx] = useState<string | null>(null);
+
+  const claimFaucet = async () => {
+    setFaucetState("pending");
+    setFaucetMsg(null);
+    setFaucetTx(null);
+    try {
+      const res = await fetch(`${FAUCET_API}/api/faucet`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address, token: "THCFI" }),
+      });
+      const data = (await res.json()) as { ok: boolean; error?: string; txHash?: string; amount?: number; token?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
+      setFaucetTx(data.txHash ?? null);
+      setFaucetMsg(`${data.amount} ${data.token} minted to your wallet`);
+      setFaucetState("done");
+    } catch (err) {
+      setFaucetMsg(err instanceof Error ? err.message : "faucet request failed");
+      setFaucetState("error");
+    }
+  };
+
   return (
     <>
       <p className="deposit-note">
@@ -87,6 +114,38 @@ function ReceiveSection({
         Agents: this address is also shown by{" "}
         <code>thaifi fund</code> and <code>thaifi whoami</code>.
       </p>
+
+      <div className="faucet-box">
+        <div className="faucet-head">
+          <span className="label">Faucet — real on-chain tokens</span>
+          <button
+            className="btn-soft"
+            onClick={claimFaucet}
+            disabled={faucetState === "pending"}
+          >
+            {faucetState === "pending" ? "Minting…" : "Get 25 THCFI"}
+          </button>
+        </div>
+        {faucetState === "done" && (
+          <p className="muted">
+            {faucetMsg}
+            {faucetTx && (
+              <>
+                {" · "}
+                <a href={`https://exp.thaifi.com/tx/${faucetTx}`} target="_blank" rel="noreferrer">
+                  view transaction
+                </a>
+              </>
+            )}
+          </p>
+        )}
+        {faucetState === "error" && <p className="error-text">{faucetMsg}</p>}
+        <p className="muted" style={{ marginTop: 6 }}>
+          Mints 25 THCFI (ThaiFi stable token, 1 = 1 THB) on-chain to this
+          address — use it for agent payments on the marketplace. One claim per
+          wallet per day.
+        </p>
+      </div>
     </>
   );
 }

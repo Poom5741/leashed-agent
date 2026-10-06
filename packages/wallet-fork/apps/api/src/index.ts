@@ -7,6 +7,7 @@ import { sendOtpEmail } from "./email";
 import { buildAuthorizeUrl, exchangeCode, lineReady, verifyIdToken } from "./line";
 import { tidxQuery } from "./tidx";
 import { requireAgentAuth, type AgentIdentity } from "./agentAuth";
+import faucetApp from "./faucet";
 import {
   handleAgentOrder,
   handleAgentOrderStatus,
@@ -117,6 +118,8 @@ app.get("/SKILL.md", async (c) => {
   c.header("X-ThaiFi-Worker", "api");
   return new Response(asset.body, asset);
 });
+
+app.route("/", faucetApp);
 
 app.get("/api/healthz", async (c) => {
   try {

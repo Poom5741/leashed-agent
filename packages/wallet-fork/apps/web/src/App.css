@@ -1962,3 +1962,18 @@ textarea {
   background: var(--card-2);
   color: var(--text);
 }
+
+/* Faucet box (Receive tab) */
+.faucet-box {
+  margin-top: 18px;
+  border: 1.5px dashed var(--border);
+  padding: 14px 16px;
+}
+
+.faucet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}

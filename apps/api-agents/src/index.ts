@@ -31,6 +31,7 @@ import {
 } from "./db.js";
 import { auditReceipts, type AuditVerdict } from "./auditor.js";
 import { makeServiceId } from "./services.js";
+import faucetApp from "./faucet.js";
 
 export type Bindings = { DB: D1Database; ALLOWED_ORIGINS?: string };
 export type Variables = { userId: string };
@@ -232,6 +233,8 @@ app.post("/api/audit", async (c) => {
     createdAt: now,
   });
 });
+
+app.route("/", faucetApp);
 
 app.get("/api/healthz", (c) => c.json({ ok: true }));
 
