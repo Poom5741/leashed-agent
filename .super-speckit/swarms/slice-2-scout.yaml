@@ -1,0 +1,241 @@
+swarm:
+  name: slice-2-scout
+  workspace: /Users/poom-work/token2049/leashed-agent
+  mode: sequential
+  model: claude-sonnet-4-5
+
+  # ============================================================================
+  # Slice 2 — wallet /agents SPA + Hono API + D1
+  # ============================================================================
+  # Pre-flight: M9a (9b343dc) is committed — 33/33 slice-1 tests green.
+  # This swarm gathers the repo evidence needed to write the 5 matrix rows for
+  # F12 (wallet /agents page) in docs/verification-matrix.md.
+  #
+  # Spec ref: leashed-agent/docs/verification-matrix.md "Slice 2" placeholder.
+  # The /agents route lives in the upstream wallet fork, NOT in leashed-agent.
+  # We need to read three independent surfaces before we can write a faithful
+  # F12 row: D1 schema (data model), Hono API (auth + routing pattern), SPA
+  # route (React 19 + Vite component pattern).
+  # ============================================================================
+
+  agents:
+    # ── Wave 1: parallel scouts (no deps) ──────────────────────────────────
+    d1_scout:
+      role: d1-schema-archivist
+      task: |
+        You are the D1 schema scout for slice 2 (platform-fork).
+
+        Read the existing migrations in `~/token2049/wallet/apps/api/migrations/`
+        (the upstream wallet fork is mounted at `~/token2049/wallet` — reference
+        only, NOT the submission). The leashed-agent repo is at
+        `~/token2049/leashed-agent`.
+
+        Goals:
+        1. Inventory every migration file: filename, applied order, schema
+           objects (tables, indexes, columns) each one creates.
+        2. Specifically extract: the `agent_pairings` table from migration
+           0002 (it is the table slice 1's POST /api/agent/pair uses). Quote
+           the exact CREATE TABLE statement.
+        3. Identify: which existing tables could back the new `agents`
+           (multi-agent P256 keys) and `agent_audit_batches` (slice 3 CRE
+           audit batches) tables? Do we need new migrations, or can we add
+           columns to `agent_pairings` and a new sibling table?
+        4. List every unique constraint, foreign key, and index on the
+           existing tables — slice 2 must not break these.
+
+        Write your findings to:
+          workspace/.swarm_slice-2-scout/d1_report.md
+
+        Schema:
+          # D1 schema scout — slice 2
+          ## Existing migrations
+          - 0001_xxx.sql: <tables created, key columns>
+          - 0002_xxx.sql: <tables created, key columns>
+          ...
+          ## agent_pairings table (verbatim CREATE TABLE)
+          ```sql
+          ...
+          ```
+          ## Reuse vs new tables
+          - agents: <add columns to agent_pairings OR new table — recommend one>
+          - agent_audit_batches: <same>
+          ## Constraints to preserve
+          - <list>
+          ## F12 row data
+          - table: <name>
+          - columns this slice uses: <list>
+          - RLS / per-user filter: <how the API filters by wallet owner>
+
+      reports_to:
+        - integrator
+
+    hono_scout:
+      role: hono-api-analyst
+      task: |
+        You are the Hono API scout for slice 2 (platform-fork).
+
+        Read `~/token2049/wallet/apps/api/src/index.ts` and its
+        sub-routers in `~/token/2049/wallet/apps/api/src/routes/`.
+        The leashed-agent repo is at `~/token2049/leashed-agent`.
+
+        Goals:
+        1. Inventory every existing route under `/api/agent/*` — list method,
+           path, handler, middleware, line number.
+        2. Specifically extract: `requireAuth` middleware (file:line and full
+           body) and how it derives the active wallet/user.
+        3. Identify the closest analog for the new `/api/agents` collection
+           endpoint (slice 1's `agent ls`/`agent revoke` call it). Likely
+           candidate: `handleAgentOrder` in `payso.ts` per the slice 1 plan.
+        4. Check `env.ts` for the `Env` type and `wrangler.jsonc` for
+           bindings — note which D1 binding the new route will use.
+        5. Confirm: do existing routes use `c.req.json()`, `c.req.param()`,
+           and `c.env.DB`? Capture the idioms so the new routes match.
+
+        Write your findings to:
+          workspace/.swarm_slice-2-scout/hono_report.md
+
+        Schema:
+          # Hono API scout — slice 2
+          ## /api/agent/* route inventory
+          | method | path | handler | middleware | line |
+          | ...   | ...  | ...     | ...        | ...  |
+          ## requireAuth middleware
+          - file: <path>
+          - lines: <range>
+          - body:
+            ```typescript
+            ...
+            ```
+          ## Active-wallet derivation
+          - <how the userAddress is obtained from the authed session>
+          ## Closest analog for /api/agents
+          - file: payso.ts
+          - function: handleAgentOrder
+          - lines: <range>
+          - why it's a good template: <reasoning>
+          ## Env / bindings
+          - DB binding name: <name>
+          - Other bindings used by /api/agent/*: <list>
+          ## Idioms to match
+          - JSON body: `await c.req.json()`
+          - URL param: `c.req.param('keyId')`
+          - DB query: `c.env.DB.prepare(...).bind(...).first() / .all()`
+          ## F12 row data
+          - new routes to add (per spec): POST /api/agents, GET /api/agents,
+            DELETE /api/agents/:keyId, GET /api/agents/:keyId/passbook,
+            POST /api/agents/:keyId/audit (slice 3)
+          - all under requireAuth
+
+      reports_to:
+        - integrator
+
+    spa_scout:
+      role: react-spa-surveyor
+      task: |
+        You are the SPA scout for slice 2 (platform-fork).
+
+        Read `~/token2049/wallet/apps/web/src/` (or wherever the upstream
+        React 19 + Vite SPA lives — likely under `apps/web/` or
+        `apps/wallet/`). The leashed-agent repo is at
+        `~/token2049/leashed-agent`.
+
+        Goals:
+        1. Find the existing AuthorizedApps.tsx page (or equivalent) — slice
+           1's plan says slice 2 REPLACES it with the /agents page. Extract
+           the file path and the route registration (e.g. React Router
+           `<Route path="..." element={...} />`).
+        2. Inventory the existing auth/passkey surface: how does the SPA
+           obtain a session token to call the Hono API? (likely
+           WebAuthn → cookie or sessionStorage).
+        3. Identify the design system: Tailwind config? Custom CSS? Note the
+           primary colors and the typography scale.
+        4. The leashed-agent v1 dashboard has a "paper ledger" passbook
+           design at `apps/dashboard/public/index.html`. Read the
+           `<style>` block to extract the design tokens we should reuse
+           for the new /agents passbook page (color palette, font stack,
+           border radii).
+        5. The /agents route must work standalone OR as a nested route under
+           the existing wallet shell. Recommend the lower-friction path.
+
+        Write your findings to:
+          workspace/.swarm_slice-2-scout/spa_report.md
+
+        Schema:
+          # SPA scout — slice 2
+          ## Existing AuthorizedApps page
+          - file: <path>
+          - lines: <range>
+          - route registration: <React Router snippet>
+          ## Auth surface
+          - passkey/session flow: <1-2 paragraph summary>
+          - how the SPA sends auth to the Hono API: <header / cookie / etc>
+          ## Design system
+          - Tailwind? custom CSS? <answer>
+          - primary palette: <hex codes>
+          - typography: <font stack>
+          ## Passbook design reuse
+          - source: leashed-agent/apps/dashboard/public/index.html
+          - design tokens to carry over:
+            - paper bg: <hex>
+            - ink color: <hex>
+            - stamp red: <hex>
+            - font: <stack>
+            - border radius: <value>
+          ## F12 row data
+          - route path: /agents (or /dashboard/agents, depending on nesting)
+          - component file: <new file to create>
+          - data fetches:
+            - on mount: GET /api/agents
+            - per-agent drilldown: GET /api/agents/:keyId/passbook
+            - revoke button: DELETE /api/agents/:keyId
+            - rerun audit (slice 3): POST /api/agents/:keyId/audit
+
+      reports_to:
+        - integrator
+
+    # ── Wave 2: integrator (waits for all 3 scouts) ────────────────────────
+    integrator:
+      role: feature-matrix-writer
+      task: |
+        You are the integrator. The three scouts have written
+        d1_report.md, hono_report.md, spa_report.md under
+        workspace/.swarm_slice-2-scout/.
+
+        Read all three reports. Then write the F12 row of
+        `leashed-agent/docs/verification-matrix.md` to match the spec
+        template used by other "Slice 1" rows in the same file.
+
+        Your output:
+          workspace/.swarm_slice-2-scout/f12_row.md
+
+        Schema:
+          # F12 row — wallet /agents SPA page
+          | # | Requirement | Public seam | Verification | Status |
+          |---|---|---|---|---|
+          | S2.R1 | New POST /api/agents creates a leashed agent (server-side) | curl -X POST .../api/agents -H "Cookie: ..." -d '{"template":"noodle-shop"}' | exit 200; row in D1 `agents` table; keyId is 0x… | pending |
+          | S2.R2 | GET /api/agents lists the user's agents | curl .../api/agents | 200 + JSON array; each entry matches what `agent ls` would show on the CLI | pending |
+          | S2.R3 | GET /api/agents/:keyId/passbook returns per-agent receipts + on-chain leash state | curl .../api/agents/0x…/passbook | 200; includes receipts, last_used, current_spend, lease_state | pending |
+          | S2.R4 | DELETE /api/agents/:keyId revokes the agent server-side | curl -X DELETE .../api/agents/0x… | 200; row's `revoked_at` set; subsequent GET on that keyId returns 404 or shows [revoked] | pending |
+          | S2.R5 | /agents SPA route renders the user's agents | open https://wallet.thaifi.com/agents (judge-access) | page renders, 2 agents visible, each clickable to its passbook | pending |
+          | S2.R6 | Revoke button on the SPA works end-to-end | click revoke in browser | DELETE /api/agents/:keyId fires; row turns [revoked]; passbook shows "revoked" stamp | pending |
+
+        Also update `leashed-agent/.super-speckit/verification/feature-map.md`
+        row F12 from "pending — slice 2" to "pending — slice 2 (matrix rows
+        drafted M9c)" and reference the new SHA in evidence column.
+
+        Finally, draft the first set of Test-Designer briefs — what the
+        test files for each S2.R row need to assert. The maker lane
+        (slice 2 maker) will use these briefs. Write to:
+          workspace/.swarm_slice-2-scout/test_briefs.md
+
+        One brief per row, format:
+          ### S2.R1 brief
+          - HTTP fixture: <method/path/body>
+          - DB fixture: <preconditions on D1 agents table>
+          - Assertion: <what the test checks>
+          - Cleanup: <how the test resets state>
+
+      waits_for:
+        - d1_scout
+        - hono_scout
+        - spa_scout
