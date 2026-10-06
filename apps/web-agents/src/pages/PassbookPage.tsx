@@ -33,43 +33,85 @@ export function PassbookPage() {
   if (err) return (
     <section>
       <p className="error">Failed to load passbook: {err}</p>
-      <Link to="/agents">← back to agents</Link>
+      <Link to="/agents" className="back">← back to agents</Link>
     </section>
   );
-  if (!pb) return <p className="muted">Loading…</p>;
+  if (!pb) return <p className="loading-muted">Loading passbook…</p>;
 
   const audit = pb.latestAudit;
   return (
-    <section>
+    <>
       <Link to="/agents" className="back">← back to agents</Link>
-      <h1>{pb.template}</h1>
+
+      <div className="section-head">
+        <h1>{pb.template}</h1>
+        <span className="meta">keyId <code>{pb.keyId}</code></span>
+      </div>
+
+      <section className="hero" style={{ padding: "var(--s-6) var(--s-6)" }}>
+        <span className="eyebrow">PASSBOOK · LEASH STATE</span>
+        <h1 style={{ fontSize: "22px" }}>
+          {pb.leaseState === "revoked"
+            ? "Lease revoked — no further payments allowed."
+            : "Lease live — payments allowed up to the cap."}
+        </h1>
+        <p>
+          This passbook shows the agent's leash, its receipts, and the latest CRE auditor verdict.
+          Every payment is on-chain, every verdict is auditable.
+        </p>
+      </section>
+
       <div className="meta-grid">
-        <div><span className="label">keyId</span><code>{pb.keyId}</code></div>
-        <div><span className="label">status</span><span className={`status status-${pb.status}`}>{pb.status}</span></div>
-        <div><span className="label">leaseState</span><span className={`status status-${pb.leaseState}`}>{pb.leaseState}</span></div>
-        <div><span className="label">limit</span><code>{pb.limitAmount ?? "—"} / {pb.limitPeriod ?? "—"}s</code></div>
+        <div>
+          <span className="label">status</span>
+          <span className={`status status-${pb.status}`}>{pb.status}</span>
+        </div>
+        <div>
+          <span className="label">leaseState</span>
+          <span className={`status status-${pb.leaseState}`}>{pb.leaseState}</span>
+        </div>
+        <div>
+          <span className="label">spending cap</span>
+          <code style={{ fontSize: "14px" }}>{pb.limitAmount ?? "—"} {pb.limitPeriod ? `THCFI / ${pb.limitPeriod}s` : ""}</code>
+        </div>
+        <div>
+          <span className="label">created</span>
+          <code style={{ fontSize: "12.5px" }}>{new Date(pb.createdAt).toISOString().slice(0, 19)}Z</code>
+        </div>
       </div>
 
       <h2>Audit</h2>
       {audit ? (
         <div className="audit-card" data-verdict={audit.verdict}>
-          <div>
+          <div className="audit-row">
             <span className={`status status-${audit.verdict}`}>{audit.verdict}</span>
-            <span className="muted"> · checked {audit.checked} receipts</span>
-            {audit.problems.length > 0 && (
-              <ul className="problems">
-                {audit.problems.map((p, i) => <li key={i}>{p}</li>)}
-              </ul>
-            )}
+            <span className="audit-headline">
+              {audit.verdict === "WARN"
+                ? "No receipts yet — nothing to check, nothing to fail."
+                : audit.verdict === "PASS"
+                  ? `Checked ${audit.checked} receipt${audit.checked === 1 ? "" : "s"} — clean ledger.`
+                  : `Checked ${audit.checked} receipt${audit.checked === 1 ? "" : "s"} — flagged ${audit.problems.length} issue${audit.problems.length === 1 ? "" : "s"}.`}
+            </span>
           </div>
-          <div className="audit-meta muted">
-            <span>batch {audit.batchId.slice(0, 8)}…</span>
-            <span> · {audit.attestationTx === null ? "no CRE attestation (Hono in-process audit)" : `CRE tx ${audit.attestationTx}`}</span>
-            <span> · {new Date(audit.createdAt).toLocaleString()}</span>
+          {audit.problems.length > 0 && (
+            <ul className="problems">
+              {audit.problems.map((p, i) => <li key={i}>{p}</li>)}
+            </ul>
+          )}
+          <div className="audit-meta">
+            batch {audit.batchId.slice(0, 8)}… ·{" "}
+            {audit.attestationTx === null
+              ? "in-process (Hono); CRE cron attests Sepolia"
+              : `CRE attestation ${audit.attestationTx}`}
+            {" · "}
+            {new Date(audit.createdAt).toLocaleString()}
           </div>
         </div>
       ) : (
-        <p className="muted">Not audited. Click "Rerun audit" to invoke the CRE auditor algorithm in this process.</p>
+        <p className="muted">
+          Not audited. Click <strong>Rerun audit</strong> to invoke the CRE auditor algorithm in
+          this process.
+        </p>
       )}
       {auditErr && <p className="error">Audit failed: {auditErr}</p>}
       <button onClick={runAudit} disabled={auditing} className="primary">
@@ -78,7 +120,10 @@ export function PassbookPage() {
 
       <h2>Receipts</h2>
       {pb.receipts.length === 0 ? (
-        <p className="muted">No receipts yet. Run the agent: <code>npx @leashed/wallet-cli-platform agent run --brief "…" --budget 1.5</code></p>
+        <p className="muted">
+          No receipts yet. Run the agent:{" "}
+          <code>npx @leashed/wallet-cli-platform agent run --brief "…" --budget 1.5</code>
+        </p>
       ) : (
         <table className="receipts">
           <thead>
@@ -97,6 +142,6 @@ export function PassbookPage() {
           </tbody>
         </table>
       )}
-    </section>
+    </>
   );
 }

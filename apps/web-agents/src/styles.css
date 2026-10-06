@@ -1,98 +1,559 @@
-/* Leashed Agent Platform — paper-ledger look (carried from v1 dashboard).
- * Borrowed from leashed-agent/apps/dashboard/public/index.html:
- *   - paper bg (#f6f1e7)
- *   - ink color (#1a1a1a)
- *   - stamp red (#a83232)
- *   - monospace ledger typography
+/* ============================================================================
+ * Leashed Agent Platform — design system (v2)
+ * Positioning: Trust Layer for AI Agents
+ *
+ * Palette: deep navy surface, electric teal accent, off-white cards. No
+ * paper-ledger nostalgia — this is fintech UI for a chain-enforced leash,
+ * a receipts ledger, and an independent auditor.
+ *
+ * Tokens are declared at :root so every page reads from one source.
+ * ============================================================================
  */
-:root {
-  --paper: #f6f1e7;
-  --ink: #1a1a1a;
-  --muted: #6b6356;
-  --stamp: #a83232;
-  --border: #1a1a1a;
-  --ok: #2d6a4f;
-}
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; margin: 0; }
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 14px;
-  line-height: 1.5;
-}
-.app { display: flex; flex-direction: column; min-height: 100%; }
-.topbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 24px; border-bottom: 2px solid var(--border);
-  background: var(--paper);
-}
-.brand { font-weight: 700; text-decoration: none; color: var(--ink); font-size: 16px; }
-.topbar nav a { margin-left: 16px; color: var(--ink); }
-.main { padding: 24px; flex: 1; }
-h1 { font-size: 22px; margin: 0 0 16px 0; }
-h2 { font-size: 16px; margin: 24px 0 8px 0; }
-.muted { color: var(--muted); }
-.error { color: var(--stamp); }
-.empty { text-align: center; padding: 48px; }
-pre { background: rgba(0,0,0,0.04); padding: 12px; border: 1px dashed var(--border); }
-code { background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 2px; }
-.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
-.card {
-  display: block; padding: 16px; border: 2px solid var(--border);
-  background: var(--paper); text-decoration: none; color: var(--ink);
-  transition: transform 0.1s ease;
-}
-.card:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
-.card-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.template { font-weight: 700; }
-.status {
-  display: inline-block; padding: 2px 8px; border: 1px solid var(--ink);
-  font-size: 11px; text-transform: uppercase;
-}
-.status-revoked { background: var(--stamp); color: white; }
-.status-approved { background: var(--ok); color: white; }
-.status-pending { background: #f0c14b; color: var(--ink); }
-.revoked-tag { font-weight: 700; }
-.keyId { display: block; word-break: break-all; margin: 8px 0; font-size: 12px; }
-.card-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
-.meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
-.meta-grid > div { padding: 8px; border: 1px solid var(--border); }
-.label { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; }
-.back { display: inline-block; margin-bottom: 16px; }
-.receipts { width: 100%; border-collapse: collapse; }
-.receipts th, .receipts td { padding: 8px; border: 1px solid var(--border); text-align: left; }
-.receipts th { background: rgba(0,0,0,0.04); font-size: 11px; text-transform: uppercase; }
 
-/* Slice 3 — audit card + buttons */
-.status-PASS { background: var(--ok); color: white; }
-.status-WARN { background: #f0c14b; color: var(--ink); }
-.status-FAIL { background: var(--stamp); color: white; }
-.audit-card {
-  border: 1px solid var(--border);
-  padding: 12px;
-  margin: 12px 0;
+:root {
+  /* Brand */
+  --brand-ink: #0B1A2F;
+  --brand-surface: #0F2238;
+  --brand-surface-2: #173455;
+  --brand-card: #FFFFFF;
+  --brand-paper: #F4F7FB;
+
+  /* Accent */
+  --accent: #00C2A8;       /* electric teal */
+  --accent-soft: #00C2A833;
+  --accent-deep: #007E6E;
+
+  /* Status */
+  --ok: #1FA968;
+  --warn: #E5A100;
+  --danger: #E5484D;
+
+  /* Text */
+  --ink: #0F172A;
+  --ink-2: #334155;
+  --muted: #64748B;
+  --on-dark: #E6EDF7;
+  --on-dark-muted: #8AA0BD;
+
+  /* Lines */
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+
+  /* Spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+
+  /* Radii / shadow */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(15, 34, 56, 0.06), 0 1px 1px rgba(15, 34, 56, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 34, 56, 0.08), 0 2px 4px rgba(15, 34, 56, 0.04);
+  --shadow-lg: 0 18px 48px rgba(15, 34, 56, 0.18), 0 6px 12px rgba(15, 34, 56, 0.08);
+}
+
+/* ============================================================================
+ * Base
+ * ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--brand-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--s-3) 0;
+}
+h1 { font-size: 26px; font-weight: 700; line-height: 1.25; }
+h2 { font-size: 17px; font-weight: 600; margin-top: var(--s-6); }
+h3 { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+
+a {
+  color: var(--accent-deep);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+code, .mono {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  background: rgba(11, 26, 47, 0.06);
+  padding: 1px 6px;
+  border-radius: var(--r-sm);
+  color: var(--brand-ink);
+}
+
+.muted { color: var(--muted); }
+.error { color: var(--danger); }
+
+/* ============================================================================
+ * App shell — sidebar + main
+ * ========================================================================== */
+
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--brand-surface);
+  color: var(--on-dark);
+  padding: var(--s-5) var(--s-4);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: rgba(0,0,0,0.02);
+  gap: var(--s-5);
 }
-.audit-card[data-verdict="FAIL"] { border-color: var(--stamp); }
-.audit-card[data-verdict="PASS"] { border-color: var(--ok); }
-.audit-meta { font-size: 11px; }
-.problems { margin: 8px 0 0 16px; padding: 0; color: var(--stamp); font-size: 12px; }
-button.primary {
-  font-family: inherit; font-size: 13px;
-  padding: 8px 16px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
-  cursor: pointer; margin: 8px 0 24px 0;
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--on-dark);
 }
-button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
-button.revoke-btn {
-  font-family: inherit; font-size: 11px;
-  padding: 4px 8px; margin-top: 8px;
-  border: 1px solid var(--stamp); background: transparent; color: var(--stamp);
+.brand:hover { text-decoration: none; }
+.brand-mark {
+  display: inline-flex;
+  width: 28px; height: 28px;
+  background: var(--accent);
+  color: var(--brand-ink);
+  border-radius: var(--r-sm);
+  align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.nav {
+  display: flex; flex-direction: column;
+  gap: 2px;
+}
+.nav a {
+  color: var(--on-dark-muted);
+  padding: 10px var(--s-3);
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-weight: 500;
+}
+.nav a:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--on-dark);
+  text-decoration: none;
+}
+.nav a.active {
+  background: rgba(0, 194, 168, 0.18);
+  color: var(--accent);
+}
+
+.tagline {
+  margin-top: auto;
+  padding: var(--s-3);
+  font-size: 12px;
+  color: var(--on-dark-muted);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  line-height: 1.4;
+}
+.tagline strong { color: var(--accent); font-weight: 600; }
+
+.main {
+  padding: var(--s-6) var(--s-7);
+  max-width: 1200px;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { flex-direction: row; flex-wrap: wrap; gap: var(--s-3); padding: var(--s-3); }
+  .tagline { display: none; }
+  .main { padding: var(--s-4); }
+}
+
+/* ============================================================================
+ * Hero — AgentsListPage
+ * ========================================================================== */
+
+.hero {
+  background: linear-gradient(135deg, var(--brand-surface) 0%, var(--brand-surface-2) 100%);
+  border-radius: var(--r-lg);
+  padding: var(--s-7);
+  margin-bottom: var(--s-6);
+  color: var(--on-dark);
+  box-shadow: var(--shadow-md);
+}
+.hero .eyebrow {
+  display: inline-block;
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: var(--s-3);
+}
+.hero h1 {
+  color: var(--on-dark);
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: var(--s-3);
+  max-width: 720px;
+}
+.hero p {
+  color: var(--on-dark-muted);
+  font-size: 15px;
+  max-width: 660px;
+  margin: 0;
+}
+.hero .trust-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+}
+.hero .pill {
+  background: rgba(0, 194, 168, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(0, 194, 168, 0.35);
+  padding: 6px var(--s-3);
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+/* ============================================================================
+ * Section headers
+ * ========================================================================== */
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: var(--s-6);
+  margin-bottom: var(--s-3);
+}
+.section-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.section-head .meta {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ============================================================================
+ * Cards — agent tiles
+ * ========================================================================== */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--s-4);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  background: var(--brand-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-5);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  position: relative;
+}
+.card:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.card-row { display: flex; justify-content: space-between; align-items: center; }
+.template {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+}
+.keyId {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  color: var(--muted);
+  word-break: break-all;
+  background: transparent;
+  padding: 0;
+}
+.card-meta {
+  display: flex;
+  gap: var(--s-3);
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.card-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--s-2);
+}
+
+/* ============================================================================
+ * Status pills
+ * ========================================================================== */
+
+.status {
+  display: inline-block;
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--border);
+  color: var(--ink-2);
+}
+.status-approved { background: rgba(31, 169, 104, 0.14); color: var(--ok); }
+.status-pending  { background: rgba(229, 161, 0, 0.16);  color: var(--warn); }
+.status-revoked  { background: rgba(229, 72, 77, 0.14);  color: var(--danger); }
+.status-claimed  { background: rgba(11, 26, 47, 0.10);   color: var(--ink-2); }
+.status-expired  { background: rgba(100, 116, 139, 0.16); color: var(--muted); }
+.status-rejected { background: rgba(229, 72, 77, 0.14);  color: var(--danger); }
+
+.status-PASS { background: rgba(31, 169, 104, 0.16); color: var(--ok); }
+.status-WARN { background: rgba(229, 161, 0, 0.18);  color: var(--warn); }
+.status-FAIL { background: rgba(229, 72, 77, 0.16);  color: var(--danger); }
+
+.status-ok      { background: rgba(31, 169, 104, 0.16); color: var(--ok); }
+.status-revoked-lease { background: rgba(229, 72, 77, 0.14); color: var(--danger); }
+
+/* keep existing legacy class name from slice 2 */
+.revoked-tag { font-weight: 700; }
+
+/* ============================================================================
+ * Buttons
+ * ========================================================================== */
+
+button, .btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 8px 14px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.12s ease;
+  line-height: 1;
+}
+button.primary, .btn.primary {
+  background: var(--accent);
+  color: var(--brand-ink);
+  border-color: var(--accent);
+}
+button.primary:hover:not(:disabled), .btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+button.secondary, .btn.secondary {
+  background: var(--brand-card);
+  color: var(--ink);
+  border-color: var(--border-strong);
+}
+button.secondary:hover { border-color: var(--accent); }
+
+button.revoke-btn {
+  background: transparent;
+  color: var(--danger);
+  border-color: rgba(229, 72, 77, 0.4);
+  font-size: 12px;
+  padding: 5px 10px;
+}
+button.revoke-btn:hover:not(:disabled) {
+  background: var(--danger);
+  color: white;
+  border-color: var(--danger);
 }
 button.revoke-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-button.revoke-btn:hover { background: var(--stamp); color: white; }
+
+/* ============================================================================
+ * Passbook — meta grid + audit panel + receipts
+ * ========================================================================== */
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: var(--s-4);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+.back:hover { color: var(--accent-deep); text-decoration: none; }
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--s-3);
+  margin-bottom: var(--s-5);
+}
+.meta-grid > div {
+  background: var(--brand-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--s-3) var(--s-4);
+}
+.label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.audit-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  background: var(--brand-card);
+  border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-5);
+  margin-bottom: var(--s-4);
+}
+.audit-card[data-verdict="PASS"] { border-left-color: var(--ok); }
+.audit-card[data-verdict="WARN"] { border-left-color: var(--warn); }
+.audit-card[data-verdict="FAIL"] { border-left-color: var(--danger); }
+
+.audit-card .audit-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.audit-card .audit-headline {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+.audit-card .problems {
+  margin: var(--s-3) 0 0 18px;
+  padding: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+.audit-meta {
+  margin-top: var(--s-2);
+  font-size: 11.5px;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+/* ============================================================================
+ * Tables (receipts + services)
+ * ========================================================================== */
+
+table.receipts, table.services-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--brand-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+table.receipts th, table.services-table th {
+  background: rgba(11, 26, 47, 0.04);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px var(--s-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+table.receipts td, table.services-table td {
+  padding: 10px var(--s-4);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font-size: 13px;
+}
+table.receipts tr:last-child td, table.services-table tr:last-child td { border-bottom: none; }
+
+/* ============================================================================
+ * Empty + search
+ * ========================================================================== */
+
+.empty {
+  background: var(--brand-card);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-md);
+  padding: var(--s-7);
+  text-align: center;
+}
+.empty h1 {
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: var(--s-2);
+}
+.empty p { color: var(--muted); margin: var(--s-2) 0; }
+.empty pre {
+  background: var(--brand-paper);
+  border-radius: var(--r-sm);
+  padding: var(--s-3) var(--s-4);
+  display: inline-block;
+  text-align: left;
+  margin-top: var(--s-3);
+}
+.empty pre code { background: transparent; padding: 0; }
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+input[type="search"], input[type="text"] {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px var(--s-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  background: var(--brand-card);
+  color: var(--ink);
+  min-width: 260px;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+input[type="search"]:focus, input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* ============================================================================
+ * Loading shimmer
+ * ========================================================================== */
+
+.loading-muted {
+  color: var(--muted);
+  font-style: italic;
+  padding: var(--s-5) 0;
+}

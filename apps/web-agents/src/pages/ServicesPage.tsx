@@ -6,11 +6,9 @@ export function ServicesPage() {
   const [services, setServices] = useState<ServiceEntry[] | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  // Debounce-less: re-fetch on every keystroke. The D1 query is indexed
-  // and the row count is small (<500 in any reasonable dev session).
   useEffect(() => {
     let cancelled = false;
-    listServices(q.trim() || undefined)
+    listServices(q || undefined)
       .then((rows) => {
         if (!cancelled) setServices(rows);
       })
@@ -23,12 +21,25 @@ export function ServicesPage() {
   }, [q]);
 
   if (err) return <p className="error">Failed to load services: {err}</p>;
-  if (services === null) return <p className="muted">Loading…</p>;
+  if (services === null) return <p className="loading-muted">Loading services…</p>;
 
   return (
-    <section>
-      <h1>Marketplace services</h1>
-      <p className="muted">Public registry of seller services registered by ThaiFi wallet holders.</p>
+    <>
+      <section className="hero">
+        <span className="eyebrow">MARKETPLACE</span>
+        <h1>Discover services any ThaiFi wallet holder can pay for.</h1>
+        <p>
+          Public registry of seller services. Anyone with a ThaiFi wallet can register
+          one with <code>npx @leashed/wallet-cli-platform marketplace register</code>.
+          Agents discover via <code>GET /v1/services</code>.
+        </p>
+      </section>
+
+      <div className="section-head">
+        <h2>Registered services</h2>
+        <span className="meta">{services.length} {services.length === 1 ? "service" : "services"}</span>
+      </div>
+
       <div className="search-row">
         <input
           type="search"
@@ -37,18 +48,22 @@ export function ServicesPage() {
           onChange={(e) => setQ(e.target.value)}
           aria-label="filter services"
         />
-        <span className="muted">{services.length} {services.length === 1 ? "service" : "services"}</span>
       </div>
 
       {services.length === 0 ? (
-        <p className="muted">
-          {q.trim() ? "No matches." : "No services registered yet. Register one from the CLI:"}
-          {!q.trim() && <code> npx @leashed/wallet-cli-platform marketplace register &lt;url&gt; --rail cardano-x402 --price 0.10 --token USDM</code>}
-        </p>
+        <section className="empty">
+          <h1>{q.trim() ? "No matches." : "No services registered yet."}</h1>
+          {!q.trim() && (
+            <p>Register one from the CLI:</p>
+          )}
+          {!q.trim() && (
+            <pre><code>npx @leashed/wallet-cli-platform marketplace register &lt;url&gt; --rail cardano-x402 --price 0.10 --token USDM</code></pre>
+          )}
+        </section>
       ) : (
-        <table className="receipts">
+        <table className="services-table">
           <thead>
-            <tr><th>id</th><th>endpoint</th><th>rail</th><th>price</th><th>token</th></tr>
+            <tr><th>id</th><th>endpoint</th><th>rail</th><th>price (base)</th><th>token</th></tr>
           </thead>
           <tbody>
             {services.map((s) => (
@@ -63,6 +78,6 @@ export function ServicesPage() {
           </tbody>
         </table>
       )}
-    </section>
+    </>
   );
 }
