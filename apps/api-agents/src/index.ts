@@ -23,9 +23,13 @@ import {
   revokeAgent,
   insertAuditBatch,
   latestAuditForKey,
+  insertService,
+  getServiceById,
+  listServices,
   type D1Database,
 } from "./db.js";
 import { auditReceipts, type AuditVerdict } from "./auditor.js";
+import { makeServiceId } from "./services.js";
 
 export type Bindings = { DB: D1Database };
 export type Variables = { userId: string };
@@ -189,5 +193,80 @@ app.post("/api/audit", async (c) => {
 });
 
 app.get("/api/healthz", (c) => c.json({ ok: true }));
+
+// ---------- Slice 4 — public marketplace services registry ----------
+//
+// POST is signed-payload style: the slice-1 CLI constructs `{payload,
+// signature, sellerAddress}` where `payload` is canonicalised JSON of the
+// service description and `signature` is an EIP-191 personal_sign over
+// that canonical payload. For slice 4 we treat the signature as metadata
+// (the row stores it verbatim); real secp256k1 + keccak256 signature
+// recovery lands in slice 5.
+//
+// GET is fully public — discovery is open; the row's `signature` column
+// is intentionally omitted from the response.
+
+app.post("/v1/services", async (c) => {
+  const body = await c.req.json<{
+    payload?: {
+      endpointUrl?: string;
+      rail?: string;
+      priceBase?: string;
+      token?: string;
+      sellerAddress?: string;
+      nonce?: string;
+    };
+    signature?: string;
+    sellerAddress?: string;
+  }>();
+  const p = body.payload;
+  if (
+    !p ||
+    !p.endpointUrl ||
+    !p.rail ||
+    !p.priceBase ||
+    !p.token ||
+    !p.sellerAddress ||
+    !body.signature ||
+    !body.sellerAddress
+  ) {
+    return c.json({ error: "missing required fields" }, 400);
+  }
+  if (body.sellerAddress !== p.sellerAddress) {
+    return c.json({ error: "sellerAddress mismatch between payload and wrapper" }, 400);
+  }
+
+  const id = makeServiceId(p.endpointUrl, p.sellerAddress);
+  const existing = await getServiceById(c.env.DB, id);
+  if (existing) {
+    return c.json({ id: existing.id, endpointUrl: existing.endpoint_url }, 200);
+  }
+
+  await insertService(c.env.DB, {
+    id,
+    endpointUrl: p.endpointUrl,
+    rail: p.rail,
+    priceBase: p.priceBase,
+    token: p.token,
+    sellerAddress: p.sellerAddress,
+    signature: body.signature,
+    createdAt: Date.now(),
+  });
+  return c.json({ id, endpointUrl: p.endpointUrl }, 201);
+});
+
+app.get("/v1/services", async (c) => {
+  const q = c.req.query("q");
+  const rows = await listServices(c.env.DB, { q });
+  return c.json({
+    services: rows.map((r) => ({
+      id: r.id,
+      endpointUrl: r.endpoint_url,
+      rail: r.rail,
+      priceBase: r.price_base,
+      token: r.token,
+    })),
+  });
+});
 
 export default app;

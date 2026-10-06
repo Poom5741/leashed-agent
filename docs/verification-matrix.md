@@ -40,9 +40,17 @@
 | S3.R3 | The passbook page gains a "Rerun audit" button that POSTs to `/api/audit` and updates the audit card in place with the new verdict. | open `/agents/0xaa`, click "Rerun audit" | button is reachable on the passbook page; click → POST 200; the audit card re-renders with a new `batchId` (different UUID). | **live (M12)** — see `.super-speckit/verification/slice-3-spa-green.md` step 2 |
 | S3.R4 (carry-over) | The `/agents` list page adds a per-card "Revoke" button that calls `DELETE /api/agents/:keyId` and flips the card to `[revoked]` optimistically. | click Revoke on a list card | card flips from `approved` → `revoked [revoked]`; URL does not change (preventDefault on the inner button). | **live (M12)** — see `.super-speckit/verification/slice-3-spa-green.md` step 3 |
 
-## Slice 4 — seller marketplace (CLI consumer + agent hook)
+## Slice 4 — public marketplace services registry (Hono + SPA)
 
-_(rows added when slice 4 starts)_
+> Slice 1 already shipped the CLI half (`marketplace register|ls`). Slice 4 is the server half — `POST /v1/services` accepts the CLI's signed payload, `GET /v1/services` is the public discovery endpoint, and the SPA has a `/services` page with a search input.
+
+| # | Requirement | Public seam | Verification | Status |
+|---|---|---|---|---|
+| S4.R1 | `POST /v1/services` accepts the slice-1 body shape `{payload: {endpointUrl, rail, priceBase, token, sellerAddress, nonce}, signature, sellerAddress}` and persists a row with `id = sha256(endpointUrl + "\|" + sellerAddress).slice(0, 16)`. | `curl -X POST .../v1/services -d '{...}'` | HTTP 201 `{id, endpointUrl}` on first insert; HTTP 400 on missing/inconsistent fields; HTTP 200 (same id) on re-register (idempotent). | **live (M13)** — TDD `services.test.ts` happy + idempotent + 400 branches (4 tests) |
+| S4.R2 | `POST /v1/services` is idempotent on `(endpointUrl, sellerAddress)` — re-registering the same pair returns the same id and does not duplicate the row. | two POSTs with the same body → same `id`; `SELECT count(*) FROM services` = 1 | HTTP 200 second time, `count = 1`. | **live (M13)** — TDD "POST /v1/services is idempotent" |
+| S4.R3 | `GET /v1/services` returns registered entries, sorted by `created_at DESC`. Public-only fields — no `signature`, no `sellerAddress`. | `curl .../v1/services` → 200 with `{services: [{id, endpointUrl, rail, priceBase, token}, …]}` | HTTP 200; key set per entry matches `[id, endpointUrl, priceBase, rail, token]` exactly. | **live (M13)** — TDD happy + empty-list branches (2 tests) |
+| S4.R4 | `GET /v1/services?q=foo` filters by case-insensitive substring against `endpointUrl` or `rail`. | register two services on different hosts and rails; `?q=foo` returns only the match. | HTTP 200, narrowed list. | **live (M13)** — TDD "q=llm filters endpoint" + "q=cardano filters rail" (2 tests) |
+| S4.R5 | The SPA has a `/services` page that lists entries from `GET /v1/services` with a search input that narrows in real time. | navigate to `/services`; type "poster" → list narrows; clear → restores. | IAB click test — see `.super-speckit/verification/slice-4-spa-green.md`. | **live (M13)** |
 
 ## Slice 5 — recording + slides reframe + 4-track submission
 

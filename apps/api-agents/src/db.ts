@@ -188,3 +188,96 @@ export async function latestAuditForKey(
     .bind(userId, keyId)
     .first<AuditBatchRow>();
 }
+
+// ---------- Slice 4 — services marketplace registry ----------
+
+export interface ServiceRow {
+  id: string;
+  endpoint_url: string;
+  rail: string;
+  price_base: string;
+  token: string;
+  seller_address: string;
+  signature: string;
+  created_at: number;
+}
+
+export interface NewService {
+  id: string;
+  endpointUrl: string;
+  rail: string;
+  priceBase: string;
+  token: string;
+  sellerAddress: string;
+  signature: string;
+  createdAt: number;
+}
+
+export async function insertService(db: D1Database, svc: NewService): Promise<void> {
+  await db
+    .prepare(
+      `INSERT INTO services
+         (id, endpoint_url, rail, price_base, token, seller_address, signature, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    )
+    .bind(
+      svc.id,
+      svc.endpointUrl,
+      svc.rail,
+      svc.priceBase,
+      svc.token,
+      svc.sellerAddress,
+      svc.signature,
+      svc.createdAt,
+    )
+    .run();
+}
+
+export async function getServiceById(db: D1Database, id: string): Promise<ServiceRow | null> {
+  return await db
+    .prepare(
+      `SELECT id, endpoint_url, rail, price_base, token, seller_address, signature, created_at
+         FROM services
+         WHERE id = ?`,
+    )
+    .bind(id)
+    .first<ServiceRow>();
+}
+
+export interface ListServicesOpts {
+  q?: string | null;
+  limit?: number;
+}
+
+export async function listServices(
+  db: D1Database,
+  opts: ListServicesOpts = {},
+): Promise<Pick<ServiceRow, "id" | "endpoint_url" | "rail" | "price_base" | "token">[]> {
+  const limit = Math.min(opts.limit ?? 100, 500);
+  const q = (opts.q ?? "").trim();
+  if (!q) {
+    const { results } = await db
+      .prepare(
+        `SELECT id, endpoint_url, rail, price_base, token
+           FROM services
+           ORDER BY created_at DESC
+           LIMIT ?`,
+      )
+      .bind(limit)
+      .all<Pick<ServiceRow, "id" | "endpoint_url" | "rail" | "price_base" | "token">>();
+    return results ?? [];
+  }
+  // Case-insensitive substring match against endpoint_url OR rail.
+  const like = `%${q.toLowerCase()}%`;
+  const { results } = await db
+    .prepare(
+      `SELECT id, endpoint_url, rail, price_base, token
+         FROM services
+         WHERE LOWER(endpoint_url) LIKE ? OR LOWER(rail) LIKE ?
+         ORDER BY created_at DESC
+         LIMIT ?`,
+    )
+    .bind(like, like, limit)
+    .all<Pick<ServiceRow, "id" | "endpoint_url" | "rail" | "price_base" | "token">>();
+  return results ?? [];
+}
