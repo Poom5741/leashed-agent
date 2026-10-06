@@ -16,6 +16,7 @@
  */
 
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import {
   insertAgent,
   listAgentsByUser,
@@ -31,10 +32,50 @@ import {
 import { auditReceipts, type AuditVerdict } from "./auditor.js";
 import { makeServiceId } from "./services.js";
 
-export type Bindings = { DB: D1Database };
+export type Bindings = { DB: D1Database; ALLOWED_ORIGINS?: string };
 export type Variables = { userId: string };
 
 const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
+
+// CORS — allow the deployed SPA + the workers.dev preview + localhost dev.
+// Reads comma-separated ALLOWED_ORIGINS env var so the deployment can
+// tighten without redeploying code. Wildcard fallback when origin is
+// unset (e.g. server-to-server).
+const allowed = (envOrigins: string | undefined) => {
+  const defaults = [
+    "http://localhost:5173",
+    "http://localhost:8787",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:8787",
+    "https://leashed-api-agents.poom-a1d.workers.dev",
+    "https://leashed-agent-platform.pages.dev",
+    "https://leashed-agent-platform.poom-a1d.pages.dev",
+  ];
+  const list = envOrigins
+    ? envOrigins.split(",").map((s) => s.trim()).filter(Boolean)
+    : [];
+  return [...defaults, ...list];
+};
+
+app.use(
+  "*",
+  cors({
+    origin: (origin, c) => {
+      const envOrigins = (c.env as { ALLOWED_ORIGINS?: string }).ALLOWED_ORIGINS;
+      const list = allowed(envOrigins);
+      // No Origin header (server-to-server, curl, etc.) → wildcard
+      if (!origin) return "*";
+      // Trusted origin → reflect it back
+      if (list.includes(origin)) return origin;
+      // Known origin but untrusted → deny explicitly
+      return null;
+    },
+    allowHeaders: ["Content-Type", "X-Stub-User"],
+    allowMethods: ["GET", "POST", "DELETE", "OPTIONS"],
+    maxAge: 86400,
+    credentials: false,
+  }),
+);
 
 app.use("/api/agents/*", async (c, next) => {
   const userId = c.req.header("X-Stub-User");

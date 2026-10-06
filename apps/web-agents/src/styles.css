@@ -1,61 +1,45 @@
 /* ============================================================================
- * Leashed Agent Platform — design system (v2)
- * Positioning: Trust Layer for AI Agents
+ * Leashed Agent Platform — Variant D: Archival Blueprint
+ * "An auditor's working document."
  *
- * Palette: deep navy surface, electric teal accent, off-white cards. No
- * paper-ledger nostalgia — this is fintech UI for a chain-enforced leash,
- * a receipts ledger, and an independent auditor.
+ * Cool gray-cyan paper, drafting blue ink, hairline grids, corner crosshairs,
+ * left-edge ruler, schematic annotations (FIG. 1, FIG. 2, FIG. 3).
  *
- * Tokens are declared at :root so every page reads from one source.
- * ============================================================================
- */
+ * Tokens declared at :root so every page reads from one source.
+ * ========================================================================== */
 
 :root {
-  /* Brand */
-  --brand-ink: #0B1A2F;
-  --brand-surface: #0F2238;
-  --brand-surface-2: #173455;
-  --brand-card: #FFFFFF;
-  --brand-paper: #F4F7FB;
+  /* Surfaces */
+  --paper:#E9EBEC;
+  --panel:#F4F6F7;
+  --row:#FFFFFF;
 
-  /* Accent */
-  --accent: #00C2A8;       /* electric teal */
-  --accent-soft: #00C2A833;
-  --accent-deep: #007E6E;
+  /* Ink */
+  --ink:#1B2C3E;
+  --ink-2:#243447;
+  --ink55:rgba(27,44,62,.55);
+  --ink35:rgba(27,44,62,.32);
+
+  /* Drafting blue */
+  --blue:#1F4E79;
+  --blue-light:#3B7CB9;
+  --blue-pale:#D5E1ED;
 
   /* Status */
-  --ok: #1FA968;
-  --warn: #E5A100;
-  --danger: #E5484D;
-
-  /* Text */
-  --ink: #0F172A;
-  --ink-2: #334155;
-  --muted: #64748B;
-  --on-dark: #E6EDF7;
-  --on-dark-muted: #8AA0BD;
+  --ok:#2D7D4A;
+  --red:#A93837;
+  --gold:#A07C2C;
 
   /* Lines */
-  --border: #E2E8F0;
-  --border-strong: #CBD5E1;
+  --rule:#1F4E79;
+  --rule-faint:rgba(31,78,121,.18);
 
-  /* Spacing scale */
-  --s-1: 4px;
-  --s-2: 8px;
-  --s-3: 12px;
-  --s-4: 16px;
-  --s-5: 24px;
-  --s-6: 32px;
-  --s-7: 48px;
-  --s-8: 64px;
+  /* Type */
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:"Roboto Mono","JetBrains Mono","IBM Plex Mono",ui-monospace,monospace;
 
-  /* Radii / shadow */
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --shadow-sm: 0 1px 2px rgba(15, 34, 56, 0.06), 0 1px 1px rgba(15, 34, 56, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 34, 56, 0.08), 0 2px 4px rgba(15, 34, 56, 0.04);
-  --shadow-lg: 0 18px 48px rgba(15, 34, 56, 0.18), 0 6px 12px rgba(15, 34, 56, 0.08);
+  /* Geometry */
+  --ruler-w:18px;
 }
 
 /* ============================================================================
@@ -67,493 +51,550 @@ html, body, #root { height: 100%; }
 
 body {
   margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-family: var(--sans);
   font-size: 14.5px;
   line-height: 1.55;
   color: var(--ink);
-  background: var(--brand-paper);
+  background: var(--paper);
+  /* drafting-paper hairline grid */
+  background-image:
+    linear-gradient(0deg, var(--rule-faint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule-faint) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3 {
-  font-family: "Inter", -apple-system, system-ui, sans-serif;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  margin: 0 0 var(--s-3) 0;
-}
-h1 { font-size: 26px; font-weight: 700; line-height: 1.25; }
-h2 { font-size: 17px; font-weight: 600; margin-top: var(--s-6); }
-h3 { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+h1, h2, h3 { color: var(--ink); letter-spacing: -.01em; margin: 0 0 12px 0; font-family: var(--sans); }
+h1 { font-size: 32px; font-weight: 600; line-height: 1.15; }
+h2 { font-size: 18px; font-weight: 600; margin-top: 28px; }
+h3 { font-size: 13px; font-weight: 600; color: var(--blue); letter-spacing: .04em; }
 
-a {
-  color: var(--accent-deep);
-  text-decoration: none;
-}
-a:hover { text-decoration: underline; }
+a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; }
+a:hover { text-decoration-style: solid; }
 
-code, .mono {
-  font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
-  font-size: 12.5px;
-  background: rgba(11, 26, 47, 0.06);
-  padding: 1px 6px;
-  border-radius: var(--r-sm);
-  color: var(--brand-ink);
-}
+code, .mono { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
 
-.muted { color: var(--muted); }
-.error { color: var(--danger); }
+.muted { color: var(--ink55); }
+.error { color: var(--red); }
 
 /* ============================================================================
- * App shell — sidebar + main
+ * App shell — drafting plate
  * ========================================================================== */
 
 .app {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: var(--ruler-w) 1fr;
   min-height: 100vh;
-}
-
-.sidebar {
-  background: var(--brand-surface);
-  color: var(--on-dark);
-  padding: var(--s-5) var(--s-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-5);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  color: var(--on-dark);
-}
-.brand:hover { text-decoration: none; }
-.brand-mark {
-  display: inline-flex;
-  width: 28px; height: 28px;
-  background: var(--accent);
-  color: var(--brand-ink);
-  border-radius: var(--r-sm);
-  align-items: center; justify-content: center;
-  font-weight: 800;
-  font-size: 14px;
-}
-
-.nav {
-  display: flex; flex-direction: column;
-  gap: 2px;
-}
-.nav a {
-  color: var(--on-dark-muted);
-  padding: 10px var(--s-3);
-  border-radius: var(--r-sm);
-  font-size: 14px;
-  font-weight: 500;
-}
-.nav a:hover {
-  background: rgba(255,255,255,0.06);
-  color: var(--on-dark);
-  text-decoration: none;
-}
-.nav a.active {
-  background: rgba(0, 194, 168, 0.18);
-  color: var(--accent);
-}
-
-.tagline {
-  margin-top: auto;
-  padding: var(--s-3);
-  font-size: 12px;
-  color: var(--on-dark-muted);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  line-height: 1.4;
-}
-.tagline strong { color: var(--accent); font-weight: 600; }
-
-.main {
-  padding: var(--s-6) var(--s-7);
-  max-width: 1200px;
-  width: 100%;
-}
-
-@media (max-width: 860px) {
-  .app { grid-template-columns: 1fr; }
-  .sidebar { flex-direction: row; flex-wrap: wrap; gap: var(--s-3); padding: var(--s-3); }
-  .tagline { display: none; }
-  .main { padding: var(--s-4); }
-}
-
-/* ============================================================================
- * Hero — AgentsListPage
- * ========================================================================== */
-
-.hero {
-  background: linear-gradient(135deg, var(--brand-surface) 0%, var(--brand-surface-2) 100%);
-  border-radius: var(--r-lg);
-  padding: var(--s-7);
-  margin-bottom: var(--s-6);
-  color: var(--on-dark);
-  box-shadow: var(--shadow-md);
-}
-.hero .eyebrow {
-  display: inline-block;
-  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  margin-bottom: var(--s-3);
-}
-.hero h1 {
-  color: var(--on-dark);
-  font-size: 32px;
-  line-height: 1.2;
-  margin-bottom: var(--s-3);
-  max-width: 720px;
-}
-.hero p {
-  color: var(--on-dark-muted);
-  font-size: 15px;
-  max-width: 660px;
-  margin: 0;
-}
-.hero .trust-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-  margin-top: var(--s-5);
-}
-.hero .pill {
-  background: rgba(0, 194, 168, 0.12);
-  color: var(--accent);
-  border: 1px solid rgba(0, 194, 168, 0.35);
-  padding: 6px var(--s-3);
-  border-radius: 999px;
-  font-size: 12.5px;
-  font-weight: 500;
-}
-
-/* ============================================================================
- * Section headers
- * ========================================================================== */
-
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-top: var(--s-6);
-  margin-bottom: var(--s-3);
-}
-.section-head h2 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-}
-.section-head .meta {
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
-/* ============================================================================
- * Cards — agent tiles
- * ========================================================================== */
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--s-4);
-}
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-2);
-  background: var(--brand-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: var(--s-4) var(--s-5);
-  color: var(--ink);
-  text-decoration: none;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  padding: 28px 28px 56px;
+  max-width: 1180px;
+  margin: 0 auto;
   position: relative;
 }
-.card:hover {
-  text-decoration: none;
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+
+.ruler {
+  background: repeating-linear-gradient(0deg, var(--blue) 0 1px, transparent 1px 12px);
+  position: relative;
 }
-.card-row { display: flex; justify-content: space-between; align-items: center; }
-.template {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--ink);
+.ruler::before,
+.ruler::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--blue);
 }
-.keyId {
-  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  font-size: 12px;
-  color: var(--muted);
-  word-break: break-all;
-  background: transparent;
-  padding: 0;
+.ruler::before { top: 0; }
+.ruler::after { bottom: 0; }
+
+/* corner crosshairs on the main plate */
+.app::before, .app::after,
+.app > .crosshair-bl, .app > .crosshair-br {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--blue);
+  pointer-events: none;
 }
-.card-meta {
+.app::before { top: 24px;    left: 24px;    border-right: none; border-bottom: none; }
+.app::after  { top: 24px;    right: 24px;   border-left: none;  border-bottom: none; }
+.app > .crosshair-bl { bottom: 48px; left: 24px;  border-right: none; border-top: none; }
+.app > .crosshair-br { bottom: 48px; right: 24px; border-left: none;  border-top: none; }
+
+.main {
   display: flex;
-  gap: var(--s-3);
-  color: var(--muted);
-  font-size: 12.5px;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
 }
-.card-meta span { display: inline-flex; align-items: center; gap: 4px; }
-.card-actions {
+
+/* the drafting header bar that sits above every page */
+.head-bar {
   display: flex;
-  justify-content: flex-end;
-  margin-top: var(--s-2);
+  justify-content: space-between;
+  align-items: center;
+  background: var(--blue);
+  color: var(--paper);
+  padding: 10px 20px;
+  font: 600 11px var(--mono);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--blue);
+}
+.head-bar .trust {
+  background: var(--blue-pale);
+  color: var(--blue);
+  padding: 3px 10px;
+}
+.head-bar .right { color: var(--blue-pale); }
+
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; padding: 16px; }
+  .ruler { display: none; }
+  .app::before, .app::after, .crosshair-bl, .crosshair-br { display: none; }
 }
 
 /* ============================================================================
- * Status pills
+ * Page card (each route = one white panel sitting on the paper)
  * ========================================================================== */
 
-.status {
-  display: inline-block;
-  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--border);
-  color: var(--ink-2);
+.page {
+  background: var(--panel);
+  border: 1.5px solid var(--blue);
+  box-shadow: 0 1px 0 var(--blue), 0 8px 24px -10px rgba(27, 44, 62, .35);
+  position: relative;
 }
-.status-approved { background: rgba(31, 169, 104, 0.14); color: var(--ok); }
-.status-pending  { background: rgba(229, 161, 0, 0.16);  color: var(--warn); }
-.status-revoked  { background: rgba(229, 72, 77, 0.14);  color: var(--danger); }
-.status-claimed  { background: rgba(11, 26, 47, 0.10);   color: var(--ink-2); }
-.status-expired  { background: rgba(100, 116, 139, 0.16); color: var(--muted); }
-.status-rejected { background: rgba(229, 72, 77, 0.14);  color: var(--danger); }
+.page-body { padding: 28px 36px 36px; }
 
-.status-PASS { background: rgba(31, 169, 104, 0.16); color: var(--ok); }
-.status-WARN { background: rgba(229, 161, 0, 0.18);  color: var(--warn); }
-.status-FAIL { background: rgba(229, 72, 77, 0.16);  color: var(--danger); }
+.page-foot {
+  background: var(--blue);
+  color: var(--paper);
+  padding: 10px 20px;
+  font: 500 10.5px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1.5px solid var(--blue);
+}
+.page-foot .trust { color: var(--blue-pale); }
 
-.status-ok      { background: rgba(31, 169, 104, 0.16); color: var(--ok); }
-.status-revoked-lease { background: rgba(229, 72, 77, 0.14); color: var(--danger); }
+/* figure caption like "FIG. 1 — Register of leashed agents" */
+.kicker {
+  font: 600 10px var(--mono);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kicker::before {
+  content: "";
+  width: 18px;
+  height: 1.5px;
+  background: var(--blue);
+}
 
-/* keep existing legacy class name from slice 2 */
-.revoked-tag { font-weight: 700; }
+.lede {
+  font: 400 14.5px/1.55 var(--sans);
+  max-width: 620px;
+  color: var(--ink55);
+  margin-bottom: 28px;
+}
+
+/* meta strip across the top of each page */
+.meta-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-bottom: 24px;
+  border: 1.5px solid var(--blue);
+}
+.meta-bar > div {
+  padding: 12px 16px;
+  border-right: 1.5px solid var(--blue);
+  background: var(--paper);
+}
+.meta-bar > div:last-child { border-right: none; }
+.meta-bar .k {
+  font: 600 9.5px var(--mono);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.meta-bar .v {
+  font: 600 15px var(--mono);
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ============================================================================
+ * Schematic annotation (the "↓ on-chain" labels)
+ * ========================================================================== */
+
+.anno {
+  font: 500 11px var(--mono);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.anno::before { content: "↓"; font-size: 13px; }
+
+/* ============================================================================
+ * Status pills (drafting-blue accents + matching border)
+ * ========================================================================== */
+
+.stat {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1.5px solid currentColor;
+  font: 700 10px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+.stat.approved { color: var(--ok); }
+.stat.revoked  { color: var(--red); }
+.stat.pending  { color: var(--gold); }
+
+/* verdict badges used in the seal block */
+.verdict-PASS { color: var(--ok); }
+.verdict-WARN { color: var(--gold); }
+.verdict-FAIL { color: var(--red); }
 
 /* ============================================================================
  * Buttons
  * ========================================================================== */
 
 button, .btn {
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  border-radius: var(--r-sm);
+  font: 600 11px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--ink);
+  background: transparent;
   padding: 8px 14px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.12s ease;
-  line-height: 1;
+  border-radius: 0;
+  transition: background .12s, color .12s;
 }
 button.primary, .btn.primary {
-  background: var(--accent);
-  color: var(--brand-ink);
-  border-color: var(--accent);
+  background: var(--blue);
+  color: var(--paper);
+  border-color: var(--blue);
 }
-button.primary:hover:not(:disabled), .btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
-button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+button.primary:hover:not(:disabled) { background: var(--ink); border-color: var(--ink); }
+button.primary:disabled { opacity: .5; cursor: not-allowed; }
 
-button.secondary, .btn.secondary {
-  background: var(--brand-card);
-  color: var(--ink);
-  border-color: var(--border-strong);
-}
-button.secondary:hover { border-color: var(--accent); }
+button.secondary, .btn.secondary { color: var(--ink); }
+button.secondary:hover { background: var(--paper); }
 
 button.revoke-btn {
-  background: transparent;
-  color: var(--danger);
-  border-color: rgba(229, 72, 77, 0.4);
-  font-size: 12px;
-  padding: 5px 10px;
+  color: var(--red);
+  border-color: var(--red);
+  padding: 6px 12px;
 }
 button.revoke-btn:hover:not(:disabled) {
-  background: var(--danger);
-  color: white;
-  border-color: var(--danger);
+  background: var(--red);
+  color: var(--paper);
 }
-button.revoke-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+button.revoke-btn:disabled { opacity: .5; cursor: not-allowed; }
 
 /* ============================================================================
- * Passbook — meta grid + audit panel + receipts
+ * Cards — schematic agent tiles
  * ========================================================================== */
 
-.back {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: var(--s-4);
-  color: var(--ink-2);
-  font-size: 13px;
-  font-weight: 500;
-}
-.back:hover { color: var(--accent-deep); text-decoration: none; }
-
-.meta-grid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--s-3);
-  margin-bottom: var(--s-5);
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
+  margin-top: 8px;
 }
-.meta-grid > div {
-  background: var(--brand-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: var(--s-3) var(--s-4);
-}
-.label {
+.card {
+  background: var(--paper);
+  border: 1.5px solid var(--blue);
+  padding: 18px 18px 14px;
+  text-decoration: none;
+  color: inherit;
   display: block;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
+  transition: background .12s, transform .12s;
 }
-
-.audit-card {
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  background: var(--brand-card);
-  border-radius: var(--r-md);
-  padding: var(--s-4) var(--s-5);
-  margin-bottom: var(--s-4);
-}
-.audit-card[data-verdict="PASS"] { border-left-color: var(--ok); }
-.audit-card[data-verdict="WARN"] { border-left-color: var(--warn); }
-.audit-card[data-verdict="FAIL"] { border-left-color: var(--danger); }
-
-.audit-card .audit-row {
+.card:hover { background: var(--blue-pale); }
+.card .top {
   display: flex;
-  align-items: center;
-  gap: var(--s-3);
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
-.audit-card .audit-headline {
+.card .name { font: 600 20px var(--sans); }
+.card .keyId {
+  font: 500 11.5px var(--mono);
+  color: var(--ink55);
+  border: 1px solid var(--blue);
+  padding: 2px 6px;
+  display: inline-block;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.card .row {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  padding: 4px 0;
+  border-top: 1px dashed var(--rule-faint);
+  font: 500 11.5px var(--mono);
+}
+.card .row span { color: var(--blue); }
+.card .row b {
+  color: var(--ink);
   font-weight: 600;
-  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.card .foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1.5px solid var(--blue);
+}
+.card .anno { margin: 0; }
+.card.revoked { opacity: .55; }
+
+/* ============================================================================
+ * Passbook — summary strip + verdict + receipts
+ * ========================================================================== */
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-bottom: 20px;
+  border: 1.5px solid var(--blue);
+}
+.summary > div {
+  padding: 18px 20px;
+  border-right: 1.5px solid var(--blue);
+  background: var(--paper);
+}
+.summary > div:last-child { border-right: none; }
+.summary .k {
+  font: 600 9.5px var(--mono);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.summary .v {
+  font: 600 28px/1.05 var(--mono);
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
   color: var(--ink);
 }
-.audit-card .problems {
-  margin: var(--s-3) 0 0 18px;
-  padding: 0;
-  color: var(--danger);
-  font-size: 12.5px;
+.summary .v small { font-size: 13px; color: var(--ink55); font-weight: 400; margin-left: 4px; }
+.summary .s { font: 500 11.5px var(--mono); color: var(--ink55); margin-top: 6px; }
+
+.verdict-strip {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--paper);
+  border: 1.5px solid var(--ok);
+  margin: 18px 0;
 }
-.audit-meta {
-  margin-top: var(--s-2);
-  font-size: 11.5px;
-  color: var(--muted);
-  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+.verdict-strip .big {
+  font: 700 24px var(--mono);
+  letter-spacing: .06em;
+}
+.verdict-strip[data-verdict="PASS"] .big { color: var(--ok); }
+.verdict-strip[data-verdict="WARN"] .big { color: var(--gold); }
+.verdict-strip[data-verdict="FAIL"] { border-color: var(--red); }
+.verdict-strip[data-verdict="FAIL"] .big { color: var(--red); }
+.verdict-strip .label { font: 600 13px var(--sans); }
+.verdict-strip .sub { font: 500 11.5px var(--mono); color: var(--ink55); margin-top: 2px; }
+.verdict-strip .stampbox {
+  margin-left: auto;
+  font: 500 11px var(--mono);
+  color: var(--ink55);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.verdict-strip .problems {
+  margin: 6px 0 0 18px;
+  padding: 0;
+  font: 500 11.5px var(--mono);
+  color: var(--red);
+}
+
+.seal-block {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 18px 0 6px;
+  padding: 18px 22px;
+  background: var(--blue-pale);
+  border: 1.5px solid var(--blue);
+}
+.seal {
+  background: var(--paper);
+  border: 1.5px solid var(--ok);
+  padding: 14px 22px;
+  text-align: center;
+  font: 700 12px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg);
+  color: var(--ok);
+}
+.seal .big {
+  display: block;
+  font: 700 22px var(--mono);
+  margin-bottom: 4px;
+  letter-spacing: .04em;
+}
+.seal .sub {
+  display: block;
+  font: 500 9.5px var(--mono);
+  margin-top: 4px;
+  color: var(--ink55);
+}
+.seal-block .meta { font: 500 12px var(--mono); line-height: 1.7; color: var(--ink); }
+.seal-block .meta b { font-weight: 700; }
+.seal-block .meta small {
+  color: var(--ink55);
+  display: block;
+  font-size: 11px;
+  margin-top: 2px;
 }
 
 /* ============================================================================
- * Tables (receipts + services)
+ * Tables — receipts + services
  * ========================================================================== */
 
 table.receipts, table.services-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: var(--brand-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  overflow: hidden;
+  border-collapse: collapse;
+  margin-top: 18px;
+  border: 1.5px solid var(--blue);
+  font-family: var(--mono);
 }
-table.receipts th, table.services-table th {
-  background: rgba(11, 26, 47, 0.04);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+table.receipts thead th, table.services-table thead th {
+  font: 600 10px var(--mono);
   text-transform: uppercase;
-  color: var(--muted);
-  padding: 10px var(--s-4);
+  letter-spacing: .16em;
+  color: var(--paper);
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  padding: 8px 10px;
+  background: var(--blue);
+  border-right: 1px solid var(--blue-pale);
 }
-table.receipts td, table.services-table td {
-  padding: 10px var(--s-4);
-  border-bottom: 1px solid var(--border);
-  vertical-align: middle;
+table.receipts thead th:last-child, table.services-table thead th:last-child { border-right: none; }
+table.receipts tbody td, table.services-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--rule-faint);
+  font-size: 13.5px;
+  vertical-align: top;
+  background: var(--paper);
+}
+table.receipts tbody tr:last-child td, table.services-table tbody tr:last-child td { border-bottom: none; }
+table.receipts tbody tr:hover td, table.services-table tbody tr:hover td { background: var(--blue-pale); }
+table.receipts td.mono, table.services-table td.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
   font-size: 13px;
 }
-table.receipts tr:last-child td, table.services-table tr:last-child td { border-bottom: none; }
+table.receipts .detail, table.services-table .detail { font-weight: 600; font-family: var(--sans); }
+table.receipts .sub, table.services-table .sub {
+  font-size: 11px;
+  color: var(--ink55);
+  margin-top: 3px;
+  font-family: var(--mono);
+}
+.rail {
+  display: inline-block;
+  padding: 3px 7px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font: 700 9.5px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: var(--panel);
+}
+.amt {
+  text-align: right;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.paid-stamp {
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1.5px solid var(--ok);
+  color: var(--ok);
+  font: 700 9.5px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
 
 /* ============================================================================
- * Empty + search
+ * Services — row-based register
  * ========================================================================== */
 
-.empty {
-  background: var(--brand-card);
-  border: 1px dashed var(--border-strong);
-  border-radius: var(--r-md);
-  padding: var(--s-7);
-  text-align: center;
+.services-register {
+  border: 1.5px solid var(--blue);
+  margin-top: 8px;
 }
-.empty h1 {
-  font-size: 22px;
-  color: var(--ink);
-  margin-bottom: var(--s-2);
+.service-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 130px 90px 70px;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--rule-faint);
+  align-items: baseline;
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: 13px;
 }
-.empty p { color: var(--muted); margin: var(--s-2) 0; }
-.empty pre {
-  background: var(--brand-paper);
-  border-radius: var(--r-sm);
-  padding: var(--s-3) var(--s-4);
-  display: inline-block;
-  text-align: left;
-  margin-top: var(--s-3);
+.service-row:last-child { border-bottom: none; }
+.service-row:hover { background: var(--blue-pale); }
+.service-row .id { font: 600 11.5px var(--mono); color: var(--blue); }
+.service-row .url a { font: 500 12.5px var(--mono); }
+.service-row .url .desc {
+  font-size: 11px;
+  color: var(--ink55);
+  margin-top: 2px;
+  font-family: var(--mono);
 }
-.empty pre code { background: transparent; padding: 0; }
 
-.search-row {
-  display: flex;
-  align-items: center;
-  gap: var(--s-3);
-  margin-bottom: var(--s-4);
-}
-input[type="search"], input[type="text"] {
-  font-family: inherit;
-  font-size: 14px;
-  padding: 8px var(--s-3);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-sm);
-  background: var(--brand-card);
-  color: var(--ink);
-  min-width: 260px;
-  transition: border-color 0.12s ease, box-shadow 0.12s ease;
-}
-input[type="search"]:focus, input[type="text"]:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+  .meta-bar { grid-template-columns: 1fr 1fr; }
+  .meta-bar > div { border-right: none; border-bottom: 1.5px solid var(--blue); }
+  .summary { grid-template-columns: 1fr; }
+  .summary > div { border-right: none; border-bottom: 1.5px solid var(--blue); }
+  table.receipts, table.services-table { font-size: 12.5px; }
+  .service-row { grid-template-columns: 1fr; gap: 6px; }
+  .page-body { padding: 18px 18px 24px; }
 }
 
 /* ============================================================================
- * Loading shimmer
+ * Loading state
  * ========================================================================== */
 
 .loading-muted {
-  color: var(--muted);
+  color: var(--ink55);
   font-style: italic;
-  padding: var(--s-5) 0;
+  padding: 24px 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
 }

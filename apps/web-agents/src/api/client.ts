@@ -41,7 +41,7 @@ export interface Passbook {
   latestAudit: AuditResult | null;
 }
 
-const BASE = ""; // vite dev proxies /api → Hono worker
+const BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? ""; // vite dev proxies /api → Hono worker; prod build sets VITE_API_BASE
 const STUB_USER = "user_alice";
 
 async function jsonOrThrow<T>(res: Response): Promise<T> {
