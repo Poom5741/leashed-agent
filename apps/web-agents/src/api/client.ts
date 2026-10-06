@@ -47,6 +47,7 @@ export interface Passbook {
 const BASE =
   (import.meta.env.VITE_API_BASE as string | undefined) ??
   "https://leashed-api-agents.poom-a1d.workers.dev";
+export const API_BASE = BASE;
 const STUB_USER = "user_alice";
 
 async function jsonOrThrow<T>(res: Response): Promise<T> {

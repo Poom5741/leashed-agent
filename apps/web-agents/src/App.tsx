@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { AgentsListPage } from "./pages/AgentsListPage.js";
 import { PassbookPage } from "./pages/PassbookPage.js";
 import { ServicesPage } from "./pages/ServicesPage.js";
+import { FaucetPage } from "./pages/FaucetPage.js";
 import "./styles.css";
 
 const TITLES: Record<string, string> = {
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/agents" element={<AgentsListPage />} />
           <Route path="/agents/:keyId" element={<PassbookPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/faucet" element={<FaucetPage />} />
         </Routes>
 
         <div className="page-foot" style={{ marginTop: 12 }}>
