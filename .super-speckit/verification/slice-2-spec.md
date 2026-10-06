@@ -1,9 +1,10 @@
 # Slice 2 spec — wallet /agents SPA + Hono API + D1
 
-> Branch: `platform-fork/agents-spa` (or work in `~/token2049/wallet` directly per user confirmation).
+> **Landing site (user-confirmed 2026-10-06): leashed-agent monorepo.** No separate wallet-fork repo for this slice.
+> New apps: `leashed-agent/apps/api-agents/` (Hono worker, Cloudflare D1) and `leashed-agent/apps/web-agents/` (React 19 + Vite SPA).
 > Source of truth: `leashed-agent/docs/verification-matrix.md` rows S2.R1–S2.R7.
 
-## D1 schema changes — `wallet/apps/api/migrations/0003_agents_template.sql`
+## D1 schema changes — `apps/api-agents/migrations/0003_agents_template.sql`
 
 ```sql
 -- Slice 2 — add template + revoked status to agent_pairings.
@@ -20,7 +21,7 @@ ALTER TABLE agent_pairings ADD COLUMN template TEXT NOT NULL DEFAULT 'legacy';
 -- supports "list this user's agents" efficiently.
 ```
 
-## Hono API contract — new routes in `wallet/apps/api/src/index.ts`
+## Hono API contract — new routes in `apps/api-agents/src/index.ts`
 
 All routes sit under the existing `requireAuth` middleware (already applied
 to `/api/agent/*`). The new routes reuse the same `AppEnv` type and `c.env.DB`.
@@ -125,7 +126,7 @@ app.delete("/api/agents/:keyId", async (c) => {
 });
 ```
 
-## SPA page — new `/agents` route in `wallet/apps/web/src/`
+## SPA page — new `/agents` route in `apps/web-agents/src/`
 
 1. Add a new route at `/agents` (or `/dashboard/agents` if the wallet SPA nests it).
 2. Use the existing `useSession` hook to get the authed session, then `fetch('/api/agents')` on mount.
@@ -145,6 +146,6 @@ Each S2.R row gets a Hono test fixture:
 - **S2.R6**: click into one card, assert passbook renders.
 - **S2.R7**: apply migration 0003, inspect schema, assert `template` column exists, assert existing rows have `template='legacy'`.
 
-## Worktree recommendation
+## Worktree policy
 
-Per kit policy (`maker_requires_isolated_worktree: true`), the slice-2 maker lane should work in `~/.super-speckit-worktrees/ss/feature/platform-fork-spa-c` (or similar). The Hono route additions go in the **wallet fork** (separate repo at `~/token2049/wallet`); the SPA additions are also in the wallet fork's web app. The leashed-agent repo only gets the spec + feature map updates (this commit).
+User opted to edit on `main` directly (36h deadline, kit policy `maker_requires_isolated_worktree: true` overridden for this run). All slice-2 work commits to `main` of `leashed-agent`.
