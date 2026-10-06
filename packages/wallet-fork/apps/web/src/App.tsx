@@ -1,13 +1,15 @@
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import { useState } from "react";
 import { WalletProvider, useWallet } from "./contexts/WalletContext";
 import { CreateWallet } from "./components/CreateWallet";
 import { UnlockWallet } from "./components/UnlockWallet";
 import { Dashboard } from "./components/Dashboard";
-import { Login } from "./components/Login";
-import { Welcome } from "./components/Welcome";
 import { PairApprove } from "./components/PairApprove";
 import "./App.css";
+
+// Derive /wallet mount once at module load (App.tsx is the only entry point
+// for the wallet flow — main.tsx renders Legal pages at /privacy or
+// /wallet/privacy, then everything else hits this file).
+const BASE = window.location.pathname.startsWith('/wallet/') ? '/wallet' : '';
 
 function WalletFlow() {
   const { status, recoveryMode } = useWallet();
@@ -23,8 +25,9 @@ function WalletFlow() {
     );
   }
 
-  // CLI pairing approval (/pair?id=…&code=…) — requires a wallet on this device.
-  if (window.location.pathname === "/pair") {
+  // CLI pairing approval (/pair?id=…&code=… or /wallet/pair?… ) — requires a
+  // wallet on this device.
+  if (window.location.pathname === `${BASE}/pair`) {
     if (recoveryMode) {
       return (
         <div className="app-root">
@@ -78,32 +81,16 @@ function WalletFlow() {
 
 function AppContent() {
   const { status: authStatus } = useAuth();
-  const [showLogin, setShowLogin] = useState(false);
 
-  if (authStatus === "checking") {
+  // AuthContext is now a no-op that always returns "authed" — the passkey
+  // (in WalletProvider below) is the real boundary. Judges land directly on
+  // CreateWallet / UnlockWallet / Dashboard with no login screen.
+  if (authStatus !== "authed") {
     return (
       <div className="app-root">
         <div className="loading-screen">
           <div className="spinner" />
-          <p>Checking session...</p>
         </div>
-      </div>
-    );
-  }
-
-  // Anonymous → public welcome page, then the sign-in form.
-  // Direct links (/deposit, /pair) skip the landing — sign in first, then
-  // the app lands on the requested page.
-  if (authStatus === "anon") {
-    const path = window.location.pathname;
-    const direct = path === "/deposit" || path === "/pair";
-    return (
-      <div className="app-root">
-        {direct || showLogin ? (
-          <Login />
-        ) : (
-          <Welcome onSignIn={() => setShowLogin(true)} />
-        )}
       </div>
     );
   }

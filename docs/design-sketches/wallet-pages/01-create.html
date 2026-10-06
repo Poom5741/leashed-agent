@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leashed Wallet — Create · design sketch</title>
+<style>
+  :root {
+    --paper: #E9EBEC; --card: #F4F5F5; --card-2: #E9EBEC;
+    --blue: #1F4E79; --blue-pale: #4A7BA6; --blue-soft: rgba(31,78,121,.08);
+    --ink: #17222E; --muted: #5C6B7A; --border: rgba(31,78,121,.35);
+    --hairline: rgba(31,78,121,.18);
+    --success: #2E7D46; --warn: #B0761A; --danger: #A33B2E;
+    --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    --mono: "Roboto Mono", ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--hairline) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+    background-size: 32px 32px;
+    font-family: var(--sans); color: var(--ink);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px; position: relative;
+  }
+  .ruler { position: fixed; left: 18px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .ruler::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0 15px, var(--border) 15px 16px); }
+  .crosshair { position: fixed; width: 14px; height: 14px; pointer-events: none; }
+  .crosshair::before, .crosshair::after { content: ""; position: absolute; background: var(--border); }
+  .crosshair::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+  .crosshair::after { top: 50%; left: 0; right: 0; height: 1px; }
+  .ch-bl { left: 14px; bottom: 14px; } .ch-br { right: 14px; bottom: 14px; }
+  .shell { width: 100%; max-width: 460px; position: relative; }
+  .head-bar {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 14px;
+  }
+  .head-bar .right { color: var(--muted); }
+  .card {
+    background: var(--card); border: 1.5px solid var(--blue);
+    box-shadow: 6px 6px 0 rgba(31,78,121,.12); padding: 32px 30px; position: relative;
+  }
+  .card::before, .card::after {
+    content: ""; position: absolute; width: 9px; height: 9px; pointer-events: none;
+  }
+  .card::before { top: -5px; left: -5px; border-top: 1.5px solid var(--blue); border-left: 1.5px solid var(--blue); }
+  .card::after { bottom: -5px; right: -5px; border-bottom: 1.5px solid var(--blue); border-right: 1.5px solid var(--blue); }
+  .fig {
+    position: absolute; top: 12px; right: 14px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
+    color: var(--blue-pale); text-transform: uppercase;
+  }
+  .logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .logo-mark {
+    width: 38px; height: 38px; border: 1.5px solid var(--blue); background: var(--blue);
+    color: var(--paper); display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-weight: 700; font-size: 17px;
+  }
+  .logo-name { font-weight: 600; font-size: 16px; letter-spacing: .01em; }
+  .logo-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+  h1 { font-size: 21px; font-weight: 600; margin-bottom: 8px; }
+  .lede { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 22px; }
+  .lede strong { color: var(--ink); }
+  .method { display: flex; gap: 12px; }
+  .method-opt {
+    flex: 1; border: 1.5px solid var(--border); padding: 16px 14px; cursor: pointer;
+    background: transparent; transition: background 120ms ease;
+  }
+  .method-opt.active { border-color: var(--blue); background: var(--blue-soft); box-shadow: 3px 3px 0 rgba(31,78,121,.15); }
+  .method-opt .glyph { font-size: 20px; margin-bottom: 8px; }
+  .method-opt .t { font-weight: 600; font-size: 13.5px; margin-bottom: 4px; }
+  .method-opt .d { font-size: 11px; color: var(--muted); line-height: 1.45; }
+  .method-opt .badge {
+    display: inline-block; margin-top: 8px; font-family: var(--mono); font-size: 9px;
+    letter-spacing: .1em; text-transform: uppercase; padding: 2px 6px;
+    background: var(--blue); color: var(--paper);
+  }
+  .method-opt .badge.rec { background: var(--success); }
+  .stamp {
+    margin-top: 20px; border: 1.5px dashed var(--border); padding: 12px 14px;
+    font-size: 11.5px; color: var(--muted); line-height: 1.5; position: relative;
+  }
+  .stamp .fig2 {
+    position: absolute; top: -8px; left: 10px; background: var(--card); padding: 0 6px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: .12em; color: var(--blue-pale); text-transform: uppercase;
+  }
+  .btn {
+    width: 100%; margin-top: 18px; padding: 13px 16px; border: 1.5px solid var(--blue);
+    background: var(--blue); color: var(--paper); font-family: var(--sans); font-size: 14px;
+    font-weight: 600; cursor: pointer; letter-spacing: .01em;
+    box-shadow: 3px 3px 0 rgba(31,78,121,.25);
+  }
+  .btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 rgba(31,78,121,.3); }
+  .btn.ghost { background: transparent; color: var(--blue); box-shadow: none; margin-top: 10px; }
+  .foot { margin-top: 16px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .foot .trust { color: var(--blue); }
+  .watermark {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%) rotate(-4deg);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .35em; color: var(--blue-pale);
+    text-transform: uppercase; opacity: .7;
+  }
+</style>
+</head>
+<body>
+<span class="ruler"></span><span class="crosshair ch-bl"></span><span class="crosshair ch-br"></span>
+<div class="shell">
+  <div class="watermark">design sketch · not production</div>
+  <div class="head-bar"><span>Trust Layer · Leashed Wallet</span><span class="right">SHEET 01 / CREATE</span></div>
+  <div class="card">
+    <span class="fig">FIG. 1 — KEY BIRTH</span>
+    <div class="logo-row">
+      <div class="logo-mark">L</div>
+      <div>
+        <div class="logo-name">Leashed Wallet</div>
+        <div class="logo-sub">passkey-only · thaiFi chain 17</div>
+      </div>
+    </div>
+    <h1>Create your wallet</h1>
+    <p class="lede">
+      A new EVM wallet is generated and encrypted <strong>on this device</strong>.
+      No email, no phone, no account — <strong>your passkey is the only key</strong>.
+      No server can move your funds.
+    </p>
+
+    <div class="method">
+      <div class="method-opt active">
+        <div class="glyph">🔐</div>
+        <div class="t">Passkey</div>
+        <div class="d">Face ID / fingerprint / security key. Signs every transaction locally.</div>
+        <span class="badge rec">Recommended</span>
+      </div>
+      <div class="method-opt">
+        <div class="glyph">🔢</div>
+        <div class="t">8-digit PIN</div>
+        <div class="d">Fallback for browsers without passkey support. Weaker — guessable.</div>
+        <span class="badge">Fallback</span>
+      </div>
+    </div>
+
+    <div class="stamp">
+      <span class="fig2">NOTICE · REV 02</span>
+      Keys never leave this device. Write down nothing — the passkey
+      <em>is</em> the recovery. Export an encrypted backup file after creation
+      if you want a second copy.
+    </div>
+
+    <button class="btn">Create wallet with passkey</button>
+    <button class="btn ghost">↧ Import from encrypted backup</button>
+  </div>
+  <div class="foot"><span>leashed-agent · v2 · draft 003</span><span class="trust">trust layer · verifiable</span></div>
+</div>
+</body>
+</html>

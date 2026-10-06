@@ -1,6 +1,5 @@
-// Privacy Policy and Terms of Use — required URLs for the LINE Login channel
-// (set in the LINE Developers console). Served by the SPA at /privacy and
-// /terms via the Workers asset fallback.
+// Privacy Policy and Terms of Use — Leashed Agent fork ships English-only.
+// LINE sign-in is removed; the passkey is the only identity.
 
 import { thaifi } from "../config/chain";
 
@@ -15,9 +14,9 @@ function LegalShell({
 }) {
   return (
     <div className="legal-page">
-      <a className="legal-back" href="/">← Back to ThaiFi Wallet</a>
+      <a className="legal-back" href="/">← Back to Leashed Wallet</a>
       <h1>{title}</h1>
-      <p className="legal-updated">Last updated / ปรับปรุงล่าสุด: {updated}</p>
+      <p className="legal-updated">Last updated: {updated}</p>
       {children}
     </div>
   );
@@ -25,38 +24,31 @@ function LegalShell({
 
 export function PrivacyPage() {
   return (
-    <LegalShell title="Privacy Policy / นโยบายความเป็นส่วนตัว" updated="September 18, 2026">
-      <h2>English</h2>
-
+    <LegalShell title="Privacy Policy" updated="October 6, 2026">
       <h2>1. Overview</h2>
       <p>
-        ThaiFi Wallet is a <strong>non-custodial</strong> wallet for the ThaiFi
-        network (chain ID 17). Your account sign-in (LINE or email) identifies
-        you and stores an <strong>encrypted</strong> copy of your wallet backup.
-        We never hold your keys and cannot move your funds.
+        Leashed Wallet is a <strong>non-custodial</strong> passkey wallet for
+        the ThaiFi network (chain ID {thaifi.id}). It is a fork of the ThaiFi
+        Wallet, re-skinned for the Leashed Agent Platform. There is no
+        identity provider — your device and your passkey are the only thing
+        that authorises access.
       </p>
 
       <h2>2. What we collect</h2>
       <ul>
         <li>
-          <strong>Sign-in data:</strong> if you sign in with LINE, your LINE user
-          ID, display name and profile picture; if you sign in with email, your
-          email address. Email sign-in codes are sent from{" "}
-          <code>noreply@thaifi.com</code>.
+          <strong>Nothing about you.</strong> No email, no LINE user ID, no
+          phone, no analytics. The wallet never asks for an account.
         </li>
         <li>
-          <strong>Encrypted wallet backup (optional):</strong> the encrypted key
-          blob produced on your device, stored in Cloudflare D1. It is
+          <strong>Encrypted wallet backup (optional):</strong> the encrypted
+          key blob produced on your device, stored in Cloudflare D1. It is
           ciphertext — meaningless without your passkey or recovery password.
         </li>
         <li>
-          <strong>Session cookie:</strong> a signed, HttpOnly cookie that keeps
-          you signed in for up to 30 days.
-        </li>
-        <li>
           <strong>Public blockchain data:</strong> your wallet address and
-          transactions are public on the ThaiFi chain and shown in the History
-          tab via the ThaiFi indexer.
+          transactions are public on the ThaiFi chain and shown in the
+          Activity tab via the ThaiFi indexer.
         </li>
       </ul>
 
@@ -67,54 +59,38 @@ export function PrivacyPage() {
         after a passkey confirmation. No employee or server can recover them.
       </p>
 
-      <h2>4. Storage and processors</h2>
+      <h2>4. Storage</h2>
       <ul>
-        <li><strong>Cloudflare</strong> — Workers, D1 database and transactional email.</li>
-        <li><strong>LINE</strong> — identity provider when you choose LINE sign-in.</li>
+        <li><strong>Cloudflare</strong> — Workers, D1 database (encrypted backups only).</li>
       </ul>
 
       <h2>5. Your choices</h2>
       <p>
-        You can delete the cloud backup or sign out at any time in the app.
-        Removing your wallet from a device does not delete blockchain records,
-        which are public by design. Questions: contact us via{" "}
-        <a href="https://thaifi.com" target="_blank" rel="noreferrer">thaifi.com</a>.
+        You can delete the cloud backup at any time in the app. Removing your
+        wallet from a device does not delete blockchain records, which are
+        public by design. Questions: open an issue on the Leashed Agent
+        GitHub repo.
       </p>
-
-      <div className="legal-lang">
-        <h2>ไทย</h2>
-        <p>
-          <strong>สรุป:</strong> ThaiFi Wallet เป็น wallet แบบ non-custodial
-          กุญแจส่วนตัวของคุณถูกสร้างและจัดเก็บไว้ในเครื่องของคุณเท่านั้น
-          เราไม่มีทางเห็นหรือย้ายเงินของคุณได้ เราเก็บเพียง: ข้อมูลการล็อกอิน
-          (LINE user ID / อีเมล), ไฟล์สำรอง wallet ที่<strong>เข้ารหัสแล้ว</strong>
-          (เก็บบน Cloudflare D1 — ถอดรหัสไม่ได้หากไม่มี passkey หรือ recovery
-          password ของคุณ), session cookie และข้อมูลสาธารณะบนบล็อกเชน
-          อีเมลรหัสล็อกอินส่งจาก noreply@thaifi.com
-          คุณสามารถลบ backup บนคลาวด์หรือออกจากระบบได้ทุกเมื่อจากในแอป
-        </p>
-      </div>
     </LegalShell>
   );
 }
 
 export function TermsPage() {
   return (
-    <LegalShell title="Terms of Use / ข้อกำหนดการใช้งาน" updated="September 18, 2026">
-      <h2>English</h2>
-
+    <LegalShell title="Terms of Use" updated="October 6, 2026">
       <h2>1. The service</h2>
       <p>
-        ThaiFi Wallet provides a non-custodial wallet interface for the ThaiFi
-        network (chain ID {thaifi.id}), including encrypted cloud backup of your
-        wallet key and transaction history. The software is provided as-is.
+        Leashed Wallet provides a non-custodial wallet interface for the ThaiFi
+        network (chain ID {thaifi.id}), including optional encrypted cloud
+        backup of your wallet key and read-only transaction history. The
+        software is provided as-is.
       </p>
 
       <h2>2. You are responsible for your keys</h2>
       <p>
-        Because the wallet is non-custodial, <strong>only you</strong> can access
-        your funds. You are solely responsible for your recovery password,
-        backup file and device security. If you lose them,{" "}
+        Because the wallet is non-custodial, <strong>only you</strong> can
+        access your funds. You are solely responsible for your recovery
+        password, backup file and device security. If you lose them,{" "}
         <strong>nobody — including us — can restore access</strong>. A cloud
         backup helps only if you remember your recovery password.
       </p>
@@ -137,21 +113,8 @@ export function TermsPage() {
       <h2>5. Changes</h2>
       <p>
         We may update these terms; continued use after an update constitutes
-        acceptance. These terms are governed by the laws of Thailand.
+        acceptance.
       </p>
-
-      <div className="legal-lang">
-        <h2>ไทย</h2>
-        <p>
-          <strong>สรุป:</strong> ThaiFi Wallet เป็น wallet แบบ non-custodial —
-          <strong>คุณรับผิดชอบกุญแจและการสำรองข้อมูลของคุณเองทั้งหมด</strong>
-          หากสูญเสีย recovery password หรือไฟล์ backup จะไม่มีใครรวมถึงเรา
-          สามารถกู้คืนการเข้าถึง wallet ของคุณได้ ห้ามใช้บริการเพื่อกิจกรรมที่ผิดกฎหมาย
-          บริการจัดให้ "ตามสภาพ" โดยไม่มีการรับประกัน
-          และเราไม่รับผิดต่อความเสียหายที่เกิดจากการใช้งาน
-          ข้อกำหนดนี้อยู่ภายใต้กฎหมายไทย
-        </p>
-      </div>
     </LegalShell>
   );
 }

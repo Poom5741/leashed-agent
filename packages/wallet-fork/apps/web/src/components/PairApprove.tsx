@@ -264,7 +264,10 @@ export function PairApprove() {
           <button
             className="btn-primary"
             style={{ marginTop: 8 }}
-            onClick={() => (window.location.href = "/deposit")}
+            onClick={() => {
+              const base = window.location.pathname.startsWith('/wallet/') ? '/wallet' : '';
+              window.location.href = `${base}/deposit`;
+            }}
           >
             Go to Deposit
           </button>

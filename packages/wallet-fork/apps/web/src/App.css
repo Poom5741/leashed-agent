@@ -587,6 +587,59 @@ code {
   padding: 6px 4px;
 }
 
+/* Leashed Agent marketplace — read-only list of services this wallet can
+   transact with. Variant D: hairline divider, monospace id, hover lift. */
+.agent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.agent-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition: background 120ms ease;
+}
+
+.agent-row:first-child {
+  border-top: none;
+}
+
+.agent-row:hover {
+  background: var(--card-2);
+}
+
+.agent-row .row-icon.rail-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.agent-row .row-icon.rail-badge[data-rail="thaifi-mpp"] {
+  background: #5b6b8a;
+}
+
+.agent-row .row-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
 .row-main {
   flex: 1;
   min-width: 0;

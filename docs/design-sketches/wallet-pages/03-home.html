@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leashed Wallet — Home · design sketch</title>
+<style>
+  :root {
+    --paper: #E9EBEC; --card: #F4F5F5; --card-2: #E9EBEC;
+    --blue: #1F4E79; --blue-pale: #4A7BA6; --blue-soft: rgba(31,78,121,.08);
+    --ink: #17222E; --muted: #5C6B7A; --border: rgba(31,78,121,.35);
+    --hairline: rgba(31,78,121,.18);
+    --success: #2E7D46; --warn: #B0761A; --danger: #A33B2E;
+    --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    --mono: "Roboto Mono", ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--hairline) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+    background-size: 32px 32px;
+    font-family: var(--sans); color: var(--ink);
+    min-height: 100vh; padding: 40px 20px 48px; position: relative;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; position: relative; }
+  .ruler { position: fixed; left: 18px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .ruler::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0 15px, var(--border) 15px 16px); }
+  .crosshair { position: fixed; width: 14px; height: 14px; pointer-events: none; }
+  .crosshair::before, .crosshair::after { content: ""; position: absolute; background: var(--border); }
+  .crosshair::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+  .crosshair::after { top: 50%; left: 0; right: 0; height: 1px; }
+  .ch-bl { left: 14px; bottom: 14px; } .ch-br { right: 14px; bottom: 14px; }
+  .watermark {
+    position: absolute; top: -26px; left: 0;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .3em; color: var(--blue-pale);
+    text-transform: uppercase;
+  }
+  .head-bar {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+    border-bottom: 1.5px solid var(--blue); padding-bottom: 10px;
+  }
+  .head-bar .right { color: var(--muted); }
+  .layout { display: flex; gap: 22px; align-items: flex-start; }
+  .sidenav { width: 168px; flex-shrink: 0; display: flex; flex-direction: column; gap: 2px; }
+  .sidenav a {
+    display: flex; align-items: center; gap: 8px; text-decoration: none;
+    font-size: 12.5px; color: var(--muted); padding: 8px 10px;
+    border-left: 2px solid transparent;
+  }
+  .sidenav a.active { color: var(--blue); font-weight: 600; border-left-color: var(--blue); background: var(--blue-soft); }
+  .sidenav a:hover { color: var(--blue); }
+  .sidenav .nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--blue-pale); margin: 10px 10px 4px; }
+  .content { flex: 1; min-width: 0; position: relative; }
+  .card {
+    background: var(--card); border: 1.5px solid var(--blue);
+    box-shadow: 6px 6px 0 rgba(31,78,121,.12); padding: 26px 28px; position: relative;
+    margin-bottom: 20px;
+  }
+  .card::before, .card::after { content: ""; position: absolute; width: 9px; height: 9px; pointer-events: none; }
+  .card::before { top: -5px; left: -5px; border-top: 1.5px solid var(--blue); border-left: 1.5px solid var(--blue); }
+  .card::after { bottom: -5px; right: -5px; border-bottom: 1.5px solid var(--blue); border-right: 1.5px solid var(--blue); }
+  .fig {
+    position: absolute; top: 12px; right: 14px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
+    color: var(--blue-pale); text-transform: uppercase;
+  }
+  .page-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .lede { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 18px; }
+  .lede strong { color: var(--ink); }
+  .mono { font-family: var(--mono); }
+  .label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue-pale); margin-bottom: 6px; }
+  .total { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .total .amt { font-family: var(--mono); font-size: 34px; font-weight: 600; letter-spacing: -.01em; }
+  .total .unit { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .delta { font-family: var(--mono); font-size: 12px; color: var(--success); }
+  .addr-row { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); padding: 9px 12px; background: var(--card); }
+  .addr-row code { font-family: var(--mono); font-size: 12px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .copy { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .08em; cursor: pointer; white-space: nowrap; }
+  .tok-row { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-top: 1px solid var(--hairline); }
+  .tok-row:first-child { border-top: none; }
+  .badge {
+    width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--paper); background: var(--blue); border-radius: 4px;
+  }
+  .badge.thc { background: #5B6B8A; }
+  .badge.tusdm { background: #2E7D46; }
+  .badge.usdm { background: #1F4E79; }
+  .tok-main { flex: 1; min-width: 0; }
+  .tok-name { font-size: 13.5px; font-weight: 600; }
+  .tok-sub { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+  .tok-amt { text-align: right; }
+  .tok-amt .v { font-family: var(--mono); font-size: 13.5px; font-weight: 600; }
+  .tok-amt .u { font-family: var(--mono); font-size: 10.5px; color: var(--muted); display: block; }
+  .btn {
+    padding: 12px 18px; border: 1.5px solid var(--blue); background: var(--blue); color: var(--paper);
+    font-family: var(--sans); font-size: 13.5px; font-weight: 600; cursor: pointer;
+    box-shadow: 3px 3px 0 rgba(31,78,121,.25); text-decoration: none; display: inline-block;
+  }
+  .btn.ghost { background: transparent; color: var(--blue); box-shadow: none; }
+  .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .qr {
+    width: 168px; height: 168px; background:
+      repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0/22px 22px,
+      var(--card); border: 1.5px solid var(--blue); position: relative;
+  }
+  .qr::after {
+    content: ""; position: absolute; inset: 62px; background: var(--card);
+    border: 3px solid var(--blue); display: flex;
+  }
+  .qr-tag { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--blue); letter-spacing: .08em; }
+  .split { display: flex; gap: 24px; flex-wrap: wrap; }
+  .split > * { flex: 1; min-width: 220px; }
+  .stamp { border: 1.5px dashed var(--border); padding: 12px 14px; font-size: 11.5px; color: var(--muted); line-height: 1.5; position: relative; margin-top: 16px; }
+  .stamp .fig2 { position: absolute; top: -8px; left: 10px; background: var(--card); padding: 0 6px; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; color: var(--blue-pale); text-transform: uppercase; }
+  table.ledger { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.ledger th {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--blue-pale); text-align: left; padding: 6px 8px; border-bottom: 1.5px solid var(--border);
+  }
+  table.ledger td { padding: 9px 8px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  table.ledger .mono { font-size: 11px; }
+  .dir-in { color: var(--success); font-weight: 600; }
+  .dir-out { color: var(--danger); font-weight: 600; }
+  .pill { font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--border); color: var(--muted); }
+  .pill.ok { border-color: var(--success); color: var(--success); }
+  .foot { margin-top: 14px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .foot .trust { color: var(--blue); }
+  .field { margin-bottom: 16px; }
+  .field input, .field textarea {
+    width: 100%; border: 1.5px solid var(--border); background: var(--card); color: var(--ink);
+    font-family: var(--mono); font-size: 13px; padding: 11px 12px; outline: none;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--blue); }
+  .chips { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 11px; padding: 5px 10px; border: 1px solid var(--border); color: var(--muted); cursor: pointer; }
+  .chip.active { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); font-weight: 600; }
+</style>
+</head>
+<body>
+<span class="ruler"></span><span class="crosshair ch-bl"></span><span class="crosshair ch-br"></span>
+<div class="wrap">
+  <div class="watermark">design sketch · not production</div>
+  
+<div class="head-bar"><span>Trust Layer · Leashed Wallet</span><span class="right">SHEET 03 / HOME</span></div>
+<div class="layout"><nav class="sidenav">
+      <div class="nav-label">WALLET · 0x7fA3…9cE2</div><a href="02-unlock.html" class="">▸ Unlock</a><a href="03-home.html" class="active">▸ Home</a><a href="04-agents.html" class="">▸ Agents</a><a href="05-activity.html" class="">▸ Activity</a><a href="06-send.html" class="">▸ Send</a><a href="07-receive.html" class="">▸ Receive</a><a href="08-sign.html" class="">▸ Sign</a><a href="09-apps.html" class="">▸ Authorized Apps</a>
+      <div class="nav-label">MENU</div>
+      <a href="#">◐ Theme</a><a href="#">⤓ Export backup</a><a href="#">✕ Remove wallet</a>
+    </nav>
+<div class="content">
+  <div class="card"><span class="fig">FIG. 3 — PASSBOOK</span>
+    <div class="page-title">Passbook</div>
+    <div class="total"><span class="amt">1,284.62</span><span class="unit">pathUSD est.</span></div>
+    <div class="delta">▲ +12.40 today · 0x7fA3…9cE2 · <span class="pill ok">passkey guard</span></div>
+    <div style="margin-top:16px" class="addr-row">
+      <code>0x7fA3c41B02Ee5D19a8bC7f60241E3d94aa0F9cE2</code>
+      <span class="copy">⧉ COPY</span><span class="copy">QR</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn" href="06-send.html">Send</a>
+      <a class="btn ghost" href="07-receive.html">Receive</a>
+      <a class="btn ghost" href="04-agents.html">Agent marketplace</a>
+    </div>
+  </div>
+  <div class="card"><span class="fig">FIG. 3.1 — BALANCES</span>
+    <div class="label">Token ledger</div>
+    <div class="tok-row"><span class="badge">pUSD</span><span class="tok-main"><span class="tok-name">pathUSD</span><span class="tok-sub">TIP-20 · gas + payments</span></span><span class="tok-amt"><span class="v">1,152.408912</span><span class="u">≈ $1,152.41</span></span></div>
+    <div class="tok-row"><span class="badge thc">THC</span><span class="tok-main"><span class="tok-name">THCFI</span><span class="tok-sub">ThaiFi Chain native · MPP rail</span></span><span class="tok-amt"><span class="v">96.250000</span><span class="u">≈ $96.25</span></span></div>
+    <div class="tok-row"><span class="badge tusdm">tU</span><span class="tok-main"><span class="tok-name">tUSDM</span><span class="tok-sub">Cardano x402 rail · test</span></span><span class="tok-amt"><span class="v">24.000000</span><span class="u">≈ $24.00</span></span></div>
+    <div class="tok-row"><span class="badge">US</span><span class="tok-main"><span class="tok-name">USDM</span><span class="tok-sub">Cardano x402 rail</span></span><span class="tok-amt"><span class="v">12.00</span><span class="u">≈ $12.00</span></span></div>
+    <div class="stamp"><span class="fig2">AUDIT</span>Balances are read directly from ThaiFi RPC — no custodian, no index in between. Audit stamp: <span class="mono">CRE-2026-10-06 · PASS</span></div>
+  </div>
+  <div class="foot"><span>leashed-agent · v2 · draft 003</span><span class="trust">trust layer · verifiable</span></div>
+</div></div>
+</div>
+</body>
+</html>

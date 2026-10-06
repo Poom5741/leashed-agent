@@ -1,23 +1,27 @@
 import {
   createContext,
   useContext,
-  useCallback,
-  useEffect,
-  useState,
   type ReactNode,
 } from "react";
-import { api, type AuthUser } from "../lib/api";
 
 /**
- * Account layer (LINE / Email OTP) — gates the app and keys the cloud
- * backup. Deliberately separate from WalletContext: login identifies the
- * user, the passkey still guards every piece of key material.
+ * Auth layer — Leashed Agent fork ships in passkey-only mode. The original
+ * upstream used LINE / Email OTP to gate the app and key a cloud backup;
+ * here the passkey IS the boundary, so we short-circuit to `authed` and
+ * keep the same context shape so downstream code (Logout button, status
+ * pill) doesn't need to change.
  */
-type AuthStatus = "checking" | "anon" | "authed";
+type AuthStatus = "authed";
+
+interface AuthUser {
+  id: string;
+  displayName: string;
+  email: string | null;
+}
 
 interface AuthContextValue {
   status: AuthStatus;
-  user: AuthUser | null;
+  user: AuthUser;
   lineEnabled: boolean;
   refresh: () => Promise<void>;
   logout: () => Promise<void>;
@@ -25,38 +29,23 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+const ANON_DEVICE_USER: AuthUser = {
+  id: "device",
+  displayName: "Passkey Wallet",
+  email: null,
+};
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [status, setStatus] = useState<AuthStatus>("checking");
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [lineEnabled, setLineEnabled] = useState(false);
-
-  const refresh = useCallback(async () => {
-    const [me, config] = await Promise.all([
-      api.me(),
-      api.config().catch(() => ({ lineEnabled: false, appName: "ThaiFi Wallet" })),
-    ]);
-    setLineEnabled(config.lineEnabled);
-    if (me.user) {
-      setUser(me.user);
-      setStatus("authed");
-    } else {
-      setUser(null);
-      setStatus("anon");
-    }
-  }, []);
-
-  useEffect(() => {
-    refresh().catch(() => setStatus("anon"));
-  }, [refresh]);
-
-  const logout = useCallback(async () => {
-    await api.logout().catch(() => undefined);
-    setUser(null);
-    setStatus("anon");
-  }, []);
+  const value: AuthContextValue = {
+    status: "authed",
+    user: ANON_DEVICE_USER,
+    lineEnabled: false,
+    refresh: async () => undefined,
+    logout: async () => undefined,
+  };
 
   return (
-    <AuthContext.Provider value={{ status, user, lineEnabled, refresh, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

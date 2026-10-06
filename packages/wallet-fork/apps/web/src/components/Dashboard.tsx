@@ -10,6 +10,7 @@ import { WriteContract } from "./WriteContract";
 import { SignMessage } from "./SignMessage";
 import { History } from "./History";
 import { AuthorizedApps } from "./AuthorizedApps";
+import { AgentsTab } from "./AgentsTab";
 import { Deposit } from "./Deposit";
 import { UnlockWallet } from "./UnlockWallet";
 import { downloadBackupFile } from "../lib/backup";
@@ -19,6 +20,7 @@ type Tab =
   | "home"
   | "history"
   | "apps"
+  | "agents"
   | "deposit"
   | "send"
   | "write-contract"
@@ -133,6 +135,7 @@ const Icons = {
 
 const NAV: { id: Tab; label: string; icon: ReactNode }[] = [
   { id: "home", label: "Home", icon: Icons.home },
+  { id: "agents", label: "Agents", icon: Icons.shield },
   { id: "history", label: "Activity", icon: Icons.activity },
   { id: "apps", label: "Authorized Apps", icon: Icons.shield },
   { id: "deposit", label: "Deposit", icon: Icons.receive },
@@ -169,7 +172,10 @@ export function Dashboard() {
   const { user, logout } = useAuth();
   const [theme, toggleTheme] = useTheme();
   const [tab, setTab] = useState<Tab>(() => {
-    if (window.location.pathname === "/deposit") return "deposit";
+    const path = window.location.pathname;
+    // /wallet/deposit (production) or /deposit (local dev) — derive the base.
+    const base = path.startsWith('/wallet/') ? '/wallet' : '';
+    if (path === `${base}/deposit`) return "deposit";
     const fromUrl = new URLSearchParams(window.location.search).get("tab");
     if (isTab(fromUrl)) return fromUrl;
     return (fromUrl && TAB_ALIASES[fromUrl]) || "home";
@@ -441,6 +447,15 @@ export function Dashboard() {
                 <h1 className="page-title">Activity</h1>
                 <section className="card">
                   <History showHeader />
+                </section>
+              </>
+            )}
+
+            {tab === "agents" && (
+              <>
+                <h1 className="page-title">Agents</h1>
+                <section className="card">
+                  <AgentsTab />
                 </section>
               </>
             )}

@@ -51,7 +51,14 @@ export function History({ showHeader = false, limit }: HistoryProps) {
       const result = await api.history(storedWallet.address);
       setItems(result.items);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load history.");
+      // SPA-only deployments have no wallet API (history is an indexer
+      // proxy) — explain instead of showing a raw 404.
+      const msg = err instanceof Error ? err.message : "Could not load history.";
+      setError(
+        /404|Not Found|Failed to fetch/i.test(msg)
+          ? "Live activity feed needs the wallet API (not part of this deployment). Balances on the Home tab are read directly from the chain."
+          : msg,
+      );
     } finally {
       setLoading(false);
     }

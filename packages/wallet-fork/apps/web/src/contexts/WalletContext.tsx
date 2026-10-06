@@ -105,6 +105,10 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const [recoveryMode, setRecoveryMode] = useState<RecoveryMode | null>(null);
   const [cloudSyncedAt, setCloudSyncedAt] = useState<number | null>(null);
   const [needsBackup, setNeedsBackup] = useState(false);
+  // Cloud backup API reachable? The Pages deployment is SPA-only (no wallet
+  // worker), so /api/backups 404s — suppress the sync prompt instead of
+  // letting judges hit a dead endpoint.
+  const [cloudAvailable, setCloudAvailable] = useState(true);
   const [pinRequest, setPinRequest] = useState<PinRequest | null>(null);
 
   useEffect(() => {
@@ -141,6 +145,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         backups = (await api.listBackups()).backups;
       } catch {
         backups = [];
+        if (!cancelled) setCloudAvailable(false);
       }
       if (cancelled) return;
 
@@ -480,6 +485,11 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const syncToCloud = useCallback(
     async (recoveryPassword?: string) => {
       if (!storedWallet) return;
+      if (!cloudAvailable) {
+        throw new Error(
+          "Cloud backup isn't available on this deployment — use Export to save an encrypted backup file locally instead.",
+        );
+      }
 
       let json: string;
       if (storedWallet.guard === "pin") {
@@ -507,7 +517,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       setCloudSyncedAt(Date.now());
       setNeedsBackup(false);
     },
-    [storedWallet, exportBackup, requestPin],
+    [storedWallet, exportBackup, requestPin, cloudAvailable],
   );
 
   const dismissBackupPrompt = useCallback(() => {
@@ -522,7 +532,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         platformAuthAvailable,
         recoveryMode,
         cloudSyncedAt,
-        needsBackup,
+        needsBackup: needsBackup && cloudAvailable,
         signWithPasskey,
         createWallet,
         removeWallet,

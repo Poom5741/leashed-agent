@@ -3,10 +3,18 @@ import react from '@vitejs/plugin-react'
 
 import { cloudflare } from "@cloudflare/vite-plugin";
 
-// Port 5174: 3000 is squatted by OrbStack on this machine and 5173 by another
-// local app — pin the dev server where the API's CORS_ORIGIN expects it.
+// Leashed Wallet — mounted at /wallet/ inside the platform Pages origin
+// (leashed-agent-platform.pages.dev). The base path rewrites all asset URLs
+// and matches the SPA fallback Pages applies to /wallet/* paths.
+const BASE_PATH = "/wallet/";
+
 export default defineConfig({
+  base: BASE_PATH,
   plugins: [react(), cloudflare()],
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+  },
   server: {
     port: 5174,
     strictPort: true,
@@ -15,10 +23,6 @@ export default defineConfig({
     // prefix intact; no rewrite).
     proxy: {
       '/api': {
-        target: 'http://localhost:8787',
-        changeOrigin: true,
-      },
-      '/line-callback': {
         target: 'http://localhost:8787',
         changeOrigin: true,
       },
