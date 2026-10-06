@@ -3,6 +3,7 @@ import { daccWriteContract } from "dacc-js";
 import { parseAbi } from "viem";
 import { useWallet } from "../contexts/WalletContext";
 import { thaifi } from "../config/chain";
+import { Ico } from "./icons";
 
 interface Props {
   onSent?: () => void;
@@ -140,7 +141,7 @@ export function WriteContract({ onSent }: Props) {
 
       {txHash && (
         <div className="success-box">
-          <p>◆ Transaction sent</p>
+          <p><Ico name="check" size={14} /> Transaction sent</p>
           <p>
             <a
               href={`${thaifi.blockExplorers!.default.url}/tx/${txHash}`}

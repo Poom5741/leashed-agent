@@ -6,6 +6,7 @@ import { useState } from "react";
 import { renderSVG } from "uqr";
 import { useWallet } from "../contexts/WalletContext";
 import { TOKENS } from "../config/tokens";
+import { Ico } from "./icons";
 
 export function Deposit() {
   const { storedWallet } = useWallet();
@@ -71,13 +72,13 @@ function ReceiveSection({
         <div className="address-copy">
           <code className="truncate">{address}</code>
           <button className="btn-icon" title="Copy address" onClick={onCopy}>
-            {copied ? "✓" : "⧉"}
+            {copied ? <Ico name="check" size={14} /> : <Ico name="copy" size={14} />}
           </button>
         </div>
       </div>
 
       <div className="warning-banner" style={{ textAlign: "left" }}>
-        🌉 <strong>Bridge USDC — coming soon.</strong> Deposits from BSC and
+        <Ico name="shield" size={14} /> <strong>Bridge USDC — coming soon.</strong> Deposits from BSC and
         other chains will be available here. For now, ThaiFi-side transfers only
         — sending assets from other chains cannot be recovered.
       </div>

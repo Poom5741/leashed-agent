@@ -2,6 +2,7 @@ import { useState } from "react";
 import { daccSignMessage } from "dacc-js";
 import { useWallet } from "../contexts/WalletContext";
 import { thaifi } from "../config/chain";
+import { Ico } from "./icons";
 
 export function SignMessage() {
   const { storedWallet, signWithPasskey } = useWallet();
@@ -68,7 +69,7 @@ export function SignMessage() {
 
       {signature && (
         <div className="success-box">
-          <p>◆ Message signed</p>
+          <p><Ico name="check" size={14} /> Message signed</p>
           <label>Signature:</label>
           <textarea readOnly rows={4} value={signature} className="signature-output" />
         </div>

@@ -3,6 +3,7 @@ import { useWallet } from "../contexts/WalletContext";
 import { api, type HistoryItem } from "../lib/api";
 import { thaifi } from "../config/chain";
 import { TOKENS } from "../config/tokens";
+import { Ico } from "./icons";
 
 interface HistoryProps {
   /** Render the card header (title + refresh). */
@@ -55,7 +56,7 @@ export function History({ showHeader = false, limit }: HistoryProps) {
       // proxy) — explain instead of showing a raw 404.
       const msg = err instanceof Error ? err.message : "Could not load history.";
       setError(
-        /404|Not Found|Failed to fetch/i.test(msg)
+        /404|Not Found|Failed to fetch|Unexpected token/i.test(msg)
           ? "Live activity feed needs the wallet API (not part of this deployment). Balances on the Home tab are read directly from the chain."
           : msg,
       );
@@ -82,7 +83,7 @@ export function History({ showHeader = false, limit }: HistoryProps) {
         <div className="history-header">
           <h3>Activity</h3>
           <button className="btn-text" onClick={load} disabled={loading}>
-            ↻ Refresh
+            <Ico name="refresh" size={14} /> Refresh
           </button>
         </div>
       )}
@@ -107,7 +108,7 @@ export function History({ showHeader = false, limit }: HistoryProps) {
         </div>
       )}
 
-      {loading && items === null && <p className="history-empty">⏳ Loading transactions…</p>}
+      {loading && items === null && <p className="history-empty">Loading transactions…</p>}
       {error && <p className="error-text">{error}</p>}
       {items && items.length === 0 && (
         <p className="history-empty">No token transfers yet — receive some tokens to get started.</p>
@@ -126,7 +127,7 @@ export function History({ showHeader = false, limit }: HistoryProps) {
               target="_blank"
               rel="noreferrer"
             >
-              <span className={`row-icon ${item.direction}`}>{item.direction === "in" ? "↓" : "↑"}</span>
+              <span className={`row-icon ${item.direction}`}><Ico name={item.direction === "in" ? "arrowIn" : "arrowOut"} size={14} /></span>
               <span className="row-main">
                 <span className="row-title">
                   {item.direction === "in" ? "Received" : "Sent"} {item.tokenSymbol}

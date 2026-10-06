@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { ConfirmModal } from "./ConfirmModal";
+import { Ico } from "./icons";
 
 interface ExportPasswordModalProps {
   open: boolean;
@@ -119,7 +120,7 @@ export function ExportPasswordModal({
           </div>
           {error && <p style={{ color: "var(--danger)", fontSize: 13, margin: "4px 0 0" }}>{error}</p>}
           <p style={{ color: "var(--text)", fontSize: 12, marginTop: 8 }}>
-            ⚠️ Remember this password — it cannot be recovered if lost.
+            <Ico name="shield" size={14} /> Remember this password — it cannot be recovered if lost.
           </p>
         </div>
       }

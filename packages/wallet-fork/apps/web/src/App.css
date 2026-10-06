@@ -177,6 +177,91 @@ code {
   margin-bottom: 28px;
 }
 
+/* ---- Rev B sidebar: wallet chip + guard pill + section labels ---- */
+.wallet-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chip-avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  background: var(--paper);
+  color: #1f4e79;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip-avatar svg {
+  width: 17px;
+  height: 17px;
+}
+
+.chip-main {
+  min-width: 0;
+}
+
+.chip-addr {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--paper);
+}
+
+.chip-net {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-pale);
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.guard-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 3px 8px;
+  border: 1px solid #7bc894;
+  color: #7bc894;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.guard-pill.pin {
+  border-color: #e3b466;
+  color: #e3b466;
+}
+
+.guard-pill svg {
+  width: 11px;
+  height: 11px;
+}
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue-pale);
+  opacity: 0.75;
+  padding: 14px 2px 5px;
+}
+
+.side-bottom .sec-label {
+  padding-top: 4px;
+}
+
 .side-nav {
   display: flex;
   flex-direction: column;
@@ -186,16 +271,17 @@ code {
 .side-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   width: 100%;
   padding: 9px 10px;
   border: none;
-  border-radius: var(--radius-sm);
+  border-left: 3px solid transparent;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   background: transparent;
   color: var(--paper);
-  opacity: 0.78;
+  opacity: 0.82;
   font: inherit;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
   text-align: left;
@@ -208,15 +294,14 @@ code {
 
 .side-btn.active {
   color: var(--paper);
-  opacity: 1;
   font-weight: 600;
   background: rgba(31, 78, 121, 0.45);
-  border-left: 2px solid var(--paper);
+  border-left-color: var(--paper);
 }
 
 .side-btn svg {
   flex-shrink: 0;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .side-bottom {
@@ -251,6 +336,26 @@ code {
   cursor: pointer;
   text-align: left;
   text-decoration: none;
+}
+
+/* Sidebar sits on the dark drafting-blue plate in both themes — its items
+   must stay light; --text is dark navy and disappears (rev B fix). */
+.sidebar .side-menu-item {
+  color: var(--paper);
+  opacity: 0.88;
+}
+
+.sidebar .side-menu-item:hover {
+  opacity: 1;
+}
+
+.sidebar .side-menu-item .side-sub {
+  color: var(--blue-pale);
+  opacity: 0.9;
+}
+
+.sidebar .account-chip span {
+  color: var(--paper);
 }
 
 .side-menu-item:hover {
@@ -625,7 +730,7 @@ code {
   font-size: 10.5px;
   letter-spacing: 0.04em;
   color: var(--paper);
-  background: var(--blue);
+  background: #1f4e79;
   flex-shrink: 0;
 }
 

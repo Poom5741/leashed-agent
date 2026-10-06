@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useWallet } from "../contexts/WalletContext";
 import { useTheme, logoFor } from "../lib/theme";
 import { ThemeToggle } from "./ThemeToggle";
+import { Ico } from "./icons";
 
 export function CreateWallet() {
   const { createWallet, platformAuthAvailable, importBackup } = useWallet();
@@ -68,7 +69,7 @@ export function CreateWallet() {
         {pinMode ? (
           <>
             <div className="warning-banner" style={{ textAlign: "left" }}>
-              ⚠ <strong>No passkey in this browser.</strong> Your wallet will be
+              <Ico name="shield" size={14} /> <strong>No passkey in this browser.</strong> Your wallet will be
               protected by an 8-digit PIN instead — significantly weaker than a
               passkey. Anyone with this device or your cloud backup could try to
               guess it, and if you forget the PIN the wallet can never be recovered.
@@ -129,7 +130,7 @@ export function CreateWallet() {
             </div>
 
             <button className="btn-secondary" onClick={handleImportClick}>
-              ↧ Import from Backup
+              <Ico name="download" size={14} /> Import from Backup
             </button>
           </>
         ) : (
@@ -161,7 +162,7 @@ export function CreateWallet() {
             </div>
 
             <button className="btn-secondary" onClick={handleImportClick}>
-              ↧ Import from Backup
+              <Ico name="download" size={14} /> Import from Backup
             </button>
           </>
         )}

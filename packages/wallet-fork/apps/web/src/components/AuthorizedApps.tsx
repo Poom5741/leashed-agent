@@ -9,6 +9,7 @@ import { api } from "../lib/api";
 import { thaifi } from "../config/chain";
 import { TOKENS, PATHUSD } from "../config/tokens";
 import { Addresses } from "viem/tempo";
+import { Ico } from "./icons";
 
 const accountKeychain = Addresses.accountKeychain;
 
@@ -141,7 +142,7 @@ export function AuthorizedApps() {
         <div className="history-list">
           {pairs.map((p) => (
             <div key={p.id} className="history-row">
-              <span className="row-icon">⌘</span>
+              <span className="row-icon"><Ico name="key" size={14} /></span>
               <span className="row-main">
                 <span className="row-title">{p.name}</span>
                 <span className="row-sub">

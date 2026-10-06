@@ -15,6 +15,7 @@ import { Deposit } from "./Deposit";
 import { UnlockWallet } from "./UnlockWallet";
 import { downloadBackupFile } from "../lib/backup";
 import { useTheme, logoFor } from "../lib/theme";
+import { Ico } from "./icons";
 
 type Tab =
   | "home"
@@ -131,14 +132,52 @@ const Icons = {
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
     </Icon>
   ),
+  key: (
+    <Icon>
+      <circle cx="7.5" cy="15.5" r="4.5" />
+      <path d="M11 12l9-9" />
+      <path d="M17 6l3 3" />
+      <path d="M14 9l2 2" />
+    </Icon>
+  ),
+  bot: (
+    <Icon>
+      <rect x="4" y="8" width="16" height="12" rx="2" />
+      <path d="M12 8V4" />
+      <path d="M9 16h.01M15 16h.01" />
+      <path d="M2 14h2M20 14h2" />
+    </Icon>
+  ),
+  sun: (
+    <Icon>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </Icon>
+  ),
+  moon: (
+    <Icon>
+      <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" />
+    </Icon>
+  ),
+  refresh: (
+    <Icon>
+      <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+      <path d="M21 3v6h-6" />
+    </Icon>
+  ),
+  chevLeft: (
+    <Icon>
+      <path d="M15 18l-6-6 6-6" />
+    </Icon>
+  ),
 };
 
 const NAV: { id: Tab; label: string; icon: ReactNode }[] = [
   { id: "home", label: "Home", icon: Icons.home },
-  { id: "agents", label: "Agents", icon: Icons.shield },
+  { id: "agents", label: "Agents", icon: Icons.bot },
   { id: "history", label: "Activity", icon: Icons.activity },
   { id: "apps", label: "Authorized Apps", icon: Icons.shield },
-  { id: "deposit", label: "Deposit", icon: Icons.receive },
+  { id: "deposit", label: "Receive", icon: Icons.receive },
   { id: "send", label: "Send", icon: Icons.send },
   { id: "write-contract", label: "Contract", icon: Icons.contract },
   { id: "sign-message", label: "Sign", icon: Icons.sign },
@@ -268,7 +307,7 @@ export function Dashboard() {
     <div className="side-menu">
       <button className="side-menu-item" onClick={() => { copyAddress(); onAfter?.(); }}>
         <span className="side-label">{Icons.copy} Copy address</span>
-        <span className="side-sub">{copied ? "Copied ✓" : shorten(storedWallet.address)}</span>
+        <span className="side-sub">{copied ? "Copied" : shorten(storedWallet.address)}</span>
       </button>
       <a
         className="side-menu-item"
@@ -281,7 +320,7 @@ export function Dashboard() {
       </a>
       <button className="side-menu-item" onClick={toggleTheme}>
         <span className="side-label">
-          {theme === "dark" ? "◐ White mode" : "◑ Dark mode"}
+          {theme === "dark" ? Icons.sun : Icons.moon} {theme === "dark" ? "Light mode" : "Dark mode"}
         </span>
       </button>
       <button
@@ -339,8 +378,18 @@ export function Dashboard() {
       </div>
 
       <aside className="sidebar">
-        <img src={logoFor(theme)} alt="ThaiFi" className="side-logo" />
+        <div className="wallet-chip">
+          <div className="chip-avatar">{Icons.key}</div>
+          <div className="chip-main">
+            <div className="chip-addr">{shorten(storedWallet.address)}</div>
+            <div className="chip-net">ThaiFi · chain {thaifi.id}</div>
+          </div>
+        </div>
+        <div className={`guard-pill ${storedWallet.guard === "pin" ? "pin" : ""}`}>
+          {Icons.shield} {storedWallet.guard === "pin" ? "PIN guard" : "Passkey guard"}
+        </div>
 
+        <div className="sec-label">Wallet</div>
         <nav className="side-nav">
           {NAV.map((n) => (
             <button
@@ -358,6 +407,7 @@ export function Dashboard() {
         </nav>
 
         <div className="side-bottom">
+          <div className="sec-label">Actions</div>
           {menuButtons()}
 
           <div className="account-chip">
@@ -374,7 +424,7 @@ export function Dashboard() {
           <>
             {tab !== "home" && (
               <button className="back-btn" onClick={() => setTab("home")}>
-                ← Home
+                <Ico name="chevLeft" size={14} /> Home
               </button>
             )}
             {tab === "home" && (
@@ -389,7 +439,7 @@ export function Dashboard() {
                     {Icons.copy} Copy address
                   </button>
                   <button className="btn-soft" onClick={refreshBalance} disabled={balanceLoading}>
-                    {balanceLoading ? "⏳" : "↻"} Refresh
+                    <Ico name="refresh" size={14} /> Refresh
                   </button>
                 </div>
 
@@ -434,10 +484,10 @@ export function Dashboard() {
 
                 <p className="muted">
                   {needsBackup
-                    ? "☁ Cloud sync pending — set your recovery password to enable automatic backup"
+                    ? <><Ico name="cloud" size={14} /> Cloud sync pending — set your recovery password to enable automatic backup</>
                     : cloudSyncedAt
-                      ? `☁ Cloud backup synced ${new Date(cloudSyncedAt).toLocaleString()}`
-                      : "☁ Cloud backup not synced yet"}
+                      ? <><Ico name="cloud" size={14} /> Cloud backup synced {new Date(cloudSyncedAt).toLocaleString()}</>
+                      : <><Ico name="cloud" size={14} /> Cloud backup not synced yet</>}
                 </p>
               </>
             )}

@@ -8,6 +8,7 @@ import { createClient, tempoActions, Addresses, Abis } from "viem/tempo";
 import { useWallet } from "../contexts/WalletContext";
 import { thaifi, thaifiTempo } from "../config/chain";
 import { TOKENS, PATHUSD, type TokenInfo } from "../config/tokens";
+import { Ico } from "./icons";
 
 const accountKeychain = Addresses.accountKeychain;
 // authorizeKey(address keyId, uint8 signatureType, (uint64,bool,(address,uint256)[],bool,[]) config)
@@ -186,7 +187,7 @@ export function PairApprove() {
   if (done) {
     return (
       <div className="card auth-card">
-        <h1>✓ CLI authorized</h1>
+        <h1><Ico name="check" size={18} /> CLI authorized</h1>
         <p className="subtitle">
           The CLI can now sign transactions for {storedWallet?.address.slice(0, 10)}… within
           the spending limit. Revoke it any time under Authorized Apps.
@@ -207,7 +208,7 @@ export function PairApprove() {
   if (!info) {
     return (
       <div className="card auth-card">
-        <p className="muted">⏳ Loading pairing…</p>
+        <p className="muted">Loading pairing…</p>
       </div>
     );
   }
@@ -250,7 +251,7 @@ export function PairApprove() {
       {feeChecked && feeToken && (
         <div className="info-box">
           <p>
-            ⛽ Gas for this approval: <strong>{feeToken.symbol}</strong> (balance{" "}
+            Gas for this approval: <strong>{feeToken.symbol}</strong> (balance{" "}
             {fmtUnits(balances[feeToken.address] ?? 0n)})
           </p>
         </div>
@@ -258,7 +259,7 @@ export function PairApprove() {
       {feeChecked && !feeToken && (
         <div className="info-box">
           <p>
-            ⚠ This wallet has no token to pay gas with — it needs at least 0.01 of
+            <Ico name="shield" size={14} /> This wallet has no token to pay gas with — it needs at least 0.01 of
             pathUSD, THCFI or THCOC before transactions can be sent.
           </p>
           <button
@@ -325,7 +326,7 @@ export function PairApprove() {
         {busy ? "Authorizing…" : "Confirm with Passkey & Authorize"}
       </button>
       <p className="muted" style={{ marginTop: 10, fontSize: 12 }}>
-        ⚠ The CLI can spend up to each token's own limit per period
+        <Ico name="shield" size={14} /> The CLI can spend up to each token's own limit per period
         {feeToken ? ` (gas for this tx is paid in ${feeToken.symbol})` : ""}.
       </p>
     </div>

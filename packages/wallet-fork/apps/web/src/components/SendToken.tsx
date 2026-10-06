@@ -4,6 +4,7 @@ import { createPublicClient, http, encodeFunctionData, decodeAbiParameters } fro
 import { useWallet } from "../contexts/WalletContext";
 import { thaifi } from "../config/chain";
 import { TOKENS, PATHUSD, findToken } from "../config/tokens";
+import { Ico } from "./icons";
 
 const client = createPublicClient({
   chain: thaifi,
@@ -201,12 +202,12 @@ export function SendToken({ onSent, initialToken, pathUsdBalance }: Props) {
               disabled={loading}
               style={{ marginTop: 8 }}
             />
-            {fetchingInfo && <span className="field-hint">⏳ Reading token info...</span>}
+            {fetchingInfo && <span className="field-hint">Reading token info…</span>}
             {!fetchingInfo && decimals !== null && symbol && (
               <span className="field-hint success">{symbol} · {decimals} decimals</span>
             )}
             {!fetchingInfo && tokenAddress.length === 42 && decimals === null && (
-              <span className="field-hint error">⚠ Not a valid ERC-20 token</span>
+              <span className="field-hint error">Not a valid ERC-20 token</span>
             )}
           </>
         )}
@@ -237,7 +238,7 @@ export function SendToken({ onSent, initialToken, pathUsdBalance }: Props) {
 
       {gasBlocked && (
         <div className="warning-banner">
-          ⛽ <strong>No pathUSD for gas.</strong> Gas is always paid in pathUSD —
+          <strong>No pathUSD for gas.</strong> Gas is always paid in pathUSD —
           receive some pathUSD first, then send {symbol || "this token"}.
         </div>
       )}
@@ -250,7 +251,7 @@ export function SendToken({ onSent, initialToken, pathUsdBalance }: Props) {
 
       {txHash && (
         <div className="success-box">
-          <p>◆ Transaction sent</p>
+          <p><Ico name="check" size={14} /> Transaction sent</p>
           <p>
             <a
               href={`${thaifi.blockExplorers!.default.url}/tx/${txHash}`}

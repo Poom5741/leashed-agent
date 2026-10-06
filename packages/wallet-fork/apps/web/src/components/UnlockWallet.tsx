@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useWallet } from "../contexts/WalletContext";
 import { ConfirmModal } from "./ConfirmModal";
 import { useTheme, logoFor } from "../lib/theme";
+import { Ico } from "./icons";
 
 /**
  * Recovery / Import screen — reached from the Dashboard ("Recover / Import")
@@ -82,7 +83,7 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
       {recoveryMode ? (
         <div className="recovery-section">
           <div className="warning-banner">
-            ⚠ Passkey not found on this device/domain. Use your recovery password to restore.
+            <Ico name="shield" size={14} /> Passkey not found on this device/domain. Use your recovery password to restore.
           </div>
           <div className="field">
             <label>Recovery Password</label>
@@ -104,7 +105,7 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
       ) : (
         <div className="link-row">
           <button className="btn-text" onClick={() => setConfirmImport(true)}>
-            ↧ Import backup file
+            <Ico name="download" size={14} /> Import backup file
           </button>
           <button className="btn-text-danger" onClick={() => setConfirmDelete(true)}>
             Delete
