@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
+*.tsbuildinfo
 
 # Super-SpecKit harness internals (per-run state, not project history)
 .super-speckit/bugs/
