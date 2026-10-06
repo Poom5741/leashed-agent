@@ -1,17 +1,18 @@
 /**
- * Leashed Agent Platform — /agents collection (slice 2).
+ * Leashed Agent Platform — /agents collection (slice 2) + /api/audit (slice 3).
  *
  * Public surface:
  *   POST   /api/agents                       — S2.R1: create a new leashed agent
  *   GET    /api/agents                       — S2.R2: list the user's agents
- *   GET    /api/agents/:keyId/passbook       — S2.R3: per-agent passbook
+ *   GET    /api/agents/:keyId/passbook       — S2.R3 + S3.R3: per-agent passbook + latest audit
  *   DELETE /api/agents/:keyId                — S2.R4: revoke an agent
+ *   POST   /api/audit                        — S3.R1: run the CRE auditor on demand
  *
  * Auth: stubbed `requireAuth` middleware extracts the user from a header for
  * the pre-flight. Production wire-in: swap `stubAuth` for the upstream wallet
  * fork's `requireAuth` (see slice-2-spec.md).
  *
- * Storage: Cloudflare D1 (`agent_pairings` table, extended with `template`).
+ * Storage: Cloudflare D1 (`agent_pairings` + `agent_audit_batches`).
  */
 
 import { Hono } from "hono";
@@ -20,8 +21,11 @@ import {
   listAgentsByUser,
   getAgentByKeyId,
   revokeAgent,
+  insertAuditBatch,
+  latestAuditForKey,
   type D1Database,
 } from "./db.js";
+import { auditReceipts, type AuditVerdict } from "./auditor.js";
 
 export type Bindings = { DB: D1Database };
 export type Variables = { userId: string };
@@ -29,6 +33,13 @@ export type Variables = { userId: string };
 const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
 app.use("/api/agents/*", async (c, next) => {
+  const userId = c.req.header("X-Stub-User");
+  if (!userId) return c.json({ error: "unauthorized" }, 401);
+  c.set("userId", userId);
+  await next();
+});
+
+app.use("/api/audit", async (c, next) => {
   const userId = c.req.header("X-Stub-User");
   if (!userId) return c.json({ error: "unauthorized" }, 401);
   c.set("userId", userId);
@@ -89,6 +100,7 @@ app.get("/api/agents/:keyId/passbook", async (c) => {
   const keyId = c.req.param("keyId");
   const row = await getAgentByKeyId(c.env.DB, userId, keyId);
   if (!row) return c.json({ error: "not found" }, 404);
+  const latest = await latestAuditForKey(c.env.DB, userId, keyId);
   return c.json({
     keyId: row.key_id,
     template: row.template,
@@ -98,6 +110,18 @@ app.get("/api/agents/:keyId/passbook", async (c) => {
     limitAmount: row.limit_amount,
     limitPeriod: row.limit_period,
     createdAt: row.created_at,
+    latestAudit: latest
+      ? {
+          verdict: latest.verdict,
+          checked: latest.checked_count,
+          totalBase: latest.total_base,
+          otherBase: latest.other_base,
+          problems: JSON.parse(latest.problems_json) as string[],
+          batchId: latest.id,
+          attestationTx: latest.attestation_tx,
+          createdAt: latest.created_at,
+        }
+      : null,
   });
 });
 
@@ -107,6 +131,61 @@ app.delete("/api/agents/:keyId", async (c) => {
   const { changed, status } = await revokeAgent(c.env.DB, userId, keyId);
   if (!status) return c.json({ error: "not found" }, 404);
   return c.json({ keyId, status, revoked: changed });
+});
+
+// Slice 3 — POST /api/audit. Wraps the CRE auditor algorithm in process so
+// any wallet holder can audit any of their own agents on demand and have
+// the verdict persisted to D1. Real Chainlink CRE attestation is kept on
+// the cron-triggered workflow (see workflows/leashed-auditor/); this route
+// is the per-user, on-demand UX layer with attestationTx=null.
+app.post("/api/audit", async (c) => {
+  const userId = c.get("userId");
+  const body = await c.req.json<{
+    keyId?: string;
+    creditCapBase?: string;
+    receipts?: Parameters<typeof auditReceipts>[0]["receipts"];
+    agent?: Parameters<typeof auditReceipts>[0]["agent"];
+  }>();
+  if (!body.keyId) return c.json({ error: "missing keyId" }, 400);
+
+  const agentRow = await getAgentByKeyId(c.env.DB, userId, body.keyId);
+  if (!agentRow) return c.json({ error: "not found" }, 404);
+
+  const creditCapBase = body.creditCapBase ?? agentRow.limit_amount ?? "0";
+  // On-demand API has no leash telemetry feed yet; pass limitLeft="" so the
+  // leash cross-check (main.ts:71-73) is a no-op and the empty-passbook WARN
+  // branch is the dominant outcome. Real telemetry wire-in lands in slice 5.
+  const result = auditReceipts(
+    { receipts: body.receipts ?? [], agent: body.agent ?? { limitLeft: "" } },
+    creditCapBase,
+  );
+
+  const id = crypto.randomUUID();
+  const now = Date.now();
+  await insertAuditBatch(c.env.DB, {
+    id,
+    keyId: body.keyId,
+    userId,
+    verdict: result.verdict as AuditVerdict,
+    checkedCount: result.checked,
+    totalBase: result.totalBase,
+    otherBase: result.otherBase,
+    problemsJson: JSON.stringify(result.problems),
+    attestationTx: null,
+    createdAt: now,
+  });
+
+  return c.json({
+    keyId: body.keyId,
+    verdict: result.verdict,
+    checked: result.checked,
+    totalBase: result.totalBase,
+    otherBase: result.otherBase,
+    problems: result.problems,
+    attestationTx: null,
+    batchId: id,
+    createdAt: now,
+  });
 });
 
 app.get("/api/healthz", (c) => c.json({ ok: true }));

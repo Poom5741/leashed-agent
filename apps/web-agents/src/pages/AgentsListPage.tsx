@@ -1,16 +1,34 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { listAgents, type Agent } from "../api/client.js";
+import { listAgents, revokeAgent, type Agent } from "../api/client.js";
 
 export function AgentsListPage() {
   const [agents, setAgents] = useState<Agent[] | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [revoking, setRevoking] = useState<string | null>(null);
 
   useEffect(() => {
     listAgents()
       .then(setAgents)
       .catch((e: unknown) => setErr(e instanceof Error ? e.message : String(e)));
   }, []);
+
+  async function onRevoke(keyId: string, ev: React.MouseEvent) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    setRevoking(keyId);
+    try {
+      await revokeAgent(keyId);
+      // Optimistic local update; the next listAgents pull would too.
+      setAgents((prev) =>
+        prev ? prev.map((a) => (a.keyId === keyId ? { ...a, status: "revoked" } : a)) : prev
+      );
+    } catch (e: unknown) {
+      setErr(e instanceof Error ? e.message : String(e));
+    } finally {
+      setRevoking(null);
+    }
+  }
 
   if (err) return <p className="error">Failed to load agents: {err}</p>;
   if (agents === null) return <p className="muted">Loading…</p>;
@@ -43,6 +61,16 @@ export function AgentsListPage() {
               <span>limit: {a.limitAmount ?? "—"}</span>
               <span>period: {a.limitPeriod ?? "—"}s</span>
             </div>
+            {a.status !== "revoked" && (
+              <button
+                className="revoke-btn"
+                onClick={(ev) => onRevoke(a.keyId, ev)}
+                disabled={revoking === a.keyId}
+                aria-label={`revoke agent ${a.keyId}`}
+              >
+                {revoking === a.keyId ? "Revoking…" : "Revoke"}
+              </button>
+            )}
           </Link>
         ))}
       </div>

@@ -63,6 +63,24 @@ function fakeD1(): D1Database {
     CREATE INDEX idx_pairings_user ON agent_pairings (user_id, status);
     CREATE INDEX idx_pairings_key ON agent_pairings (key_id, status);
     ALTER TABLE agent_pairings ADD COLUMN template TEXT NOT NULL DEFAULT 'legacy';
+
+    -- Slice 3 — POST /api/audit results. The slice-2 passbook endpoint
+    -- queries this table on every read, so its schema must be present in
+    -- every fake D1 the slice-2 tests instantiate.
+    CREATE TABLE agent_audit_batches (
+      id             TEXT    PRIMARY KEY,
+      key_id         TEXT    NOT NULL,
+      user_id        TEXT    NOT NULL,
+      verdict        TEXT    NOT NULL CHECK (verdict IN ('PASS','WARN','FAIL')),
+      checked_count  INTEGER NOT NULL,
+      total_base     INTEGER NOT NULL DEFAULT 0,
+      other_base     INTEGER NOT NULL DEFAULT 0,
+      problems_json  TEXT    NOT NULL DEFAULT '[]',
+      attestation_tx TEXT,
+      created_at     INTEGER NOT NULL
+    );
+    CREATE INDEX idx_audit_batches_key  ON agent_audit_batches(key_id,  created_at DESC);
+    CREATE INDEX idx_audit_batches_user ON agent_audit_batches(user_id, created_at DESC);
   `);
   // Seed one user so the user_id FK target is realistic (no actual FK, but
   // the test helpers mirror the upstream shape).

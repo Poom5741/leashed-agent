@@ -64,3 +64,35 @@ code { background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 2px; }
 .receipts { width: 100%; border-collapse: collapse; }
 .receipts th, .receipts td { padding: 8px; border: 1px solid var(--border); text-align: left; }
 .receipts th { background: rgba(0,0,0,0.04); font-size: 11px; text-transform: uppercase; }
+
+/* Slice 3 — audit card + buttons */
+.status-PASS { background: var(--ok); color: white; }
+.status-WARN { background: #f0c14b; color: var(--ink); }
+.status-FAIL { background: var(--stamp); color: white; }
+.audit-card {
+  border: 1px solid var(--border);
+  padding: 12px;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(0,0,0,0.02);
+}
+.audit-card[data-verdict="FAIL"] { border-color: var(--stamp); }
+.audit-card[data-verdict="PASS"] { border-color: var(--ok); }
+.audit-meta { font-size: 11px; }
+.problems { margin: 8px 0 0 16px; padding: 0; color: var(--stamp); font-size: 12px; }
+button.primary {
+  font-family: inherit; font-size: 13px;
+  padding: 8px 16px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+  cursor: pointer; margin: 8px 0 24px 0;
+}
+button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+button.revoke-btn {
+  font-family: inherit; font-size: 11px;
+  padding: 4px 8px; margin-top: 8px;
+  border: 1px solid var(--stamp); background: transparent; color: var(--stamp);
+  cursor: pointer;
+}
+button.revoke-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+button.revoke-btn:hover { background: var(--stamp); color: white; }

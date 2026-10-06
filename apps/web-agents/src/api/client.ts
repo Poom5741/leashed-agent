@@ -1,5 +1,5 @@
 /**
- * Slice 2 client — thin fetch wrappers for the /agents Hono API.
+ * Slice 2 + 3 client — thin fetch wrappers for the /agents Hono API.
  * The stub `X-Stub-User` header replaces production auth for the
  * pre-flight; flip to a real session cookie in production wire-in.
  */
@@ -16,6 +16,19 @@ export interface Agent {
   createdAt: number;
 }
 
+export type AuditVerdict = "PASS" | "WARN" | "FAIL";
+
+export interface AuditResult {
+  verdict: AuditVerdict;
+  checked: number;
+  totalBase: number;
+  otherBase: number;
+  problems: string[];
+  batchId: string;
+  attestationTx: string | null;
+  createdAt: number;
+}
+
 export interface Passbook {
   keyId: string;
   template: string;
@@ -25,6 +38,7 @@ export interface Passbook {
   limitAmount: string | null;
   limitPeriod: number | null;
   createdAt: number;
+  latestAudit: AuditResult | null;
 }
 
 const BASE = ""; // vite dev proxies /api → Hono worker
@@ -48,6 +62,15 @@ export async function getPassbook(keyId: string): Promise<Passbook> {
     headers: { "X-Stub-User": STUB_USER },
   });
   return jsonOrThrow<Passbook>(res);
+}
+
+export async function auditAgent(keyId: string): Promise<AuditResult & { keyId: string }> {
+  const res = await fetch(`${BASE}/api/audit`, {
+    method: "POST",
+    headers: { "X-Stub-User": STUB_USER, "Content-Type": "application/json" },
+    body: JSON.stringify({ keyId }),
+  });
+  return jsonOrThrow(res);
 }
 
 export async function revokeAgent(keyId: string): Promise<{ status: Agent["status"]; revoked: boolean }> {

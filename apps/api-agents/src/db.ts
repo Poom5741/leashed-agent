@@ -117,3 +117,74 @@ export async function revokeAgent(
     .first<{ status: AgentRow["status"] }>();
   return { changed: false, status: current?.status ?? null };
 }
+
+// ---------- Slice 3 — agent_audit_batches ----------
+
+export type AuditVerdict = "PASS" | "WARN" | "FAIL";
+
+export interface AuditBatchRow {
+  id: string;
+  key_id: string;
+  user_id: string;
+  verdict: AuditVerdict;
+  checked_count: number;
+  total_base: number;
+  other_base: number;
+  problems_json: string;
+  attestation_tx: string | null;
+  created_at: number;
+}
+
+export interface NewAuditBatch {
+  id: string;
+  keyId: string;
+  userId: string;
+  verdict: AuditVerdict;
+  checkedCount: number;
+  totalBase: number;
+  otherBase: number;
+  problemsJson: string;
+  attestationTx: string | null;
+  createdAt: number;
+}
+
+export async function insertAuditBatch(db: D1Database, batch: NewAuditBatch): Promise<void> {
+  await db
+    .prepare(
+      `INSERT INTO agent_audit_batches
+         (id, key_id, user_id, verdict, checked_count, total_base,
+          other_base, problems_json, attestation_tx, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    )
+    .bind(
+      batch.id,
+      batch.keyId,
+      batch.userId,
+      batch.verdict,
+      batch.checkedCount,
+      batch.totalBase,
+      batch.otherBase,
+      batch.problemsJson,
+      batch.attestationTx,
+      batch.createdAt,
+    )
+    .run();
+}
+
+export async function latestAuditForKey(
+  db: D1Database,
+  userId: string,
+  keyId: string,
+): Promise<AuditBatchRow | null> {
+  return await db
+    .prepare(
+      `SELECT id, key_id, user_id, verdict, checked_count, total_base,
+              other_base, problems_json, attestation_tx, created_at
+         FROM agent_audit_batches
+         WHERE user_id = ? AND key_id = ?
+         ORDER BY created_at DESC
+         LIMIT 1`,
+    )
+    .bind(userId, keyId)
+    .first<AuditBatchRow>();
+}

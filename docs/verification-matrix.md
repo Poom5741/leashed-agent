@@ -31,7 +31,14 @@
 
 ## Slice 3 — public CRE auditor `POST /api/audit`
 
-_(rows added when slice 3 starts)_
+> Slice 3 reuses the structural auditor algorithm from the existing CRE workflow (`workflows/leashed-auditor/auditor/main.ts:49-76`) as a TS port in process — same checks, no Chainlink CRE attestation. The CRE workflow keeps its cron cadence for the Chainlink CRE track; this slice is the per-user, on-demand UX layer.
+
+| # | Requirement | Public seam | Verification | Status |
+|---|---|---|---|---|
+| S3.R1 | `POST /api/audit` accepts `{keyId, creditCapBase?}` and returns a `{verdict, checked, totalBase, otherBase, problems, batchId, createdAt}` row persisted to `agent_audit_batches`. | `curl -X POST .../api/audit -H "X-Stub-User: user_alice" -d '{"keyId":"0x…"}'` | HTTP 200; `verdict ∈ {PASS,WARN,FAIL}`; `batchId` is a UUID; one new row in `agent_audit_batches`. | **live (M12)** — TDD `audit.test.ts` happy + forged + valid-receipt + 401 + 404 |
+| S3.R2 | `GET /api/agents/:keyId/passbook` returns the latest audit (the same shape, minus `keyId`) under `latestAudit`. | `curl .../api/agents/0x…/passbook` | HTTP 200; `latestAudit` is `null` before the first POST, then `{verdict, checked, totalBase, otherBase, problems, batchId, attestationTx, createdAt}` matching the most recent `agent_audit_batches` row by `key_id`. | **live (M12)** — TDD `audit.test.ts` "S3.R3: passbook returns latestAudit field when one exists" + "S3.R3: passbook's latestAudit is null when no audit has been run" |
+| S3.R3 | The passbook page gains a "Rerun audit" button that POSTs to `/api/audit` and updates the audit card in place with the new verdict. | open `/agents/0xaa`, click "Rerun audit" | button is reachable on the passbook page; click → POST 200; the audit card re-renders with a new `batchId` (different UUID). | **live (M12)** — see `.super-speckit/verification/slice-3-spa-green.md` step 2 |
+| S3.R4 (carry-over) | The `/agents` list page adds a per-card "Revoke" button that calls `DELETE /api/agents/:keyId` and flips the card to `[revoked]` optimistically. | click Revoke on a list card | card flips from `approved` → `revoked [revoked]`; URL does not change (preventDefault on the inner button). | **live (M12)** — see `.super-speckit/verification/slice-3-spa-green.md` step 3 |
 
 ## Slice 4 — seller marketplace (CLI consumer + agent hook)
 
