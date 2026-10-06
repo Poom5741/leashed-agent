@@ -1,4 +1,4 @@
-/** /pair — approve a ThaiFi Wallet CLI pairing (passkey/PIN-guard wallet). */
+/** /pair — approve a Leashed Wallet CLI pairing (passkey/PIN-guard wallet). */
 
 import { useEffect, useState } from "react";
 import { http, parseUnits, type Abi } from "viem";

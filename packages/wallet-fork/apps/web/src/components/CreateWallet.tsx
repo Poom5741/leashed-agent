@@ -57,11 +57,12 @@ export function CreateWallet() {
         <ThemeToggle />
       </div>
       <div className="card auth-card">
-        <img src={logoFor(theme)} alt="ThaiFi" className="auth-logo" />
-        <h1>Create ThaiFi Wallet</h1>
+        <img src={logoFor(theme)} alt="Leashed Wallet" className="auth-logo" />
+        <h1>Create Leashed Wallet</h1>
         <p className="subtitle">
-          A new EVM wallet on ThaiFi will be generated and encrypted on this
-          device. You hold the keys — no server can move your funds.
+          A new EVM wallet on ThaiFi (chain 17) will be generated and encrypted
+          on this device. No email, no account — your passkey is the only key,
+          and no server can move your funds.
         </p>
 
         {pinMode ? (

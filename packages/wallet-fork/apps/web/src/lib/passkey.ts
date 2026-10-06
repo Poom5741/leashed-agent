@@ -4,7 +4,7 @@
 
 import { bufferToBase64url, base64urlToBuffer, generateRandomBytes } from "./crypto";
 
-const RP_NAME = "ThaiFi Wallet";
+const RP_NAME = "Leashed Wallet";
 
 function getRPID(): string {
   // On localhost, use "localhost"; in production, use the domain without port
