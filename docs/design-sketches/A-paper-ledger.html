@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variant A — Paper Ledger Book · Leashed Agent Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper:#F1EBDE; --panel:#FAF6EC;
+    --ink:#211B10; --ink55:rgba(33,27,16,.58); --ink35:rgba(33,27,16,.36);
+    --rule:rgba(33,27,16,.24); --rule-faint:rgba(33,27,16,.12);
+    --red:#B3372B; --green:#2F6B4A; --inkblue:#2456A6; --gold:#B58A1F;
+    --serif:"Fraunces",Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --thai:"Noto Sans Thai",sans-serif;
+    --hand:"Caveat",cursive;
+  }
+  * { box-sizing:border-box; margin:0; }
+  body { background:#D9D0BC; color:var(--ink); font:15px/1.5 var(--thai); padding:36px 22px 60px; }
+  .book { max-width:1040px; margin:0 auto 48px; background:var(--paper); border-radius:3px; position:relative; overflow:hidden;
+    box-shadow:0 1px 2px rgba(30,25,15,.25), 0 24px 70px -30px rgba(30,25,15,.55); }
+  .book::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.5; z-index:5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .watermark { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; z-index:0; }
+  .watermark span { font:700 150px var(--serif); letter-spacing:.1em; color:transparent;
+    -webkit-text-stroke:1.5px rgba(33,27,16,.05); transform:rotate(-16deg); white-space:nowrap; }
+  .pad { padding:36px 42px 30px; position:relative; z-index:1; }
+
+  /* trust-layer banner across all variants */
+  .trustbar {
+    display:flex; justify-content:space-between; align-items:center; gap:18px;
+    border-top:2.5px solid var(--ink); border-bottom:1.5px solid var(--ink);
+    padding:10px 42px; background:rgba(33,27,16,.04);
+    font:600 10.5px var(--mono); letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink55); position:relative; z-index:1;
+  }
+  .trustbar b { color:var(--ink); }
+  .trustbar .right { color:var(--ink); font-weight:600; letter-spacing:.14em; }
+
+  .mast { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;
+    padding-bottom:0; }
+  .mast h1 { font:600 31px/1.05 var(--serif); letter-spacing:-.01em; margin-top:14px; }
+  .mast h1 .th { display:block; font:500 14px var(--thai); color:var(--ink55); margin-top:7px; letter-spacing:.05em; }
+  .mast .acct { text-align:right; font:12px var(--mono); color:var(--ink55); line-height:1.75; }
+  .mast .acct b { color:var(--ink); font-weight:600; }
+  .serial { border:1.4px solid var(--ink35); color:var(--ink55); border-radius:2px; padding:3px 9px;
+    font:600 11px var(--mono); letter-spacing:.14em; }
+
+  .truststrip {
+    display:flex; gap:0; align-items:stretch; margin-top:18px;
+    border:1.4px solid var(--ink35); background:var(--panel); border-radius:2px; overflow:hidden;
+  }
+  .truststrip > div { flex:1; padding:13px 16px; border-right:1px solid var(--rule); }
+  .truststrip > div:last-child { border-right:none; }
+  .truststrip .k { font:500 9.5px var(--mono); text-transform:uppercase; letter-spacing:.16em; color:var(--ink55); }
+  .truststrip .v { font:600 13.5px var(--mono); margin-top:5px; font-variant-numeric:tabular-nums; }
+  .truststrip .v .ok   { color:var(--green); }
+  .truststrip .v .warn { color:var(--gold); }
+
+  .summary { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1.5px solid var(--ink); margin-top:18px; }
+  .summary > div { padding:17px 18px 15px; border-right:1px solid var(--rule); }
+  .summary > div:last-child { border-right:none; }
+  .summary .k { font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:.16em; color:var(--ink55); }
+  .summary .v { font:600 28px/1.1 var(--mono); margin-top:8px; font-variant-numeric:tabular-nums; }
+  .summary .v small { font-size:15px; font-weight:500; color:var(--ink55); }
+  .summary .s { font-size:12px; color:var(--ink55); margin-top:6px; }
+
+  .satellite { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:11px 18px; border-bottom:1px solid var(--rule); background:rgba(33,27,16,.025); }
+  .satellite .k { font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:.16em; color:var(--ink55); }
+  .satellite .v { font:500 13px var(--mono); font-variant-numeric:tabular-nums; color:var(--ink); }
+
+  .guarantor { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; padding:20px 2px 22px; flex-wrap:wrap; }
+  .sig .k { font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:.16em; color:var(--ink55); }
+  .sig .line { margin-top:10px; border-bottom:1.4px solid var(--ink); padding:0 10px 4px; min-width:260px;
+    display:flex; justify-content:space-between; align-items:flex-end; gap:16px; }
+  .sig .name { font:600 27px var(--hand); transform:rotate(-2deg); color:#31306E; white-space:nowrap; }
+  .sig .note { font-size:11px; color:var(--ink55); font-family:var(--mono); text-align:right; line-height:1.6; }
+  .revoke { border:1.4px solid var(--red); color:var(--red); background:transparent; border-radius:2px;
+    padding:10px 18px; font:600 12px var(--mono); letter-spacing:.1em; cursor:pointer; text-transform:uppercase;
+    transition:background .15s; }
+  .revoke:hover { background:rgba(179,55,43,.08); }
+
+  .stampbox { border:2.2px solid var(--ink35); outline:1.2px solid var(--ink35); outline-offset:3px;
+    border-radius:3px; padding:11px 18px; transform:rotate(-2.4deg); text-align:center; min-width:200px;
+    color:var(--ink55); }
+  .stampbox .big { font:700 15px var(--mono); letter-spacing:.12em; text-transform:uppercase; }
+  .stampbox .sub { font:500 10px var(--mono); margin-top:4px; letter-spacing:.08em; }
+  .stampbox.pass { border-color:var(--green); outline-color:var(--green); color:var(--green); transform:rotate(2deg); }
+  .stampbox.warn { border-color:var(--gold);  outline-color:var(--gold);  color:var(--gold);  transform:rotate(2deg); }
+  .stampbox.fail { border-color:var(--red);   outline-color:var(--red);   color:var(--red);   transform:rotate(2deg); }
+
+  .perf { height:16px; margin:2px -42px 0; background:
+    radial-gradient(circle at 8px 8px, #D9D0BC 5px, transparent 5.5px) repeat-x;
+    background-size:26px 16px; background-position:2px center; }
+
+  .ledger { padding:26px 42px 30px; position:relative; z-index:1; }
+  .ledger .head { display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:10px; }
+  .ledger h2 { font:600 17px var(--serif); }
+  .ledger .meta { font:12px var(--mono); color:var(--ink55); }
+
+  /* card grid for agents page */
+  .agents { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; padding:20px 42px 10px; position:relative; z-index:1; }
+  .card { background:var(--paper); border:1.4px solid var(--ink35); border-radius:3px; padding:18px 18px 14px; text-decoration:none; color:inherit; transition:transform .12s, box-shadow .12s; position:relative; }
+  .card:hover { transform:translateY(-1px); box-shadow:0 6px 18px -10px rgba(30,25,15,.4); }
+  .card .top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .card .name { font:600 18px var(--serif); }
+  .card .serial { position:absolute; top:8px; right:8px; }
+  .card .keyId { font:500 11.5px var(--mono); color:var(--ink55); margin:8px 0; word-break:break-all; }
+  .card .row2 { display:flex; justify-content:space-between; gap:10px; font:500 11.5px var(--mono); color:var(--ink55); margin-top:8px; }
+  .card .row2 b { color:var(--ink); font-weight:600; }
+  .card .foot { display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:10px; border-top:1px solid var(--rule); }
+  .card .revoke { font-size:11px; padding:5px 11px; }
+
+  /* status pills (no color-only — also use a glyph) */
+  .pill { display:inline-flex; align-items:center; gap:5px;
+    font:600 10px var(--mono); letter-spacing:.12em; text-transform:uppercase;
+    border:1.2px solid var(--ink35); color:var(--ink55);
+    padding:3px 8px; border-radius:2px; white-space:nowrap; }
+  .pill::before { font:700 11px var(--mono); }
+  .pill.approved::before { content:"✓"; color:var(--green); }
+  .pill.revoked::before  { content:"✕"; color:var(--red); }
+  .pill.pending::before  { content:"…"; color:var(--gold); }
+  .pill.approved { border-color:var(--green); color:var(--green); }
+  .pill.revoked  { border-color:var(--red);   color:var(--red);   }
+  .pill.pending  { border-color:var(--gold);  color:var(--gold);  }
+
+  table { width:100%; border-collapse:collapse; }
+  thead th { font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:.14em; color:var(--ink55);
+    text-align:left; padding:8px 10px; border-top:1.5px solid var(--ink); border-bottom:1px solid var(--rule); }
+  tbody td { padding:12px 10px; border-bottom:1px solid var(--rule-faint); font-size:13.5px; vertical-align:middle; }
+  td.mono { font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .detail { font-weight:500; }
+  .sub { font-size:11px; color:var(--ink55); margin-top:2px; font-family:var(--mono); }
+  .railtag { font:600 10px var(--mono); letter-spacing:.12em; border:1.2px solid var(--ink35); color:var(--ink55);
+    padding:3px 8px; border-radius:2px; white-space:nowrap; }
+  .amt { text-align:right; font-family:var(--mono); font-weight:600; white-space:nowrap; }
+  a { color:var(--inkblue); text-decoration:underline; text-underline-offset:3px; }
+  .empty { color:var(--ink55); font-family:var(--mono); font-size:12.5px; padding:18px 10px; }
+
+  .auditstamp { border:2px solid var(--green); color:var(--green); padding:8px 18px; border-radius:2px;
+    text-align:center; transform:rotate(1.6deg); font:700 12px var(--mono); letter-spacing:.12em;
+    box-shadow:inset 0 0 0 1.5px var(--paper); }
+  .auditstamp .small { display:block; font:500 10px var(--mono); letter-spacing:.08em; margin-top:4px; color:var(--ink55); text-transform:none; }
+
+  .foot { border-top:1.5px solid var(--ink); margin-top:6px; padding-top:13px;
+    display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; }
+  .foot .note { font-size:11.5px; color:var(--ink55); font-family:var(--mono); }
+  .barcode { height:26px; width:150px; background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 11px); opacity:.8; }
+
+  .page-label {
+    font:500 11px var(--mono); text-transform:uppercase; letter-spacing:.18em; color:var(--ink55);
+    text-align:center; margin:24px auto -16px;
+  }
+
+  @media (max-width:760px) {
+    .agents { padding:20px 20px 10px; }
+    .ledger, .pad { padding-left:20px; padding-right:20px; }
+    .trustbar { padding:10px 20px; }
+    .summary { grid-template-columns:1fr; }
+    .summary > div { border-right:none; border-bottom:1px solid var(--rule); }
+    .watermark span { font-size:64px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">Variant A · Paper Ledger Book · Trust Layer for AI Agents</div>
+
+<!-- =================== Agents page =================== -->
+<div class="book">
+  <div class="watermark" aria-hidden="true"><span>LEASHED · LEASHED</span></div>
+
+  <div class="trustbar">
+    <span><b>TRUST LAYER · v2</b> &nbsp; Leash · Receipts · Audit · Funding</span>
+    <span class="right">Page 001 — Register</span>
+  </div>
+
+  <div class="pad">
+    <div class="mast">
+      <div>
+        <span class="serial">BOOK Nº LA-0067</span>
+        <h1 style="margin-top:12px">Your leashed agents
+          <span class="th">a register of every AI worker, on-chain, with a leash</span></h1>
+      </div>
+      <div class="acct">
+        AGENT A/C <b>0x3369…4f4e</b><br />
+        BRANCH <b>ThaiFi chain 17</b> + <b>Cardano preprod</b><br />
+        STATEMENT <b>06 Oct 2026</b>
+      </div>
+    </div>
+
+    <div class="agents">
+      <a class="card" href="#">
+        <div class="top">
+          <div class="name">noodle-shop</div>
+          <span class="pill approved">approved</span>
+        </div>
+        <div class="keyId">0xaa · p256</div>
+        <div class="row2"><span>limit</span><b>5,000,000 THCFI / 30 d</b></div>
+        <div class="foot">
+          <span class="rail">created 14 Nov 2023</span>
+          <button class="revoke">✕ Revoke</button>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="top">
+          <div class="name">poster</div>
+          <span class="pill approved">approved</span>
+        </div>
+        <div class="keyId">0xab · p256</div>
+        <div class="row2"><span>limit</span><b>2,000,000 THCFI / 30 d</b></div>
+        <div class="foot">
+          <span class="rail">created 14 Nov 2023</span>
+          <button class="revoke">✕ Revoke</button>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="top">
+          <div class="name">invoice</div>
+          <span class="pill approved">approved</span>
+        </div>
+        <div class="keyId">0xad · p256</div>
+        <div class="row2"><span>limit</span><b>3,000,000 THCFI / 30 d</b></div>
+        <div class="foot">
+          <span class="rail">created 15 Nov 2023</span>
+          <button class="revoke">✕ Revoke</button>
+        </div>
+      </a>
+      <a class="card" href="#" style="opacity:.55">
+        <div class="top">
+          <div class="name">audit-bot</div>
+          <span class="pill revoked">revoked</span>
+        </div>
+        <div class="keyId">0xac · p256</div>
+        <div class="row2"><span>limit</span><b>1,000,000 THCFI / 30 d</b></div>
+        <div class="foot">
+          <span class="rail">revoked 14 Nov 2023</span>
+          <span></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="foot" style="margin:18px 0 0">
+      <div class="note">4 agents · 3 active · 1 revoked · machine-printed by leashed-agent</div>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="perf" aria-hidden="true"></div>
+</div>
+
+<!-- =================== Passbook page =================== -->
+<div class="book">
+  <div class="watermark" aria-hidden="true"><span>LEASHED · LEASHED</span></div>
+
+  <div class="trustbar">
+    <span><b>AGENT A/C 0xaa</b> &nbsp; noodle-shop &nbsp;·&nbsp; Passbook</span>
+    <span class="right">Page 001 · Leaf 002</span>
+  </div>
+
+  <div class="pad">
+    <div class="mast">
+      <div>
+        <span class="serial">AGENT Nº LA-0xaa</span>
+        <h1 style="margin-top:12px">Passbook — noodle-shop
+          <span class="th">a spending record a human can actually read</span></h1>
+      </div>
+      <div class="acct">
+        KEY <b>0xaa…</b> &nbsp;·&nbsp; TYPE <b>p256</b><br />
+        GUARANTOR <b>0x3369…4f4e</b><br />
+        STATEMENT <b>06 Oct 2026</b>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div>
+        <div class="k">Credit line remaining</div>
+        <div class="v">4,998.499971 <small>THCFI</small></div>
+        <div class="s">cap 5,000 THCFI / 30 d · enforced on-chain</div>
+      </div>
+      <div>
+        <div class="k">Wallet balance</div>
+        <div class="v">4,998.499971 <small>THCFI</small></div>
+        <div class="s">top up 1 THB = 1 THCFI by QR</div>
+      </div>
+      <div>
+        <div class="k">Charged this page</div>
+        <div class="v">1.500029 <small>THCFI</small></div>
+        <div class="s">every line below is a real linked transaction</div>
+      </div>
+    </div>
+
+    <div class="satellite">
+      <span class="k">Satellite account · Cardano preprod (our own x402 service)</span>
+      <span class="v">10,003.65 tADA · 999.9 tUSDM</span>
+    </div>
+
+    <div class="guarantor">
+      <div class="sig">
+        <div class="k">Guarantor (human)</div>
+        <div class="line">
+          <span class="name">signed on-chain ✓</span>
+          <span class="note">AccountKeychain · TIP-1011<br />revocation is instant, on-chain</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:24px; flex-wrap:wrap">
+        <div class="stampbox warn">
+          <div class="big">Awaiting audit</div>
+          <div class="sub">CHAINLINK CRE · STAGED</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:9px; align-items:flex-end">
+          <button class="revoke">✕ Revoke agent</button>
+          <div class="sig" style="text-align:right"><div class="k">Key expires · <span>2027-01-04</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="perf" aria-hidden="true"></div>
+
+  <div class="ledger">
+    <div class="head">
+      <h2>Transaction record</h2>
+      <div class="meta">2 receipts · sorted by time</div>
+    </div>
+    <table>
+      <thead><tr><th>Time</th><th>Detail</th><th>Rail</th><th style="text-align:right">Debit</th><th>Stamp</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">03:44</td>
+          <td><div class="detail">poster render</div><div class="sub">ThaiFi MPP · payto 0x5266…4eE6</div></td>
+          <td><span class="railtag">thaifi-mpp</span></td>
+          <td class="amt">1.5 THCFI</td>
+          <td><span class="auditstamp">PAID<div class="small">on-chain</div></span></td>
+          <td><a href="#">exp.thaifi.com/tx/0xf6e9…3b65e</a></td>
+        </tr>
+        <tr>
+          <td class="mono">04:44</td>
+          <td><div class="detail">verify poster receipt</div><div class="sub">Cardano x402 · cross-rail attest</div></td>
+          <td><span class="railtag">cardano-x402</span></td>
+          <td class="amt">0.10 USDM</td>
+          <td><span class="auditstamp">PAID<div class="small">on-chain</div></span></td>
+          <td><a href="#">cardanoscan.io/tx/5e79…bdc0</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="foot">
+      <div class="note">CRE verdict <b style="color:var(--green)">PASS</b> · 2 receipts · attested Sepolia 0x…dEaD · updated 06 Oct 2026, 17:00</div>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== Services page =================== -->
+<div class="book">
+  <div class="watermark" aria-hidden="true"><span>LEASHED · LEASHED</span></div>
+
+  <div class="trustbar">
+    <span><b>MARKETPLACE</b> &nbsp; Public service register</span>
+    <span class="right">Page 001 — Register B</span>
+  </div>
+
+  <div class="pad">
+    <div class="mast">
+      <div>
+        <span class="serial">REGISTER Nº LA-MKT</span>
+        <h1 style="margin-top:12px">Registered services
+          <span class="th">anyone with a ThaiFi wallet can register, anyone can browse</span></h1>
+      </div>
+      <div class="acct">
+        FILTER <b>none</b><br />
+        RAIL <b>all</b><br />
+        SORTED <b>newest first</b>
+      </div>
+    </div>
+
+    <div class="truststrip">
+      <div><div class="k">total</div><div class="v">4 services</div></div>
+      <div><div class="k">rail</div><div class="v">3 cardano-x402 · 1 thaifi-mpp</div></div>
+      <div><div class="k">tokens</div><div class="v">THCFI · USDM · tUSDM</div></div>
+      <div><div class="k">signers</div><div class="v">0x5266…4eE6</div></div>
+    </div>
+
+    <table style="margin-top:20px">
+      <thead><tr><th>ID</th><th>Endpoint</th><th>Rail</th><th style="text-align:right">Price (base)</th><th>Token</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">11aa22…</td><td><a href="#">https://pay.merchant.co/topup</a></td><td><span class="railtag">cardano-x402</span></td><td class="amt">500,000</td><td>tUSDM</td></tr>
+        <tr><td class="mono">faf949…</td><td><a href="#">https://qa.example.com/profile</a></td><td><span class="railtag">cardano-x402</span></td><td class="amt">100,000</td><td>USDM</td></tr>
+        <tr><td class="mono">53fe93…</td><td><a href="#">https://seller.example/poster</a></td><td><span class="railtag">thaifi-mpp</span></td><td class="amt">1,500,000</td><td>THCFI</td></tr>
+        <tr><td class="mono">8da7d1…</td><td><a href="#">https://seller.example/llm</a></td><td><span class="railtag">cardano-x402</span></td><td class="amt">150,000</td><td>THCFI</td></tr>
+      </tbody>
+    </table>
+
+    <div class="foot">
+      <div class="note">Signatures stored · never returned · register via <code style="background:transparent;padding:0">npx @leashed/wallet-cli-platform marketplace register</code></div>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="perf" aria-hidden="true"></div>
+</div>
+
+</body>
+</html>

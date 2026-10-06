@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Variants · Leashed Agent Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#F4F2EE; --paper:#FFFFFF;
+    --ink:#0F172A; --ink55:rgba(15,23,42,.55); --ink35:rgba(15,23,42,.35);
+    --accent:#0B1A2F; --accent-soft:#0B1A2F22;
+    --border:#E2E8F0;
+  }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--ink); font:15px/1.55 var(--sans); padding:36px 22px 60px; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  .h { font:600 28px/1.15 "IBM Plex Sans",system-ui,sans-serif; letter-spacing:-.01em; margin-bottom:8px; }
+  .sub { color:var(--ink55); margin-bottom:32px; max-width:600px; }
+  .eyebrow { font:600 10.5px var(--mono); letter-spacing:.22em; text-transform:uppercase; color:var(--ink55); margin-bottom:14px; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px; }
+  .card { background:var(--paper); border:1px solid var(--border); border-radius:2px;
+    text-decoration:none; color:inherit; transition:border-color .12s, transform .12s; display:flex; flex-direction:column; }
+  .card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .card .thumb { aspect-ratio:16/10; background:var(--accent-soft); border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font:700 36px var(--mono); color:var(--accent); }
+  .card .thumb.b { background:#F7F5F0; color:#1A1815; }
+  .card .thumb.c { background:#FF3D7F; color:#F4F0E6; }
+  .card .thumb.d { background:#D5E1ED; color:#1F4E79; }
+  .card .body { padding:18px 20px 22px; }
+  .card .name { font:600 18px "IBM Plex Sans",system-ui,sans-serif; margin-bottom:6px; }
+  .card .tag { font:500 11px var(--mono); letter-spacing:.16em; text-transform:uppercase; color:var(--ink55); margin-bottom:14px; }
+  .card .desc { color:var(--ink55); font-size:14px; line-height:1.55; margin-bottom:14px; }
+  .card .open { font:600 11px var(--mono); letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .card .open::after { content:" →"; }
+
+  .swatches { display:flex; gap:6px; margin-top:12px; }
+  .sw { width:22px; height:22px; border-radius:2px; border:1px solid var(--border); }
+
+  .compare { margin-top:48px; }
+  .compare h2 { font:600 20px "IBM Plex Sans",system-ui,sans-serif; margin-bottom:16px; }
+  table { width:100%; border-collapse:collapse; background:var(--paper); border:1px solid var(--border); }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--border); font-size:13.5px; vertical-align:top; }
+  th { font:600 11px var(--mono); letter-spacing:.16em; text-transform:uppercase; color:var(--ink55); background:#F9F7F4; }
+  td:first-child { font:600 14px "IBM Plex Sans",system-ui,sans-serif; }
+  td.mono { font:500 12px var(--mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">TRUST LAYER · v2 · design exploration</div>
+  <div class="h">Four visual directions for the Leashed Agent Platform.</div>
+  <p class="sub">Each variant is a complete HTML mockup of the three pages (Agents list, Passbook, Marketplace). Open them side-by-side to compare feel. None of these touch production code yet.</p>
+
+  <div class="grid">
+    <a class="card" href="A-paper-ledger.html">
+      <div class="thumb">A</div>
+      <div class="body">
+        <div class="name">Paper Ledger Book</div>
+        <div class="tag">Variant A · serif + ink</div>
+        <div class="desc">The v1 baseline refined: Fraunces + IBM Plex Mono + Caveat signature. Paper bg, ink rules, watermark, perforation between leaves, stamp motifs. Most familiar.</div>
+        <div class="swatches">
+          <div class="sw" style="background:#F1EBDE"></div>
+          <div class="sw" style="background:#211B10"></div>
+          <div class="sw" style="background:#B3372B"></div>
+          <div class="sw" style="background:#2F6B4A"></div>
+        </div>
+        <div class="open" style="margin-top:18px">Open variant</div>
+      </div>
+    </a>
+    <a class="card" href="B-modern-ink.html">
+      <div class="thumb b">B</div>
+      <div class="body">
+        <div class="name">Modern Ink</div>
+        <div class="tag">Variant B · minimal Japanese ledger</div>
+        <div class="desc">Editorial restraint. Shippori Mincho serif, vertical-rule layout, single ink color, generous whitespace. Lets the data breathe.</div>
+        <div class="swatches">
+          <div class="sw" style="background:#F7F5F0"></div>
+          <div class="sw" style="background:#1A1815"></div>
+          <div class="sw" style="background:#B83A2B"></div>
+          <div class="sw" style="background:#5C7340"></div>
+        </div>
+        <div class="open" style="margin-top:18px">Open variant</div>
+      </div>
+    </a>
+    <a class="card" href="C-neo-brutalist.html">
+      <div class="thumb c">C</div>
+      <div class="body">
+        <div class="name">Neo-brutalist Trust Ledger</div>
+        <div class="tag">Variant C · heavy borders + accents</div>
+        <div class="desc">Loud. 3-px black rules, no rounded edges, hot-pink + cyan on cream, monospace everywhere, chunky offset shadows. Visible from across the room.</div>
+        <div class="swatches">
+          <div class="sw" style="background:#F4F0E6"></div>
+          <div class="sw" style="background:#0A0A0A"></div>
+          <div class="sw" style="background:#FF3D7F"></div>
+          <div class="sw" style="background:#00E0D6"></div>
+        </div>
+        <div class="open" style="margin-top:18px">Open variant</div>
+      </div>
+    </a>
+    <a class="card" href="D-archival-blueprint.html">
+      <div class="thumb d">D</div>
+      <div class="body">
+        <div class="name">Archival Blueprint</div>
+        <div class="tag">Variant D · technical drafting</div>
+        <div class="desc">Cool gray-cyan paper. Hairline grids, drafting-blue ink, schematic annotations, corner crosshairs, ruler tick marks. Reads as an auditor's working document.</div>
+        <div class="swatches">
+          <div class="sw" style="background:#E9EBEC"></div>
+          <div class="sw" style="background:#1F4E79"></div>
+          <div class="sw" style="background:#2D7D4A"></div>
+          <div class="sw" style="background:#A93837"></div>
+        </div>
+        <div class="open" style="margin-top:18px">Open variant</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="compare">
+    <h2>Side-by-side</h2>
+    <table>
+      <thead><tr><th></th><th>A · Paper ledger</th><th>B · Modern ink</th><th>C · Neo-brutalist</th><th>D · Blueprint</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Display typeface</td>
+          <td class="mono">Fraunces serif</td>
+          <td class="mono">Shippori Mincho</td>
+          <td class="mono">Space Grotesk display</td>
+          <td class="mono">IBM Plex Sans</td>
+        </tr>
+        <tr>
+          <td>Mono typeface</td>
+          <td class="mono">IBM Plex Mono</td>
+          <td class="mono">JetBrains Mono</td>
+          <td class="mono">IBM Plex Mono</td>
+          <td class="mono">Roboto Mono</td>
+        </tr>
+        <tr>
+          <td>Surface</td>
+          <td class="mono">Paper (#F1EBDE) on D9D0BC desk</td>
+          <td class="mono">Paper (#F7F5F0) on EDEAE2</td>
+          <td class="mono">Panel (#FFF) on paper (#F4F0E6)</td>
+          <td class="mono">Panel (#F4F6F7) on gridded paper</td>
+        </tr>
+        <tr>
+          <td>Ink</td>
+          <td class="mono">#211B10</td>
+          <td class="mono">#1A1815</td>
+          <td class="mono">#0A0A0A</td>
+          <td class="mono">#1F4E79 (drafting blue)</td>
+        </tr>
+        <tr>
+          <td>Accent</td>
+          <td class="mono">Stamp red #B3372B / green #2F6B4A</td>
+          <td class="mono">Vermillion / moss / indigo</td>
+          <td class="mono">Hot pink + cyan</td>
+          <td class="mono">Blue + green/red stamps</td>
+        </tr>
+        <tr>
+          <td>Distinctive motif</td>
+          <td class="mono">Watermark + perforation + Caveat signature</td>
+          <td class="mono">Marginal tick + vertical rule</td>
+          <td class="mono">3-px offset shadows</td>
+          <td class="mono">Corner crosshairs + ruler</td>
+        </tr>
+        <tr>
+          <td>Reads as</td>
+          <td class="mono">A passbook</td>
+          <td class="mono">A receipt</td>
+          <td class="mono">A protest poster</td>
+          <td class="mono">An audit schematic</td>
+        </tr>
+        <tr>
+          <td>Demo tone</td>
+          <td class="mono">Trustworthy, established</td>
+          <td class="mono">Editorial, calm</td>
+          <td class="mono">Confident, loud</td>
+          <td class="mono">Technical, precise</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
