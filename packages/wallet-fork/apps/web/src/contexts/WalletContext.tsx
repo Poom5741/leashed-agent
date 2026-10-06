@@ -337,12 +337,20 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       let passwordSecretkey: string;
       let recoveryPw: string;
       if (storedWallet.guard === "pin") {
-        recoveryPw = await requestPin({
+        // The PIN only authorises the secret decrypt. The recovery data in
+        // the file MUST be derived from the recovery password the user typed
+        // in the export modal — encrypting it under the PIN made every backup
+        // PIN-only recoverable (Rakazo F12 root cause, byte-proven).
+        if (!recoveryPassword) {
+          throw new Error("Recovery password is required to export a backup.");
+        }
+        recoveryPw = recoveryPassword;
+        const pin = await requestPin({
           title: "Enter your PIN",
           message: "Enter your PIN to export the backup file.",
         });
         passwordSecretkey = await decryptWithRecoveryPassword(
-          recoveryPw,
+          pin,
           storedWallet.encryptedSecret,
           storedWallet.iv,
           storedWallet.pinSalt,

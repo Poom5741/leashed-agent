@@ -220,7 +220,7 @@ function shorten(address: string): string {
 export function Dashboard() {
   const { storedWallet, exportBackup, cloudSyncedAt, needsBackup, syncToCloud, dismissBackupPrompt } =
     useWallet();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [theme, toggleTheme] = useTheme();
   const [tab, setTab] = useState<Tab>(() => {
     // Trailing slash normalized: Pages 308s /wallet/deposit -> /wallet/deposit/
@@ -304,10 +304,6 @@ export function Dashboard() {
     }
   };
 
-  const handleLogout = async () => {
-    await logout();
-  };
-
   const copyAddress = async () => {
     if (!storedWallet) return;
     await navigator.clipboard.writeText(storedWallet.address);
@@ -348,9 +344,6 @@ export function Dashboard() {
         onClick={() => { setShowRecover(true); setTab("home"); onAfter?.(); }}
       >
         <span className="side-label">{Icons.upload} Recover / Import</span>
-      </button>
-      <button className="side-menu-item danger" onClick={() => { handleLogout(); onAfter?.(); }}>
-        <span className="side-label">{Icons.logout} Log out</span>
       </button>
     </div>
   );
