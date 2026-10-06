@@ -70,6 +70,46 @@ export async function decryptWithRecoveryPassword(
   iv: string,
   salt: string,
 ): Promise<string> {
+  // Canary: prove the helper round-trips with THIS password in THIS context
+  // before blaming the file. If the canary fails, the crypto environment (or
+  // an instrumentation wrapper) is broken; if it passes, the file params are
+  // mismatched. Distinguishes the two (Rakazo F12, round 3).
+  try {
+    const canary = await encryptWithRecoveryPassword(recoveryPassword, "canary");
+    const round = await decryptWithRecoveryPasswordRaw(
+      recoveryPassword,
+      canary.ciphertext,
+      canary.iv,
+      canary.salt,
+    );
+    if (round !== "canary") {
+      throw new Error(
+        `Restore crypto self-test failed (round-trip returned ${JSON.stringify(round).slice(0, 40)}).`,
+      );
+    }
+  } catch (err) {
+    throw new Error(
+      `Restore crypto self-test failed in this browser context: ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
+
+  try {
+    return await decryptWithRecoveryPasswordRaw(recoveryPassword, ciphertext, iv, salt);
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : String(err);
+    throw new Error(
+      `Backup decrypt failed (${detail}) — params: ct=${ciphertext.length}B iv=${iv.length}B salt=${salt.length}B. ` +
+        "Check the recovery password matches the one set at export.",
+    );
+  }
+}
+
+async function decryptWithRecoveryPasswordRaw(
+  recoveryPassword: string,
+  ciphertext: string,
+  iv: string,
+  salt: string,
+): Promise<string> {
   const saltBuf = Uint8Array.from(atob(salt), (c) => c.charCodeAt(0)).buffer;
   const ivBuf = Uint8Array.from(atob(iv), (c) => c.charCodeAt(0)).buffer;
   const ctBuf = Uint8Array.from(atob(ciphertext), (c) => c.charCodeAt(0)).buffer;

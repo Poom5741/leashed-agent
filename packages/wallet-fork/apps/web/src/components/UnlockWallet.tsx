@@ -62,7 +62,7 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
 
   return (
     <div className="card">
-      <img src="/logo-white.svg" alt="Leashed Wallet" className="card-logo" />
+      <img src={`${import.meta.env.BASE_URL}logo-white.svg`} alt="Leashed Wallet" className="card-logo" />
       <h1>Recover / Import Wallet</h1>
       <p className="subtitle">
         Import a backup file to restore this wallet on a new device or domain —

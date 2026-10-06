@@ -55,7 +55,7 @@ export function CreateWallet() {
         <ThemeToggle />
       </div>
       <div className="card auth-card">
-        <img src="/logo-white.svg" alt="Leashed Wallet" className="auth-logo" />
+        <img src={`${import.meta.env.BASE_URL}logo-white.svg`} alt="Leashed Wallet" className="auth-logo" />
         <h1>Create Leashed Wallet</h1>
         <p className="subtitle">
           A new EVM wallet on ThaiFi (chain 17) will be generated and encrypted
