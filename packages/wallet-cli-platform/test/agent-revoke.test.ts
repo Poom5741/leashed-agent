@@ -19,7 +19,6 @@ import {
   saveStore,
   addAgent,
   getAgent,
-  type Store,
   type AgentRecord,
 } from "../src/store.js";
 
@@ -27,7 +26,7 @@ function tmpDir(): string {
   return mkdtempSync(join(tmpdir(), "wallet-cli-revoke-"));
 }
 
-function seededStore(): Store {
+function seededStore(): string {
   const dir = tmpDir();
   const store = loadStore(dir);
   store.wallet = {
@@ -48,7 +47,7 @@ function seededStore(): Store {
   };
   addAgent(store, a);
   saveStore(store, dir);
-  return store;
+  return dir;
 }
 
 function fakeHttp(postImpl: (url: string, body: unknown) => { status: number; body: unknown }): HttpClient & { calls: { url: string; body?: unknown }[] } {
@@ -73,13 +72,13 @@ test("agent revoke exits 1 when the keyId is not in the store", async () => {
 });
 
 test("agent revoke exits 0 and marks revokedAt locally on HTTP 200", async () => {
-  const store = seededStore();
-  const keyId = getAgent(store, "0x" + "72".repeat(16) + "1E67")!.keyId;
+  const storeDir = seededStore();
+  const keyId = getAgent(loadStore(storeDir), "0x" + "72".repeat(16) + "1E67")!.keyId;
   const http = fakeHttp((url) => {
     if (url === "/api/agent/revoke") return { status: 200, body: { ok: true } };
     return { status: 404, body: {} };
   });
-  const res = await runAgentRevoke({ keyId, storeDir: <string>store, http });
+  const res = await runAgentRevoke({ keyId, storeDir, http });
 
   assert.equal(res.exitCode, 0);
   assert.match(res.stdout, /revoked/i);
@@ -91,22 +90,22 @@ test("agent revoke exits 0 and marks revokedAt locally on HTTP 200", async () =>
 
   // Local state must reflect the revocation
   // (The impl reloads from storeDir after the POST.)
-  const reloaded = loadStore(<string>store);
+  const reloaded = loadStore(storeDir);
   const after = getAgent(reloaded, keyId);
   assert.ok(after);
   assert.ok(typeof after!.revokedAt === "string", "revokedAt must be set after HTTP 200");
 });
 
 test("agent revoke exits 1 on HTTP 500 and does NOT mutate local state", async () => {
-  const store = seededStore();
-  const keyId = getAgent(store, "0x" + "72".repeat(16) + "1E67")!.keyId;
+  const storeDir = seededStore();
+  const keyId = getAgent(loadStore(storeDir), "0x" + "72".repeat(16) + "1E67")!.keyId;
   const http = fakeHttp(() => ({ status: 500, body: { error: "boom" } }));
-  const res = await runAgentRevoke({ keyId, storeDir: <string>store, http });
+  const res = await runAgentRevoke({ keyId, storeDir, http });
   assert.equal(res.exitCode, 1);
   assert.match(res.stderr, /5\d\d|server|retry/i);
 
   // Local state must NOT be marked.
-  const reloaded = loadStore(<string>store);
+  const reloaded = loadStore(storeDir);
   const after = getAgent(reloaded, keyId);
   assert.ok(after);
   assert.equal(after!.revokedAt, undefined, "must not mark locally on server failure");

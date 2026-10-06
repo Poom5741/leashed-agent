@@ -17,7 +17,6 @@ import {
   loadStore,
   saveStore,
   addAgent,
-  type Store,
   type AgentRecord,
 } from "../src/store.js";
 
@@ -25,7 +24,7 @@ function tmpDir(): string {
   return mkdtempSync(join(tmpdir(), "wallet-cli-ls-"));
 }
 
-function seededStore(n: number, withRevoked = false): Store {
+function seededStore(n: number, withRevoked = false): string {
   const dir = tmpDir();
   const store = loadStore(dir);
   store.wallet = {
@@ -51,7 +50,7 @@ function seededStore(n: number, withRevoked = false): Store {
     }
   }
   saveStore(store, dir);
-  return store;
+  return dir;
 }
 
 test("agent ls on an empty store exits 1 with a 'no agents' message", () => {
@@ -62,8 +61,8 @@ test("agent ls on an empty store exits 1 with a 'no agents' message", () => {
 });
 
 test("agent ls on a store with 1 agent prints exactly 1 table row", () => {
-  const store = seededStore(1);
-  const res = runAgentLs({ storeDir: <StoreDir>store });
+  const dir = seededStore(1);
+  const res = runAgentLs({ storeDir: dir });
   assert.equal(res.exitCode, 0);
   // 1 data row + 1 header row
   const dataRows = res.stdout.trim().split("\n").filter((l) => l.includes("noodle-shop"));
@@ -71,8 +70,8 @@ test("agent ls on a store with 1 agent prints exactly 1 table row", () => {
 });
 
 test("agent ls on a store with N agents prints N table rows", () => {
-  const store = seededStore(5);
-  const res = runAgentLs({ storeDir: <StoreDir>store });
+  const dir = seededStore(5);
+  const res = runAgentLs({ storeDir: dir });
   assert.equal(res.exitCode, 0);
   const lines = res.stdout.trim().split("\n");
   // header + N data rows
@@ -80,8 +79,8 @@ test("agent ls on a store with N agents prints N table rows", () => {
 });
 
 test("agent ls annotates revoked agents with a [revoked] tag", () => {
-  const store = seededStore(3, /* withRevoked */ true);
-  const res = runAgentLs({ storeDir: <StoreDir>store });
+  const dir = seededStore(3, /* withRevoked */ true);
+  const res = runAgentLs({ storeDir: dir });
   assert.equal(res.exitCode, 0);
   // The last-added agent is the revoked one (per seededStore).
   const revokedLine = res.stdout.split("\n").find((l) => l.includes("audit-bot") || l.includes("0x03"));

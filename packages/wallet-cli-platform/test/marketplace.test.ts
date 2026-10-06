@@ -30,7 +30,7 @@ import {
 } from "../src/commands/marketplace.js";
 import {
   loadStore,
-  type Store,
+  saveStore,
 } from "../src/store.js";
 
 function tmpDir(): string {
@@ -46,6 +46,7 @@ function walletStore(): string {
     label: "primary",
     createdAt: new Date().toISOString(),
   };
+  saveStore(store, dir);
   return dir;
 }
 

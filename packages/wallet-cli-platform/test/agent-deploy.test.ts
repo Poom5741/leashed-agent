@@ -24,9 +24,26 @@ import {
   type HttpClient,
   type DeployDefaults,
 } from "../src/commands/agent-deploy.js";
+import {
+  loadStore,
+  saveStore,
+} from "../src/store.js";
 
 function tmpDir(): string {
   return mkdtempSync(join(tmpdir(), "wallet-cli-deploy-"));
+}
+
+function seededStore(): string {
+  const dir = tmpDir();
+  const store = loadStore(dir);
+  store.wallet = {
+    address: "0xwallet",
+    userAddress: "0xuser",
+    label: "primary",
+    createdAt: new Date().toISOString(),
+  };
+  saveStore(store, dir);
+  return dir;
 }
 
 function fakeHttp(responses: Array<{ url: string; status: number; body: unknown }>): HttpClient & { calls: { method: string; url: string; body?: unknown }[] } {
@@ -78,7 +95,7 @@ test("agent deploy exits 1 with a 'Not paired' message when no wallet is in the 
 });
 
 test("agent deploy on HTTP 200 + approved returns the new key and leash", async () => {
-  const dir = tmpDir();
+  const dir = seededStore();
   const http = fakeHttp([
     { url: "/api/agent/pair", status: 200, body: { pairingId: "pair_abc", code: "u-1234", approvalUrl: "https://thaifi.com/approve/pair_abc" } },
     { url: "/api/agent/pair/pair_abc", status: 200, body: { status: "approved", key: { keyId: "0x" + "ee".repeat(32) }, leash: { perTokenBase: { THCFI: "2000000" }, periodSec: 2592000, keyExpiry: 1893456000 } } },
@@ -107,7 +124,7 @@ test("agent deploy on HTTP 200 + approved returns the new key and leash", async 
 });
 
 test("agent deploy times out when poll never returns 'approved'", async () => {
-  const dir = tmpDir();
+  const dir = seededStore();
   const http: HttpClient = {
     async post() {
       return { status: 200, body: { pairingId: "pair_abc", code: "u-1234", approvalUrl: "https://thaifi.com/approve/pair_abc" } };
@@ -127,7 +144,7 @@ test("agent deploy times out when poll never returns 'approved'", async () => {
 });
 
 test("agent deploy exits 1 with an auth error on HTTP 401/403", async () => {
-  const dir = tmpDir();
+  const dir = seededStore();
   const http: HttpClient = {
     async post() { return { status: 401, body: { error: "unauthorized" } }; },
     async get() { return { status: 401, body: { error: "unauthorized" } }; },
@@ -143,7 +160,7 @@ test("agent deploy exits 1 with an auth error on HTTP 401/403", async () => {
 });
 
 test("agent deploy exits 1 with a retryable error on HTTP 500", async () => {
-  const dir = tmpDir();
+  const dir = seededStore();
   const http: HttpClient = {
     async post() { return { status: 500, body: { error: "boom" } }; },
     async get() { return { status: 500, body: { error: "boom" } }; },
