@@ -1,6 +1,6 @@
 {
-  "name": "@leashed/wallet-cli-platform",
-  "version": "0.5.0",
+  "name": "leashed-wallet-cli-platform",
+  "version": "0.5.1",
   "description": "Leashed Agent Platform CLI — fork of thaifi-wallet-cli. Pair a ThaiFi wallet, deploy AI agents with on-chain leash, register marketplace services, audit receipts.",
   "type": "module",
   "bin": {
@@ -50,8 +50,5 @@
     "@types/pngjs": "^6.0.5",
     "tsx": "^4.19.0",
     "typescript": "^5.9.0"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
