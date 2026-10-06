@@ -53,9 +53,9 @@ leashed agent revoke                            # kill the leash instantly
 
 | Claim | Proof |
 |---|---|
-| Cardano preprod x402 payment (tUSDM) | [tx `5e796a4c…`](https://preprod.cardanoscan.io/transaction/5e796a4c) · [`docs/m2-cardano-evidence.md`](docs/m2-cardano-evidence.md) |
-| Faucet transfer (lucid-built, 1 tUSDM + 1.5 tADA) | [tx `d0534724…`](https://preprod.cardanoscan.io/transaction/d0534724f12f1f910685bffa45200556c85dec7e2cf7ed13371b3f5fad58b6f2) — block 5,261,421 |
-| ThaiFi chain-17 agent payment (THCFI) | tx `0xf6e953e1…` · first real on-chain paid job (M1) |
+| Cardano preprod x402 payment (tUSDM) | [tx `5e796a4c…bdc0`](https://preprod.cardanoscan.io/transaction/5e796a4cce249e021ad694283bec298eae0add25cbb31a106b6cca1379efbdc0) · [`docs/m2-cardano-evidence.md`](docs/m2-cardano-evidence.md) |
+| Faucet transfer (lucid-built, 1 tUSDM + 1.5 tADA) | [tx `d0534724…58b6f2`](https://preprod.cardanoscan.io/transaction/d0534724f12f1f910685bffa45200556c85dec7e2cf7ed13371b3f5fad58b6f2) — block 5,261,421 |
+| ThaiFi chain-17 agent payment (THCFI) | [tx `0xf6e953e1…b65e`](https://exp.thaifi.com/tx/0xf6e953e17647cf5559455337552b82f93208d57cde8fa2d57ba9a80860f3b65e) — first real on-chain paid job (M1) |
 | CRE audit verdicts | [`docs/cre-auditor-evidence.txt`](docs/cre-auditor-evidence.txt) — first-run FAIL caught a real accounting gap, now PASS |
 | Sepolia attestation of the verdict | CRE workflow output, via NOWNodes RPC |
 
