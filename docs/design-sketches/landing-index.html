@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Landing directions · Leashed Agent Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#F4F2EE; --paper:#FFFFFF;
+    --ink:#0F172A; --ink55:rgba(15,23,42,.55);
+    --accent:#1F4E79; --accent-soft:#1F4E7914;
+    --border:#E2E8F0;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans); padding: 36px 22px 60px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .h { font: 600 28px/1.15 "IBM Plex Sans",system-ui,sans-serif; letter-spacing: -.01em; margin-bottom: 8px; }
+  .sub { color: var(--ink55); margin-bottom: 32px; max-width: 680px; }
+  .eyebrow { font: 600 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--ink55); margin-bottom: 14px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+  .card { background: var(--paper); border: 1px solid var(--border); border-radius: 2px;
+    text-decoration: none; color: inherit; transition: border-color .12s, transform .12s;
+    display: flex; flex-direction: column; }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .thumb { aspect-ratio: 16/10; background: var(--accent-soft); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font: 700 48px var(--mono); color: var(--accent); }
+  .card .thumb.b { background: #F4F6F7; color: #1F4E79; }
+  .card .thumb.c { background: #1F4E79; color: #E9EBEC; }
+  .card .body { padding: 20px 22px 24px; }
+  .card .name { font: 600 18px "IBM Plex Sans",system-ui,sans-serif; margin-bottom: 6px; }
+  .card .tag { font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink55); margin-bottom: 14px; }
+  .card .desc { color: var(--ink55); font-size: 14px; line-height: 1.55; margin-bottom: 14px; }
+  .card .open { font: 600 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .card .open::after { content: " →"; }
+
+  .compare { margin-top: 48px; }
+  .compare h2 { font: 600 20px "IBM Plex Sans",system-ui,sans-serif; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--border); }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 13.5px; vertical-align: top; }
+  th { font: 600 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink55); background: #F9F7F4; }
+  td:first-child { font: 600 14px "IBM Plex Sans",system-ui,sans-serif; }
+  td.mono { font: 500 12px var(--mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Landing page · direction picker</div>
+  <div class="h">Three landing directions for the trust layer.</div>
+  <p class="sub">Each is a complete, self-contained HTML mockup of the marketing splash that would replace the current root at <code>leashed-agent-platform.pages.dev</code>. Pick the one that reads right; we refine from there. All three use the Variant D blueprint palette (#1F4E79 drafting blue).</p>
+
+  <div class="grid">
+    <a class="card" href="L1-architectural.html">
+      <div class="thumb">L1</div>
+      <div class="body">
+        <div class="name">Architectural Manifest</div>
+        <div class="tag">L1 · blueprint / structured</div>
+        <div class="desc">Hero + four-pillar pitch + architecture diagram + evidence strip + four-track grid. Single-column, max-width 1180px. The most "deck-y" of the three — reads like the slide deck's strongest slide, with a CTA at the top.</div>
+        <div class="open">Open L1</div>
+      </div>
+    </a>
+    <a class="card" href="L2-editorial.html">
+      <div class="thumb b">L2</div>
+      <div class="body">
+        <div class="name">Editorial Narrative</div>
+        <div class="tag">L2 · long-form / magazine</div>
+        <div class="desc">Single 760px column, Shippori Mincho serif for body text, drop cap on the first paragraph. Five sections, each opens with a § n + title + hairline rule. The "we built this" story version. Reads slowly.</div>
+        <div class="open">Open L2</div>
+      </div>
+    </a>
+    <a class="card" href="L3-receipt.html">
+      <div class="thumb c">L3</div>
+      <div class="body">
+        <div class="name">Receipt-First</div>
+        <div class="tag">L3 · visceral / on-brand</div>
+        <div class="desc">The whole page IS a giant receipt/manifest. Watermark "LEASHED · LEASHED", perforation between sections, Caveat signature, stamp motif, real on-chain tx hashes in the ledger. The most "trust layer" version — judges feel it instantly.</div>
+        <div class="open">Open L3</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="compare">
+    <h2>Side-by-side</h2>
+    <table>
+      <thead><tr><th></th><th>L1 · Architectural</th><th>L2 · Editorial</th><th>L3 · Receipt</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Display</td>
+          <td class="mono">IBM Plex Sans</td>
+          <td class="mono">Shippori Mincho serif</td>
+          <td class="mono">IBM Plex Sans + Caveat signature</td>
+        </tr>
+        <tr>
+          <td>Width</td>
+          <td class="mono">1180px (full)</td>
+          <td class="mono">760px (editorial)</td>
+          <td class="mono">920px (receipt)</td>
+        </tr>
+        <tr>
+          <td>Voice</td>
+          <td class="mono">"Four pillars + diagram"</td>
+          <td class="mono">"We built the four pieces"</td>
+          <td class="mono">Receipt/manifest</td>
+        </tr>
+        <tr>
+          <td>Reads as</td>
+          <td class="mono">Engineering brief</td>
+          <td class="mono">Magazine essay</td>
+          <td class="mono">Passbook page</td>
+        </tr>
+        <tr>
+          <td>Demo tone</td>
+          <td class="mono">Confident, structured</td>
+          <td class="mono">Editorial, calm</td>
+          <td class="mono">Visceral, on-brand</td>
+        </tr>
+        <tr>
+          <td>Reads in</td>
+          <td class="mono">~45s</td>
+          <td class="mono">~2 min</td>
+          <td class="mono">~30s</td>
+        </tr>
+        <tr>
+          <td>Trust signal</td>
+          <td class="mono">Diagrams + numbers</td>
+          <td class="mono">Argument + receipts</td>
+          <td class="mono">Lives inside a stamp</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

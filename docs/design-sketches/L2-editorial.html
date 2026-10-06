@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>L2 — Editorial Narrative · Leashed Agent Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper:  #E9EBEC;
+    --panel:  #F4F6F7;
+    --ink:    #1B2C3E;
+    --ink55:  rgba(27,44,62,.55);
+    --blue:   #1F4E79;
+    --blue-l: #3B7CB9;
+    --blue-p: #D5E1ED;
+    --green:  #2D7D4A;
+    --sans:   "IBM Plex Sans", system-ui, sans-serif;
+    --mono:   "Roboto Mono", ui-monospace, monospace;
+    --serif:  "Shippori Mincho", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(0deg, rgba(31,78,121,.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,78,121,.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+    line-height: 1.55;
+  }
+  a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; }
+  a:hover { text-decoration-style: solid; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 60px 28px 80px; }
+  .rule { height: 1.5px; background: var(--blue); margin: 40px 0; border: none; }
+  .rule-thin { height: 1px; background: rgba(31,78,121,.4); margin: 28px 0; border: none; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* Eyebrow */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font: 700 11px var(--mono); letter-spacing: .22em; text-transform: uppercase;
+    color: var(--blue);
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1.5px; background: var(--blue); }
+
+  /* Title block — masthead */
+  .mast { margin-bottom: 56px; }
+  .mast .eyebrow { margin-bottom: 28px; }
+  .mast h1 {
+    font: 700 64px/1.0 var(--serif); letter-spacing: -.02em;
+    margin: 0 0 16px;
+  }
+  .mast .deck {
+    font: 400 19px/1.5 var(--serif); color: var(--ink);
+    max-width: 600px;
+  }
+
+  /* Drop cap */
+  .lede-with-cap {
+    font: 400 17px/1.65 var(--serif); color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .lede-with-cap::first-letter {
+    font: 700 60px/1 var(--serif); color: var(--blue); float: left;
+    margin: 4px 8px 0 0; line-height: 1;
+  }
+
+  /* Section label */
+  .sec-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin: 56px 0 20px;
+  }
+  .sec-head .num {
+    font: 700 11px var(--mono); letter-spacing: .18em; color: var(--blue);
+  }
+  .sec-head h2 {
+    font: 700 28px/1.15 var(--serif); letter-spacing: -.01em;
+    margin: 0; flex: 1;
+  }
+  .sec-head .rule-grow { flex: 1; height: 1px; background: var(--blue); margin-left: 16px; }
+
+  p { font: 400 16px/1.65 var(--serif); margin: 0 0 18px; }
+
+  /* Pull-quote */
+  .pullquote {
+    margin: 48px 0; padding: 24px 0 24px 24px;
+    border-left: 4px solid var(--blue);
+    font: 500 24px/1.4 var(--serif);
+    color: var(--ink);
+  }
+  .pullquote cite {
+    display: block; margin-top: 12px;
+    font: 500 12px var(--mono); letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink55); font-style: normal;
+  }
+
+  /* Schema strip — bracketed ledger lines */
+  .schema {
+    background: var(--panel); border: 1.5px solid var(--blue);
+    padding: 24px 28px; margin: 32px 0;
+  }
+  .schema .label {
+    font: 700 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 16px;
+  }
+  .schema .line {
+    font: 500 14px/1.7 var(--mono); color: var(--ink);
+    padding: 4px 0; border-bottom: 1px dashed rgba(31,78,121,.3);
+    font-variant-numeric: tabular-nums;
+  }
+  .schema .line:last-child { border-bottom: none; }
+  .schema .line .k { color: var(--blue); margin-right: 12px; }
+  .schema .line .v { color: var(--ink); }
+  .schema .line .note { color: var(--ink55); font-size: 12px; margin-left: 8px; }
+
+  /* Pill */
+  .pill {
+    display: inline-block;
+    background: var(--blue-p); color: var(--blue);
+    border: 1.5px solid var(--blue);
+    padding: 4px 10px;
+    font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  /* Stamp */
+  .stamp {
+    display: inline-block;
+    border: 2px solid var(--blue); color: var(--blue);
+    padding: 6px 14px;
+    font: 700 13px var(--mono); letter-spacing: .14em; text-transform: uppercase;
+    transform: rotate(-3deg); margin: 24px 0;
+  }
+  .stamp .small { display: block; font: 500 10px var(--mono); opacity: .7; margin-top: 2px; }
+
+  /* CTA bar */
+  .cta {
+    margin: 56px 0; padding: 32px;
+    border: 1.5px solid var(--blue); background: var(--panel);
+    text-align: center;
+  }
+  .cta .eyebrow { justify-content: center; margin-bottom: 14px; display: inline-flex; }
+  .cta h3 { font: 700 22px var(--serif); margin: 0 0 18px; }
+  .cta .btn {
+    display: inline-block; padding: 14px 28px;
+    background: var(--blue); color: var(--paper);
+    border: 1.5px solid var(--blue);
+    font: 700 13px var(--mono); letter-spacing: .14em; text-transform: uppercase;
+    text-decoration: none; margin: 0 6px;
+  }
+  .cta .btn:hover { background: var(--ink); border-color: var(--ink); }
+  .cta .btn.secondary { background: transparent; color: var(--ink); }
+  .cta .btn.secondary:hover { background: var(--ink); color: var(--paper); }
+
+  /* Foot */
+  .foot {
+    margin-top: 80px; padding-top: 24px;
+    border-top: 1.5px solid var(--blue);
+    font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink55); text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .mast h1 { font-size: 40px; }
+    .wrap { padding: 36px 18px 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MAST -->
+  <header class="mast">
+    <div class="eyebrow">TOKEN2049 Origins 2026 · Leashed Agent Platform</div>
+    <h1>The trust layer<br>for AI agents.</h1>
+    <p class="deck">A story about an agent that buys a poster and the people who make sure it can't.</p>
+  </header>
+
+  <hr class="rule" />
+
+  <!-- OPENING -->
+  <div class="sec-head">
+    <span class="num">§ 1</span>
+    <h2>The problem</h2>
+    <span class="rule-grow"></span>
+  </div>
+  <p class="lede-with-cap">
+    An AI agent already spends money. It asks a language model for a tagline. It hires an image
+    model to render the poster. The payments clear on-chain, in milliseconds, with no one on the
+    other end asking whether the spend was sensible. <em>That is the problem.</em> No cap that holds,
+    no receipt that survives the call, no third party that signs off on the books.
+  </p>
+  <p>
+    x402 micropayments moved 75.4 million transactions last August and <span class="mono">$24.2M</span>
+    in volume. The transaction count grew. The oversight didn't. We watched the lane and saw the
+    same gap the judges will see: a payment rail without a trust layer.
+  </p>
+
+  <div class="pullquote">
+    "A payments primitive without an audit primitive is a primitive that can't scale to a CFO."
+    <cite>— the platform hypothesis, 06 Oct 2026</cite>
+  </div>
+
+  <!-- SOLUTION -->
+  <hr class="rule" />
+  <div class="sec-head">
+    <span class="num">§ 2</span>
+    <h2>The four pieces</h2>
+    <span class="rule-grow"></span>
+  </div>
+  <p class="lede-with-cap">
+    We built the four pieces the lane was missing. Not a feature. Not a product. A trust
+    layer. Each piece is a separate job, not a checkbox on a slide deck.
+  </p>
+
+  <div class="schema">
+    <div class="label">FIG. 1 · Trust-layer composition</div>
+    <div class="line"><span class="k">01  LEASH</span><span class="v">per-token spending cap set by the human</span><span class="note">AccountKeychain · TIP-1011</span></div>
+    <div class="line"><span class="k">02  RECEIPTS</span><span class="v">every payment → ledger entry + explorer link</span><span class="note">ThaiFi · Cardano · CRE</span></div>
+    <div class="line"><span class="k">03  AUDIT</span><span class="v">CRE workflow re-checks ledger, attests verdict on Sepolia</span><span class="note">deterministic consensus-aggregated</span></div>
+    <div class="line"><span class="k">04  FUNDING</span><span class="v">PromptPay QR → 1 THB = 1 THCFI</span><span class="note">no exchange account needed</span></div>
+  </div>
+
+  <p>
+    Each piece is independently useful. Each piece is also load-bearing for the others —
+    the leash makes the receipts meaningful; the receipts make the audit possible; the audit
+    makes the funding trustworthy; the funding the leash human-settable. Take one out and the
+    other three stop working.
+  </p>
+
+  <!-- DEMO -->
+  <hr class="rule" />
+  <div class="sec-head">
+    <span class="num">§ 3</span>
+    <h2>The demo journey</h2>
+    <span class="rule-grow"></span>
+  </div>
+  <p class="lede-with-cap">
+    A Thai SME marketing worker. It costs a prompt for 0.2 THCFI to the LLM, then 1.5 THCFI to the
+    image model for the finished Thai-text poster. Two real on-chain payments, two real receipts,
+    one CRE verdict. We ran this twice during the sprint. Both runs are recorded in
+    <span class="mono">docs/cre-auditor-evidence.txt</span> and
+    <span class="mono">docs/m2-cardano-evidence.md</span>.
+  </p>
+
+  <div class="schema">
+    <div class="label">FIG. 2 · Sprint receipts</div>
+    <div class="line"><span class="k">POSTER RENDER</span><span class="v">1.5 THCFI · ThaiFi MPP · chain 17</span><span class="note">exp.thaifi.com/tx/0xf6e9…</span></div>
+    <div class="line"><span class="k">VERIFY-RECEIPT</span><span class="v">0.10 tUSDM · Cardano x402 · preprod</span><span class="note">cardanoscan.io/tx/5e79…</span></div>
+    <div class="line"><span class="k">CRE VERDICT</span><span class="v">PASS · 2 receipts · 0 problems</span><span class="note">attested on Sepolia 0x…dEaD</span></div>
+  </div>
+
+  <div class="stamp">CRE Audited<small>Sepolia 0x…dEaD · 06 Oct 17:00 SGT</small></div>
+
+  <!-- ARCHITECTURE -->
+  <hr class="rule" />
+  <div class="sec-head">
+    <span class="num">§ 4</span>
+    <h2>The architecture, in one paragraph</h2>
+    <span class="rule-grow"></span>
+  </div>
+  <p>
+    A passkey wallet on ThaiFi owns one or more leashed agents. Each agent has a P256
+    access key authorized on-chain with a per-token spending cap. When the agent runs a job
+    it pays per call — ThaiFi MPP for one set of services, Cardano x402 for another —
+    and every payment becomes a receipt. The CRE auditor fetches the receipts on a cron,
+    runs the same risk checks as the Hono in-process route
+    <span class="mono">POST /api/audit</span>, and attests the verdict on Sepolia. The owner
+    sees the ledger at <span class="mono">https://leashed-agent-platform.pages.dev/agents</span>
+    and can fire any agent with one click.
+  </p>
+
+  <!-- TRACKS -->
+  <hr class="rule" />
+  <div class="sec-head">
+    <span class="num">§ 5</span>
+    <h2>Four tracks, four integrations, one product</h2>
+    <span class="rule-grow"></span>
+  </div>
+  <p>
+    <span class="pill">Main</span>
+    <span class="pill">Cardano</span>
+    <span class="pill">Chainlink CRE</span>
+    <span class="pill">NOWNodes</span>
+  </p>
+  <p>
+    Each track submission has to earn its place — the rules disqualify bolt-ons. So we made
+    each integration core. Cardano x402 is one of the two payment rails, not a demo. CRE is
+    the auditor, not an afterthought. NOWNodes is the RPC data plane the auditor fetches
+    receipts from. Main is the whole product. None of the legs are decorative.
+  </p>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="eyebrow">Try it now</div>
+    <h3>The app is live. The receipt chain is live. The audit is live.</h3>
+    <a class="btn" href="https://leashed-agent-platform.pages.dev/agents">Open the SPA</a>
+    <a class="btn secondary" href="https://github.com/Poom5741/leashed-agent">Read the source</a>
+    <p style="margin: 20px 0 0; font: 500 12px var(--mono); color: var(--ink55); letter-spacing: .08em;">
+      SPA · leashed-agent-platform.pages.dev &nbsp;&nbsp;·&nbsp;&nbsp; API · leashed-api-agents.poom-a1d.workers.dev &nbsp;&nbsp;·&nbsp;&nbsp; npm · leashed-wallet-cli-platform@0.5.1
+    </p>
+  </div>
+
+  <footer class="foot">
+    Leashed Agent Platform · v2 · TOKEN2049 Origins Hackathon 2026
+  </footer>
+</div>
+</body>
+</html>

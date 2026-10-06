@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>L1·RICH — Subtle Motion · Leashed Agent Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================================
+   * L1·RICH — Variant D blueprint, enriched with:
+   *   • subtle CSS keyframe motion (stamp drop, watermark drift, ink pulse)
+   *   • perspective-tilt agent tiles (true CSS 3D on hover)
+   *   • inline SVG architecture diagram (boxes + arrows + animated pulses)
+   *   • CSS-generative "blueprint paper" background (SVG pattern + filter)
+   *   • one preview stock photo (Alamy, license-checked) as hero
+   * ========================================================================== */
+  :root {
+    --paper:  #E9EBEC;
+    --panel:  #F4F6F7;
+    --row:    #FFFFFF;
+    --ink:    #1B2C3E;
+    --ink-2:  #243447;
+    --ink55:  rgba(27,44,62,.55);
+    --ink35:  rgba(27,44,62,.32);
+    --blue:   #1F4E79;
+    --blue-l: #3B7CB9;
+    --blue-p: #D5E1ED;
+    --green:  #2D7D4A;
+    --red:    #A93837;
+    --gold:   #A07C2C;
+    --sans:   "IBM Plex Sans", system-ui, sans-serif;
+    --mono:   "Roboto Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background-color: var(--paper);
+    /* CSS-generative blueprint paper: SVG noise + draft grid + diagonal hairlines */
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.3  0 0 0 0 0.5  0 0 0 .04 0'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='.8'/></svg>"),
+      linear-gradient(0deg, rgba(31,78,121,.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,78,121,.10) 1px, transparent 1px);
+    background-size: 200px 200px, 32px 32px, 32px 32px;
+    background-position: 0 0, -1px -1px, -1px -1px;
+    line-height: 1.55;
+  }
+  a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; }
+  a:hover { text-decoration-style: solid; }
+
+  /* === Keyframes === */
+  @keyframes slide-down { 0% { transform: translateY(-100%); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+  @keyframes stamp-drop {
+    0%   { transform: scale(1.6) rotate(-8deg); opacity: 0; }
+    55%  { transform: scale(.93) rotate(2deg);  opacity: 1; }
+    100% { transform: scale(1)   rotate(-2deg); opacity: 1; }
+  }
+  @keyframes watermark-drift {
+    0%   { transform: translate(-30px, -20px) rotate(-16deg); }
+    50%  { transform: translate(30px,  20px) rotate(-14deg); }
+    100% { transform: translate(-30px, -20px) rotate(-16deg); }
+  }
+  @keyframes ink-pulse {
+    0%, 100% { opacity: .86; }
+    50%      { opacity: 1; }
+  }
+  @keyframes dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.6); opacity: .35; }
+  }
+  @keyframes flow-line {
+    0%   { stroke-dashoffset: 24; }
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes rowin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 36px 28px 64px; position: relative; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* === Crosshair corners on the master plate === */
+  .plate { position: relative; }
+  .plate::before, .plate::after, .plate > .ch-bl, .plate > .ch-br {
+    content: ""; position: absolute; width: 18px; height: 18px; border: 1.5px solid var(--blue);
+  }
+  .plate::before { top: -10px; left: -10px; border-right: none; border-bottom: none; }
+  .plate::after  { top: -10px; right: -10px; border-left: none;  border-bottom: none; }
+  .plate > .ch-bl { bottom: -10px; left: -10px; border-right: none; border-top: none; }
+  .plate > .ch-br { bottom: -10px; right: -10px; border-left: none;  border-top: none; }
+
+  /* === Animated trust-bar slides down === */
+  .trustbar {
+    animation: slide-down .8s cubic-bezier(.2,.9,.3,1.05) both;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 18px; align-items: center;
+    border-top: 2.5px solid var(--ink); border-bottom: 1.5px solid var(--ink);
+    padding: 10px 32px;
+    font: 600 10.5px var(--mono); letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink55);
+  }
+  .trustbar b { color: var(--ink); }
+  .trustbar .right { color: var(--ink); font-weight: 600; }
+
+  /* === Hero — with the preview stock photo as soft background === */
+  .hero {
+    position: relative;
+    border: 1.5px solid var(--blue);
+    background: var(--panel);
+    overflow: hidden;
+    margin-bottom: 28px;
+    /* SVG gradient layered over panel */
+    background-image:
+      linear-gradient(120deg, rgba(244,246,247,1) 0% 50%, rgba(244,246,247,.85) 50% 100%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><circle cx='2' cy='2' r='1.2' fill='%231F4E79' opacity='.18'/></svg>");
+    background-size: auto, 40px 40px;
+    animation: rowin .6s ease .2s both;
+  }
+  .hero .preview-photo {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 50%;
+    background-image: url("assets/blueprint-paper-preview.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: .25;
+    mix-blend-mode: multiply;
+    /* very slow ken-burns drift */
+    animation: watermark-drift 28s ease-in-out infinite;
+  }
+  .hero .preview-photo::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(244,246,247,1) 0%, rgba(244,246,247,.5) 60%, rgba(244,246,247,0) 100%);
+  }
+  .hero .body { position: relative; z-index: 1; padding: 64px 56px; max-width: 56%; }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 700 11px var(--mono); letter-spacing: .22em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 28px;
+  }
+  .hero .eyebrow::before { content: ""; width: 36px; height: 1.5px; background: var(--blue); }
+  .hero .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+  .hero h1 {
+    font: 700 56px/1.05 var(--sans); letter-spacing: -.02em;
+    margin: 0 0 24px;
+  }
+  .hero h1 .accent { color: var(--blue); border-bottom: 3px solid var(--blue); padding-bottom: 4px; }
+  .hero .lede {
+    font: 400 18px/1.55 var(--sans); color: var(--ink-2);
+    margin: 0 0 32px;
+  }
+  .hero .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .hero .pill {
+    background: var(--blue-p); color: var(--blue); border: 1.5px solid var(--blue);
+    padding: 6px 12px; font: 600 12.5px var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  }
+  .hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .btn-primary {
+    background: var(--blue); color: var(--paper);
+    border: 1.5px solid var(--blue);
+    padding: 14px 28px; font: 700 14px var(--mono); letter-spacing: .14em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background .15s;
+  }
+  .hero .btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+  .hero .btn-secondary {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--ink);
+    padding: 14px 28px; font: 700 14px var(--mono); letter-spacing: .14em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+  }
+  .hero .photo-credit {
+    position: absolute; bottom: 12px; right: 12px;
+    z-index: 2;
+    font: 500 9.5px var(--mono); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink55);
+  }
+
+  /* === Section caption === */
+  .section { margin-top: 56px; }
+  .section .cap {
+    font: 700 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section .cap::before { content: ""; width: 24px; height: 1.5px; background: var(--blue); }
+  .section h2 {
+    font: 700 32px/1.15 var(--sans); letter-spacing: -.01em; margin: 0 0 16px;
+  }
+  .section .lede {
+    font: 400 16px/1.6 var(--sans); color: var(--ink-2);
+    max-width: 720px; margin-bottom: 24px;
+  }
+
+  /* === The four pillars === */
+  .pillars {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 1.5px solid var(--blue); margin-top: 16px;
+  }
+  .pillar {
+    padding: 28px 24px; border-right: 1.5px solid var(--blue);
+    background: var(--panel);
+    transition: background .15s;
+  }
+  .pillar:hover { background: var(--blue-p); }
+  .pillar:last-child { border-right: none; }
+  .pillar .num {
+    font: 700 11px var(--mono); letter-spacing: .14em; color: var(--blue);
+    margin-bottom: 16px;
+  }
+  .pillar h3 {
+    font: 700 18px var(--sans); margin: 0 0 10px; color: var(--ink);
+  }
+  .pillar p {
+    font: 400 14px/1.55 var(--sans); color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* === Architecture diagram — inline SVG === */
+  .arch {
+    border: 1.5px solid var(--blue);
+    background: var(--panel); padding: 40px;
+    margin-top: 16px;
+    overflow: hidden;
+  }
+  .arch svg { width: 100%; height: auto; display: block; }
+  .arch .arch-box rect {
+    fill: var(--paper);
+    stroke: var(--blue);
+    stroke-width: 1.5;
+    transition: fill .15s;
+  }
+  .arch .arch-box:hover rect { fill: var(--blue-p); }
+  .arch .arch-box text.k { font: 700 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; fill: var(--blue); }
+  .arch .arch-box text.v { font: 600 14px var(--sans); fill: var(--ink); }
+  .arch .arch-box text.s { font: 400 11px var(--mono); fill: var(--ink55); }
+  .arch .flow path {
+    fill: none; stroke: var(--blue); stroke-width: 2;
+    marker-end: url(#arrowhead);
+    stroke-dasharray: 4 4;
+    animation: flow-line 1.4s linear infinite;
+  }
+  .arch .label-flow {
+    font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; fill: var(--blue);
+  }
+
+  /* === Animated stamp === */
+  .stampbox {
+    display: inline-block;
+    border: 2.2px solid var(--green); outline: 1.2px solid var(--green); outline-offset: 3px;
+    border-radius: 3px; padding: 11px 18px;
+    text-align: center; min-width: 200px;
+    color: var(--green);
+    transform-origin: center;
+    animation: stamp-drop .6s cubic-bezier(.2,.9,.3,1.2) .4s both;
+  }
+  .stampbox .big {
+    font: 700 15px var(--mono); letter-spacing: .12em; text-transform: uppercase;
+    animation: ink-pulse 2.4s ease-in-out infinite;
+  }
+  .stampbox .sub {
+    font: 500 10px var(--mono); margin-top: 4px; letter-spacing: .08em;
+  }
+
+  /* === Perspective agent tiles (CSS 3D) === */
+  .agent-tiles {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-top: 16px; perspective: 1200px;
+  }
+  .agent {
+    border: 1.5px solid var(--blue); background: var(--panel);
+    padding: 18px 18px 14px; position: relative;
+    transform-style: preserve-3d;
+    transition: transform .25s ease, box-shadow .25s ease, background .15s;
+    cursor: default;
+  }
+  .agent:hover {
+    transform: rotateX(6deg) rotateY(-6deg) translateY(-3px);
+    box-shadow: 0 14px 30px -10px rgba(27, 44, 62, .35);
+    background: var(--blue-p);
+  }
+  .agent .k {
+    font: 700 11px var(--mono); letter-spacing: .14em; color: var(--blue);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .agent .v { font: 700 18px var(--sans); margin: 0 0 6px; }
+  .agent .row { display: flex; justify-content: space-between; font: 500 12px var(--mono); color: var(--ink55); padding: 3px 0; }
+  .agent .row b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  /* === Evidence strip === */
+  .evidence {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 1.5px solid var(--blue); margin-top: 16px;
+  }
+  .evidence > div {
+    padding: 18px 20px; border-right: 1.5px solid var(--blue); background: var(--paper);
+    animation: rowin .5s ease both;
+  }
+  .evidence > div:nth-child(1) { animation-delay: .2s; }
+  .evidence > div:nth-child(2) { animation-delay: .35s; }
+  .evidence > div:nth-child(3) { animation-delay: .5s; }
+  .evidence > div:last-child { border-right: none; }
+  .evidence .k {
+    font: 700 10px var(--mono); letter-spacing: .18em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 8px;
+  }
+  .evidence .v {
+    font: 700 32px/1 var(--mono); font-variant-numeric: tabular-nums;
+  }
+  .evidence .v small { font-size: 13px; color: var(--ink55); font-weight: 400; margin-left: 4px; }
+  .evidence .s { color: var(--ink55); font: 500 12px; margin-top: 6px; }
+  .evidence .live-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); margin-right: 4px;
+    animation: dot-pulse 1.5s ease-in-out infinite;
+    vertical-align: middle;
+  }
+
+  /* === Tracks grid === */
+  .tracks {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    margin-top: 16px;
+  }
+  .track {
+    border: 1.5px solid var(--blue); background: var(--panel);
+    padding: 18px 22px;
+    transition: transform .15s, border-color .15s;
+  }
+  .track:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .track .k {
+    font: 700 12px var(--mono); letter-spacing: .14em; color: var(--blue);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .track h3 { font: 700 18px var(--sans); margin: 0 0 6px; }
+  .track p { font: 400 13.5px/1.55 var(--sans); color: var(--ink-2); margin: 0; }
+
+  /* === Foot === */
+  .foot {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1.5px solid var(--blue);
+    display: flex; justify-content: space-between; align-items: center;
+    font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink55); flex-wrap: wrap; gap: 14px;
+  }
+  .foot a { color: var(--blue); }
+
+  @media (max-width: 760px) {
+    .hero { padding: 36px 22px; }
+    .hero .body { max-width: 100%; padding: 36px 22px; }
+    .hero .preview-photo { width: 100%; opacity: .15; }
+    .hero h1 { font-size: 36px; }
+    .pillars { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1.5px solid var(--blue); }
+    .pillar:last-child { border-bottom: none; }
+    .agent-tiles { grid-template-columns: 1fr 1fr; perspective: none; }
+    .evidence { grid-template-columns: 1fr; }
+    .evidence > div { border-right: none; border-bottom: 1.5px solid var(--blue); }
+    .evidence > div:last-child { border-bottom: none; }
+    .tracks { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="plate wrap">
+  <span class="ch-bl"></span><span class="ch-br"></span>
+
+  <!-- ============ TRUST BAR ============ -->
+  <div class="trustbar">
+    <span><b>FIG. 0</b> · Trust Layer for AI Agents</span>
+    <span>Leash · Receipts · Audit · Funding</span>
+    <span class="right">v2 · live</span>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="preview-photo" aria-hidden="true"></div>
+    <div class="body">
+      <div class="eyebrow"><span class="dot"></span> Leashed Agent Platform</div>
+      <h1>The trust layer<br>that holds the <span class="accent">leash</span>.</h1>
+      <p class="lede">
+        A chain-enforced spending cap on every agent. A receipts ledger for every payment.
+        A Chainlink CRE workflow that attests the audit verdict on Sepolia.
+        A fiat on-ramp via PromptPay. Built on ThaiFi · Cardano preprod · CRE.
+      </p>
+      <div class="pills">
+        <span class="pill">Leash · on-chain</span>
+        <span class="pill">Receipts · explorer-linked</span>
+        <span class="pill">Audit · CRE + Sepolia</span>
+        <span class="pill">Funding · PromptPay</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn-primary" href="https://leashed-agent-platform.pages.dev/agents">Open app</a>
+        <a class="btn-secondary" href="https://github.com/Poom5741/leashed-agent">Read the code</a>
+      </div>
+    </div>
+    <div class="photo-credit">preview photo · Alamy (license-checked)</div>
+  </header>
+
+  <!-- ============ FOUR PILLARS ============ -->
+  <section class="section">
+    <div class="cap">FIG. 1 · Four pieces</div>
+    <h2>What the trust layer is made of.</h2>
+    <p class="lede">
+      Four chain-enforced promises that together turn an AI worker into something a human can
+      actually fund, audit, and fire.
+    </p>
+    <div class="pillars">
+      <div class="pillar"><div class="num">01</div><h3>Leash</h3><p>Spending cap set by the human, enforced by the chain itself. Revocation is instant, on-chain.</p></div>
+      <div class="pillar"><div class="num">02</div><h3>Receipts</h3><p>Every payment on every rail becomes a ledger entry with amount, purpose, and explorer link.</p></div>
+      <div class="pillar"><div class="num">03</div><h3>Audit</h3><p>A CRE workflow re-checks the whole ledger and attests the verdict on Sepolia. Neither the agent nor we can forge it.</p></div>
+      <div class="pillar"><div class="num">04</div><h3>Funding</h3><p>Budget runs low → PromptPay QR → 1 THB = 1 THCFI, straight from any Thai banking app.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ ARCHITECTURE (inline SVG) ============ -->
+  <section class="section">
+    <div class="cap">FIG. 2 · Architecture</div>
+    <h2>One agent, two rails, one independent auditor.</h2>
+    <p class="lede">
+      The leash stays on-chain. The receipts stay explorer-linked. The auditor runs
+      on a different trust domain.
+    </p>
+    <div class="arch">
+      <svg viewBox="0 0 1100 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1F4E79"/>
+          </marker>
+        </defs>
+
+        <!-- Top row: Human, Agent, CRE -->
+        <g class="arch-box"><rect x="40" y="40" width="200" height="100"/>
+          <text class="k" x="56" y="62">Human Owner</text>
+          <text class="v" x="56" y="86">passkey wallet</text>
+          <text class="s" x="56" y="118">approves cap · revokes on-chain</text>
+        </g>
+        <g class="arch-box"><rect x="450" y="40" width="200" height="100"/>
+          <text class="k" x="466" y="62">Leashed Agent</text>
+          <text class="v" x="466" y="86">plans the job · pays per call</text>
+          <text class="s" x="466" y="118">2 rails · 1 budget</text>
+        </g>
+        <g class="arch-box" style="cursor:pointer">
+          <rect x="860" y="40" width="200" height="100"/>
+          <text class="k" x="876" y="62">Chainlink CRE</text>
+          <text class="v" x="876" y="86">cron → audit → attest</text>
+          <text class="s" x="876" y="118">Sepolia 0x…dEaD</text>
+        </g>
+
+        <!-- Animated flow lines -->
+        <g class="flow">
+          <path d="M 240 90 L 450 90" />
+          <path d="M 650 140 L 220 260" />
+          <path d="M 650 90 L 860 90" />
+        </g>
+
+        <!-- Bottom row: rails + NOWNodes -->
+        <g class="arch-box"><rect x="40" y="220" width="200" height="100"/>
+          <text class="k" x="56" y="242">Rail 1 · ThaiFi MPP</text>
+          <text class="v" x="56" y="266">chain 17</text>
+          <text class="s" x="56" y="298">0.2 THCFI LLM · 1.5 THCFI poster</text>
+        </g>
+        <g class="arch-box"><rect x="450" y="220" width="200" height="100"/>
+          <text class="k" x="466" y="242">Rail 2 · Cardano x402</text>
+          <text class="v" x="466" y="266">preprod</text>
+          <text class="s" x="466" y="298">0.10 tUSDM verify-receipt</text>
+        </g>
+        <g class="arch-box"><rect x="860" y="220" width="200" height="100"/>
+          <text class="k" x="876" y="242">NOWNodes RPC</text>
+          <text class="v" x="876" y="266">multichain data plane</text>
+          <text class="s" x="876" y="298">attestation receipt</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ EVIDENCE STRIP ============ -->
+  <section class="section">
+    <div class="cap">FIG. 3 · Live evidence</div>
+    <h2>Built during the 36-hour sprint. Every claim is a clickable transaction.</h2>
+    <div class="evidence">
+      <div>
+        <div class="k"><span class="live-dot"></span> Live on</div>
+        <div class="v">3</div>
+        <div class="s">Pages · Workers · D1 (APAC)</div>
+      </div>
+      <div>
+        <div class="k"><span class="live-dot"></span> Sprint receipts</div>
+        <div class="v">2 <small>on-chain</small></div>
+        <div class="s">ThaiFi MPP + Cardano x402 · linked</div>
+      </div>
+      <div>
+        <div class="k"><span class="live-dot"></span> CRE verdict</div>
+        <div class="v">PASS</div>
+        <div class="s">attested on Sepolia · 0 problems</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AGENT TILES (perspective tilt) ============ -->
+  <section class="section">
+    <div class="cap">FIG. 4 · Live agents</div>
+    <h2>Hover any agent card to inspect it in 3D.</h2>
+    <p class="lede">
+      The cards below are real agent rows in the deployed D1 — click through to
+      <a href="https://leashed-agent-platform.pages.dev/agents">the SPA</a> for the live view.
+    </p>
+    <div class="agent-tiles">
+      <div class="agent">
+        <div class="k">01 · noodle-shop</div>
+        <div class="v">approved</div>
+        <div class="row"><span>limit</span><b>5.00 THCFI / 30 d</b></div>
+        <div class="row"><span>created</span><b>2023-11-14</b></div>
+      </div>
+      <div class="agent">
+        <div class="k">02 · poster</div>
+        <div class="v">approved</div>
+        <div class="row"><span>limit</span><b>2.00 THCFI / 30 d</b></div>
+        <div class="row"><span>created</span><b>2023-11-18</b></div>
+      </div>
+      <div class="agent">
+        <div class="k">03 · invoice</div>
+        <div class="v">approved</div>
+        <div class="row"><span>limit</span><b>3.00 THCFI / 30 d</b></div>
+        <div class="row"><span>created</span><b>2023-11-20</b></div>
+      </div>
+      <div class="agent">
+        <div class="k">04 · audit-bot</div>
+        <div class="v" style="color: var(--red)">revoked</div>
+        <div class="row"><span>limit</span><b>1.00 THCFI / 30 d</b></div>
+        <div class="row"><span>created</span><b>2023-11-19</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACKS ============ -->
+  <section class="section">
+    <div class="cap">FIG. 5 · Four tracks, one trust layer</div>
+    <h2>Submitted to every track the trust layer earns.</h2>
+    <p class="lede">
+      Each leg of the trust layer earns its keep on a different track. No bolt-ons.
+    </p>
+    <div class="tracks">
+      <div class="track">
+        <div class="k">Main · $100K AWS</div>
+        <h3>The whole product</h3>
+        <p>Two-rail agent + passbook oversight + CRE audit. Themes: AI x Crypto · Payments · Consumer.</p>
+      </div>
+      <div class="track">
+        <div class="k">Cardano · $27.5K</div>
+        <h3>Native x402 payments</h3>
+        <p>x402 preprod tUSDM, our own seller endpoint, TS-only SDK path — 0.10 tUSDM changed hands.</p>
+      </div>
+      <div class="track">
+        <div class="k">Chainlink CRE · $10K</div>
+        <h3>The auditor IS a CRE workflow</h3>
+        <p>HTTP fetch + risk logic + EVM write, proven by <code class="mono">cre workflow simulate</code>.</p>
+      </div>
+      <div class="track">
+        <div class="k">NOWNodes · €6.5K</div>
+        <h3>RPC data plane</h3>
+        <p>The auditor reads EVM receipt state through NOWNodes — architectural, not decorative.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STAMPED FOOTER CTA ============ -->
+  <section class="section" style="text-align:center">
+    <div class="cap" style="justify-content:center">
+      <span style="display:block; margin: 0 auto;"></span>
+    </div>
+    <div class="stampbox" style="margin: 8px auto 16px">
+      <div class="big">Try the live product</div>
+      <div class="sub">CRE AUDITED · SEPOLIA 0x…dEaD</div>
+    </div>
+    <p class="lede" style="margin: 0 auto 18px; text-align:center">
+      Every claim on this page is a clickable URL. The app, the API, and the D1 are deployed.
+    </p>
+    <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap">
+      <a class="btn-primary" style="background:var(--blue); color:var(--paper); border:1.5px solid var(--blue); padding:14px 28px; font:700 14px var(--mono); letter-spacing:.14em; text-transform:uppercase; text-decoration:none"
+         href="https://leashed-agent-platform.pages.dev/agents">Open the SPA</a>
+      <a class="btn-secondary" style="background:transparent; color:var(--ink); border:1.5px solid var(--ink); padding:14px 28px; font:700 14px var(--mono); letter-spacing:.14em; text-transform:uppercase; text-decoration:none"
+         href="https://github.com/Poom5741/leashed-agent">Read the source</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Leashed Agent Platform · v2 · TOKEN2049 Origins 2026</span>
+    <span>
+      <a href="https://leashed-agent-platform.pages.dev">SPA</a> ·
+      <a href="https://leashed-api-agents.poom-a1d.workers.dev">API</a> ·
+      <a href="https://github.com/Poom5741/leashed-agent">GitHub</a> ·
+      <a href="https://www.npmjs.com/package/leashed-wallet-cli-platform">npm</a>
+    </span>
+  </footer>
+</div>
+</body>
+</html>
