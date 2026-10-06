@@ -1,0 +1,66 @@
+/* Leashed Agent Platform — paper-ledger look (carried from v1 dashboard).
+ * Borrowed from leashed-agent/apps/dashboard/public/index.html:
+ *   - paper bg (#f6f1e7)
+ *   - ink color (#1a1a1a)
+ *   - stamp red (#a83232)
+ *   - monospace ledger typography
+ */
+:root {
+  --paper: #f6f1e7;
+  --ink: #1a1a1a;
+  --muted: #6b6356;
+  --stamp: #a83232;
+  --border: #1a1a1a;
+  --ok: #2d6a4f;
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.app { display: flex; flex-direction: column; min-height: 100%; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 24px; border-bottom: 2px solid var(--border);
+  background: var(--paper);
+}
+.brand { font-weight: 700; text-decoration: none; color: var(--ink); font-size: 16px; }
+.topbar nav a { margin-left: 16px; color: var(--ink); }
+.main { padding: 24px; flex: 1; }
+h1 { font-size: 22px; margin: 0 0 16px 0; }
+h2 { font-size: 16px; margin: 24px 0 8px 0; }
+.muted { color: var(--muted); }
+.error { color: var(--stamp); }
+.empty { text-align: center; padding: 48px; }
+pre { background: rgba(0,0,0,0.04); padding: 12px; border: 1px dashed var(--border); }
+code { background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 2px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.card {
+  display: block; padding: 16px; border: 2px solid var(--border);
+  background: var(--paper); text-decoration: none; color: var(--ink);
+  transition: transform 0.1s ease;
+}
+.card:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+.card-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.template { font-weight: 700; }
+.status {
+  display: inline-block; padding: 2px 8px; border: 1px solid var(--ink);
+  font-size: 11px; text-transform: uppercase;
+}
+.status-revoked { background: var(--stamp); color: white; }
+.status-approved { background: var(--ok); color: white; }
+.status-pending { background: #f0c14b; color: var(--ink); }
+.revoked-tag { font-weight: 700; }
+.keyId { display: block; word-break: break-all; margin: 8px 0; font-size: 12px; }
+.card-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
+.meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.meta-grid > div { padding: 8px; border: 1px solid var(--border); }
+.label { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; }
+.back { display: inline-block; margin-bottom: 16px; }
+.receipts { width: 100%; border-collapse: collapse; }
+.receipts th, .receipts td { padding: 8px; border: 1px solid var(--border); text-align: left; }
+.receipts th { background: rgba(0,0,0,0.04); font-size: 11px; text-transform: uppercase; }
