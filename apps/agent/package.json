@@ -1,0 +1,18 @@
+{
+  "name": "@leashed/agent",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "job": "tsx src/job.ts"
+  },
+  "dependencies": {
+    "@leashed/receipts": "workspace:*",
+    "@leashed/payments-thaifi": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
