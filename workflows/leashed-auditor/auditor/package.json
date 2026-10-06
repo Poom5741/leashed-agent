@@ -8,9 +8,11 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "@chainlink/cre-sdk": "^1.22.0"
+    "@chainlink/cre-sdk": "^1.22.0",
+    "@noble/hashes": "^2.4.0"
   },
   "devDependencies": {
+    "@types/node": "^26.6.4",
     "typescript": "5.9.3"
   }
 }

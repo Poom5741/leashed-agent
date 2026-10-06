@@ -1,3 +1,7 @@
 {
-  "schedule": "*/30 * * * * *"
+  "schedule": "*/30 * * * * *",
+  "receiptsUrl": "http://localhost:4030/api/state",
+  "creditCapBase": "5000000000",
+  "chainSelector": "16015286601757825753",
+  "attestTo": "0x000000000000000000000000000000000000dEaD"
 }

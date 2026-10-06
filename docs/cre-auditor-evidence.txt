@@ -1,0 +1,29 @@
+Initializing...
+Loading settings...
+! Using default private key for chain write simulation. To use your own key, set CRE_ETH_PRIVATE_KEY in your .env file or system environment.
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 9e73c4d143a792638adcd376876f6306fc4101f64c4a2bcedce20c27665a7629
+  Config hash: e2af854cd3f5b3f4679804d35978a89ed1c4982af1c21fa1312a2db38fd39666
+2026-10-06T13:03:07Z [SIMULATION] Simulator Initialized
+
+2026-10-06T13:03:07Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-10-06T13:03:07Z [USER LOG] CRE auditor: fetching agent receipt ledger …
+2026-10-06T13:03:11Z [USER LOG] audit result: PASS | checked=2 | totalBase=1500000
+2026-10-06T13:03:12Z [USER LOG] attestation written to 0x000000000000000000000000000000000000dEaD (sepolia)
+2026-10-06T13:03:12Z [USER LOG] attestation reply:
+
+✓ Workflow Simulation Result:
+"{\"verdict\":\"PASS\",\"checked\":2,\"totalBase\":1500000,\"otherBase\":100000,\"problems\":[],\"attestationTo\":\"0x000000000000000000000000000000000000dEaD\",\"at\":\"2026-10-06T05:03:12.473Z\"}"
+
+2026-10-06T13:03:12Z [SIMULATION] Execution finished signal received
+2026-10-06T13:03:12Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯

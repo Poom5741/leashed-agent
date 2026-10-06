@@ -6359,11 +6359,16 @@ var ListSchema = /* @__PURE__ */ messageDesc(file_values_v1_values, 3);
 var DecimalSchema = /* @__PURE__ */ messageDesc(file_values_v1_values, 4);
 var file_sdk_v1alpha_sdk = /* @__PURE__ */ fileDesc("ChVzZGsvdjFhbHBoYS9zZGsucHJvdG8SC3Nkay52MWFscGhhIrQBChVTaW1wbGVDb25zZW5zdXNJbnB1dHMSIQoFdmFsdWUYASABKAsyEC52YWx1ZXMudjEuVmFsdWVIABIPCgVlcnJvchgCIAEoCUgAEjUKC2Rlc2NyaXB0b3JzGAMgASgLMiAuc2RrLnYxYWxwaGEuQ29uc2Vuc3VzRGVzY3JpcHRvchIhCgdkZWZhdWx0GAQgASgLMhAudmFsdWVzLnYxLlZhbHVlQg0KC29ic2VydmF0aW9uIpABCglGaWVsZHNNYXASMgoGZmllbGRzGAEgAygLMiIuc2RrLnYxYWxwaGEuRmllbGRzTWFwLkZpZWxkc0VudHJ5Gk8KC0ZpZWxkc0VudHJ5EgsKA2tleRgBIAEoCRIvCgV2YWx1ZRgCIAEoCzIgLnNkay52MWFscGhhLkNvbnNlbnN1c0Rlc2NyaXB0b3I6AjgBIoYBChNDb25zZW5zdXNEZXNjcmlwdG9yEjMKC2FnZ3JlZ2F0aW9uGAEgASgOMhwuc2RrLnYxYWxwaGEuQWdncmVnYXRpb25UeXBlSAASLAoKZmllbGRzX21hcBgCIAEoCzIWLnNkay52MWFscGhhLkZpZWxkc01hcEgAQgwKCmRlc2NyaXB0b3IiagoNUmVwb3J0UmVxdWVzdBIXCg9lbmNvZGVkX3BheWxvYWQYASABKAwSFAoMZW5jb2Rlcl9uYW1lGAIgASgJEhQKDHNpZ25pbmdfYWxnbxgDIAEoCRIUCgxoYXNoaW5nX2FsZ28YBCABKAkilwEKDlJlcG9ydFJlc3BvbnNlEhUKDWNvbmZpZ19kaWdlc3QYASABKAwSEgoGc2VxX25yGAIgASgEQgIwABIWCg5yZXBvcnRfY29udGV4dBgDIAEoDBISCgpyYXdfcmVwb3J0GAQgASgMEi4KBHNpZ3MYBSADKAsyIC5zZGsudjFhbHBoYS5BdHRyaWJ1dGVkU2lnbmF0dXJlIjsKE0F0dHJpYnV0ZWRTaWduYXR1cmUSEQoJc2lnbmF0dXJlGAEgASgMEhEKCXNpZ25lcl9pZBgCIAEoDSJrChFDYXBhYmlsaXR5UmVxdWVzdBIKCgJpZBgBIAEoCRIlCgdwYXlsb2FkGAIgASgLMhQuZ29vZ2xlLnByb3RvYnVmLkFueRIOCgZtZXRob2QYAyABKAkSEwoLY2FsbGJhY2tfaWQYBCABKAUiWgoSQ2FwYWJpbGl0eVJlc3BvbnNlEicKB3BheWxvYWQYASABKAsyFC5nb29nbGUucHJvdG9idWYuQW55SAASDwoFZXJyb3IYAiABKAlIAEIKCghyZXNwb25zZSKbAQoTVHJpZ2dlclN1YnNjcmlwdGlvbhIKCgJpZBgBIAEoCRIlCgdwYXlsb2FkGAIgASgLMhQuZ29vZ2xlLnByb3RvYnVmLkFueRIOCgZtZXRob2QYAyABKAkSLwoMcmVxdWlyZW1lbnRzGAQgASgLMhkuc2RrLnYxYWxwaGEuUmVxdWlyZW1lbnRzEhAKCHByZV9ob29rGAUgASgIIkgKEVRlZVR5cGVBbmRSZWdpb25zEiIKBHR5cGUYASABKA4yFC5zZGsudjFhbHBoYS5UZWVUeXBlEg8KB3JlZ2lvbnMYAyADKAkiVQoaVHJpZ2dlclN1YnNjcmlwdGlvblJlcXVlc3QSNwoNc3Vic2NyaXB0aW9ucxgBIAMoCzIgLnNkay52MWFscGhhLlRyaWdnZXJTdWJzY3JpcHRpb24iQAoHVHJpZ2dlchIOCgJpZBgBIAEoBEICMAASJQoHcGF5bG9hZBgCIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiGgoHUmVnaW9ucxIPCgdyZWdpb25zGAEgAygJIlIKElRlZVR5cGVzQW5kUmVnaW9ucxI8ChR0ZWVfdHlwZV9hbmRfcmVnaW9ucxgBIAMoCzIeLnNkay52MWFscGhhLlRlZVR5cGVBbmRSZWdpb25zInwKA1RlZRIrCgthbnlfcmVnaW9ucxgBIAEoCzIULnNkay52MWFscGhhLlJlZ2lvbnNIABJAChV0ZWVfdHlwZXNfYW5kX3JlZ2lvbnMYAiABKAsyHy5zZGsudjFhbHBoYS5UZWVUeXBlc0FuZFJlZ2lvbnNIAEIGCgRpdGVtIi0KDFJlcXVpcmVtZW50cxIdCgN0ZWUYASABKAsyEC5zZGsudjFhbHBoYS5UZWUiJwoYQXdhaXRDYXBhYmlsaXRpZXNSZXF1ZXN0EgsKA2lkcxgBIAMoBSK4AQoZQXdhaXRDYXBhYmlsaXRpZXNSZXNwb25zZRJICglyZXNwb25zZXMYASADKAsyNS5zZGsudjFhbHBoYS5Bd2FpdENhcGFiaWxpdGllc1Jlc3BvbnNlLlJlc3BvbnNlc0VudHJ5GlEKDlJlc3BvbnNlc0VudHJ5EgsKA2tleRgBIAEoBRIuCgV2YWx1ZRgCIAEoCzIfLnNkay52MWFscGhhLkNhcGFiaWxpdHlSZXNwb25zZToCOAEiygEKDkV4ZWN1dGVSZXF1ZXN0Eg4KBmNvbmZpZxgBIAEoDBIrCglzdWJzY3JpYmUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuRW1wdHlIABInCgd0cmlnZ2VyGAMgASgLMhQuc2RrLnYxYWxwaGEuVHJpZ2dlckgAEigKCHByZV9ob29rGAUgASgLMhQuc2RrLnYxYWxwaGEuVHJpZ2dlckgAEh0KEW1heF9yZXNwb25zZV9zaXplGAQgASgEQgIwAEIJCgdyZXF1ZXN0IswBCg9FeGVjdXRpb25SZXN1bHQSIQoFdmFsdWUYASABKAsyEC52YWx1ZXMudjEuVmFsdWVIABIPCgVlcnJvchgCIAEoCUgAEkgKFXRyaWdnZXJfc3Vic2NyaXB0aW9ucxgDIAEoCzInLnNkay52MWFscGhhLlRyaWdnZXJTdWJzY3JpcHRpb25SZXF1ZXN0SAASMQoMcmVzdHJpY3Rpb25zGAQgASgLMhkuc2RrLnYxYWxwaGEuUmVzdHJpY3Rpb25zSABCCAoGcmVzdWx0IlYKEUdldFNlY3JldHNSZXF1ZXN0EiwKCHJlcXVlc3RzGAEgAygLMhouc2RrLnYxYWxwaGEuU2VjcmV0UmVxdWVzdBITCgtjYWxsYmFja19pZBgCIAEoBSIiChNBd2FpdFNlY3JldHNSZXF1ZXN0EgsKA2lkcxgBIAMoBSKrAQoUQXdhaXRTZWNyZXRzUmVzcG9uc2USQwoJcmVzcG9uc2VzGAEgAygLMjAuc2RrLnYxYWxwaGEuQXdhaXRTZWNyZXRzUmVzcG9uc2UuUmVzcG9uc2VzRW50cnkaTgoOUmVzcG9uc2VzRW50cnkSCwoDa2V5GAEgASgFEisKBXZhbHVlGAIgASgLMhwuc2RrLnYxYWxwaGEuU2VjcmV0UmVzcG9uc2VzOgI4ASIuCg1TZWNyZXRSZXF1ZXN0EgoKAmlkGAEgASgJEhEKCW5hbWVzcGFjZRgCIAEoCSJFCgZTZWNyZXQSCgoCaWQYASABKAkSEQoJbmFtZXNwYWNlGAIgASgJEg0KBW93bmVyGAMgASgJEg0KBXZhbHVlGAQgASgJIkoKC1NlY3JldEVycm9yEgoKAmlkGAEgASgJEhEKCW5hbWVzcGFjZRgCIAEoCRINCgVvd25lchgDIAEoCRINCgVlcnJvchgEIAEoCSJuCg5TZWNyZXRSZXNwb25zZRIlCgZzZWNyZXQYASABKAsyEy5zZGsudjFhbHBoYS5TZWNyZXRIABIpCgVlcnJvchgCIAEoCzIYLnNkay52MWFscGhhLlNlY3JldEVycm9ySABCCgoIcmVzcG9uc2UiQQoPU2VjcmV0UmVzcG9uc2VzEi4KCXJlc3BvbnNlcxgBIAMoCzIbLnNkay52MWFscGhhLlNlY3JldFJlc3BvbnNlIkIKEU1ldGhvZFJlc3RyaWN0aW9uEgoKAmlkGAEgASgJEg4KBm1ldGhvZBgCIAEoCRIRCgltYXhfY2FsbHMYAyABKA0iWAoVQ2FwYWJpbGl0eVJlc3RyaWN0aW9uEjAKBm1ldGhvZBgBIAEoCzIeLnNkay52MWFscGhhLk1ldGhvZFJlc3RyaWN0aW9uSABCDQoLcmVzdHJpY3Rpb24ioQEKFkNhcGFiaWxpdHlSZXN0cmljdGlvbnMSOAoMcmVzdHJpY3Rpb25zGAEgAygLMiIuc2RrLnYxYWxwaGEuQ2FwYWJpbGl0eVJlc3RyaWN0aW9uEhcKD21heF90b3RhbF9jYWxscxgCIAEoDRI0CgR0eXBlGAMgASgOMiYuc2RrLnYxYWxwaGEuQ2FwYWJpbGl0eVJlc3RyaWN0aW9uVHlwZSJRChdTZWNyZXRQcmVmaXhSZXN0cmljdGlvbhIOCgZwcmVmaXgYASABKAkSEQoJbmFtZXNwYWNlGAIgASgJEhMKC21heF9zZWNyZXRzGAMgASgNIpABChFTZWNyZXRSZXN0cmljdGlvbhIrCgxleGFjdF9zZWNyZXQYASABKAsyEy5zZGsudjFhbHBoYS5TZWNyZXRIABI/Cg9wcmVmaXhlZF9zZWNyZXQYAiABKAsyJC5zZGsudjFhbHBoYS5TZWNyZXRQcmVmaXhSZXN0cmljdGlvbkgAQg0KC3Jlc3RyaWN0aW9uIl8KElNlY3JldHNSZXN0cml0aW9ucxI0CgxyZXN0cmljdGlvbnMYASADKAsyHi5zZGsudjFhbHBoYS5TZWNyZXRSZXN0cmljdGlvbhITCgttYXhfc2VjcmV0cxgCIAEoDSJ7CgxSZXN0cmljdGlvbnMSMAoHc2VjcmV0cxgBIAEoCzIfLnNkay52MWFscGhhLlNlY3JldHNSZXN0cml0aW9ucxI5CgxjYXBhYmlsaXRpZXMYAiABKAsyIy5zZGsudjFhbHBoYS5DYXBhYmlsaXR5UmVzdHJpY3Rpb25zKt0BCg9BZ2dyZWdhdGlvblR5cGUSIAocQUdHUkVHQVRJT05fVFlQRV9VTlNQRUNJRklFRBAAEhsKF0FHR1JFR0FUSU9OX1RZUEVfTUVESUFOEAESHgoaQUdHUkVHQVRJT05fVFlQRV9JREVOVElDQUwQAhIiCh5BR0dSRUdBVElPTl9UWVBFX0NPTU1PTl9QUkVGSVgQAxIiCh5BR0dSRUdBVElPTl9UWVBFX0NPTU1PTl9TVUZGSVgQBBIjCh9BR0dSRUdBVElPTl9UWVBFX0ZSRVFVRU5DWV9MSVNUEAUqOQoETW9kZRIUChBNT0RFX1VOU1BFQ0lGSUVEEAASDAoITU9ERV9ET04QARINCglNT0RFX05PREUQAio7CgdUZWVUeXBlEhgKFFRFRV9UWVBFX1VOU1BFQ0lGSUVEEAASFgoSVEVFX1RZUEVfQVdTX05JVFJPEAEqaQoZQ2FwYWJpbGl0eVJlc3RyaWN0aW9uVHlwZRImCiJDQVBBQklMSVRZX1JFU1RSSUNUSU9OX1RZUEVfQ0xPU0VEEAASJAogQ0FQQUJJTElUWV9SRVNUUklDVElPTl9UWVBFX09QRU4QAUJoCg9jb20uc2RrLnYxYWxwaGFCCFNka1Byb3RvUAGiAgNTWFiqAgtTZGsuVjFhbHBoYcoCC1Nka1xWMWFscGhh4gIXU2RrXFYxYWxwaGFcR1BCTWV0YWRhdGHqAgxTZGs6OlYxYWxwaGFiBnByb3RvMw", [file_google_protobuf_any, file_google_protobuf_empty, file_values_v1_values]);
 var SimpleConsensusInputsSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 0);
+var ConsensusDescriptorSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 2);
 var ReportRequestSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 3);
 var ReportResponseSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 4);
 var AttributedSignatureSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 5);
 var CapabilityRequestSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 6);
 var TriggerSubscriptionRequestSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 10);
+var RegionsSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 12);
+var TeeTypesAndRegionsSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 13);
+var TeeSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 14);
+var RequirementsSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 15);
 var AwaitCapabilitiesRequestSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 16);
 var AwaitCapabilitiesResponseSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 17);
 var ExecuteRequestSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 18);
@@ -6404,6 +6409,26 @@ var AdditionalEnvironments;
   AdditionalEnvironments2[AdditionalEnvironments2["UNSPECIFIED"] = 0] = "UNSPECIFIED";
   AdditionalEnvironments2[AdditionalEnvironments2["TEE"] = 1] = "TEE";
 })(AdditionalEnvironments || (AdditionalEnvironments = {}));
+var file_capabilities_blockchain_evm_v1alpha_client = /* @__PURE__ */ fileDesc("CjBjYXBhYmlsaXRpZXMvYmxvY2tjaGFpbi9ldm0vdjFhbHBoYS9jbGllbnQucHJvdG8SI2NhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhIh0KC1RvcGljVmFsdWVzEg4KBnZhbHVlcxgBIAMoDCK4AQoXRmlsdGVyTG9nVHJpZ2dlclJlcXVlc3QSEQoJYWRkcmVzc2VzGAEgAygMEkAKBnRvcGljcxgCIAMoCzIwLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLlRvcGljVmFsdWVzEkgKCmNvbmZpZGVuY2UYAyABKA4yNC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Db25maWRlbmNlTGV2ZWwiegoTQ2FsbENvbnRyYWN0UmVxdWVzdBI6CgRjYWxsGAEgASgLMiwuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuQ2FsbE1zZxInCgxibG9ja19udW1iZXIYAiABKAsyES52YWx1ZXMudjEuQmlnSW50IiEKEUNhbGxDb250cmFjdFJlcGx5EgwKBGRhdGEYASABKAwiWwoRRmlsdGVyTG9nc1JlcXVlc3QSRgoMZmlsdGVyX3F1ZXJ5GAEgASgLMjAuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRmlsdGVyUXVlcnkiSQoPRmlsdGVyTG9nc1JlcGx5EjYKBGxvZ3MYASADKAsyKC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Mb2cixwEKA0xvZxIPCgdhZGRyZXNzGAEgASgMEg4KBnRvcGljcxgCIAMoDBIPCgd0eF9oYXNoGAMgASgMEhIKCmJsb2NrX2hhc2gYBCABKAwSDAoEZGF0YRgFIAEoDBIRCglldmVudF9zaWcYBiABKAwSJwoMYmxvY2tfbnVtYmVyGAcgASgLMhEudmFsdWVzLnYxLkJpZ0ludBIQCgh0eF9pbmRleBgIIAEoDRINCgVpbmRleBgJIAEoDRIPCgdyZW1vdmVkGAogASgIIjEKB0NhbGxNc2cSDAoEZnJvbRgBIAEoDBIKCgJ0bxgCIAEoDBIMCgRkYXRhGAMgASgMIr0BCgtGaWx0ZXJRdWVyeRISCgpibG9ja19oYXNoGAEgASgMEiUKCmZyb21fYmxvY2sYAiABKAsyES52YWx1ZXMudjEuQmlnSW50EiMKCHRvX2Jsb2NrGAMgASgLMhEudmFsdWVzLnYxLkJpZ0ludBIRCglhZGRyZXNzZXMYBCADKAwSOwoGdG9waWNzGAUgAygLMisuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuVG9waWNzIhcKBlRvcGljcxINCgV0b3BpYxgBIAMoDCJMChBCYWxhbmNlQXRSZXF1ZXN0Eg8KB2FjY291bnQYASABKAwSJwoMYmxvY2tfbnVtYmVyGAIgASgLMhEudmFsdWVzLnYxLkJpZ0ludCI0Cg5CYWxhbmNlQXRSZXBseRIiCgdiYWxhbmNlGAEgASgLMhEudmFsdWVzLnYxLkJpZ0ludCJPChJFc3RpbWF0ZUdhc1JlcXVlc3QSOQoDbXNnGAEgASgLMiwuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuQ2FsbE1zZyIjChBFc3RpbWF0ZUdhc1JlcGx5Eg8KA2dhcxgBIAEoBEICMAAiKwobR2V0VHJhbnNhY3Rpb25CeUhhc2hSZXF1ZXN0EgwKBGhhc2gYASABKAwiYgoZR2V0VHJhbnNhY3Rpb25CeUhhc2hSZXBseRJFCgt0cmFuc2FjdGlvbhgBIAEoCzIwLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLlRyYW5zYWN0aW9uIqEBCgtUcmFuc2FjdGlvbhIRCgVub25jZRgBIAEoBEICMAASDwoDZ2FzGAIgASgEQgIwABIKCgJ0bxgDIAEoDBIMCgRkYXRhGAQgASgMEgwKBGhhc2gYBSABKAwSIAoFdmFsdWUYBiABKAsyES52YWx1ZXMudjEuQmlnSW50EiQKCWdhc19wcmljZRgHIAEoCzIRLnZhbHVlcy52MS5CaWdJbnQiLAocR2V0VHJhbnNhY3Rpb25SZWNlaXB0UmVxdWVzdBIMCgRoYXNoGAEgASgMIlsKGkdldFRyYW5zYWN0aW9uUmVjZWlwdFJlcGx5Ej0KB3JlY2VpcHQYASABKAsyLC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5SZWNlaXB0IpkCCgdSZWNlaXB0EhIKBnN0YXR1cxgBIAEoBEICMAASFAoIZ2FzX3VzZWQYAiABKARCAjAAEhQKCHR4X2luZGV4GAMgASgEQgIwABISCgpibG9ja19oYXNoGAQgASgMEjYKBGxvZ3MYBiADKAsyKC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Mb2cSDwoHdHhfaGFzaBgHIAEoDBIuChNlZmZlY3RpdmVfZ2FzX3ByaWNlGAggASgLMhEudmFsdWVzLnYxLkJpZ0ludBInCgxibG9ja19udW1iZXIYCSABKAsyES52YWx1ZXMudjEuQmlnSW50EhgKEGNvbnRyYWN0X2FkZHJlc3MYCiABKAwiQAoVSGVhZGVyQnlOdW1iZXJSZXF1ZXN0EicKDGJsb2NrX251bWJlchgBIAEoCzIRLnZhbHVlcy52MS5CaWdJbnQiUgoTSGVhZGVyQnlOdW1iZXJSZXBseRI7CgZoZWFkZXIYASABKAsyKy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5IZWFkZXIiawoGSGVhZGVyEhUKCXRpbWVzdGFtcBgBIAEoBEICMAASJwoMYmxvY2tfbnVtYmVyGAIgASgLMhEudmFsdWVzLnYxLkJpZ0ludBIMCgRoYXNoGAMgASgMEhMKC3BhcmVudF9oYXNoGAQgASgMIqsBChJXcml0ZVJlcG9ydFJlcXVlc3QSEAoIcmVjZWl2ZXIYASABKAwSKwoGcmVwb3J0GAIgASgLMhsuc2RrLnYxYWxwaGEuUmVwb3J0UmVzcG9uc2USRwoKZ2FzX2NvbmZpZxgDIAEoCzIuLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLkdhc0NvbmZpZ0gAiAEBQg0KC19nYXNfY29uZmlnIiIKCUdhc0NvbmZpZxIVCglnYXNfbGltaXQYASABKARCAjAAIocDChBXcml0ZVJlcG9ydFJlcGx5EkAKCXR4X3N0YXR1cxgBIAEoDjItLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLlR4U3RhdHVzEnUKInJlY2VpdmVyX2NvbnRyYWN0X2V4ZWN1dGlvbl9zdGF0dXMYAiABKA4yRC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5SZWNlaXZlckNvbnRyYWN0RXhlY3V0aW9uU3RhdHVzSACIAQESFAoHdHhfaGFzaBgDIAEoDEgBiAEBEi8KD3RyYW5zYWN0aW9uX2ZlZRgEIAEoCzIRLnZhbHVlcy52MS5CaWdJbnRIAogBARIaCg1lcnJvcl9tZXNzYWdlGAUgASgJSAOIAQFCJQojX3JlY2VpdmVyX2NvbnRyYWN0X2V4ZWN1dGlvbl9zdGF0dXNCCgoIX3R4X2hhc2hCEgoQX3RyYW5zYWN0aW9uX2ZlZUIQCg5fZXJyb3JfbWVzc2FnZSppCg9Db25maWRlbmNlTGV2ZWwSGQoVQ09ORklERU5DRV9MRVZFTF9TQUZFEAASGwoXQ09ORklERU5DRV9MRVZFTF9MQVRFU1QQARIeChpDT05GSURFTkNFX0xFVkVMX0ZJTkFMSVpFRBACKoIBCh9SZWNlaXZlckNvbnRyYWN0RXhlY3V0aW9uU3RhdHVzEi4KKlJFQ0VJVkVSX0NPTlRSQUNUX0VYRUNVVElPTl9TVEFUVVNfU1VDQ0VTUxAAEi8KK1JFQ0VJVkVSX0NPTlRSQUNUX0VYRUNVVElPTl9TVEFUVVNfUkVWRVJURUQQASpOCghUeFN0YXR1cxITCg9UWF9TVEFUVVNfRkFUQUwQABIWChJUWF9TVEFUVVNfUkVWRVJURUQQARIVChFUWF9TVEFUVVNfU1VDQ0VTUxACMuMbCgZDbGllbnQSgAEKDENhbGxDb250cmFjdBI4LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLkNhbGxDb250cmFjdFJlcXVlc3QaNi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5DYWxsQ29udHJhY3RSZXBseRJ6CgpGaWx0ZXJMb2dzEjYuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRmlsdGVyTG9nc1JlcXVlc3QaNC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5GaWx0ZXJMb2dzUmVwbHkSdwoJQmFsYW5jZUF0EjUuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuQmFsYW5jZUF0UmVxdWVzdBozLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLkJhbGFuY2VBdFJlcGx5En0KC0VzdGltYXRlR2FzEjcuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRXN0aW1hdGVHYXNSZXF1ZXN0GjUuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRXN0aW1hdGVHYXNSZXBseRKYAQoUR2V0VHJhbnNhY3Rpb25CeUhhc2gSQC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5HZXRUcmFuc2FjdGlvbkJ5SGFzaFJlcXVlc3QaPi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5HZXRUcmFuc2FjdGlvbkJ5SGFzaFJlcGx5EpsBChVHZXRUcmFuc2FjdGlvblJlY2VpcHQSQS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5HZXRUcmFuc2FjdGlvblJlY2VpcHRSZXF1ZXN0Gj8uY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuR2V0VHJhbnNhY3Rpb25SZWNlaXB0UmVwbHkShgEKDkhlYWRlckJ5TnVtYmVyEjouY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuSGVhZGVyQnlOdW1iZXJSZXF1ZXN0GjguY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuSGVhZGVyQnlOdW1iZXJSZXBseRJ2CgpMb2dUcmlnZ2VyEjwuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRmlsdGVyTG9nVHJpZ2dlclJlcXVlc3QaKC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Mb2cwARJ9CgtXcml0ZVJlcG9ydBI3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLldyaXRlUmVwb3J0UmVxdWVzdBo1LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLldyaXRlUmVwb3J0UmVwbHkaqBKCtRijEggBEglldm1AMS4wLjAakxIKDUNoYWluU2VsZWN0b3ISgRIS/hEKFwoLYWRpLW1haW5uZXQQ/PDmwrfn3ao4ChgKC2FkaS10ZXN0bmV0EP2myPr5hozaggEKJAoXYXBlY2hhaW4tdGVzdG5ldC1jdXJ0aXMQwcO0+I3EkrKJAQoXCgthcmMtdGVzdG5ldBDnxoye19fQjSoKHQoRYXZhbGFuY2hlLW1haW5uZXQQ1eeKwOHVmKRZCiMKFmF2YWxhbmNoZS10ZXN0bmV0LWZ1amkQm/n8kKLjqPjMAQooChtiaW5hbmNlX3NtYXJ0X2NoYWluLW1haW5uZXQQz/eU8djtlbidAQooChtiaW5hbmNlX3NtYXJ0X2NoYWluLXRlc3RuZXQQ+62+nICu5Iq4AQoYCgxjZWxvLW1haW5uZXQQhtTo2IaTiNcSChgKDGNlbG8tc2Vwb2xpYRDEw/yL/OedmjQKGgoOY3Jvbm9zLXRlc3RuZXQQ/dnureDe2sgpCiIKFWR0Y2MtbWFpbm5ldC1hcHBjaGFpbhDU1LHj17uKzsABCiIKFWR0Y2MtdGVzdG5ldC1hbmRlc2l0ZRDSg+PQmZblpNcBChwKEGV0aGVyZXVtLW1haW5uZXQQlfbx5M+ypsJFCicKG2V0aGVyZXVtLW1haW5uZXQtYXJiaXRydW0tMRDE6I3Njpuh10QKJAoXZXRoZXJldW0tbWFpbm5ldC1iYXNlLTEQgv+rov65kNPdAQoiChZldGhlcmV1bS1tYWlubmV0LWluay0xEKCwpum35qqEMAokChhldGhlcmV1bS1tYWlubmV0LWxpbmVhLTEQtrrpmMu9sJtACiUKGWV0aGVyZXVtLW1haW5uZXQtbWFudGxlLTEQiue0leewg8wVCicKG2V0aGVyZXVtLW1haW5uZXQtb3B0aW1pc20tMRC4lY/D9/7Q6TMKJgoZZXRoZXJldW0tbWFpbm5ldC1zY3JvbGwtMRC4vOTrxL7In7cBCikKHWV0aGVyZXVtLW1haW5uZXQtd29ybGRjaGFpbi0xEIfvurfFtsK4HAolChlldGhlcmV1bS1tYWlubmV0LXhsYXllci0xEJal/JymqO/tKQolChlldGhlcmV1bS1tYWlubmV0LXprc3luYy0xEJTul9nttLHXFQojChZldGhlcmV1bS10ZXN0bmV0LWhvb2RpEIOkr4ny2q2IkAEKJQoYZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhENm15M78ye6g3gEKLwojZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhLWFyYml0cnVtLTEQ6s7u/+q2hKMwCiwKH2V0aGVyZXVtLXRlc3RuZXQtc2Vwb2xpYS1iYXNlLTEQuMq57/aQrsiPAQosCiBldGhlcmV1bS10ZXN0bmV0LXNlcG9saWEtbGluZWEtMRDrqtT+gvnmr08KLQohZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhLW1hbnRsZS0xENXGuO7N9vKmcgovCiNldGhlcmV1bS10ZXN0bmV0LXNlcG9saWEtb3B0aW1pc20tMRCfhsWhvtjDwEgKLQohZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhLXNjcm9sbC0xEIvptL7buu3RHwowCiNldGhlcmV1bS10ZXN0bmV0LXNlcG9saWEtdW5pY2hhaW4tMRC03v7g7JeplsQBCjEKJWV0aGVyZXVtLXRlc3RuZXQtc2Vwb2xpYS13b3JsZGNoYWluLTEQut/gxcep88VJCi0KIWV0aGVyZXVtLXRlc3RuZXQtc2Vwb2xpYS16a3N5bmMtMRC3wfz98sSA3l8KIAoUZ25vc2lzX2NoYWluLW1haW5uZXQQ9JKt2vKirroGCicKG2dub3Npc19jaGFpbi10ZXN0bmV0LWNoaWFkbxCzsYLQm6WPj3sKHwoTaHlwZXJsaXF1aWQtbWFpbm5ldBCns/jdztHp8iEKHwoTaHlwZXJsaXF1aWQtdGVzdG5ldBCIzt3Il+DJvTsKIAoTaW5rLXRlc3RuZXQtc2Vwb2xpYRDo9Kel8+aWwIcBChkKDWpvdmF5LW1haW5uZXQQtcPEmqGA35IVChkKDWpvdmF5LXRlc3RuZXQQ5M+KhN6y3o4NChsKD21lZ2FldGgtbWFpbm5ldBDqlbbIvOSmyFQKHgoRbWVnYWV0aC10ZXN0bmV0LTIQ443eiLGP/ZP9AQoZCg1tb25hZC1tYWlubmV0EPnAycz/jufadQoZCg1tb25hZC10ZXN0bmV0ENCQz5Gm9OilHgokChdwaGFyb3MtYXRsYW50aWMtdGVzdG5ldBDMme3gzryvtN8BChoKDnBoYXJvcy1tYWlubmV0EMjBh571782hbAobCg5wbGFzbWEtbWFpbm5ldBD4m/HR2snVxoEBChoKDnBsYXNtYS10ZXN0bmV0ENWbv6XDtJmHNwobCg9wb2x5Z29uLW1haW5uZXQQsavk8JqShp04CiEKFHBvbHlnb24tdGVzdG5ldC1hbW95EM2P1t/xx5D64QEKJAoYcHJpdmF0ZS10ZXN0bmV0LWFuZGVzaXRlENSmmKXBj9z8XwojChZwcml2YXRlLXRlc3RuZXQtYmFzYWx0EP/t5OTou7vp/gEKIgoWcHJpdmF0ZS10ZXN0bmV0LXB1bWljZRD5wsS2xKXE2xUKJQoZcHJpdmF0ZS10ZXN0bmV0LXF1YXJ0eml0ZRD58KLdrN2H+jkKJAoYcHJpdmF0ZS10ZXN0bmV0LXJoeW9saXRlEIH6ievhtNuxCAodChFyb2Jpbmhvb2QtdGVzdG5ldBDI7fy+ppGomxwKGQoNc29uaWMtbWFpbm5ldBDRsuXt2aCynRcKGQoNc29uaWMtdGVzdG5ldBDIiPvUtMb6vBgKGwoOc3RhYmxlLXRlc3RuZXQQnZGLs6WgpdWjAQoaCg10LXJleC10ZXN0bmV0EP3A49zL/Yi19AEKGAoLdGFjLXRlc3RuZXQQ1duN4/ufk9eDAQoiChZ0ZW1wby10ZXN0bmV0LW1vZGVyYXRvEJObwOnkhI2wdQobCg54bGF5ZXItdGVzdG5ldBDJvqG0rcy83Y0BQuUBCidjb20uY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGFCC0NsaWVudFByb3RvUAGiAgNDQkWqAiNDYXBhYmlsaXRpZXMuQmxvY2tjaGFpbi5Fdm0uVjFhbHBoYcoCI0NhcGFiaWxpdGllc1xCbG9ja2NoYWluXEV2bVxWMWFscGhh4gIvQ2FwYWJpbGl0aWVzXEJsb2NrY2hhaW5cRXZtXFYxYWxwaGFcR1BCTWV0YWRhdGHqAiZDYXBhYmlsaXRpZXM6OkJsb2NrY2hhaW46OkV2bTo6VjFhbHBoYWIGcHJvdG8z", [file_sdk_v1alpha_sdk, file_tools_generator_v1alpha_cre_metadata, file_values_v1_values]);
+var FilterLogTriggerRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 1);
+var CallContractRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 2);
+var CallContractReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 3);
+var FilterLogsRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 4);
+var FilterLogsReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 5);
+var LogSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 6);
+var BalanceAtRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 10);
+var BalanceAtReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 11);
+var EstimateGasRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 12);
+var EstimateGasReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 13);
+var GetTransactionByHashRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 14);
+var GetTransactionByHashReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 15);
+var GetTransactionReceiptRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 17);
+var GetTransactionReceiptReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 18);
+var HeaderByNumberRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 20);
+var HeaderByNumberReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 21);
+var WriteReportRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 23);
+var GasConfigSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 24);
+var WriteReportReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 25);
 var ConfidenceLevel;
 (function(ConfidenceLevel2) {
   ConfidenceLevel2[ConfidenceLevel2["SAFE"] = 0] = "SAFE";
@@ -7710,9 +7735,438 @@ class Report {
     return this.report;
   }
 }
+var hexToBytes3 = (hexStr) => {
+  if (!hexStr.startsWith("0x")) {
+    throw new Error(`Invalid hex string: ${hexStr}`);
+  }
+  if (!/^0x[0-9a-fA-F]*$/.test(hexStr)) {
+    throw new Error(`Invalid hex string: ${hexStr}`);
+  }
+  if ((hexStr.length - 2) % 2 !== 0) {
+    throw new Error(`Hex string must have an even number of characters: ${hexStr}`);
+  }
+  const hex = hexStr.slice(2);
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let i = 0;i < hex.length; i += 2) {
+    bytes[i / 2] = Number.parseInt(hex.slice(i, i + 2), 16);
+  }
+  return bytes;
+};
 var bytesToBase64 = (bytes) => {
   return Buffer.from(bytes).toString("base64");
 };
+function createWriteCreReportRequest(input) {
+  return {
+    receiver: hexToBytes3(input.receiver),
+    report: input.report,
+    gasConfig: input.gasConfig !== undefined ? fromJson(GasConfigSchema, input.gasConfig) : undefined,
+    $report: true
+  };
+}
+function x_generatedCodeOnly_unwrap_WriteCreReportRequest(input) {
+  return create(WriteReportRequestSchema, {
+    receiver: input.receiver,
+    report: input.report !== undefined ? input.report.x_generatedCodeOnly_unwrap() : undefined,
+    gasConfig: input.gasConfig
+  });
+}
+
+class ClientCapability {
+  ChainSelector;
+  static CAPABILITY_ID = "evm@1.0.0";
+  static CAPABILITY_NAME = "evm";
+  static CAPABILITY_VERSION = "1.0.0";
+  static SUPPORTED_CHAIN_SELECTORS = {
+    "adi-mainnet": 4059281736450291836n,
+    "adi-testnet": 9418205736192840573n,
+    "apechain-testnet-curtis": 9900119385908781505n,
+    "arc-testnet": 3034092155422581607n,
+    "avalanche-mainnet": 6433500567565415381n,
+    "avalanche-testnet-fuji": 14767482510784806043n,
+    "binance_smart_chain-mainnet": 11344663589394136015n,
+    "binance_smart_chain-testnet": 13264668187771770619n,
+    "celo-mainnet": 1346049177634351622n,
+    "celo-sepolia": 3761762704474186180n,
+    "cronos-testnet": 2995292832068775165n,
+    "dtcc-mainnet-appchain": 13879014182901017172n,
+    "dtcc-testnet-andesite": 15513093881969820114n,
+    "ethereum-mainnet": 5009297550715157269n,
+    "ethereum-mainnet-arbitrum-1": 4949039107694359620n,
+    "ethereum-mainnet-base-1": 15971525489660198786n,
+    "ethereum-mainnet-ink-1": 3461204551265785888n,
+    "ethereum-mainnet-linea-1": 4627098889531055414n,
+    "ethereum-mainnet-mantle-1": 1556008542357238666n,
+    "ethereum-mainnet-optimism-1": 3734403246176062136n,
+    "ethereum-mainnet-scroll-1": 13204309965629103672n,
+    "ethereum-mainnet-worldchain-1": 2049429975587534727n,
+    "ethereum-mainnet-xlayer-1": 3016212468291539606n,
+    "ethereum-mainnet-zksync-1": 1562403441176082196n,
+    "ethereum-testnet-hoodi": 10380998176179737091n,
+    "ethereum-testnet-sepolia": 16015286601757825753n,
+    "ethereum-testnet-sepolia-arbitrum-1": 3478487238524512106n,
+    "ethereum-testnet-sepolia-base-1": 10344971235874465080n,
+    "ethereum-testnet-sepolia-linea-1": 5719461335882077547n,
+    "ethereum-testnet-sepolia-mantle-1": 8236463271206331221n,
+    "ethereum-testnet-sepolia-optimism-1": 5224473277236331295n,
+    "ethereum-testnet-sepolia-scroll-1": 2279865765895943307n,
+    "ethereum-testnet-sepolia-unichain-1": 14135854469784514356n,
+    "ethereum-testnet-sepolia-worldchain-1": 5299555114858065850n,
+    "ethereum-testnet-sepolia-zksync-1": 6898391096552792247n,
+    "gnosis_chain-mainnet": 465200170687744372n,
+    "gnosis_chain-testnet-chiado": 8871595565390010547n,
+    "hyperliquid-mainnet": 2442541497099098535n,
+    "hyperliquid-testnet": 4286062357653186312n,
+    "ink-testnet-sepolia": 9763904284804119144n,
+    "jovay-mainnet": 1523760397290643893n,
+    "jovay-testnet": 945045181441419236n,
+    "megaeth-mainnet": 6093540873831549674n,
+    "megaeth-testnet-2": 18241817625092392675n,
+    "monad-mainnet": 8481857512324358265n,
+    "monad-testnet": 2183018362218727504n,
+    "pharos-atlantic-testnet": 16098325658947243212n,
+    "pharos-mainnet": 7801139999541420232n,
+    "plasma-mainnet": 9335212494177455608n,
+    "plasma-testnet": 3967220077692964309n,
+    "polygon-mainnet": 4051577828743386545n,
+    "polygon-testnet-amoy": 16281711391670634445n,
+    "private-testnet-andesite": 6915682381028791124n,
+    "private-testnet-basalt": 18362000170840307455n,
+    "private-testnet-pumice": 1564738277398880633n,
+    "private-testnet-quartzite": 4175996748267305081n,
+    "private-testnet-rhyolite": 604447335222770945n,
+    "robinhood-testnet": 2032988798112970440n,
+    "sonic-mainnet": 1673871237479749969n,
+    "sonic-testnet": 1763698235108410440n,
+    "stable-testnet": 11793402411494852765n,
+    "t-rex-testnet": 17611928792452358269n,
+    "tac-testnet": 9488606126177218005n,
+    "tempo-testnet-moderato": 8457817439310187923n,
+    "xlayer-testnet": 10212741611335999305n
+  };
+  constructor(ChainSelector) {
+    this.ChainSelector = ChainSelector;
+  }
+  callContract(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(CallContractRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "CallContract",
+      payload,
+      inputSchema: CallContractRequestSchema,
+      outputSchema: CallContractReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  filterLogs(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(FilterLogsRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "FilterLogs",
+      payload,
+      inputSchema: FilterLogsRequestSchema,
+      outputSchema: FilterLogsReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  balanceAt(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(BalanceAtRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "BalanceAt",
+      payload,
+      inputSchema: BalanceAtRequestSchema,
+      outputSchema: BalanceAtReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  estimateGas(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(EstimateGasRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "EstimateGas",
+      payload,
+      inputSchema: EstimateGasRequestSchema,
+      outputSchema: EstimateGasReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getTransactionByHash(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetTransactionByHashRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetTransactionByHash",
+      payload,
+      inputSchema: GetTransactionByHashRequestSchema,
+      outputSchema: GetTransactionByHashReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getTransactionReceipt(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetTransactionReceiptRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetTransactionReceipt",
+      payload,
+      inputSchema: GetTransactionReceiptRequestSchema,
+      outputSchema: GetTransactionReceiptReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  headerByNumber(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(HeaderByNumberRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "HeaderByNumber",
+      payload,
+      inputSchema: HeaderByNumberRequestSchema,
+      outputSchema: HeaderByNumberReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  logTrigger(config) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return new ClientLogTrigger(config, capabilityId, "LogTrigger", this.ChainSelector);
+  }
+  writeReport(runtime, input) {
+    let payload;
+    if (input.$report) {
+      payload = x_generatedCodeOnly_unwrap_WriteCreReportRequest(input);
+    } else {
+      payload = x_generatedCodeOnly_unwrap_WriteCreReportRequest(createWriteCreReportRequest(input));
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "WriteReport",
+      payload,
+      inputSchema: WriteReportRequestSchema,
+      outputSchema: WriteReportReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+}
+
+class ClientLogTrigger {
+  _capabilityId;
+  _method;
+  ChainSelector;
+  config;
+  constructor(config, _capabilityId, _method, ChainSelector) {
+    this._capabilityId = _capabilityId;
+    this._method = _method;
+    this.ChainSelector = ChainSelector;
+    this.config = config.$typeName ? config : fromJson(FilterLogTriggerRequestSchema, config);
+  }
+  capabilityId() {
+    return this._capabilityId;
+  }
+  method() {
+    return this._method;
+  }
+  outputSchema() {
+    return LogSchema;
+  }
+  configAsAny() {
+    return anyPack(FilterLogTriggerRequestSchema, this.config);
+  }
+  adapt(rawOutput) {
+    return rawOutput;
+  }
+}
+
+class ClientRestrictor {
+  ChainSelector;
+  constructor(ChainSelector) {
+    this.ChainSelector = ChainSelector;
+  }
+  limitCallContract(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "CallContract",
+        maxCalls
+      }
+    };
+  }
+  limitFilterLogs(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "FilterLogs",
+        maxCalls
+      }
+    };
+  }
+  limitBalanceAt(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "BalanceAt",
+        maxCalls
+      }
+    };
+  }
+  limitEstimateGas(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "EstimateGas",
+        maxCalls
+      }
+    };
+  }
+  limitGetTransactionByHash(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetTransactionByHash",
+        maxCalls
+      }
+    };
+  }
+  limitGetTransactionReceipt(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetTransactionReceipt",
+        maxCalls
+      }
+    };
+  }
+  limitHeaderByNumber(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "HeaderByNumber",
+        maxCalls
+      }
+    };
+  }
+  limitWriteReport(maxCalls) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "WriteReport",
+        maxCalls
+      }
+    };
+  }
+}
+var file_capabilities_blockchain_solana_v1alpha_client = /* @__PURE__ */ fileDesc("CjNjYXBhYmlsaXRpZXMvYmxvY2tjaGFpbi9zb2xhbmEvdjFhbHBoYS9jbGllbnQucHJvdG8SJmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhIsMBCgdBY2NvdW50EhQKCGxhbXBvcnRzGAEgASgEQgIwABINCgVvd25lchgCIAEoDBJFCgRkYXRhGAMgASgLMjcuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuRGF0YUJ5dGVzT3JKU09OEhIKCmV4ZWN1dGFibGUYBCABKAgSJQoKcmVudF9lcG9jaBgFIAEoCzIRLnZhbHVlcy52MS5CaWdJbnQSEQoFc3BhY2UYBiABKARCAjAAIiYKDUNvbXB1dGVDb25maWcSFQoNY29tcHV0ZV9saW1pdBgBIAEoDSKAAQoPRGF0YUJ5dGVzT3JKU09OEkYKCGVuY29kaW5nGAEgASgOMjQuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuRW5jb2RpbmdUeXBlEg0KA3JhdxgCIAEoDEgAEg4KBGpzb24YAyABKAxIAEIGCgRib2R5IjMKCURhdGFTbGljZRISCgZvZmZzZXQYASABKARCAjAAEhIKBmxlbmd0aBgCIAEoBEICMAAijQIKEkdldEFjY291bnRJbmZvT3B0cxJGCghlbmNvZGluZxgBIAEoDjI0LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkVuY29kaW5nVHlwZRJKCgpjb21taXRtZW50GAIgASgOMjYuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQ29tbWl0bWVudFR5cGUSRQoKZGF0YV9zbGljZRgDIAEoCzIxLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkRhdGFTbGljZRIcChBtaW5fY29udGV4dF9zbG90GAQgASgEQgIwACJsChtHZXRBY2NvdW50SW5mb1dpdGhPcHRzUmVwbHkSQwoFdmFsdWUYAiABKAsyLy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5BY2NvdW50SACIAQFCCAoGX3ZhbHVlInoKHUdldEFjY291bnRJbmZvV2l0aE9wdHNSZXF1ZXN0Eg8KB2FjY291bnQYASABKAwSSAoEb3B0cxgCIAEoCzI6LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldEFjY291bnRJbmZvT3B0cyIkCg9HZXRCYWxhbmNlUmVwbHkSEQoFdmFsdWUYASABKARCAjAAIm0KEUdldEJhbGFuY2VSZXF1ZXN0EgwKBGFkZHIYASABKAwSSgoKY29tbWl0bWVudBgCIAEoDjI2LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkNvbW1pdG1lbnRUeXBlIloKDEdldEJsb2NrT3B0cxJKCgpjb21taXRtZW50GAQgASgOMjYuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQ29tbWl0bWVudFR5cGUinQEKDUdldEJsb2NrUmVwbHkSEQoJYmxvY2toYXNoGAEgASgMEhoKEnByZXZpb3VzX2Jsb2NraGFzaBgCIAEoDBIXCgtwYXJlbnRfc2xvdBgDIAEoBEICMAASGwoKYmxvY2tfdGltZRgEIAEoA0ICMABIAIgBARIYCgxibG9ja19oZWlnaHQYBSABKARCAjAAQg0KC19ibG9ja190aW1lImcKD0dldEJsb2NrUmVxdWVzdBIQCgRzbG90GAEgASgEQgIwABJCCgRvcHRzGAIgASgLMjQuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0QmxvY2tPcHRzIigKFUdldEZlZUZvck1lc3NhZ2VSZXBseRIPCgNmZWUYASABKARCAjAAInYKF0dldEZlZUZvck1lc3NhZ2VSZXF1ZXN0Eg8KB21lc3NhZ2UYASABKAkSSgoKY29tbWl0bWVudBgCIAEoDjI2LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkNvbW1pdG1lbnRUeXBlIpICChdHZXRNdWx0aXBsZUFjY291bnRzT3B0cxJGCghlbmNvZGluZxgBIAEoDjI0LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkVuY29kaW5nVHlwZRJKCgpjb21taXRtZW50GAIgASgOMjYuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQ29tbWl0bWVudFR5cGUSRQoKZGF0YV9zbGljZRgDIAEoCzIxLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkRhdGFTbGljZRIcChBtaW5fY29udGV4dF9zbG90GAQgASgEQgIwACJrChZPcHRpb25hbEFjY291bnRXcmFwcGVyEkUKB2FjY291bnQYASABKAsyLy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5BY2NvdW50SACIAQFCCgoIX2FjY291bnQicQogR2V0TXVsdGlwbGVBY2NvdW50c1dpdGhPcHRzUmVwbHkSTQoFdmFsdWUYAiADKAsyPi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5PcHRpb25hbEFjY291bnRXcmFwcGVyIoUBCiJHZXRNdWx0aXBsZUFjY291bnRzV2l0aE9wdHNSZXF1ZXN0EhAKCGFjY291bnRzGAEgAygMEk0KBG9wdHMYAiABKAsyPy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5HZXRNdWx0aXBsZUFjY291bnRzT3B0cyI0Cg9SUENGaWx0ZXJNZW1jbXASEgoGb2Zmc2V0GAEgASgEQgIwABINCgVieXRlcxgCIAEoDCJrCglSUENGaWx0ZXISRwoGbWVtY21wGAEgASgLMjcuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuUlBDRmlsdGVyTWVtY21wEhUKCWRhdGFfc2l6ZRgCIAEoBEICMAAitwIKFkdldFByb2dyYW1BY2NvdW50c09wdHMSRgoIZW5jb2RpbmcYASABKA4yNC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5FbmNvZGluZ1R5cGUSSgoKY29tbWl0bWVudBgCIAEoDjI2LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkNvbW1pdG1lbnRUeXBlEkUKCmRhdGFfc2xpY2UYAyABKAsyMS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5EYXRhU2xpY2USQgoHZmlsdGVycxgEIAMoCzIxLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlJQQ0ZpbHRlciJgCgxLZXllZEFjY291bnQSDgoGcHVia2V5GAEgASgMEkAKB2FjY291bnQYAiABKAsyLy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5BY2NvdW50Il4KF0dldFByb2dyYW1BY2NvdW50c1JlcGx5EkMKBXZhbHVlGAEgAygLMjQuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuS2V5ZWRBY2NvdW50InoKGUdldFByb2dyYW1BY2NvdW50c1JlcXVlc3QSDwoHcHJvZ3JhbRgBIAEoDBJMCgRvcHRzGAIgASgLMj4uY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0UHJvZ3JhbUFjY291bnRzT3B0cyJwChlHZXRTaWduYXR1cmVTdGF0dXNlc1JlcGx5ElMKB3Jlc3VsdHMYASADKAsyQi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5HZXRTaWduYXR1cmVTdGF0dXNlc1Jlc3VsdCIrChtHZXRTaWduYXR1cmVTdGF0dXNlc1JlcXVlc3QSDAoEc2lncxgBIAMoDCLKAQoaR2V0U2lnbmF0dXJlU3RhdHVzZXNSZXN1bHQSEAoEc2xvdBgBIAEoBEICMAASHgoNY29uZmlybWF0aW9ucxgCIAEoBEICMABIAIgBARILCgNlcnIYAyABKAkSWwoTY29uZmlybWF0aW9uX3N0YXR1cxgEIAEoDjI+LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkNvbmZpcm1hdGlvblN0YXR1c1R5cGVCEAoOX2NvbmZpcm1hdGlvbnMiKAoSR2V0U2xvdEhlaWdodFJlcGx5EhIKBmhlaWdodBgBIAEoBEICMAAiYgoUR2V0U2xvdEhlaWdodFJlcXVlc3QSSgoKY29tbWl0bWVudBgBIAEoDjI2LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkNvbW1pdG1lbnRUeXBlIn4KDU1lc3NhZ2VIZWFkZXISHwoXbnVtX3JlcXVpcmVkX3NpZ25hdHVyZXMYASABKA0SJAocbnVtX3JlYWRvbmx5X3NpZ25lZF9hY2NvdW50cxgCIAEoDRImCh5udW1fcmVhZG9ubHlfdW5zaWduZWRfYWNjb3VudHMYAyABKA0i2QEKDVBhcnNlZE1lc3NhZ2USGAoQcmVjZW50X2Jsb2NraGFzaBgBIAEoDBIUCgxhY2NvdW50X2tleXMYAiADKAwSRQoGaGVhZGVyGAMgASgLMjUuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuTWVzc2FnZUhlYWRlchJRCgxpbnN0cnVjdGlvbnMYBCADKAsyOy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5Db21waWxlZEluc3RydWN0aW9uIm8KEVBhcnNlZFRyYW5zYWN0aW9uEhIKCnNpZ25hdHVyZXMYASADKAwSRgoHbWVzc2FnZRgCIAEoCzI1LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlBhcnNlZE1lc3NhZ2UiSwoNVWlUb2tlbkFtb3VudBIOCgZhbW91bnQYASABKAkSEAoIZGVjaW1hbHMYAiABKA0SGAoQdWlfYW1vdW50X3N0cmluZxgEIAEoCSK8AQoMVG9rZW5CYWxhbmNlEhUKDWFjY291bnRfaW5kZXgYASABKA0SEgoFb3duZXIYAiABKAxIAIgBARIXCgpwcm9ncmFtX2lkGAMgASgMSAGIAQESDAoEbWludBgEIAEoDBJBCgJ1aRgFIAEoCzI1LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlVpVG9rZW5BbW91bnRCCAoGX293bmVyQg0KC19wcm9ncmFtX2lkInQKEElubmVySW5zdHJ1Y3Rpb24SDQoFaW5kZXgYASABKA0SUQoMaW5zdHJ1Y3Rpb25zGAIgAygLMjsuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQ29tcGlsZWRJbnN0cnVjdGlvbiI1Cg9Mb2FkZWRBZGRyZXNzZXMSEAoIcmVhZG9ubHkYASADKAwSEAoId3JpdGFibGUYAiADKAwiZQoTQ29tcGlsZWRJbnN0cnVjdGlvbhIYChBwcm9ncmFtX2lkX2luZGV4GAEgASgNEhAKCGFjY291bnRzGAIgAygNEgwKBGRhdGEYAyABKAwSFAoMc3RhY2tfaGVpZ2h0GAQgASgNIl8KBERhdGESDwoHY29udGVudBgBIAEoDBJGCghlbmNvZGluZxgCIAEoDjI0LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkVuY29kaW5nVHlwZSJcCgpSZXR1cm5EYXRhEhIKCnByb2dyYW1faWQYASABKAwSOgoEZGF0YRgCIAEoCzIsLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkRhdGEi2gQKD1RyYW5zYWN0aW9uTWV0YRIQCghlcnJfanNvbhgBIAEoCRIPCgNmZWUYAiABKARCAjAAEhgKDHByZV9iYWxhbmNlcxgDIAMoBEICMAASGQoNcG9zdF9iYWxhbmNlcxgEIAMoBEICMAASFAoMbG9nX21lc3NhZ2VzGAUgAygJElAKEnByZV90b2tlbl9iYWxhbmNlcxgGIAMoCzI0LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlRva2VuQmFsYW5jZRJRChNwb3N0X3Rva2VuX2JhbGFuY2VzGAcgAygLMjQuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuVG9rZW5CYWxhbmNlElQKEmlubmVyX2luc3RydWN0aW9ucxgIIAMoCzI4LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLklubmVySW5zdHJ1Y3Rpb24SUQoQbG9hZGVkX2FkZHJlc3NlcxgJIAEoCzI3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkxvYWRlZEFkZHJlc3NlcxJHCgtyZXR1cm5fZGF0YRgKIAEoCzIyLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlJldHVybkRhdGESJwoWY29tcHV0ZV91bml0c19jb25zdW1lZBgLIAEoBEICMABIAIgBAUIZChdfY29tcHV0ZV91bml0c19jb25zdW1lZCKAAQoTVHJhbnNhY3Rpb25FbnZlbG9wZRINCgNyYXcYASABKAxIABJLCgZwYXJzZWQYAiABKAsyOS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5QYXJzZWRUcmFuc2FjdGlvbkgAQg0KC3RyYW5zYWN0aW9uIo8CChNHZXRUcmFuc2FjdGlvblJlcGx5EhAKBHNsb3QYASABKARCAjAAEhsKCmJsb2NrX3RpbWUYAiABKANCAjAASACIAQESVQoLdHJhbnNhY3Rpb24YAyABKAsyOy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5UcmFuc2FjdGlvbkVudmVsb3BlSAGIAQESSgoEbWV0YRgEIAEoCzI3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlRyYW5zYWN0aW9uTWV0YUgCiAEBQg0KC19ibG9ja190aW1lQg4KDF90cmFuc2FjdGlvbkIHCgVfbWV0YSIqChVHZXRUcmFuc2FjdGlvblJlcXVlc3QSEQoJc2lnbmF0dXJlGAEgASgMIu0BCg5TaW11bGF0ZVRYT3B0cxISCgpzaWdfdmVyaWZ5GAEgASgIEkoKCmNvbW1pdG1lbnQYAiABKA4yNi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5Db21taXRtZW50VHlwZRIgChhyZXBsYWNlX3JlY2VudF9ibG9ja2hhc2gYAyABKAgSWQoIYWNjb3VudHMYBCABKAsyRy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5TaW11bGF0ZVRyYW5zYWN0aW9uQWNjb3VudHNPcHRzIosBCg9TaW11bGF0ZVRYUmVwbHkSCwoDZXJyGAEgASgJEgwKBGxvZ3MYAiADKAkSQQoIYWNjb3VudHMYAyADKAsyLy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5BY2NvdW50EhoKDnVuaXRzX2NvbnN1bWVkGAQgASgEQgIwACKIAQoRU2ltdWxhdGVUWFJlcXVlc3QSEAoIcmVjZWl2ZXIYASABKAwSGwoTZW5jb2RlZF90cmFuc2FjdGlvbhgCIAEoCRJECgRvcHRzGAMgASgLMjYuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuU2ltdWxhdGVUWE9wdHMifAofU2ltdWxhdGVUcmFuc2FjdGlvbkFjY291bnRzT3B0cxJGCghlbmNvZGluZxgBIAEoDjI0LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkVuY29kaW5nVHlwZRIRCglhZGRyZXNzZXMYAiADKAwibgoPVmFsdWVDb21wYXJhdG9yEg0KBXZhbHVlGAEgASgMEkwKCG9wZXJhdG9yGAIgASgOMjouY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQ29tcGFyaXNvbk9wZXJhdG9yImgKDFN1YmtleUNvbmZpZxIMCgRwYXRoGAEgAygJEkoKCWNvbXBhcmVycxgCIAMoCzI3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlZhbHVlQ29tcGFyYXRvciI8Cg9DUElGaWx0ZXJDb25maWcSFAoMZGVzdF9hZGRyZXNzGAEgASgMEhMKC21ldGhvZF9uYW1lGAIgASgMIp0CChdGaWx0ZXJMb2dUcmlnZ2VyUmVxdWVzdBIMCgRuYW1lGAEgASgJEg8KB2FkZHJlc3MYAiABKAwSEgoKZXZlbnRfbmFtZRgDIAEoCRIZChFjb250cmFjdF9pZGxfanNvbhgEIAEoDBJFCgdzdWJrZXlzGAUgAygLMjQuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuU3Via2V5Q29uZmlnElcKEWNwaV9maWx0ZXJfY29uZmlnGAYgASgLMjcuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQ1BJRmlsdGVyQ29uZmlnSACIAQFCFAoSX2NwaV9maWx0ZXJfY29uZmlnIvQBCgNMb2cSEAoIY2hhaW5faWQYASABKAkSFQoJbG9nX2luZGV4GAIgASgDQgIwABISCgpibG9ja19oYXNoGAMgASgMEhgKDGJsb2NrX251bWJlchgEIAEoA0ICMAASGwoPYmxvY2tfdGltZXN0YW1wGAUgASgEQgIwABIPCgdhZGRyZXNzGAYgASgMEhEKCWV2ZW50X3NpZxgHIAEoDBIPCgd0eF9oYXNoGAggASgMEgwKBGRhdGEYCSABKAwSGAoMc2VxdWVuY2VfbnVtGAogASgDQgIwABISCgVlcnJvchgLIAEoCUgAiAEBQggKBl9lcnJvciI2CgtBY2NvdW50TWV0YRISCgpwdWJsaWNfa2V5GAEgASgMEhMKC2lzX3dyaXRhYmxlGAIgASgIIosCChJXcml0ZVJlcG9ydFJlcXVlc3QSTwoScmVtYWluaW5nX2FjY291bnRzGAEgAygLMjMuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuQWNjb3VudE1ldGESEAoIcmVjZWl2ZXIYAiABKAwSUgoOY29tcHV0ZV9jb25maWcYAyABKAsyNS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5Db21wdXRlQ29uZmlnSACIAQESKwoGcmVwb3J0GAQgASgLMhsuc2RrLnYxYWxwaGEuUmVwb3J0UmVzcG9uc2VCEQoPX2NvbXB1dGVfY29uZmlnIogDChBXcml0ZVJlcG9ydFJlcGx5EkMKCXR4X3N0YXR1cxgBIAEoDjIwLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLlR4U3RhdHVzEngKInJlY2VpdmVyX2NvbnRyYWN0X2V4ZWN1dGlvbl9zdGF0dXMYAiABKA4yRy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5SZWNlaXZlckNvbnRyYWN0RXhlY3V0aW9uU3RhdHVzSACIAQESGQoMdHhfc2lnbmF0dXJlGAMgASgMSAGIAQESIAoPdHJhbnNhY3Rpb25fZmVlGAQgASgEQgIwAEgCiAEBEhoKDWVycm9yX21lc3NhZ2UYBSABKAlIA4gBAUIlCiNfcmVjZWl2ZXJfY29udHJhY3RfZXhlY3V0aW9uX3N0YXR1c0IPCg1fdHhfc2lnbmF0dXJlQhIKEF90cmFuc2FjdGlvbl9mZWVCEAoOX2Vycm9yX21lc3NhZ2UqsAEKDEVuY29kaW5nVHlwZRIWChJFTkNPRElOR19UWVBFX05PTkUQABIYChRFTkNPRElOR19UWVBFX0JBU0U1OBABEhgKFEVOQ09ESU5HX1RZUEVfQkFTRTY0EAISHQoZRU5DT0RJTkdfVFlQRV9CQVNFNjRfWlNURBADEh0KGUVOQ09ESU5HX1RZUEVfSlNPTl9QQVJTRUQQBBIWChJFTkNPRElOR19UWVBFX0pTT04QBSqHAQoOQ29tbWl0bWVudFR5cGUSGAoUQ09NTUlUTUVOVF9UWVBFX05PTkUQABIdChlDT01NSVRNRU5UX1RZUEVfRklOQUxJWkVEEAESHQoZQ09NTUlUTUVOVF9UWVBFX0NPTkZJUk1FRBACEh0KGUNPTU1JVE1FTlRfVFlQRV9QUk9DRVNTRUQQAyqzAQoWQ29uZmlybWF0aW9uU3RhdHVzVHlwZRIhCh1DT05GSVJNQVRJT05fU1RBVFVTX1RZUEVfTk9ORRAAEiYKIkNPTkZJUk1BVElPTl9TVEFUVVNfVFlQRV9QUk9DRVNTRUQQARImCiJDT05GSVJNQVRJT05fU1RBVFVTX1RZUEVfQ09ORklSTUVEEAISJgoiQ09ORklSTUFUSU9OX1NUQVRVU19UWVBFX0ZJTkFMSVpFRBADKk0KCFR4U3RhdHVzEhMKD1RYX1NUQVRVU19GQVRBTBAAEhUKEVRYX1NUQVRVU19BQk9SVEVEEAESFQoRVFhfU1RBVFVTX1NVQ0NFU1MQAiq/AQoSQ29tcGFyaXNvbk9wZXJhdG9yEhoKFkNPTVBBUklTT05fT1BFUkFUT1JfRVEQABIbChdDT01QQVJJU09OX09QRVJBVE9SX05FURABEhoKFkNPTVBBUklTT05fT1BFUkFUT1JfR1QQAhIaChZDT01QQVJJU09OX09QRVJBVE9SX0xUEAMSGwoXQ09NUEFSSVNPTl9PUEVSQVRPUl9HVEUQBBIbChdDT01QQVJJU09OX09QRVJBVE9SX0xURRAFKoIBCh9SZWNlaXZlckNvbnRyYWN0RXhlY3V0aW9uU3RhdHVzEi4KKlJFQ0VJVkVSX0NPTlRSQUNUX0VYRUNVVElPTl9TVEFUVVNfU1VDQ0VTUxAAEi8KK1JFQ0VJVkVSX0NPTlRSQUNUX0VYRUNVVElPTl9TVEFUVVNfUkVWRVJURUQQATK3DQoGQ2xpZW50EqQBChZHZXRBY2NvdW50SW5mb1dpdGhPcHRzEkUuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0QWNjb3VudEluZm9XaXRoT3B0c1JlcXVlc3QaQy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5HZXRBY2NvdW50SW5mb1dpdGhPcHRzUmVwbHkSgAEKCkdldEJhbGFuY2USOS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5HZXRCYWxhbmNlUmVxdWVzdBo3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldEJhbGFuY2VSZXBseRJ6CghHZXRCbG9jaxI3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldEJsb2NrUmVxdWVzdBo1LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldEJsb2NrUmVwbHkSkgEKEEdldEZlZUZvck1lc3NhZ2USPy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5HZXRGZWVGb3JNZXNzYWdlUmVxdWVzdBo9LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldEZlZUZvck1lc3NhZ2VSZXBseRKzAQobR2V0TXVsdGlwbGVBY2NvdW50c1dpdGhPcHRzEkouY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0TXVsdGlwbGVBY2NvdW50c1dpdGhPcHRzUmVxdWVzdBpILmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldE11bHRpcGxlQWNjb3VudHNXaXRoT3B0c1JlcGx5EpgBChJHZXRQcm9ncmFtQWNjb3VudHMSQS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5zb2xhbmEudjFhbHBoYS5HZXRQcm9ncmFtQWNjb3VudHNSZXF1ZXN0Gj8uY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0UHJvZ3JhbUFjY291bnRzUmVwbHkSngEKFEdldFNpZ25hdHVyZVN0YXR1c2VzEkMuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0U2lnbmF0dXJlU3RhdHVzZXNSZXF1ZXN0GkEuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0U2lnbmF0dXJlU3RhdHVzZXNSZXBseRKJAQoNR2V0U2xvdEhlaWdodBI8LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldFNsb3RIZWlnaHRSZXF1ZXN0GjouY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuR2V0U2xvdEhlaWdodFJlcGx5EowBCg5HZXRUcmFuc2FjdGlvbhI9LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldFRyYW5zYWN0aW9uUmVxdWVzdBo7LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkdldFRyYW5zYWN0aW9uUmVwbHkSfAoKTG9nVHJpZ2dlchI/LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhLkZpbHRlckxvZ1RyaWdnZXJSZXF1ZXN0GisuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuTG9nMAESgwEKC1dyaXRlUmVwb3J0EjouY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuV3JpdGVSZXBvcnRSZXF1ZXN0GjguY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uc29sYW5hLnYxYWxwaGEuV3JpdGVSZXBvcnRSZXBseRphgrUYXQgBEgxzb2xhbmFAMS4wLjAaSwoNQ2hhaW5TZWxlY3RvchI6EjgKGgoNc29sYW5hLWRldm5ldBDf74ynqfyx9uMBChoKDnNvbGFuYS1tYWlubmV0EOeT34y2n67dAUL0AQoqY29tLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLnNvbGFuYS52MWFscGhhQgtDbGllbnRQcm90b1ABogIDQ0JTqgImQ2FwYWJpbGl0aWVzLkJsb2NrY2hhaW4uU29sYW5hLlYxYWxwaGHKAiZDYXBhYmlsaXRpZXNcQmxvY2tjaGFpblxTb2xhbmFcVjFhbHBoYeICMkNhcGFiaWxpdGllc1xCbG9ja2NoYWluXFNvbGFuYVxWMWFscGhhXEdQQk1ldGFkYXRh6gIpQ2FwYWJpbGl0aWVzOjpCbG9ja2NoYWluOjpTb2xhbmE6OlYxYWxwaGFiBnByb3RvMw", [file_sdk_v1alpha_sdk, file_tools_generator_v1alpha_cre_metadata, file_values_v1_values]);
+var ComputeConfigSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 1);
+var GetAccountInfoWithOptsReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 5);
+var GetAccountInfoWithOptsRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 6);
+var GetBalanceReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 7);
+var GetBalanceRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 8);
+var GetBlockReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 10);
+var GetBlockRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 11);
+var GetFeeForMessageReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 12);
+var GetFeeForMessageRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 13);
+var GetMultipleAccountsWithOptsReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 16);
+var GetMultipleAccountsWithOptsRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 17);
+var GetProgramAccountsReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 22);
+var GetProgramAccountsRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 23);
+var GetSignatureStatusesReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 24);
+var GetSignatureStatusesRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 25);
+var GetSlotHeightReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 27);
+var GetSlotHeightRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 28);
+var GetTransactionReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 41);
+var GetTransactionRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 42);
+var FilterLogTriggerRequestSchema2 = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 50);
+var LogSchema2 = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 51);
+var AccountMetaSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 52);
+var WriteReportRequestSchema2 = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 53);
+var WriteReportReplySchema2 = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_solana_v1alpha_client, 54);
 var EncodingType;
 (function(EncodingType2) {
   EncodingType2[EncodingType2["NONE"] = 0] = "NONE";
@@ -7756,6 +8210,440 @@ var ReceiverContractExecutionStatus2;
   ReceiverContractExecutionStatus3[ReceiverContractExecutionStatus3["SUCCESS"] = 0] = "SUCCESS";
   ReceiverContractExecutionStatus3[ReceiverContractExecutionStatus3["REVERTED"] = 1] = "REVERTED";
 })(ReceiverContractExecutionStatus2 || (ReceiverContractExecutionStatus2 = {}));
+function createWriteCreReportRequest2(input) {
+  return {
+    remainingAccounts: (input.remainingAccounts ?? []).map((v) => fromJson(AccountMetaSchema, v)),
+    receiver: hexToBytes3(input.receiver),
+    computeConfig: input.computeConfig !== undefined ? fromJson(ComputeConfigSchema, input.computeConfig) : undefined,
+    report: input.report,
+    $report: true
+  };
+}
+function x_generatedCodeOnly_unwrap_WriteCreReportRequest2(input) {
+  return create(WriteReportRequestSchema2, {
+    remainingAccounts: input.remainingAccounts,
+    receiver: input.receiver,
+    computeConfig: input.computeConfig,
+    report: input.report !== undefined ? input.report.x_generatedCodeOnly_unwrap() : undefined
+  });
+}
+
+class ClientCapability2 {
+  ChainSelector;
+  static CAPABILITY_ID = "solana@1.0.0";
+  static CAPABILITY_NAME = "solana";
+  static CAPABILITY_VERSION = "1.0.0";
+  static SUPPORTED_CHAIN_SELECTORS = {
+    "solana-devnet": 16423721717087811551n,
+    "solana-mainnet": 124615329519749607n
+  };
+  constructor(ChainSelector) {
+    this.ChainSelector = ChainSelector;
+  }
+  getAccountInfoWithOpts(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetAccountInfoWithOptsRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetAccountInfoWithOpts",
+      payload,
+      inputSchema: GetAccountInfoWithOptsRequestSchema,
+      outputSchema: GetAccountInfoWithOptsReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getBalance(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetBalanceRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetBalance",
+      payload,
+      inputSchema: GetBalanceRequestSchema,
+      outputSchema: GetBalanceReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getBlock(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetBlockRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetBlock",
+      payload,
+      inputSchema: GetBlockRequestSchema,
+      outputSchema: GetBlockReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getFeeForMessage(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetFeeForMessageRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetFeeForMessage",
+      payload,
+      inputSchema: GetFeeForMessageRequestSchema,
+      outputSchema: GetFeeForMessageReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getMultipleAccountsWithOpts(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetMultipleAccountsWithOptsRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetMultipleAccountsWithOpts",
+      payload,
+      inputSchema: GetMultipleAccountsWithOptsRequestSchema,
+      outputSchema: GetMultipleAccountsWithOptsReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getProgramAccounts(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetProgramAccountsRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetProgramAccounts",
+      payload,
+      inputSchema: GetProgramAccountsRequestSchema,
+      outputSchema: GetProgramAccountsReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getSignatureStatuses(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetSignatureStatusesRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetSignatureStatuses",
+      payload,
+      inputSchema: GetSignatureStatusesRequestSchema,
+      outputSchema: GetSignatureStatusesReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getSlotHeight(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetSlotHeightRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetSlotHeight",
+      payload,
+      inputSchema: GetSlotHeightRequestSchema,
+      outputSchema: GetSlotHeightReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getTransaction(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetTransactionRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetTransaction",
+      payload,
+      inputSchema: GetTransactionRequestSchema,
+      outputSchema: GetTransactionReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  logTrigger(config) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return new ClientLogTrigger2(config, capabilityId, "LogTrigger", this.ChainSelector);
+  }
+  writeReport(runtime, input) {
+    let payload;
+    if (input.$report) {
+      payload = x_generatedCodeOnly_unwrap_WriteCreReportRequest2(input);
+    } else {
+      payload = x_generatedCodeOnly_unwrap_WriteCreReportRequest2(createWriteCreReportRequest2(input));
+    }
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "WriteReport",
+      payload,
+      inputSchema: WriteReportRequestSchema2,
+      outputSchema: WriteReportReplySchema2
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+}
+
+class ClientLogTrigger2 {
+  _capabilityId;
+  _method;
+  ChainSelector;
+  config;
+  constructor(config, _capabilityId, _method, ChainSelector) {
+    this._capabilityId = _capabilityId;
+    this._method = _method;
+    this.ChainSelector = ChainSelector;
+    this.config = config.$typeName ? config : fromJson(FilterLogTriggerRequestSchema2, config);
+  }
+  capabilityId() {
+    return this._capabilityId;
+  }
+  method() {
+    return this._method;
+  }
+  outputSchema() {
+    return LogSchema2;
+  }
+  configAsAny() {
+    return anyPack(FilterLogTriggerRequestSchema2, this.config);
+  }
+  adapt(rawOutput) {
+    return rawOutput;
+  }
+}
+
+class ClientRestrictor2 {
+  ChainSelector;
+  constructor(ChainSelector) {
+    this.ChainSelector = ChainSelector;
+  }
+  limitGetAccountInfoWithOpts(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetAccountInfoWithOpts",
+        maxCalls
+      }
+    };
+  }
+  limitGetBalance(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetBalance",
+        maxCalls
+      }
+    };
+  }
+  limitGetBlock(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetBlock",
+        maxCalls
+      }
+    };
+  }
+  limitGetFeeForMessage(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetFeeForMessage",
+        maxCalls
+      }
+    };
+  }
+  limitGetMultipleAccountsWithOpts(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetMultipleAccountsWithOpts",
+        maxCalls
+      }
+    };
+  }
+  limitGetProgramAccounts(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetProgramAccounts",
+        maxCalls
+      }
+    };
+  }
+  limitGetSignatureStatuses(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetSignatureStatuses",
+        maxCalls
+      }
+    };
+  }
+  limitGetSlotHeight(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetSlotHeight",
+        maxCalls
+      }
+    };
+  }
+  limitGetTransaction(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "GetTransaction",
+        maxCalls
+      }
+    };
+  }
+  limitWriteReport(maxCalls) {
+    const capabilityId = `${ClientCapability2.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability2.CAPABILITY_VERSION}`;
+    return {
+      method: {
+        id: capabilityId,
+        method: "WriteReport",
+        maxCalls
+      }
+    };
+  }
+}
+var file_capabilities_networking_confidentialhttp_v1alpha_client = /* @__PURE__ */ fileDesc("Cj1jYXBhYmlsaXRpZXMvbmV0d29ya2luZy9jb25maWRlbnRpYWxodHRwL3YxYWxwaGEvY2xpZW50LnByb3RvEjBjYXBhYmlsaXRpZXMubmV0d29ya2luZy5jb25maWRlbnRpYWxodHRwLnYxYWxwaGEiUAoQU2VjcmV0SWRlbnRpZmllchILCgNrZXkYASABKAkSEQoJbmFtZXNwYWNlGAIgASgJEhIKBW93bmVyGAMgASgJSACIAQFCCAoGX293bmVyIh4KDEhlYWRlclZhbHVlcxIOCgZ2YWx1ZXMYASADKAki1wQKC0hUVFBSZXF1ZXN0EgsKA3VybBgBIAEoCRIOCgZtZXRob2QYAiABKAkSFQoLYm9keV9zdHJpbmcYAyABKAlIABIUCgpib2R5X2J5dGVzGAggASgMSAASZgoNbXVsdGlfaGVhZGVycxgEIAMoCzJPLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmNvbmZpZGVudGlhbGh0dHAudjFhbHBoYS5IVFRQUmVxdWVzdC5NdWx0aUhlYWRlcnNFbnRyeRJ3ChZ0ZW1wbGF0ZV9wdWJsaWNfdmFsdWVzGAUgAygLMlcuY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuY29uZmlkZW50aWFsaHR0cC52MWFscGhhLkhUVFBSZXF1ZXN0LlRlbXBsYXRlUHVibGljVmFsdWVzRW50cnkSHwoXY3VzdG9tX3Jvb3RfY2FfY2VydF9wZW0YBiABKAwSKgoHdGltZW91dBgHIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbhIWCg5lbmNyeXB0X291dHB1dBgJIAEoCBpzChFNdWx0aUhlYWRlcnNFbnRyeRILCgNrZXkYASABKAkSTQoFdmFsdWUYAiABKAsyPi5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5jb25maWRlbnRpYWxodHRwLnYxYWxwaGEuSGVhZGVyVmFsdWVzOgI4ARo7ChlUZW1wbGF0ZVB1YmxpY1ZhbHVlc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCBgoEYm9keSKPAgoMSFRUUFJlc3BvbnNlEhMKC3N0YXR1c19jb2RlGAEgASgNEgwKBGJvZHkYAiABKAwSZwoNbXVsdGlfaGVhZGVycxgDIAMoCzJQLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmNvbmZpZGVudGlhbGh0dHAudjFhbHBoYS5IVFRQUmVzcG9uc2UuTXVsdGlIZWFkZXJzRW50cnkacwoRTXVsdGlIZWFkZXJzRW50cnkSCwoDa2V5GAEgASgJEk0KBXZhbHVlGAIgASgLMj4uY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuY29uZmlkZW50aWFsaHR0cC52MWFscGhhLkhlYWRlclZhbHVlczoCOAEiyAEKF0NvbmZpZGVudGlhbEhUVFBSZXF1ZXN0El0KEXZhdWx0X2Rvbl9zZWNyZXRzGAEgAygLMkIuY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuY29uZmlkZW50aWFsaHR0cC52MWFscGhhLlNlY3JldElkZW50aWZpZXISTgoHcmVxdWVzdBgCIAEoCzI9LmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmNvbmZpZGVudGlhbGh0dHAudjFhbHBoYS5IVFRQUmVxdWVzdDLKAQoGQ2xpZW50EpgBCgtTZW5kUmVxdWVzdBJJLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmNvbmZpZGVudGlhbGh0dHAudjFhbHBoYS5Db25maWRlbnRpYWxIVFRQUmVxdWVzdBo+LmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmNvbmZpZGVudGlhbGh0dHAudjFhbHBoYS5IVFRQUmVzcG9uc2UaJYK1GCEIARIdY29uZmlkZW50aWFsLWh0dHBAMS4wLjAtYWxwaGFCpgIKNGNvbS5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5jb25maWRlbnRpYWxodHRwLnYxYWxwaGFCC0NsaWVudFByb3RvUAGiAgNDTkOqAjBDYXBhYmlsaXRpZXMuTmV0d29ya2luZy5Db25maWRlbnRpYWxodHRwLlYxYWxwaGHKAjBDYXBhYmlsaXRpZXNcTmV0d29ya2luZ1xDb25maWRlbnRpYWxodHRwXFYxYWxwaGHiAjxDYXBhYmlsaXRpZXNcTmV0d29ya2luZ1xDb25maWRlbnRpYWxodHRwXFYxYWxwaGFcR1BCTWV0YWRhdGHqAjNDYXBhYmlsaXRpZXM6Ok5ldHdvcmtpbmc6OkNvbmZpZGVudGlhbGh0dHA6OlYxYWxwaGFiBnByb3RvMw", [file_google_protobuf_duration, file_tools_generator_v1alpha_cre_metadata]);
+var HTTPResponseSchema = /* @__PURE__ */ messageDesc(file_capabilities_networking_confidentialhttp_v1alpha_client, 3);
+var ConfidentialHTTPRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_networking_confidentialhttp_v1alpha_client, 4);
+
+class ClientCapability3 {
+  static CAPABILITY_ID = "confidential-http@1.0.0-alpha";
+  static CAPABILITY_NAME = "confidential-http";
+  static CAPABILITY_VERSION = "1.0.0-alpha";
+  sendRequest(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(ConfidentialHTTPRequestSchema, input);
+    }
+    const capabilityId = ClientCapability3.CAPABILITY_ID;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "SendRequest",
+      payload,
+      inputSchema: ConfidentialHTTPRequestSchema,
+      outputSchema: HTTPResponseSchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+}
+
+class ClientRestrictor3 {
+  limitSendRequest(maxCalls) {
+    const capabilityId = ClientCapability3.CAPABILITY_ID;
+    return {
+      method: {
+        id: capabilityId,
+        method: "SendRequest",
+        maxCalls
+      }
+    };
+  }
+}
 var file_capabilities_networking_http_v1alpha_client = /* @__PURE__ */ fileDesc("CjFjYXBhYmlsaXRpZXMvbmV0d29ya2luZy9odHRwL3YxYWxwaGEvY2xpZW50LnByb3RvEiRjYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGEiSgoNQ2FjaGVTZXR0aW5ncxINCgVzdG9yZRgBIAEoCBIqCgdtYXhfYWdlGAIgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uIh4KDEhlYWRlclZhbHVlcxIOCgZ2YWx1ZXMYASADKAkiNAoITXRsc0F1dGgSEwoLcHJpdmF0ZV9rZXkYASABKAwSEwoLY2VydGlmaWNhdGUYAiABKAwiuwQKB1JlcXVlc3QSCwoDdXJsGAEgASgJEg4KBm1ldGhvZBgCIAEoCRJPCgdoZWFkZXJzGAMgAygLMjouY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuaHR0cC52MWFscGhhLlJlcXVlc3QuSGVhZGVyc0VudHJ5QgIYARIMCgRib2R5GAQgASgMEioKB3RpbWVvdXQYBSABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb24SSwoOY2FjaGVfc2V0dGluZ3MYBiABKAsyMy5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGEuQ2FjaGVTZXR0aW5ncxJWCg1tdWx0aV9oZWFkZXJzGAcgAygLMj8uY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuaHR0cC52MWFscGhhLlJlcXVlc3QuTXVsdGlIZWFkZXJzRW50cnkSQQoEbXRscxgIIAEoCzIuLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmh0dHAudjFhbHBoYS5NdGxzQXV0aEgAiAEBGi4KDEhlYWRlcnNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGmcKEU11bHRpSGVhZGVyc0VudHJ5EgsKA2tleRgBIAEoCRJBCgV2YWx1ZRgCIAEoCzIyLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmh0dHAudjFhbHBoYS5IZWFkZXJWYWx1ZXM6AjgBQgcKBV9tdGxzIvECCghSZXNwb25zZRITCgtzdGF0dXNfY29kZRgBIAEoDRJQCgdoZWFkZXJzGAIgAygLMjsuY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuaHR0cC52MWFscGhhLlJlc3BvbnNlLkhlYWRlcnNFbnRyeUICGAESDAoEYm9keRgDIAEoDBJXCg1tdWx0aV9oZWFkZXJzGAQgAygLMkAuY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuaHR0cC52MWFscGhhLlJlc3BvbnNlLk11bHRpSGVhZGVyc0VudHJ5Gi4KDEhlYWRlcnNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGmcKEU11bHRpSGVhZGVyc0VudHJ5EgsKA2tleRgBIAEoCRJBCgV2YWx1ZRgCIAEoCzIyLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmh0dHAudjFhbHBoYS5IZWFkZXJWYWx1ZXM6AjgBMpsBCgZDbGllbnQSbAoLU2VuZFJlcXVlc3QSLS5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGEuUmVxdWVzdBouLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmh0dHAudjFhbHBoYS5SZXNwb25zZRojgrUYHwgCEhhodHRwLWFjdGlvbnNAMS4wLjAtYWxwaGEiAQFC6gEKKGNvbS5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGFCC0NsaWVudFByb3RvUAGiAgNDTkiqAiRDYXBhYmlsaXRpZXMuTmV0d29ya2luZy5IdHRwLlYxYWxwaGHKAiRDYXBhYmlsaXRpZXNcTmV0d29ya2luZ1xIdHRwXFYxYWxwaGHiAjBDYXBhYmlsaXRpZXNcTmV0d29ya2luZ1xIdHRwXFYxYWxwaGFcR1BCTWV0YWRhdGHqAidDYXBhYmlsaXRpZXM6Ok5ldHdvcmtpbmc6Okh0dHA6OlYxYWxwaGFiBnByb3RvMw", [file_google_protobuf_duration, file_tools_generator_v1alpha_cre_metadata]);
 var RequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_networking_http_v1alpha_client, 3);
 var ResponseSchema = /* @__PURE__ */ messageDesc(file_capabilities_networking_http_v1alpha_client, 4);
@@ -7772,7 +8660,7 @@ class SendRequester {
   }
 }
 
-class ClientCapability {
+class ClientCapability4 {
   static CAPABILITY_ID = "http-actions@1.0.0-alpha";
   static CAPABILITY_NAME = "http-actions";
   static CAPABILITY_VERSION = "1.0.0-alpha";
@@ -7791,7 +8679,7 @@ class ClientCapability {
     } else {
       payload = fromJson(RequestSchema, input);
     }
-    const capabilityId = ClientCapability.CAPABILITY_ID;
+    const capabilityId = ClientCapability4.CAPABILITY_ID;
     const capabilityResponse = runtime.callCapability({
       capabilityId,
       method: "SendRequest",
@@ -7814,11 +8702,66 @@ class ClientCapability {
     return runtime.runInNodeMode(wrappedFn, consensusAggregation, unwrapOptions);
   }
 }
+
+class ClientRestrictor4 {
+  limitSendRequest(maxCalls) {
+    const capabilityId = ClientCapability4.CAPABILITY_ID;
+    return {
+      method: {
+        id: capabilityId,
+        method: "SendRequest",
+        maxCalls
+      }
+    };
+  }
+}
+var file_capabilities_networking_http_v1alpha_trigger = /* @__PURE__ */ fileDesc("CjJjYXBhYmlsaXRpZXMvbmV0d29ya2luZy9odHRwL3YxYWxwaGEvdHJpZ2dlci5wcm90bxIkY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuaHR0cC52MWFscGhhIlYKBkNvbmZpZxJMCg9hdXRob3JpemVkX2tleXMYASADKAsyMy5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGEuQXV0aG9yaXplZEtleSJaCgdQYXlsb2FkEg0KBWlucHV0GAEgASgMEkAKA2tleRgCIAEoCzIzLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmh0dHAudjFhbHBoYS5BdXRob3JpemVkS2V5ImAKDUF1dGhvcml6ZWRLZXkSOwoEdHlwZRgBIAEoDjItLmNhcGFiaWxpdGllcy5uZXR3b3JraW5nLmh0dHAudjFhbHBoYS5LZXlUeXBlEhIKCnB1YmxpY19rZXkYAiABKAkqOwoHS2V5VHlwZRIYChRLRVlfVFlQRV9VTlNQRUNJRklFRBAAEhYKEktFWV9UWVBFX0VDRFNBX0VWTRABMpIBCgRIVFRQEmgKB1RyaWdnZXISLC5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGEuQ29uZmlnGi0uY2FwYWJpbGl0aWVzLm5ldHdvcmtpbmcuaHR0cC52MWFscGhhLlBheWxvYWQwARoggrUYHAgBEhhodHRwLXRyaWdnZXJAMS4wLjAtYWxwaGFC6wEKKGNvbS5jYXBhYmlsaXRpZXMubmV0d29ya2luZy5odHRwLnYxYWxwaGFCDFRyaWdnZXJQcm90b1ABogIDQ05IqgIkQ2FwYWJpbGl0aWVzLk5ldHdvcmtpbmcuSHR0cC5WMWFscGhhygIkQ2FwYWJpbGl0aWVzXE5ldHdvcmtpbmdcSHR0cFxWMWFscGhh4gIwQ2FwYWJpbGl0aWVzXE5ldHdvcmtpbmdcSHR0cFxWMWFscGhhXEdQQk1ldGFkYXRh6gInQ2FwYWJpbGl0aWVzOjpOZXR3b3JraW5nOjpIdHRwOjpWMWFscGhhYgZwcm90bzM", [file_tools_generator_v1alpha_cre_metadata]);
+var ConfigSchema = /* @__PURE__ */ messageDesc(file_capabilities_networking_http_v1alpha_trigger, 0);
+var PayloadSchema = /* @__PURE__ */ messageDesc(file_capabilities_networking_http_v1alpha_trigger, 1);
 var KeyType;
 (function(KeyType2) {
   KeyType2[KeyType2["UNSPECIFIED"] = 0] = "UNSPECIFIED";
   KeyType2[KeyType2["ECDSA_EVM"] = 1] = "ECDSA_EVM";
 })(KeyType || (KeyType = {}));
+
+class HTTPCapability {
+  static CAPABILITY_ID = "http-trigger@1.0.0-alpha";
+  static CAPABILITY_NAME = "http-trigger";
+  static CAPABILITY_VERSION = "1.0.0-alpha";
+  trigger(config) {
+    const capabilityId = HTTPCapability.CAPABILITY_ID;
+    return new HTTPTrigger(config, capabilityId, "Trigger");
+  }
+}
+
+class HTTPTrigger {
+  _capabilityId;
+  _method;
+  config;
+  constructor(config, _capabilityId, _method) {
+    this._capabilityId = _capabilityId;
+    this._method = _method;
+    this.config = config.$typeName ? config : fromJson(ConfigSchema, config);
+  }
+  capabilityId() {
+    return this._capabilityId;
+  }
+  method() {
+    return this._method;
+  }
+  outputSchema() {
+    return PayloadSchema;
+  }
+  configAsAny() {
+    return anyPack(ConfigSchema, this.config);
+  }
+  adapt(rawOutput) {
+    return rawOutput;
+  }
+}
+
+class HTTPRestrictor {
+}
 var file_capabilities_scheduler_cron_v1_trigger = /* @__PURE__ */ fileDesc("CixjYXBhYmlsaXRpZXMvc2NoZWR1bGVyL2Nyb24vdjEvdHJpZ2dlci5wcm90bxIeY2FwYWJpbGl0aWVzLnNjaGVkdWxlci5jcm9uLnYxIhoKBkNvbmZpZxIQCghzY2hlZHVsZRgBIAEoCSJHCgdQYXlsb2FkEjwKGHNjaGVkdWxlZF9leGVjdXRpb25fdGltZRgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiNQoNTGVnYWN5UGF5bG9hZBIgChhzY2hlZHVsZWRfZXhlY3V0aW9uX3RpbWUYASABKAk6AhgBMvUBCgRDcm9uElwKB1RyaWdnZXISJi5jYXBhYmlsaXRpZXMuc2NoZWR1bGVyLmNyb24udjEuQ29uZmlnGicuY2FwYWJpbGl0aWVzLnNjaGVkdWxlci5jcm9uLnYxLlBheWxvYWQwARJzCg1MZWdhY3lUcmlnZ2VyEiYuY2FwYWJpbGl0aWVzLnNjaGVkdWxlci5jcm9uLnYxLkNvbmZpZxotLmNhcGFiaWxpdGllcy5zY2hlZHVsZXIuY3Jvbi52MS5MZWdhY3lQYXlsb2FkIgmIAgGKtRgCCAEwARoagrUYFggBEhJjcm9uLXRyaWdnZXJAMS4wLjBCzQEKImNvbS5jYXBhYmlsaXRpZXMuc2NoZWR1bGVyLmNyb24udjFCDFRyaWdnZXJQcm90b1ABogIDQ1NDqgIeQ2FwYWJpbGl0aWVzLlNjaGVkdWxlci5Dcm9uLlYxygIeQ2FwYWJpbGl0aWVzXFNjaGVkdWxlclxDcm9uXFYx4gIqQ2FwYWJpbGl0aWVzXFNjaGVkdWxlclxDcm9uXFYxXEdQQk1ldGFkYXRh6gIhQ2FwYWJpbGl0aWVzOjpTY2hlZHVsZXI6OkNyb246OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tools_generator_v1alpha_cre_metadata]);
 var ConfigSchema2 = /* @__PURE__ */ messageDesc(file_capabilities_scheduler_cron_v1_trigger, 0);
 var PayloadSchema2 = /* @__PURE__ */ messageDesc(file_capabilities_scheduler_cron_v1_trigger, 1);
@@ -7857,6 +8800,9 @@ class CronTrigger {
   adapt(rawOutput) {
     return rawOutput;
   }
+}
+
+class CronRestrictor {
 }
 var lookup = [];
 var revLookup = [];
@@ -13498,12 +14444,69 @@ var anyTeeConstraintSchema = exports_external.object({
   regions: exports_external.array(regionSchema).nonempty().optional()
 }).strict();
 var teeConstraintSchema = exports_external.union([oneOfTeesSchema, anyTeeConstraintSchema]);
+function buildTeeRequirements(input) {
+  const parsed = teeConstraintSchema.parse(input);
+  if (Array.isArray(parsed)) {
+    const teeTypes = parsed.map((binding) => ({
+      type: teeTypeFromBinding(binding),
+      regions: binding.regions ?? []
+    }));
+    return create(RequirementsSchema, {
+      tee: create(TeeSchema, {
+        item: {
+          case: "teeTypesAndRegions",
+          value: create(TeeTypesAndRegionsSchema, { teeTypeAndRegions: teeTypes })
+        }
+      })
+    });
+  }
+  return create(RequirementsSchema, {
+    tee: create(TeeSchema, {
+      item: {
+        case: "anyRegions",
+        value: create(RegionsSchema, { regions: parsed.regions ?? [] })
+      }
+    })
+  });
+}
+function teeTypeFromBinding(binding) {
+  switch (binding.tee) {
+    case "nitro":
+      return TeeType.AWS_NITRO;
+  }
+}
 var handler = (trigger, fn, hooks) => ({
   trigger,
   fn,
   hooks
 });
+var handlerInTee = (trigger, fn, tees, hooks) => ({
+  trigger,
+  fn,
+  requirements: buildTeeRequirements(tees),
+  hooks
+});
 prepareRuntime();
+var cre = {
+  capabilities: {
+    CronCapability,
+    HTTPCapability,
+    ConfidentialHTTPClient: ClientCapability3,
+    HTTPClient: ClientCapability4,
+    EVMClient: ClientCapability,
+    SolanaClient: ClientCapability2
+  },
+  restrictors: {
+    CronRestrictor,
+    HTTPRestrictor,
+    ConfidentialHTTPRestrictor: ClientRestrictor3,
+    HTTPClientRestrictor: ClientRestrictor4,
+    EVMRestrictor: ClientRestrictor,
+    SolanaRestrictor: ClientRestrictor2
+  },
+  handler,
+  handlerInTee
+};
 function assertSafeIntegerNumber(value, label) {
   if (!Number.isFinite(value) || !Number.isInteger(value)) {
     throw new Error(`${label} requires an integer number, received ${value}`);
@@ -14372,6 +15375,19 @@ var U64_SIGN_BIT = 1n << 63n;
 var UTF8_ENCODER = new TextEncoder;
 var ANCHOR_CPI_METHOD_NAME = "anchor:event";
 var ANCHOR_CPI_METHOD_NAME_B64 = bytesToBase64(UTF8_ENCODER.encode(ANCHOR_CPI_METHOD_NAME));
+var decodeJson = (input) => {
+  const decoder = new TextDecoder("utf-8");
+  const textBody = decoder.decode(input);
+  return JSON.parse(textBody);
+};
+function json(responseOrFn) {
+  if (typeof responseOrFn === "function") {
+    return {
+      result: () => json(responseOrFn().result)
+    };
+  }
+  return decodeJson(responseOrFn.body);
+}
 function sendReport(runtime, report, fn) {
   const rawReport = report.x_generatedCodeOnly_unwrap();
   const request = fn(rawReport);
@@ -14382,7 +15398,7 @@ function sendRequesterSendReport(report, fn) {
   const request = fn(rawReport);
   return this.sendRequest(request);
 }
-ClientCapability.prototype.sendReport = sendReport;
+ClientCapability4.prototype.sendReport = sendReport;
 SendRequester.prototype.sendReport = sendRequesterSendReport;
 var network = {
   chainId: "1",
@@ -19054,6 +20070,33 @@ function unwrap(value) {
 function isValueProto(value) {
   return value != null && typeof value.$typeName === "string" && value.$typeName === "values.v1.Value";
 }
+function consensusIdenticalAggregation() {
+  return simpleConsensus(AggregationType.IDENTICAL);
+}
+
+class ConsensusImpl {
+  descriptor;
+  defaultValue;
+  constructor(descriptor, defaultValue) {
+    this.descriptor = descriptor;
+    this.defaultValue = defaultValue;
+  }
+  withDefault(t) {
+    return new ConsensusImpl(this.descriptor, t);
+  }
+  _usesUToForceShape(_) {}
+}
+function simpleConsensus(agg) {
+  return new ConsensusImpl(simpleDescriptor(agg));
+}
+function simpleDescriptor(agg) {
+  return create(ConsensusDescriptorSchema, {
+    descriptor: {
+      case: "aggregation",
+      value: agg
+    }
+  });
+}
 async function standardValidate(schema, input) {
   let result = schema["~standard"].validate(input);
   if (result instanceof Promise)
@@ -19807,15 +20850,418 @@ var sendErrorResponse = (error2) => {
   }
   hostBindings.sendResponse(payload);
 };
+var U32_MASK642 = /* @__PURE__ */ (() => BigInt(2 ** 32 - 1))();
+var _32n2 = /* @__PURE__ */ BigInt(32);
+function fromBig2(n, le = false) {
+  if (le)
+    return { h: Number(n & U32_MASK642), l: Number(n >> _32n2 & U32_MASK642) };
+  return { h: Number(n >> _32n2 & U32_MASK642) | 0, l: Number(n & U32_MASK642) | 0 };
+}
+function split2(lst, le = false) {
+  const len2 = lst.length;
+  let Ah = new Uint32Array(len2);
+  let Al = new Uint32Array(len2);
+  for (let i2 = 0;i2 < len2; i2++) {
+    const { h, l } = fromBig2(lst[i2], le);
+    [Ah[i2], Al[i2]] = [h, l];
+  }
+  return [Ah, Al];
+}
+function isBytes5(a) {
+  return a instanceof Uint8Array || ArrayBuffer.isView(a) && a.constructor.name === "Uint8Array" && "BYTES_PER_ELEMENT" in a && a.BYTES_PER_ELEMENT === 1;
+}
+var atitle = (title) => title ? `"${title}" ` : "";
+function anumber3(n, title = "") {
+  if (typeof n !== "number")
+    throw new TypeError(atitle(title) + "expected number, got " + typeof n);
+  if (!Number.isSafeInteger(n) || n < 0)
+    throw new RangeError(atitle(title) + "expected integer >= 0, got " + n);
+  return n;
+}
+function abool2(value2, title = "") {
+  if (typeof value2 !== "boolean")
+    throw new TypeError(atitle(title) + "expected boolean, got type=" + typeof value2);
+  return value2;
+}
+function abytes4(value2, length, title = "") {
+  if (isBytes5(value2) && (length === undefined || value2.length === length))
+    return value2;
+  if (length !== undefined)
+    anumber3(length, "length");
+  const bytes = isBytes5(value2);
+  const ofLen = length !== undefined ? ` of length ${length}` : "";
+  const got = bytes ? `length=${value2.length}` : `type=${typeof value2}`;
+  const message = atitle(title) + "expected Uint8Array" + ofLen + ", got " + got;
+  if (!bytes)
+    throw new TypeError(message);
+  throw new RangeError(message);
+}
+var aobject = (value2, label) => {
+  if (value2 === null || typeof value2 !== "object" || Array.isArray(value2))
+    throw new TypeError((label === "object" ? "" : `"${label}" `) + "expected object, got type=" + typeof value2);
+};
+var aopts = (value2, label) => {
+  aobject(value2, label);
+  const proto = Object.getPrototypeOf(value2);
+  if (proto !== Object.prototype && proto !== null)
+    throw new TypeError(`"${label}" expected plain object`);
+  if (Object.hasOwn(value2, "__proto__"))
+    throw new TypeError(`"${label}.__proto__" is not allowed`);
+};
+function aexists3(instance, checkFinished = true) {
+  if (instance.destroyed)
+    throw new Error("hash was destroyed");
+  if (checkFinished && instance.finished)
+    throw new Error("digest() was already called");
+}
+function aoutput3(out, instance) {
+  abytes4(out, undefined, "output");
+  const min = instance.outputLen;
+  if (!(out.length >= min)) {
+    throw new RangeError('"output" expected length >= ' + min);
+  }
+}
+function u322(arr) {
+  return new Uint32Array(arr.buffer, arr.byteOffset, Math.floor(arr.byteLength / 4));
+}
+function clean3(...arrays) {
+  for (let i2 = 0;i2 < arrays.length; i2++) {
+    arrays[i2].fill(0);
+  }
+}
+var isLE2 = /* @__PURE__ */ (() => new Uint8Array(new Uint32Array([287454020]).buffer)[0] === 68)();
+function byteSwap2(word) {
+  return word << 24 & 4278190080 | word << 8 & 16711680 | word >>> 8 & 65280 | word >>> 24 & 255;
+}
+function byteSwap322(arr) {
+  for (let i2 = 0;i2 < arr.length; i2++) {
+    arr[i2] = byteSwap2(arr[i2]);
+  }
+  return arr;
+}
+var swap32IfBE2 = isLE2 ? (u) => u : byteSwap322;
+function checkOpts(defaults, opts, title = "opts") {
+  aopts(defaults, "defaults");
+  if (opts !== undefined)
+    aopts(opts, title);
+  const merged = Object.assign(Object.create(null), defaults, opts);
+  return merged;
+}
+function createHasher4(hashCons, info = {}) {
+  if (typeof hashCons !== "function")
+    throw new TypeError('"hashCons" expected function, got type=' + typeof hashCons);
+  info = checkOpts({}, info, "info");
+  const hashC = (msg, opts) => hashCons(opts).update(msg).digest();
+  const tmp = hashCons(undefined);
+  hashC.outputLen = tmp.outputLen;
+  hashC.blockLen = tmp.blockLen;
+  hashC.canXOF = tmp.canXOF;
+  hashC.create = (opts) => hashCons(opts);
+  Object.assign(hashC, info);
+  return Object.freeze(hashC);
+}
+var _0n7 = BigInt(0);
+var _1n7 = BigInt(1);
+var _2n5 = BigInt(2);
+var _7n2 = BigInt(7);
+var _256n2 = BigInt(256);
+var _0x71n2 = BigInt(113);
+var SHA3_PI2 = [];
+var SHA3_ROTL2 = [];
+var _SHA3_IOTA2 = [];
+for (let round = 0, R = _1n7, x = 1, y = 0;round < 24; round++) {
+  [x, y] = [y, (2 * x + 3 * y) % 5];
+  SHA3_PI2.push(2 * (5 * y + x));
+  SHA3_ROTL2.push((round + 1) * (round + 2) / 2 % 64);
+  let t = _0n7;
+  for (let j = 0;j < 7; j++) {
+    R = (R << _1n7 ^ (R >> _7n2) * _0x71n2) % _256n2;
+    if (R & _2n5)
+      t ^= _1n7 << (_1n7 << BigInt(j)) - _1n7;
+  }
+  _SHA3_IOTA2.push(t);
+}
+var IOTAS2 = split2(_SHA3_IOTA2, true);
+var SHA3_IOTA_H2 = IOTAS2[0];
+var SHA3_IOTA_L2 = IOTAS2[1];
+var rotlSH2 = (h, l, s) => h << s | l >>> 32 - s;
+var rotlSL2 = (h, l, s) => l << s | h >>> 32 - s;
+var rotlBH2 = (h, l, s) => l << s - 32 | h >>> 64 - s;
+var rotlBL2 = (h, l, s) => h << s - 32 | l >>> 64 - s;
+var rotlH2 = (h, l, s) => s > 32 ? rotlBH2(h, l, s) : rotlSH2(h, l, s);
+var rotlL2 = (h, l, s) => s > 32 ? rotlBL2(h, l, s) : rotlSL2(h, l, s);
+var B = new Uint32Array(5 * 2);
+function keccakP2(s, rounds = 24) {
+  if (!(s instanceof Uint32Array))
+    throw new TypeError('"s" expected Uint32Array(50), got type=' + typeof s);
+  if (s.length !== 50)
+    throw new RangeError('"s" expected Uint32Array(50), got length=' + s.length);
+  anumber3(rounds, "rounds");
+  if (rounds < 1 || rounds > 24)
+    throw new Error('"rounds" expected integer 1..24');
+  for (let round = 24 - rounds;round < 24; round++) {
+    for (let x = 0;x < 10; x++)
+      B[x] = s[x] ^ s[x + 10] ^ s[x + 20] ^ s[x + 30] ^ s[x + 40];
+    for (let x = 0;x < 10; x += 2) {
+      const idx1 = (x + 8) % 10;
+      const idx0 = (x + 2) % 10;
+      const B0 = B[idx0];
+      const B1 = B[idx0 + 1];
+      const Th = rotlH2(B0, B1, 1) ^ B[idx1];
+      const Tl = rotlL2(B0, B1, 1) ^ B[idx1 + 1];
+      for (let y = 0;y < 50; y += 10) {
+        s[x + y] ^= Th;
+        s[x + y + 1] ^= Tl;
+      }
+    }
+    let curH = s[2];
+    let curL = s[3];
+    for (let t = 0;t < 24; t++) {
+      const shift = SHA3_ROTL2[t];
+      const Th = rotlH2(curH, curL, shift);
+      const Tl = rotlL2(curH, curL, shift);
+      const PI = SHA3_PI2[t];
+      curH = s[PI];
+      curL = s[PI + 1];
+      s[PI] = Th;
+      s[PI + 1] = Tl;
+    }
+    for (let y = 0;y < 50; y += 10) {
+      const b0 = s[y], b1 = s[y + 1], b2 = s[y + 2], b3 = s[y + 3];
+      s[y] ^= ~s[y + 2] & s[y + 4];
+      s[y + 1] ^= ~s[y + 3] & s[y + 5];
+      s[y + 2] ^= ~s[y + 4] & s[y + 6];
+      s[y + 3] ^= ~s[y + 5] & s[y + 7];
+      s[y + 4] ^= ~s[y + 6] & s[y + 8];
+      s[y + 5] ^= ~s[y + 7] & s[y + 9];
+      s[y + 6] ^= ~s[y + 8] & b0;
+      s[y + 7] ^= ~s[y + 9] & b1;
+      s[y + 8] ^= ~b0 & b2;
+      s[y + 9] ^= ~b1 & b3;
+    }
+    s[0] ^= SHA3_IOTA_H2[round];
+    s[1] ^= SHA3_IOTA_L2[round];
+  }
+  clean3(B);
+}
+
+class Keccak2 {
+  state;
+  pos = 0;
+  posOut = 0;
+  finished = false;
+  state32;
+  destroyed = false;
+  blockLen;
+  suffix;
+  outputLen;
+  canXOF;
+  enableXOF = false;
+  rounds;
+  constructor(blockLen, suffix, outputLen, enableXOF = false, rounds = 24) {
+    anumber3(blockLen, "blockLen");
+    anumber3(suffix, "suffix");
+    anumber3(rounds, "rounds");
+    abool2(enableXOF, "enableXOF");
+    this.blockLen = blockLen;
+    this.suffix = suffix;
+    this.outputLen = outputLen;
+    this.enableXOF = enableXOF;
+    this.canXOF = enableXOF;
+    this.rounds = rounds;
+    anumber3(outputLen, "outputLen");
+    if (!(0 < blockLen && blockLen < 200))
+      throw new Error('"blockLen" must be 1..199');
+    this.state = new Uint8Array(200);
+    this.state32 = u322(this.state);
+  }
+  clone() {
+    return this._cloneInto();
+  }
+  keccak() {
+    swap32IfBE2(this.state32);
+    keccakP2(this.state32, this.rounds);
+    swap32IfBE2(this.state32);
+    this.posOut = 0;
+    this.pos = 0;
+  }
+  update(data) {
+    aexists3(this);
+    abytes4(data);
+    const { blockLen, state, state32 } = this;
+    const len2 = data.length;
+    const canUseU32 = blockLen % 4 === 0 && data.byteOffset % 4 === 0;
+    const blockLen32 = blockLen / 4;
+    const data32 = canUseU32 && len2 >= blockLen ? u322(data) : undefined;
+    for (let pos = 0;pos < len2; ) {
+      if (data32 !== undefined && this.pos === 0 && pos % 4 === 0 && len2 - pos >= blockLen) {
+        for (let i2 = 0, o2 = pos / 4;i2 < blockLen32; i2++)
+          state32[i2] ^= data32[o2 + i2];
+        pos += blockLen;
+        this.pos = blockLen;
+        this.keccak();
+        continue;
+      }
+      const take = Math.min(blockLen - this.pos, len2 - pos);
+      for (let i2 = 0;i2 < take; i2++)
+        state[this.pos++] ^= data[pos++];
+      if (this.pos === blockLen)
+        this.keccak();
+    }
+    return this;
+  }
+  finish() {
+    if (this.finished)
+      return;
+    this.finished = true;
+    const { state, suffix, pos, blockLen } = this;
+    state[pos] ^= suffix;
+    if ((suffix & 128) !== 0 && pos === blockLen - 1)
+      this.keccak();
+    state[blockLen - 1] ^= 128;
+    this.keccak();
+  }
+  writeInto(out) {
+    aexists3(this, false);
+    abytes4(out);
+    this.finish();
+    const bufferOut = this.state;
+    const { blockLen } = this;
+    for (let pos = 0, len2 = out.length;pos < len2; ) {
+      if (this.posOut >= blockLen)
+        this.keccak();
+      const take = Math.min(blockLen - this.posOut, len2 - pos);
+      out.set(bufferOut.subarray(this.posOut, this.posOut + take), pos);
+      this.posOut += take;
+      pos += take;
+    }
+    return out;
+  }
+  xofInto(out) {
+    if (!this.enableXOF)
+      throw new Error("XOF is not enabled");
+    return this.writeInto(out);
+  }
+  xof(bytes) {
+    anumber3(bytes);
+    return this.xofInto(new Uint8Array(bytes));
+  }
+  digestInto(out) {
+    aoutput3(out, this);
+    if (this.finished)
+      throw new Error("digest() was already called");
+    this.writeInto(out.length === this.outputLen ? out : out.subarray(0, this.outputLen));
+    this.destroy();
+  }
+  digest() {
+    const out = new Uint8Array(this.outputLen);
+    this.digestInto(out);
+    return out;
+  }
+  destroy() {
+    this.destroyed = true;
+    clean3(this.state);
+  }
+  _cloneInto(to) {
+    const { blockLen, suffix, outputLen, rounds, enableXOF } = this;
+    to ||= new Keccak2(blockLen, suffix, outputLen, enableXOF, rounds);
+    to.blockLen = blockLen;
+    to.state32.set(this.state32);
+    to.pos = this.pos;
+    to.posOut = this.posOut;
+    to.finished = this.finished;
+    to.rounds = rounds;
+    to.suffix = suffix;
+    to.outputLen = outputLen;
+    to.enableXOF = enableXOF;
+    to.canXOF = this.canXOF;
+    to.destroyed = this.destroyed;
+    return to;
+  }
+}
+var genKeccak = (suffix, blockLen, outputLen, info = {}) => createHasher4(() => new Keccak2(blockLen, suffix, outputLen), info);
+var keccak_2562 = /* @__PURE__ */ genKeccak(1, 136, 32);
+function auditReceipts(state, creditCapBase) {
+  const problems = [];
+  const receipts = state.receipts ?? [];
+  const knownRails = ["thaifi-mpp", "cardano-x402"];
+  let totalBase = 0;
+  let otherBase = 0;
+  for (const r of receipts) {
+    if (!r.id)
+      problems.push(`receipt missing id`);
+    if (!knownRails.includes(r.rail ?? ""))
+      problems.push(`receipt ${r.id}: unknown rail ${r.rail}`);
+    if (r.status !== "paid")
+      problems.push(`receipt ${r.id}: status ${r.status}`);
+    if (!r.txHash || !/^(0x)?[0-9a-fA-F]{64}$/.test(r.txHash ?? ""))
+      problems.push(`receipt ${r.id}: no tx hash`);
+    if (!/^\d+$/.test(r.amountBase ?? ""))
+      problems.push(`receipt ${r.id}: amountBase not integer`);
+    else if ((r.token?.symbol ?? "") === "THCFI")
+      totalBase += Number(r.amountBase);
+    else
+      otherBase += Number(r.amountBase);
+  }
+  const leashLeft = Number((state.agent?.limitLeft ?? "").match(/THCFI ([\d,.]+)/)?.[1]?.replace(/,/g, "") ?? "0");
+  const cap = Number(creditCapBase);
+  const leashSpend = cap - leashLeft * 1e6;
+  if (leashLeft > 0 && totalBase > leashSpend) {
+    problems.push(`ledger total ${totalBase} exceeds on-chain leash spend ${leashSpend}`);
+  }
+  return { verdict: problems.length === 0 ? "PASS" : "FAIL", checked: receipts.length, totalBase, otherBase, problems };
+}
+function keccakSelector(sig) {
+  return Buffer.from(keccak_2562(new TextEncoder().encode(sig))).toString("hex").slice(0, 8);
+}
+function abiEncodeAudit(verdict, checked2, totalBase, timestamp) {
+  const sel = keccakSelector("audit(string,uint256,uint256,uint256)");
+  const encUint = (n) => Buffer.from(BigInt(n).toString(16).padStart(64, "0"), "hex");
+  const encString = (s) => {
+    const bytes = Buffer.from(s, "utf8");
+    const padded = Buffer.concat([bytes, Buffer.alloc((32 - bytes.length % 32) % 32)]);
+    return Buffer.concat([encUint(bytes.length), padded]);
+  };
+  return "0x" + sel + Buffer.concat([encUint(128), encString(verdict), encUint(checked2), encUint(totalBase), encUint(timestamp)]).toString("hex");
+}
+var fetchReceipts = (sendRequester, config) => {
+  const resp = sendRequester.sendRequest({
+    url: config.receiptsUrl,
+    method: "GET"
+  }).result();
+  return JSON.stringify(json(resp));
+};
 var onCronTrigger = (runtime2) => {
-  runtime2.log("Hello world! Workflow triggered.");
-  return "Hello world!";
+  runtime2.log("CRE auditor: fetching agent receipt ledger …");
+  const raw = new cre.capabilities.HTTPClient().sendRequest(runtime2, fetchReceipts, consensusIdenticalAggregation())(runtime2.config).result();
+  const state = JSON.parse(raw);
+  const result = auditReceipts(state, runtime2.config.creditCapBase);
+  runtime2.log(`audit result: ${result.verdict} | checked=${result.checked} | totalBase=${result.totalBase}`);
+  for (const p of result.problems)
+    runtime2.log(`  problem: ${p}`);
+  const calldata = abiEncodeAudit(result.verdict, result.checked, result.totalBase, Date.now());
+  const evm = new cre.capabilities.EVMClient(BigInt(runtime2.config.chainSelector));
+  const reply = evm.callContract(runtime2, {
+    call: {
+      to: runtime2.config.attestTo,
+      data: calldata
+    }
+  }).result();
+  runtime2.log(`attestation written to ${runtime2.config.attestTo} (sepolia)`);
+  runtime2.log(`attestation reply: ${Buffer.from(reply.data).toString("hex").slice(0, 64)}`);
+  return JSON.stringify({
+    verdict: result.verdict,
+    checked: result.checked,
+    totalBase: result.totalBase,
+    otherBase: result.otherBase,
+    problems: result.problems,
+    attestationTo: runtime2.config.attestTo,
+    at: new Date().toISOString()
+  });
 };
 var initWorkflow = (config) => {
-  const cron = new CronCapability;
-  return [
-    handler(cron.trigger({ schedule: config.schedule }), onCronTrigger)
-  ];
+  const cron = new cre.capabilities.CronCapability;
+  return [cre.handler(cron.trigger({ schedule: config.schedule }), onCronTrigger)];
 };
 async function main() {
   const runner = await Runner.newRunner();
