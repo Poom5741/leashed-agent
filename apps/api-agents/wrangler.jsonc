@@ -1,0 +1,17 @@
+{
+  "name": "leashed-api-agents",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "APP_NAME": "Leashed Agent Platform — /agents API"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "leashed-agents-test-db",
+      "database_id": "1c5cb0b0-3912-4175-b35d-be28725a7b4b",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
