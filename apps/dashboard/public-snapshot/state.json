@@ -1,0 +1,60 @@
+{
+ "agent": {
+  "account": "0x336933fdde8de726d24c36d410939b74b62d4f4e",
+  "key": "0x7230747982De56Bc222f45B8719Fac131f101E67",
+  "limitLeft": "pathUSD 100, THCFI 4,998.499971, THCOC 5,000 (pathUSD cap 100)",
+  "expires": "2027-01-04T03:41:38.000Z"
+ },
+ "cardano": {
+  "address": "addr_test1qr7yx9hyhumrlh2thm5ttdckdhgqjj43xpjrvxczctgkn3vtsa735q8tjczwf9jk7h3zjas70damh6vgtetd0s33xyyqm274nc",
+  "tADA": "10003.648981",
+  "tUSDM": "999.9"
+ },
+ "receipts": [
+  {
+   "id": "0xf6e953e1-1791258256845",
+   "rail": "thaifi-mpp",
+   "serviceId": "poster",
+   "purpose": "poster",
+   "token": {
+    "symbol": "THCFI",
+    "decimals": 6
+   },
+   "amountBase": "1500000",
+   "amountDisplay": "1.5 THCFI",
+   "payTo": "0x5266Dfa5ae013674f8FdC832b7c601B838D94eE6",
+   "status": "paid",
+   "txHash": "0xf6e953e17647cf5559455337552b82f93208d57cde8fa2d57ba9a80860f3b65e",
+   "txUrl": "https://exp.thaifi.com/tx/0xf6e953e17647cf5559455337552b82f93208d57cde8fa2d57ba9a80860f3b65e",
+   "createdAt": "2026-10-06T03:44:16.845Z"
+  },
+  {
+   "id": "5e796a4cc-1760000000000",
+   "rail": "cardano-x402",
+   "serviceId": "verify-receipt",
+   "purpose": "verify poster receipt (cross-rail)",
+   "token": {
+    "symbol": "USDM",
+    "decimals": 6
+   },
+   "amountBase": "100000",
+   "amountDisplay": "0.1 USDM",
+   "payTo": "addr_test1qq4vw7u0zalt8g6v8efykt4ue9f6l0pq3mh76888u7tuk0dx7nwy7wlh8hlnwe6k72n9c32hxnd9fvxhcq03e9c8rgps9drz06",
+   "status": "paid",
+   "txHash": "5e796a4cce249e021ad694283bec298eae0add25cbb31a106b6cca1379efbdc0",
+   "txUrl": "https://preprod.cardanoscan.io/transaction/5e796a4cce249e021ad694283bec298eae0add25cbb31a106b6cca1379efbdc0",
+   "createdAt": "2026-10-06T04:44:00Z"
+  }
+ ],
+ "auditor": {
+  "verdict": "PASS",
+  "checked": 2,
+  "totalBase": 1500000,
+  "otherBase": 100000,
+  "problems": [],
+  "attestationTx": "simulated \u2014 see docs/cre-auditor-evidence.txt",
+  "at": "2026-10-06T05:03:12.473Z"
+ },
+ "static": true,
+ "generatedAt": "2026-10-06T05:08:47.774Z"
+}

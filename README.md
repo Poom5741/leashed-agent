@@ -39,6 +39,39 @@ infrastructure (not submitted as our code):
   (MPP service catalog), ThaiFi chain 17 RPC/explorer, Cardano preprod,
   Blockfrost, NOWNodes, Chainlink CRE.
 
+## Architecture
+
+```
+┌──────────────┐  approves cap / revokes   ┌───────────────────────────────┐
+│ HUMAN OWNER  │──────────────────────────▶│ AGENT (apps/agent)            │
+│ wallet.thaifi│                           │ plans job · pays per call     │
+└──────────────┘                           └──────┬──────────────┬─────────┘
+        │ leash: AccountKeychain (TIP-1011)       │ MPP 402      │ x402 402
+        │ on-chain enforced, instant revoke       ▼              ▼
+        │                                  ┌────────────┐  ┌──────────────────┐
+        │                                  │ ThaiFi 17  │  │ Cardano preprod  │
+        │                                  │ THCFI      │  │ tUSDM · @x402/…  │
+        │                                  └──────┬─────┘  └───────┬──────────┘
+        ▼                                         │ receipts       │ receipts
+┌──────────────┐   fetch /api/state   ┌────────────▼────────────────▼─────────┐
+│ REVOKE (1    │◀─────────────────────│ PASSBOOK (apps/dashboard)             │
+│ click)       │                      │ ledger · limits · stamps · verdict    │
+└──────────────┘                      └───────────────┬───────────────────────┘
+                       HTTP                            │
+                                              ┌────────▼───────────────┐
+                                              │ CRE AUDITOR            │
+                                              │ (workflows/leashed-)   │
+                                              │ risk checks → attest   │
+                                              │ on Sepolia             │
+                                              └────────────────────────┘
+```
+
+## Live
+
+- **Passbook (public snapshot):** https://leashed-agent.pages.dev
+- **Evidence:** `docs/m2-cardano-evidence.md` · `docs/cre-auditor-evidence.txt` · explorer links in the ledger
+- **One-command demo:** `bash scripts/demo.sh` (agent job → seller probe → CRE audit → passbook)
+
 ## Docs
 
 - `docs/spec.md` — the spec (acceptance criteria mapped to judging weights)
