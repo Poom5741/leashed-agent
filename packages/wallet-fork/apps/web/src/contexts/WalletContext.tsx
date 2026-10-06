@@ -416,7 +416,10 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   const recoverWithPassword = useCallback(
     async (recoveryPassword: string) => {
-      if (!recoveryMode) return;
+      if (!recoveryMode) {
+        console.warn("recoverWithPassword: recoveryMode not set — nothing to restore");
+        return;
+      }
 
       const { backup } = recoveryMode;
       if (!backup.recoveryEncrypted || !backup.recoveryIv || !backup.recoverySalt) {
@@ -436,7 +439,13 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         // Stay PIN-guard — no passkey re-registration.
         newWallet = { ...backup.wallet, ownerUserId: user?.id };
       } else {
-        // 2. Register a NEW passkey for this device/domain
+        // 2. Register a NEW passkey for this device/domain. No authenticator
+        //    => fail loudly instead of hanging on a pending WebAuthn request.
+        if (!(await isPlatformAuthenticatorAvailable())) {
+          throw new Error(
+            "No passkey authenticator on this device — restore a PIN-guard backup, or use a device with Face ID / Windows Hello / a security key.",
+          );
+        }
         const passkeyResult = await registerPasskey();
 
         if (!passkeyResult.prfSupported || !passkeyResult.prfOutput) {
@@ -520,7 +529,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       setCloudSyncedAt(Date.now());
       setNeedsBackup(false);
     },
-    [storedWallet, exportBackup, requestPin, cloudAvailable],
+    [storedWallet, exportBackup, requestPin, cloudAvailable, recoveryMode, user?.id],
   );
 
   const dismissBackupPrompt = useCallback(() => {

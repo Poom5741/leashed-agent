@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useWallet } from "../contexts/WalletContext";
-import { useTheme, logoFor } from "../lib/theme";
 import { ThemeToggle } from "./ThemeToggle";
 import { Ico } from "./icons";
 
 export function CreateWallet() {
   const { createWallet, platformAuthAvailable, importBackup } = useWallet();
-  const [theme] = useTheme();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pin, setPin] = useState("");
@@ -57,7 +55,7 @@ export function CreateWallet() {
         <ThemeToggle />
       </div>
       <div className="card auth-card">
-        <img src={logoFor(theme)} alt="Leashed Wallet" className="auth-logo" />
+        <img src="/logo-white.svg" alt="Leashed Wallet" className="auth-logo" />
         <h1>Create Leashed Wallet</h1>
         <p className="subtitle">
           A new EVM wallet on ThaiFi (chain 17) will be generated and encrypted

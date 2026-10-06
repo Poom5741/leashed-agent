@@ -41,7 +41,12 @@ export interface Passbook {
   latestAudit: AuditResult | null;
 }
 
-const BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? ""; // vite dev proxies /api → Hono worker; prod build sets VITE_API_BASE
+// Deployed API origin. VITE_API_BASE overrides (vite dev proxies /api instead);
+// the hard default prevents a build without the env var from silently hitting
+// the Pages origin and parsing index.html as JSON (Rakazo finding F13).
+const BASE =
+  (import.meta.env.VITE_API_BASE as string | undefined) ??
+  "https://leashed-api-agents.poom-a1d.workers.dev";
 const STUB_USER = "user_alice";
 
 async function jsonOrThrow<T>(res: Response): Promise<T> {

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useWallet } from "../contexts/WalletContext";
 import { ConfirmModal } from "./ConfirmModal";
-import { useTheme, logoFor } from "../lib/theme";
 import { Ico } from "./icons";
 
 /**
@@ -13,7 +12,6 @@ import { Ico } from "./icons";
  */
 export function UnlockWallet({ onBack }: { onBack?: () => void }) {
   const { storedWallet, removeWallet, importBackup, recoveryMode, recoverWithPassword, cancelRecovery } = useWallet();
-  const [theme] = useTheme();
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmImport, setConfirmImport] = useState(false);
@@ -64,7 +62,7 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
 
   return (
     <div className="card">
-      <img src={logoFor(theme)} alt="Leashed Wallet" className="card-logo" />
+      <img src="/logo-white.svg" alt="Leashed Wallet" className="card-logo" />
       <h1>Recover / Import Wallet</h1>
       <p className="subtitle">
         Import a backup file to restore this wallet on a new device or domain —

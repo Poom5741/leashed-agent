@@ -109,7 +109,9 @@ export function History({ showHeader = false, limit }: HistoryProps) {
       )}
 
       {loading && items === null && <p className="history-empty">Loading transactions…</p>}
-      {error && <p className="error-text">{error}</p>}
+      {error && (
+        <p className={/wallet API/i.test(error) ? "muted-info" : "error-text"}>{error}</p>
+      )}
       {items && items.length === 0 && (
         <p className="history-empty">No token transfers yet — receive some tokens to get started.</p>
       )}

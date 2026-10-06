@@ -52,7 +52,14 @@ export function AgentsListPage() {
     }
   }
 
-  if (err) return <p className="error">Failed to load agents: {err}</p>;
+  if (err)
+    return (
+      <p className="error">
+        {/Unexpected token|Failed to fetch|404|405/i.test(String(err))
+          ? "Could not reach the agents API — it may be down. Retry shortly."
+          : `Failed to load agents: ${err}`}
+      </p>
+    );
   if (agents === null) return <p className="loading-muted">loading register…</p>;
 
   const active = agents.filter((a) => a.status !== "revoked").length;

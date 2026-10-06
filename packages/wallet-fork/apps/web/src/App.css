@@ -122,6 +122,24 @@ h1, h2, h3 {
   color: var(--paper);
 }
 
+/* F9: cards stay light in dark theme — their headings must be dark ink,
+   not the paper-colored page headings (washed-out "Balances"/"Activity"). */
+:root[data-theme="dark"] .card h1,
+:root[data-theme="dark"] .card h2,
+:root[data-theme="dark"] .card h3,
+:root[data-theme="dark"] .card-header h3 {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .card .muted,
+:root[data-theme="dark"] .card .balance-label,
+:root[data-theme="dark"] .card p,
+:root[data-theme="dark"] .card span,
+:root[data-theme="dark"] .card td,
+:root[data-theme="dark"] .card label {
+  color: var(--text);
+}
+
 code {
   font-family: var(--mono);
 }
@@ -459,6 +477,22 @@ code {
   border-bottom: 1.5px solid var(--border);
   padding-bottom: 10px;
   margin-bottom: 18px;
+}
+
+:root[data-theme="dark"] .sheet-head {
+  color: var(--paper);
+  border-bottom-color: var(--blue-pale);
+}
+
+:root[data-theme="dark"] .sheet-head .fig-note {
+  color: var(--blue-pale);
+}
+
+/* J15 nit: informational (not error) messages must not render red */
+.muted-info {
+  color: var(--muted);
+  font-size: 12.5px;
+  text-align: center;
 }
 
 .sheet-head .fig-note {
