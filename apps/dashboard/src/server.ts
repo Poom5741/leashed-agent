@@ -9,6 +9,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readAuditorVerdict } from "./auditor.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..", "..");
@@ -51,9 +52,7 @@ app.get("/api/state", async (_req, res) => {
     thaifiWhoami(),
     blockfrost(envGet("CARDANO_CLIENT_ADDRESS") ?? "addr_test1qr7yx9hyhumrlh2thm5ttdckdhgqjj43xpjrvxczctgkn3vtsa735q8tjczwf9jk7h3zjas70damh6vgtetd0s33xyyqm274nc"),
   ]);
-  const auditor = existsSync(join(ROOT, "docs", "auditor-latest.json"))
-    ? JSON.parse(readFileSync(join(ROOT, "docs", "auditor-latest.json"), "utf8"))
-    : null;
+  const auditor = readAuditorVerdict(join(ROOT, "docs", "auditor-latest.json"));
   const clientAddr = envGet("CARDANO_CLIENT_ADDRESS") ?? "addr_test1qr7yx9hyhumrlh2thm5ttdckdhgqjj43xpjrvxczctgkn3vtsa735q8tjczwf9jk7h3zjas70damh6vgtetd0s33xyyqm274nc";
   const tUSDM = (cardano?.amount ?? []).find((a) => a.unit.endsWith("0014df10745553444d"))?.quantity ?? "0";
   const tADA = (cardano?.amount ?? []).find((a) => a.unit === "lovelace")?.quantity ?? "0";

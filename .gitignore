@@ -2,3 +2,9 @@ node_modules/
 dist/
 .env
 .env.local
+
+# Super-SpecKit harness (tooling, not project; installer reads project state separately)
+.super-speckit/
+.agents/skills/
+.codex/skills/
+super-speckit.yml

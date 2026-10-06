@@ -1,0 +1,10 @@
+{
+ "verdict": "PASS",
+ "checked": 4,
+ "totalBase": 4500000,
+ "otherBase": 100000,
+ "problems": [],
+ "attestationTo": "0x000000000000000000000000000000000000dEaD",
+ "at": "2026-10-06T06:01:13.141Z",
+ "attestationTx": "simulated \u2014 see docs/cre-auditor-evidence.txt"
+}

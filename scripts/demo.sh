@@ -28,8 +28,54 @@ echo
 echo "══ 3/4 · CRE AUDITOR (independent Chainlink workflow) ══"
 cd "$ROOT/workflows/leashed-auditor"
 export PATH="$HOME/.cre/bin:$PATH"
+# Tee the FULL audit log (unfiltered) so verdict extraction works; show the user log lines.
 cre workflow simulate auditor --target staging-settings --non-interactive --trigger-index 0 2>&1 | tee /tmp/audit-run.txt | grep -E "USER LOG|Simulation Result"
-grep -oE '\{"verdict".*\}' /tmp/audit-run.txt | head -1 > "$ROOT/docs/auditor-latest.json" 2>/dev/null || true
+
+# Extract the verdict JSON robustly: scan every line for the first complete
+# JSON object whose key set includes "verdict". Never write a 0-byte file —
+# the dashboard crashes on JSON.parse('') (see test/auditor.test.ts).
+VERDICT_PATH="$ROOT/docs/auditor-latest.json"
+python3 - "$VERDICT_PATH" <<'PY' || { echo "[audit] FATAL: no verdict JSON found in /tmp/audit-run.txt" >&2; exit 1; }
+import json, sys, pathlib
+src = pathlib.Path("/tmp/audit-run.txt").read_text(errors="replace")
+target = pathlib.Path(sys.argv[1])
+
+# Find a JSON object containing "verdict" by walking balanced braces.
+# CRE's printer sometimes emits a raw object and sometimes a JSON-escaped
+# string ("{\"verdict\":…}") — we tolerate both via a second json.loads pass.
+def find_verdict(text):
+    for i, ch in enumerate(text):
+        if ch != '{':
+            continue
+        depth, j = 0, i
+        while j < len(text):
+            c = text[j]
+            if c == '{': depth += 1
+            elif c == '}':
+                depth -= 1
+                if depth == 0: break
+            j += 1
+        else:
+            continue
+        blob = text[i:j+1]
+        try:
+            obj = json.loads(blob)
+        except Exception:
+            try:
+                obj = json.loads(blob.replace('\\"', '"').replace('\\\\', '\\'))
+            except Exception:
+                continue
+        if isinstance(obj, dict) and 'verdict' in obj:
+            return obj
+    return None
+
+obj = find_verdict(src)
+if obj is None:
+    sys.exit(1)
+obj.setdefault("attestationTx", "simulated — see docs/cre-auditor-evidence.txt")
+target.write_text(json.dumps(obj, indent=1))
+print(f"[audit] verdict written: {obj.get('verdict')} (checked={obj.get('checked','?')})")
+PY
 
 echo
 echo "══ 4/4 · PASSBOOK (oversight dashboard) ══"
