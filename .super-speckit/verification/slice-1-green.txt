@@ -1,0 +1,212 @@
+
+> @leashed/wallet-cli-platform@0.0.0 test /Users/poom-work/token2049/leashed-agent/packages/wallet-cli-platform
+> tsx --test test/*.test.ts
+
+TAP version 13
+# Subtest: agent deploy exits 1 with a 'Not paired' message when no wallet is in the store
+ok 1 - agent deploy exits 1 with a 'Not paired' message when no wallet is in the store
+  ---
+  duration_ms: 0.719583
+  type: 'test'
+  ...
+# Subtest: agent deploy on HTTP 200 + approved returns the new key and leash
+ok 2 - agent deploy on HTTP 200 + approved returns the new key and leash
+  ---
+  duration_ms: 2.474959
+  type: 'test'
+  ...
+# Subtest: agent deploy times out when poll never returns 'approved'
+ok 3 - agent deploy times out when poll never returns 'approved'
+  ---
+  duration_ms: 49.9625
+  type: 'test'
+  ...
+# Subtest: agent deploy exits 1 with an auth error on HTTP 401/403
+ok 4 - agent deploy exits 1 with an auth error on HTTP 401/403
+  ---
+  duration_ms: 0.693583
+  type: 'test'
+  ...
+# Subtest: agent deploy exits 1 with a retryable error on HTTP 500
+ok 5 - agent deploy exits 1 with a retryable error on HTTP 500
+  ---
+  duration_ms: 0.495333
+  type: 'test'
+  ...
+# Subtest: agent ls on an empty store exits 1 with a 'no agents' message
+ok 6 - agent ls on an empty store exits 1 with a 'no agents' message
+  ---
+  duration_ms: 2.497458
+  type: 'test'
+  ...
+# Subtest: agent ls on a store with 1 agent prints exactly 1 table row
+ok 7 - agent ls on a store with 1 agent prints exactly 1 table row
+  ---
+  duration_ms: 2.057
+  type: 'test'
+  ...
+# Subtest: agent ls on a store with N agents prints N table rows
+ok 8 - agent ls on a store with N agents prints N table rows
+  ---
+  duration_ms: 1.034834
+  type: 'test'
+  ...
+# Subtest: agent ls annotates revoked agents with a [revoked] tag
+ok 9 - agent ls annotates revoked agents with a [revoked] tag
+  ---
+  duration_ms: 0.959208
+  type: 'test'
+  ...
+# Subtest: agent ls tolerates a missing store.json (no crash)
+ok 10 - agent ls tolerates a missing store.json (no crash)
+  ---
+  duration_ms: 0.27475
+  type: 'test'
+  ...
+# Subtest: agent revoke exits 1 when the keyId is not in the store
+ok 11 - agent revoke exits 1 when the keyId is not in the store
+  ---
+  duration_ms: 1.106625
+  type: 'test'
+  ...
+# Subtest: agent revoke exits 0 and marks revokedAt locally on HTTP 200
+ok 12 - agent revoke exits 0 and marks revokedAt locally on HTTP 200
+  ---
+  duration_ms: 2.759667
+  type: 'test'
+  ...
+# Subtest: agent revoke exits 1 on HTTP 500 and does NOT mutate local state
+ok 13 - agent revoke exits 1 on HTTP 500 and does NOT mutate local state
+  ---
+  duration_ms: 0.477959
+  type: 'test'
+  ...
+# Subtest: agent run exits 1 with a 'no active agent' message when no agents exist
+ok 14 - agent run exits 1 with a 'no active agent' message when no agents exist
+  ---
+  duration_ms: 1.56975
+  type: 'test'
+  ...
+# Subtest: agent run exits 1 when budget is negative
+ok 15 - agent run exits 1 when budget is negative
+  ---
+  duration_ms: 3.067625
+  type: 'test'
+  ...
+# Subtest: agent run exits 0 on the happy path and spawns tsx with the active agent's key + leash in env
+ok 16 - agent run exits 0 on the happy path and spawns tsx with the active agent's key + leash in env
+  ---
+  duration_ms: 1.745166
+  type: 'test'
+  ...
+# Subtest: agent run selects the most-recently-created non-revoked agent
+ok 17 - agent run selects the most-recently-created non-revoked agent
+  ---
+  duration_ms: 0.954459
+  type: 'test'
+  ...
+# Subtest: `npx thaifi-wallet-cli-platform --help` lists both `agent` and `marketplace` command families
+ok 18 - `npx thaifi-wallet-cli-platform --help` lists both `agent` and `marketplace` command families
+  ---
+  duration_ms: 469.226667
+  type: 'test'
+  ...
+# Subtest: signRegisterPayload wraps the payload with the EIP-191 personal_sign prefix
+ok 19 - signRegisterPayload wraps the payload with the EIP-191 personal_sign prefix
+  ---
+  duration_ms: 0.6955
+  type: 'test'
+  ...
+# Subtest: canonicalize sorts keys recursively for deterministic signing
+ok 20 - canonicalize sorts keys recursively for deterministic signing
+  ---
+  duration_ms: 0.204625
+  type: 'test'
+  ...
+# Subtest: marketplace register sends a signed POST and exits 0 on success
+ok 21 - marketplace register sends a signed POST and exits 0 on success
+  ---
+  duration_ms: 1.969625
+  type: 'test'
+  ...
+# Subtest: marketplace ls prints 0 rows when the registry is empty
+ok 22 - marketplace ls prints 0 rows when the registry is empty
+  ---
+  duration_ms: 0.539708
+  type: 'test'
+  ...
+# Subtest: marketplace ls prints N rows when the registry has N entries
+ok 23 - marketplace ls prints N rows when the registry has N entries
+  ---
+  duration_ms: 0.550542
+  type: 'test'
+  ...
+# Subtest: marketplace ls passes the --q filter through to GET /v1/services
+ok 24 - marketplace ls passes the --q filter through to GET /v1/services
+  ---
+  duration_ms: 0.571667
+  type: 'test'
+  ...
+# Subtest: marketplace ls exits 1 with a parse error when the registry returns malformed JSON
+ok 25 - marketplace ls exits 1 with a parse error when the registry returns malformed JSON
+  ---
+  duration_ms: 0.51675
+  type: 'test'
+  ...
+# Subtest: loadStore returns a valid empty store when no file exists
+ok 26 - loadStore returns a valid empty store when no file exists
+  ---
+  duration_ms: 2.045666
+  type: 'test'
+  ...
+# Subtest: loadStore reads a valid populated store from disk
+ok 27 - loadStore reads a valid populated store from disk
+  ---
+  duration_ms: 1.777542
+  type: 'test'
+  ...
+# Subtest: loadStore migrates from the old single-key shape
+ok 28 - loadStore migrates from the old single-key shape
+  ---
+  duration_ms: 0.570458
+  type: 'test'
+  ...
+# Subtest: add → list → get round-trip preserves agent fields
+ok 29 - add → list → get round-trip preserves agent fields
+  ---
+  duration_ms: 0.546625
+  type: 'test'
+  ...
+# Subtest: revokeAgent marks the agent with a revokedAt timestamp and removes it from active list
+ok 30 - revokeAgent marks the agent with a revokedAt timestamp and removes it from active list
+  ---
+  duration_ms: 0.158333
+  type: 'test'
+  ...
+# Subtest: revokeAgent on an unknown keyId is a no-op (does not throw)
+ok 31 - revokeAgent on an unknown keyId is a no-op (does not throw)
+  ---
+  duration_ms: 0.394292
+  type: 'test'
+  ...
+# Subtest: saveStore writes valid JSON and read-back matches in-memory state
+ok 32 - saveStore writes valid JSON and read-back matches in-memory state
+  ---
+  duration_ms: 1.099708
+  type: 'test'
+  ...
+# Subtest: saveStore applies restrictive file permissions on POSIX
+ok 33 - saveStore applies restrictive file permissions on POSIX
+  ---
+  duration_ms: 1.033583
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 580.925334
