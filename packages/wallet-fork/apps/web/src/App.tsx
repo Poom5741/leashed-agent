@@ -9,7 +9,7 @@ import "./App.css";
 // Derive /wallet mount once at module load (App.tsx is the only entry point
 // for the wallet flow — main.tsx renders Legal pages at /privacy or
 // /wallet/privacy, then everything else hits this file).
-const BASE = window.location.pathname.startsWith('/wallet/') ? '/wallet' : '';
+const BASE = window.location.pathname.replace(/\/+$/, "").startsWith('/wallet') ? '/wallet' : '';
 
 function WalletFlow() {
   const { status, recoveryMode } = useWallet();
@@ -27,7 +27,7 @@ function WalletFlow() {
 
   // CLI pairing approval (/pair?id=…&code=… or /wallet/pair?… ) — requires a
   // wallet on this device.
-  if (window.location.pathname === `${BASE}/pair`) {
+  if (window.location.pathname.replace(/\/+$/, "") === `${BASE}/pair`) {
     if (recoveryMode) {
       return (
         <div className="app-root">

@@ -86,7 +86,14 @@ export function AuthorizedApps() {
       );
       setRemaining(Object.fromEntries(entries));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load apps.");
+      const msg = err instanceof Error ? err.message : "Could not load apps.";
+      // SPA-only deployment has no wallet API (404/405/HTML responses) —
+      // explain instead of surfacing raw parser/network failures.
+      setError(
+        /404|405|Not Found|Unexpected token|Failed to fetch/i.test(msg)
+          ? "Paired-app list needs the wallet API (not part of this deployment). Pairings created with the CLI still work on-chain."
+          : msg,
+      );
     }
   }, [storedWallet]);
 

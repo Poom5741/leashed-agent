@@ -79,8 +79,9 @@ export function CreateWallet() {
               <label>8-digit PIN</label>
               <input
                 type="password"
+                autoComplete="off"
+                data-1p-ignore
                 inputMode="numeric"
-                autoComplete="new-password"
                 maxLength={8}
                 placeholder="••••••••"
                 value={pin}
@@ -93,8 +94,9 @@ export function CreateWallet() {
               <label>Confirm PIN</label>
               <input
                 type="password"
+                autoComplete="off"
+                data-1p-ignore
                 inputMode="numeric"
-                autoComplete="new-password"
                 maxLength={8}
                 placeholder="••••••••"
                 value={pinConfirm}

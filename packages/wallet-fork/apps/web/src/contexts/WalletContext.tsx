@@ -293,29 +293,32 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
       if (walletData.guard === "pin") {
         // Sync the PIN-encrypted backup immediately (no extra prompt — the PIN
-        // is the recovery password for these wallets).
-        try {
-          const json = await createBackupFile({
-            wallet: walletData,
-            passwordSecretkey,
-            recoveryPassword: opts!.pin,
-          });
-          await api.putBackup(walletData.address, json);
-          setCloudSyncedAt(Date.now());
-          setNeedsBackup(false);
-        } catch (err) {
-          console.error("Initial cloud sync failed:", err);
+        // is the recovery password for these wallets). Skipped entirely when
+        // the cloud API isn't part of this deployment (SPA-only Pages).
+        if (cloudAvailable) {
+          try {
+            const json = await createBackupFile({
+              wallet: walletData,
+              passwordSecretkey,
+              recoveryPassword: opts!.pin,
+            });
+            await api.putBackup(walletData.address, json);
+            setCloudSyncedAt(Date.now());
+            setNeedsBackup(false);
+          } catch (err) {
+            console.error("Initial cloud sync failed:", err);
+          }
         }
       } else {
         // New passkey wallet — prompt for the recovery password so it syncs.
         setNeedsBackup(true);
       }
     },
-    [user?.id, platformAuthAvailable],
+    [user?.id, platformAuthAvailable, cloudAvailable],
   );
 
   const removeWallet = useCallback(async () => {
-    if (storedWallet) {
+    if (storedWallet && cloudAvailable) {
       // Delete = device AND cloud (otherwise login would auto-restore it again).
       await api.deleteBackup(storedWallet.address).catch(() => undefined);
     }
@@ -325,7 +328,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     setNeedsBackup(false);
     setRecoveryMode(null);
     setStatus("none");
-  }, [storedWallet]);
+  }, [storedWallet, cloudAvailable]);
 
   const exportBackup = useCallback(
     async (recoveryPassword?: string) => {

@@ -223,9 +223,10 @@ export function Dashboard() {
   const { user, logout } = useAuth();
   const [theme, toggleTheme] = useTheme();
   const [tab, setTab] = useState<Tab>(() => {
-    const path = window.location.pathname;
+    // Trailing slash normalized: Pages 308s /wallet/deposit -> /wallet/deposit/
+    const path = window.location.pathname.replace(/\/+$/, "");
     // /wallet/deposit (production) or /deposit (local dev) — derive the base.
-    const base = path.startsWith('/wallet/') ? '/wallet' : '';
+    const base = path.startsWith('/wallet') ? '/wallet' : '';
     if (path === `${base}/deposit`) return "deposit";
     const fromUrl = new URLSearchParams(window.location.search).get("tab");
     if (isTab(fromUrl)) return fromUrl;

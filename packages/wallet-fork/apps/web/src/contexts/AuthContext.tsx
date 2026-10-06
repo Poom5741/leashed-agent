@@ -31,7 +31,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 const ANON_DEVICE_USER: AuthUser = {
   id: "device",
-  displayName: "Passkey Wallet",
+  displayName: "Local Wallet",
   email: null,
 };
 

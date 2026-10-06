@@ -66,7 +66,7 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
 
   return (
     <div className="card">
-      <img src={logoFor(theme)} alt="ThaiFi" className="card-logo" />
+      <img src={logoFor(theme)} alt="Leashed Wallet" className="card-logo" />
       <h1>Recover / Import Wallet</h1>
       <p className="subtitle">
         Import a backup file to restore this wallet on a new device or domain —
@@ -89,6 +89,8 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
             <label>Recovery Password</label>
             <input
               type="password"
+              autoComplete="off"
+              data-1p-ignore
               placeholder="Enter the recovery password you set during export"
               value={recoveryPassword}
               onChange={(e) => setRecoveryPassword(e.target.value)}

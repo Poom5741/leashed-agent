@@ -1,10 +1,22 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { AgentsListPage } from "./pages/AgentsListPage.js";
 import { PassbookPage } from "./pages/PassbookPage.js";
 import { ServicesPage } from "./pages/ServicesPage.js";
 import "./styles.css";
 
+const TITLES: Record<string, string> = {
+  "/": "Leashed Agent Platform — /agents",
+  "/agents": "Leashed Agent Platform — /agents",
+  "/services": "Leashed Agent Platform — /services",
+};
+
 export default function App() {
+  const location = useLocation();
+  useEffect(() => {
+    document.title = TITLES[location.pathname] ?? "Leashed Agent Platform";
+  }, [location.pathname]);
+
   return (
     <div className="app">
       <span className="ruler" aria-hidden="true" />

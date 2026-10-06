@@ -194,6 +194,34 @@ code, .mono {
   position: relative;
 }
 
+/* Head-bar (App.tsx header) — flex row so nav links never collide with the
+   title (Rakazo finding F10: "Leashed Agent Platform agents services"). */
+.head-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-bottom: 1.5px solid var(--blue);
+  padding-bottom: 10px;
+}
+
+.head-bar .right { white-space: nowrap; }
+
+.head-bar .right a { margin-right: 0 0 0 18px; text-underline-offset: 3px; }
+
+.page-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 760px) {
   .app { padding: 16px; }
   .app::before, .app::after, .ch-bl, .ch-br { display: none; }
