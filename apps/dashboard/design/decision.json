@@ -1,0 +1,15 @@
+{
+  "stage": "design-first",
+  "artifact": "leashed-agent oversight dashboard",
+  "direction": "the-passbook (v3, after user rejected dark-glass as AI slop) — a Thai bank passbook / stamped ledger: warm paper, Fraunces serif masthead, ruled tables, red PAID stamps, guarantor signature line, CRE auditor stamp box, perforation + barcode details. Concept-exact: the page IS the human's passbook on the agent.",
+  "status": "DECIDED",
+  "decidedBy": "user delegated creative authority 2026-10-06, then rejected v1 (dark glass) as generic; v3 committed by ZCode under the same delegation",
+  "rejected": ["trust-console dark (v1) — 'ai slop' per user"],
+  "tokens": {
+    "paper": "#F1EBDE", "panel": "#FAF6EC", "ink": "#211B10",
+    "stamp-red": "#B3372B", "stamp-green": "#2F6B4A", "link": "#2456A6",
+    "fonts": "Fraunces (masthead serif) + IBM Plex Mono (figures) + Noto Sans Thai + Caveat (signature)"
+  },
+  "v3-signatures": ["stamp animation when CRE verdict lands", "rotating PAID stamps per row", "perforation tear", "guarantor signature 'signed on-chain ✓'", "barcode footer"],
+  "v1-kept": ["leash/credit-line-first hierarchy", "revoke affordance", "Thai-first bilingual", "status never color-only", "prefers-reduced-motion respected"]
+}
