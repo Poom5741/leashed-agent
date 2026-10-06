@@ -7,8 +7,9 @@
     <title>Leashed Wallet · passkey-only wallet for AI agents</title>
     <script>
       // Apply the saved theme before first paint (default: dark).
+      // Approved design (rev B sheets) is the light paper look — default to it.
       document.documentElement.dataset.theme =
-        localStorage.getItem("thaifi-theme") === "light" ? "light" : "dark";
+        localStorage.getItem("thaifi-theme") === "dark" ? "dark" : "light";
     </script>
   </head>
   <body>

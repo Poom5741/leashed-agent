@@ -33,6 +33,18 @@ const TAB_ALIASES: Record<string, Tab> = {
   "send-token": "send",
 };
 
+/** Rev-B sheet annotation per tab (docs/design-sketches/wallet-pages). */
+const FIG_FOR: Record<Tab, string> = {
+  home: "SHEET 03 / HOME · FIG. 3 — PASSBOOK",
+  agents: "SHEET 04 / AGENTS · FIG. 4 — MARKETPLACE",
+  history: "SHEET 05 / ACTIVITY · FIG. 5 — LEDGER TAPE",
+  apps: "SHEET 09 / APPS · FIG. 9 — LEASH HOLDERS",
+  deposit: "SHEET 07 / RECEIVE · FIG. 7 — INTAKE",
+  send: "SHEET 06 / SEND · FIG. 6 — DISBURSEMENT",
+  "write-contract": "SHEET 06B / CONTRACT",
+  "sign-message": "SHEET 08 / SIGN · FIG. 8 — ATTESTATION",
+};
+
 /* Minimal line icons (lucide-style paths) */
 function Icon({ children }: { children: ReactNode }) {
   return (
@@ -359,6 +371,8 @@ export function Dashboard() {
 
   return (
     <div className="shell">
+      <span className="crosshair crosshair-bl" aria-hidden />
+      <span className="crosshair crosshair-br" aria-hidden />
       {/* Mobile top bar — Tempo-style: logo (→ Home) + avatar (opens the account menu) */}
       <div className="topbar">
         <button
@@ -418,6 +432,10 @@ export function Dashboard() {
       </aside>
 
       <main className="main">
+        <div className="sheet-head">
+          <span>Trust Layer · Leashed Wallet</span>
+          <span className="fig-note">{showRecover ? "SHEET 02 / UNLOCK · FIG. 2 — KEY UNSEAL" : FIG_FOR[tab]}</span>
+        </div>
         {showRecover ? (
           <UnlockWallet onBack={() => setShowRecover(false)} />
         ) : (

@@ -44,28 +44,29 @@
 }
 
 :root[data-theme="light"] {
-  /* The light theme reads the same — this is a single-aesthetic app. */
+  /* The light theme is the approved sheet look (docs/design-sketches/
+     wallet-pages rev B): paper grid, blueprint cards, hard offset shadows. */
   --bg:           #E9EBEC;
   --bg-sidebar:   #1F4E79;
   --paper:        #E9EBEC;
-  --panel:        #F4F6F7;
-  --card:         #F4F6F7;
-  --card-2:       #E9EBEC;
-  --ink:          #1B2C3E;
-  --text:         #1B2C3E;
-  --muted:        #5A6A7E;
-  --faint:        #8A98A8;
+  --panel:        #F5F6F6;
+  --card:         #F5F6F6;
+  --card-2:       #ECEEEF;
+  --ink:          #17222E;
+  --text:         #17222E;
+  --muted:        #5C6B7A;
+  --faint:        #8394A3;
   --border:       #1F4E79;
   --border-2:     #3B7CB9;
-  --blue-pale:    #D5E1ED;
-  --danger:       #A93837;
-  --success:      #2D7D4A;
+  --blue-pale:    #4A7BA6;
+  --danger:       #9C3B2C;
+  --success:      #23663C;
   --btn-2:        #D5E1ED;
   --btn-2-hover:  #B7CFDF;
   --btn-solid-bg: #1F4E79;
   --btn-solid-text: #E9EBEC;
   --overlay:      rgba(15, 78, 121, 0.4);
-  --shadow:       0 1px 0 #1F4E79, 0 8px 24px -10px rgba(27, 44, 62, 0.4);
+  --shadow:       6px 6px 0 rgba(31, 78, 121, 0.12);
 }
 
 :root {
@@ -218,7 +219,7 @@ code {
   font-size: 9.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--blue-pale);
+  color: #d5e1ed;
   opacity: 0.85;
   margin-top: 2px;
 }
@@ -253,7 +254,7 @@ code {
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue-pale);
+  color: #d5e1ed;
   opacity: 0.75;
   padding: 14px 2px 5px;
 }
@@ -350,7 +351,7 @@ code {
 }
 
 .sidebar .side-menu-item .side-sub {
-  color: var(--blue-pale);
+  color: #d5e1ed;
   opacity: 0.9;
 }
 
@@ -427,18 +428,68 @@ code {
    Page header (total balance + actions)
    ------------------------------------------------------------ */
 
-.balance-label {
-  font-size: 13px;
-  color: var(--muted);
-}
-
 .balance-big {
-  font-size: 40px;
-  font-weight: 800;
+  font-family: var(--mono);
+  font-size: 38px;
+  font-weight: 600;
   letter-spacing: -0.02em;
   margin: 2px 0 16px;
   color: var(--text);
 }
+
+.balance-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-pale);
+}
+
+/* Sheet head-bar + FIG annotation (rev B) */
+.sheet-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--border);
+  border-bottom: 1.5px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+}
+
+.sheet-head .fig-note {
+  color: var(--blue-pale);
+}
+
+.crosshair {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 4;
+  display: none;
+}
+
+:root[data-theme="light"] .crosshair {
+  display: block;
+}
+
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(31, 78, 121, 0.5);
+}
+
+.crosshair::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+.crosshair::after { top: 50%; left: 0; right: 0; height: 1px; }
+
+.crosshair-bl { left: 14px; bottom: 14px; }
+.crosshair-br { right: 14px; bottom: 14px; }
 
 .actions-row {
   display: flex;
@@ -464,6 +515,18 @@ code {
 .btn-solid {
   background: var(--btn-solid-bg);
   color: var(--btn-solid-text);
+}
+
+:root[data-theme="light"] .btn-solid {
+  border-color: var(--border);
+  box-shadow: 3px 3px 0 rgba(31, 78, 121, 0.25);
+  transition: transform 100ms ease, box-shadow 100ms ease;
+}
+
+:root[data-theme="light"] .btn-solid:hover:not(:disabled) {
+  opacity: 1;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 rgba(31, 78, 121, 0.3);
 }
 
 .btn-solid:hover:not(:disabled) { opacity: 0.9; }
@@ -496,6 +559,36 @@ code {
   margin-bottom: 16px;
   text-align: left;
   box-shadow: 0 1px 0 var(--border);
+  position: relative;
+}
+
+/* Rev-B sheet treatment: hard offset shadow + corner brackets. Applied in
+   the light (paper) theme, which is the default; dark keeps its plate look. */
+:root[data-theme="light"] .card {
+  box-shadow: 6px 6px 0 rgba(31, 78, 121, 0.12);
+}
+
+:root[data-theme="light"] .card::before,
+:root[data-theme="light"] .card::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+}
+
+:root[data-theme="light"] .card::before {
+  top: -6px;
+  left: -6px;
+  border-top: 1.5px solid var(--border);
+  border-left: 1.5px solid var(--border);
+}
+
+:root[data-theme="light"] .card::after {
+  bottom: -6px;
+  right: -6px;
+  border-bottom: 1.5px solid var(--border);
+  border-right: 1.5px solid var(--border);
 }
 
 .card-header {
