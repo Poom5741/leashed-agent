@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useWallet } from "../contexts/WalletContext";
 import { useTheme, logoFor } from "../lib/theme";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,7 +12,6 @@ export function CreateWallet() {
   const [pin, setPin] = useState("");
   const [pinConfirm, setPinConfirm] = useState("");
   const [consent, setConsent] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // No platform authenticator → PIN-guard wallet (user must accept the risks).
   const pinMode = !platformAuthAvailable;
@@ -32,24 +31,24 @@ export function CreateWallet() {
     }
   };
 
+  // The file input is created per-click and held by this closure — if React
+  // re-renders while the OS chooser is open, the selection still lands (the
+  // mounted-input version silently dropped the change event: Rakazo F7).
   const handleImportClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      setError(null);
-      const text = await file.text();
-      await importBackup(text);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to import backup.";
-      setError(message);
-    } finally {
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    }
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json,.json";
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      try {
+        setError(null);
+        await importBackup(await file.text());
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to import backup.");
+      }
+    };
+    input.click();
   };
 
   return (
@@ -168,14 +167,6 @@ export function CreateWallet() {
             </button>
           </>
         )}
-
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="application/json,.json"
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
 
         {error && <p className="error-text">{error}</p>}
       </div>

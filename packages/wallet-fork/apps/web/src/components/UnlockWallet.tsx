@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useWallet } from "../contexts/WalletContext";
 import { ConfirmModal } from "./ConfirmModal";
 import { useTheme, logoFor } from "../lib/theme";
@@ -19,7 +19,6 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
   const [confirmImport, setConfirmImport] = useState(false);
   const [recoveryPassword, setRecoveryPassword] = useState("");
   const [recoveryLoading, setRecoveryLoading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDeleteConfirm = async () => {
     setConfirmDelete(false);
@@ -27,26 +26,25 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
     onBack?.();
   };
 
+  // Closure-bound dynamic input — survives React re-renders while the OS
+  // chooser is open (the mounted-input version dropped selections: F7).
   const handleImportConfirm = () => {
     setConfirmImport(false);
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      setError(null);
-      const text = await file.text();
-      await importBackup(text);
-      onBack?.();
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to import backup.";
-      setError(message);
-    } finally {
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    }
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json,.json";
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      try {
+        setError(null);
+        await importBackup(await file.text());
+        onBack?.();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to import backup.");
+      }
+    };
+    input.click();
   };
 
   const handleRecovery = async () => {
@@ -116,14 +114,6 @@ export function UnlockWallet({ onBack }: { onBack?: () => void }) {
       )}
 
       {error && <p className="error-text">{error}</p>}
-
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="application/json,.json"
-        onChange={handleFileChange}
-        style={{ display: "none" }}
-      />
 
       <ConfirmModal
         open={confirmDelete}
