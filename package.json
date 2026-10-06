@@ -1,0 +1,18 @@
+{
+  "name": "leashed-agent",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.15.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "build": "pnpm -r --if-present run build",
+    "test": "pnpm -r --if-present run test",
+    "probe": "tsx probes/run-all.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
