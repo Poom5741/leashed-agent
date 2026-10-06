@@ -98,6 +98,67 @@
   a { color:var(--inkblue); text-decoration:underline; text-underline-offset:3px; }
   .empty { color:var(--ink55); font-family:var(--mono); font-size:12.5px; padding:18px 10px; }
 
+  /* ---- Tabs (CONSOLE / FUND / AUDIT) ---- */
+  .tabs { display:flex; gap:0; border-bottom:1.5px solid var(--ink); padding:0 42px;
+    background:rgba(33,27,16,.04); }
+  .tab { font:600 11px var(--mono); letter-spacing:.18em; text-transform:uppercase;
+    background:transparent; border:none; border-bottom:2.5px solid transparent;
+    color:var(--ink55); padding:14px 18px 12px; cursor:pointer; margin-bottom:-1.5px;
+    transition:color .15s, border-color .15s; }
+  .tab:hover { color:var(--ink); }
+  .tab.active { color:var(--ink); border-bottom-color:var(--ink); }
+  .tab .dot { display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--ink35); margin-left:8px; vertical-align:middle; }
+  .tab.active .dot.pass { background:var(--green); box-shadow:0 0 0 2px rgba(47,107,74,.18); }
+  .tab.active .dot.warn { background:#B58A1F; box-shadow:0 0 0 2px rgba(181,138,31,.18); }
+  .tab.active .dot.busy { background:var(--inkblue); animation:pulse 1s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity:.35; } }
+  .pane { display:none; padding:24px 42px 30px; position:relative; z-index:1; }
+  .pane.active { display:block; }
+  .pane h2 { font:600 19px var(--serif); margin-bottom:6px; }
+  .pane .lede { color:var(--ink55); font-size:12.5px; font-family:var(--mono);
+    margin-bottom:18px; line-height:1.55; max-width:640px; }
+  .field { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .field label { font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:.14em; color:var(--ink55); }
+  .field input, .field textarea, .field select { font:500 14px var(--mono); color:var(--ink);
+    background:var(--panel); border:1.4px solid var(--ink35); border-radius:2px;
+    padding:9px 11px; outline:none; transition:border-color .15s; font-variant-numeric:tabular-nums; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color:var(--ink); }
+  .field textarea { min-height:78px; resize:vertical; line-height:1.5; font-family:var(--thai); font-size:14px; }
+  .btnrow { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:6px; }
+  .btn { font:600 12px var(--mono); letter-spacing:.14em; text-transform:uppercase;
+    border:1.4px solid var(--ink); background:var(--ink); color:var(--paper);
+    border-radius:2px; padding:10px 18px; cursor:pointer; transition:opacity .15s; }
+  .btn:hover:not(:disabled) { opacity:.85; }
+  .btn:disabled { opacity:.35; cursor:not-allowed; }
+  .btn.ghost { background:transparent; color:var(--ink); }
+  .btn.ghost:hover:not(:disabled) { background:rgba(33,27,16,.06); }
+  .status { font:500 12px var(--mono); color:var(--ink55); }
+  .status.ok { color:var(--green); }
+  .status.err { color:var(--red); }
+  .out { background:var(--ink); color:#E5DAC1; border-radius:2px; padding:14px 16px;
+    font:500 12.5px var(--mono); line-height:1.6; max-height:380px; overflow:auto;
+    white-space:pre-wrap; word-break:break-word; margin-top:14px; }
+  .out:empty::before { content:"(output will appear here)"; color:#8C8268; }
+  .out .ok { color:#9CC68A; }
+  .out .err { color:#E68B7F; }
+  .qrwrap { display:flex; gap:22px; align-items:flex-start; flex-wrap:wrap; margin-top:6px; }
+  .qrwrap img { width:200px; height:200px; border:1.4px solid var(--ink35); background:#fff; padding:8px; }
+  .qrmeta { font:500 12.5px var(--mono); line-height:1.8; color:var(--ink); }
+  .qrmeta b { color:var(--ink); font-weight:600; }
+  .qrmeta .pill { display:inline-block; border:1.2px solid var(--ink35); border-radius:2px;
+    padding:2px 8px; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink55); }
+  .qrmeta .pill.paid { color:#fff; background:var(--green); border-color:var(--green); }
+  .qrmeta .pill.pending { color:#fff; background:#B58A1F; border-color:#B58A1F; }
+  .qrmeta .pill.delivered { color:#fff; background:var(--inkblue); border-color:var(--inkblue); }
+  .auditmeta { display:flex; gap:22px; flex-wrap:wrap; margin-top:14px; font:500 12.5px var(--mono); }
+  .auditmeta div { border-left:2.5px solid var(--ink35); padding-left:10px; }
+  .auditmeta b { display:block; font:600 18px var(--mono); color:var(--ink); margin-top:2px;
+    font-variant-numeric:tabular-nums; }
+  .auditmeta .verdict-pass b { color:var(--green); }
+  .auditmeta .verdict-fail b { color:var(--red); }
+  @media (max-width:760px){ .tabs { padding:0 20px; } .pane { padding:20px; } }
+
   .foot { border-top:1.5px solid var(--ink); margin-top:6px; padding-top:13px;
     display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; }
   .foot .note { font-size:11.5px; color:var(--ink55); font-family:var(--mono); }
@@ -170,22 +231,103 @@
 
   <div class="perf" aria-hidden="true"></div>
 
-  <div class="ledger">
-    <div class="head">
-      <h2>Transaction record</h2>
-      <div class="meta" id="count">—</div>
-    </div>
-    <table>
-      <thead>
-        <tr><th>Time</th><th>Detail</th><th>Rail</th><th style="text-align:right">Debit</th><th>Stamp</th><th>Evidence</th></tr>
-      </thead>
-      <tbody id="rows"><tr><td colspan="6" class="empty">loading ledger…</td></tr></tbody>
-    </table>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="passbook" role="tab" aria-selected="true">Passbook</button>
+    <button class="tab" data-tab="console" role="tab" aria-selected="false">Console <span class="dot" id="dot-console"></span></button>
+    <button class="tab" data-tab="fund" role="tab" aria-selected="false">Fund <span class="dot" id="dot-fund"></span></button>
+    <button class="tab" data-tab="audit" role="tab" aria-selected="false">Audit <span class="dot" id="dot-audit"></span></button>
+  </nav>
 
-    <div class="foot">
-      <div class="note">machine-printed by leashed-agent · verify at exp.thaifi.com & cardanoscan.io · updated <span id="updated">—</span></div>
-      <div class="barcode" aria-hidden="true"></div>
+  <div class="pane active" data-pane="passbook" role="tabpanel">
+    <div class="ledger" style="padding:0">
+      <div class="head">
+        <h2>Transaction record</h2>
+        <div class="meta" id="count">—</div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Time</th><th>Detail</th><th>Rail</th><th style="text-align:right">Debit</th><th>Stamp</th><th>Evidence</th></tr>
+        </thead>
+        <tbody id="rows"><tr><td colspan="6" class="empty">loading ledger…</td></tr></tbody>
+      </table>
+
+      <div class="foot">
+        <div class="note">machine-printed by leashed-agent · verify at exp.thaifi.com & cardanoscan.io · updated <span id="updated">—</span></div>
+        <div class="barcode" aria-hidden="true"></div>
+      </div>
     </div>
+  </div>
+
+  <div class="pane" data-pane="console" role="tabpanel">
+    <h2>Agent console</h2>
+    <div class="lede">Send a brief. The agent pays on-chain — ThaiFi MPP for the poster rail, Cardano x402 for our own verify-receipt service. Live output streams below.</div>
+
+    <div class="field">
+      <label for="brief">Brief (Thai or English)</label>
+      <textarea id="brief" placeholder="ร้านก๋วยเตี๋ยวเรือ โปรโมชั่นบะหมี่เกี๊ยวหมูแดง ลด 20% ทุกวันศุกร์">ร้านก๋วยเตี๋ยวเรือ โปรโมชั่นบะหมี่เกี๊ยวหมูแดง ลด 20% ทุกวันศุกร์</textarea>
+    </div>
+
+    <div class="field">
+      <label for="mode">Payment mode</label>
+      <select id="mode">
+        <option value="poster-only">poster-only (skip Qwen3.8 — pays 1.5 THCFI real on-chain)</option>
+        <option value="full">full (LLM + poster — Qwen3.8 is currently 503 upstream)</option>
+      </select>
+    </div>
+
+    <div class="btnrow">
+      <button class="btn" id="runBtn" onclick="runJob()">▶ Run agent</button>
+      <span class="status" id="jobStatus">idle</span>
+    </div>
+
+    <pre class="out" id="jobOut"></pre>
+  </div>
+
+  <div class="pane" data-pane="fund" role="tabpanel">
+    <h2>Fund the wallet — PromptPay QR</h2>
+    <div class="lede">Top up via ThaiFi Pay merchant API. 1 THB sent to the QR becomes 1 THCFI on the agent's leash. The QR is generated live; status polls every 3 s after you scan.</div>
+
+    <div class="field" style="max-width:240px">
+      <label for="amount">Amount (THB, min 6)</label>
+      <input type="number" id="amount" value="20" min="6" max="10000" step="1" />
+    </div>
+
+    <div class="btnrow">
+      <button class="btn" id="depBtn" onclick="createDeposit()">↻ Generate PromptPay QR</button>
+      <span class="status" id="depStatus">no order yet</span>
+    </div>
+
+    <div class="qrwrap" id="qrwrap" style="display:none">
+      <img id="qrImg" alt="PromptPay QR" />
+      <div class="qrmeta">
+        <div>Order <b id="depOrderId">—</b></div>
+        <div>Amount <b id="depTotal">—</b></div>
+        <div>Status <span class="pill" id="depPill">pending</span></div>
+        <div style="margin-top:6px">On-chain <b id="depTx">—</b></div>
+        <div style="margin-top:14px; font-size:11px; color:var(--ink55); max-width:280px; line-height:1.55">
+          Scan with any Thai bank app (PromptPay). THCFI arrives within ~10 s of confirmation. The Passbook tab updates automatically.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pane" data-pane="audit" role="tabpanel">
+    <h2>Independent audit — Chainlink CRE</h2>
+    <div class="lede">Re-run the CRE auditor. It fetches the live ledger, calls each tx hash on-chain, and checks totals + per-rail policy. Verdict is attested on Sepolia (simulated run here — see <code>docs/cre-auditor-evidence.txt</code>).</div>
+
+    <div class="btnrow">
+      <button class="btn" id="auditBtn" onclick="runAudit()">↻ Rerun CRE audit</button>
+      <span class="status" id="auditStatus">idle</span>
+    </div>
+
+    <div class="auditmeta" id="auditMeta" style="display:none">
+      <div class="verdict-pass"><span>Verdict</span><b id="auditVerdict">—</b></div>
+      <div><span>Receipts audited</span><b id="auditChecked">—</b></div>
+      <div><span>At</span><b id="auditAt">—</b></div>
+      <div><span>Attestation</span><b id="auditTx" style="font-size:13px">—</b></div>
+    </div>
+
+    <pre class="out" id="auditOut"></pre>
   </div>
 </div>
 
@@ -198,9 +340,7 @@ let lastCount = -1;
 
 async function refresh() {
   try {
-    let s;
-    try { s = await (await fetch('/api/state')).json(); }
-    catch { s = await (await fetch('state.json')).json(); }
+    const s = await (await fetch('/api/state')).json();
     document.getElementById('acct').textContent = (s.agent.key ?? '—').slice(0, 12) + '…';
     document.getElementById('today').textContent = new Date().toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' });
     document.getElementById('expiry').textContent = (s.agent.expires ?? '—').slice(0, 10);
@@ -242,8 +382,162 @@ async function refresh() {
     document.getElementById('updated').textContent = 'API error: ' + e.message;
   }
 }
+
+/* ---- Tabs ---- */
+const tabs = document.querySelectorAll('.tab');
+const panes = document.querySelectorAll('.pane');
+function switchTab(name) {
+  tabs.forEach(t => { const on = t.dataset.tab === name; t.classList.toggle('active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+  panes.forEach(p => p.classList.toggle('active', p.dataset.pane === name));
+  if (name === 'audit') updateAuditFromState();
+}
+tabs.forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+/* ---- Console ---- */
+let jobPoll = null;
+async function runJob() {
+  const btn = document.getElementById('runBtn');
+  const status = document.getElementById('jobStatus');
+  const out = document.getElementById('jobOut');
+  const brief = document.getElementById('brief').value.trim();
+  const mode = document.getElementById('mode').value;
+  if (!brief) { status.textContent = 'brief required'; status.className = 'status err'; return; }
+  btn.disabled = true; status.textContent = 'starting…'; status.className = 'status';
+  out.textContent = '';
+  try {
+    const r = await fetch('/api/job', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ brief, mode }) });
+    const j = await r.json();
+    if (!r.ok) { status.textContent = j.error || 'failed'; status.className = 'status err'; btn.disabled = false; return; }
+    status.textContent = 'running'; status.className = 'status';
+    setDot('console', 'busy');
+    if (jobPoll) clearInterval(jobPoll);
+    jobPoll = setInterval(async () => {
+      try {
+        const j = await (await fetch('/api/job')).json();
+        out.textContent = j.output || '';
+        if (!j.running) {
+          clearInterval(jobPoll); jobPoll = null;
+          btn.disabled = false;
+          const ok = /\[exit 0\]/.test(j.output) && !/error|FAIL/i.test(j.output);
+          status.textContent = ok ? 'completed' : 'finished with errors';
+          status.className = 'status ' + (ok ? 'ok' : 'err');
+          setDot('console', ok ? 'pass' : 'warn');
+          refresh();
+        }
+      } catch (e) { /* keep polling */ }
+    }, 1200);
+  } catch (e) {
+    status.textContent = 'network error'; status.className = 'status err'; btn.disabled = false;
+  }
+}
+
+/* ---- Fund ---- */
+let depPoll = null;
+async function createDeposit() {
+  const btn = document.getElementById('depBtn');
+  const status = document.getElementById('depStatus');
+  const amount = Math.max(6, Math.min(10000, Number(document.getElementById('amount').value || 20)));
+  btn.disabled = true; status.textContent = 'creating order…'; status.className = 'status';
+  document.getElementById('qrwrap').style.display = 'none';
+  try {
+    const r = await fetch('/api/deposit', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ amount }) });
+    const j = await r.json();
+    if (!r.ok) { status.textContent = j.error || 'failed'; status.className = 'status err'; btn.disabled = false; return; }
+    status.textContent = 'order ' + j.orderId + ' — scan the QR'; status.className = 'status';
+    setDot('fund', 'busy');
+    pollDeposit();
+  } catch (e) {
+    status.textContent = 'network error'; status.className = 'status err'; btn.disabled = false;
+  }
+}
+function pollDeposit() {
+  if (depPoll) clearInterval(depPoll);
+  depPoll = setInterval(async () => {
+    try {
+      const j = await (await fetch('/api/deposit')).json();
+      const o = j.order;
+      if (!o?.id) return;
+      document.getElementById('qrwrap').style.display = 'flex';
+      document.getElementById('qrImg').src = o.qrImage || '';
+      document.getElementById('depOrderId').textContent = o.id;
+      document.getElementById('depTotal').textContent = o.total ? (o.total + ' THB') : '—';
+      const pill = document.getElementById('depPill');
+      pill.textContent = o.status || 'pending';
+      pill.className = 'pill ' + (o.status || 'pending');
+      document.getElementById('depTx').textContent = o.txHash ? (o.txHash.slice(0, 16) + '…') : 'awaiting payment';
+      if (o.status === 'delivered' || o.status === 'paid') {
+        clearInterval(depPoll); depPoll = null;
+        document.getElementById('depBtn').disabled = false;
+        document.getElementById('depStatus').textContent = 'delivered';
+        document.getElementById('depStatus').className = 'status ok';
+        setDot('fund', 'pass');
+        refresh();
+      }
+    } catch { /* keep polling */ }
+  }, 3000);
+}
+
+/* ---- Audit ---- */
+let auditPoll = null;
+function updateAuditFromState() {
+  fetch('/api/state').then(r => r.json()).then(s => {
+    const a = s.auditor;
+    const meta = document.getElementById('auditMeta');
+    if (!a) { meta.style.display = 'none'; return; }
+    meta.style.display = 'flex';
+    const wrap = document.getElementById('auditVerdict').parentElement;
+    wrap.className = a.verdict === 'PASS' ? 'verdict-pass' : 'verdict-fail';
+    document.getElementById('auditVerdict').textContent = a.verdict;
+    document.getElementById('auditChecked').textContent = a.checked ?? '—';
+    document.getElementById('auditAt').textContent = (a.at || '').slice(0, 19).replace('T', ' ');
+    document.getElementById('auditTx').textContent = a.attestationTx || '—';
+    setDot('audit', a.verdict === 'PASS' ? 'pass' : 'warn');
+  }).catch(() => {});
+}
+async function runAudit() {
+  const btn = document.getElementById('auditBtn');
+  const status = document.getElementById('auditStatus');
+  const out = document.getElementById('auditOut');
+  btn.disabled = true; status.textContent = 'starting CRE simulate…'; status.className = 'status';
+  out.textContent = '';
+  try {
+    const r = await fetch('/api/audit', { method: 'POST' });
+    const j = await r.json();
+    if (!r.ok) { status.textContent = j.error || 'failed'; status.className = 'status err'; btn.disabled = false; return; }
+    status.textContent = 'running'; status.className = 'status';
+    setDot('audit', 'busy');
+    if (auditPoll) clearInterval(auditPoll);
+    auditPoll = setInterval(async () => {
+      try {
+        const j = await (await fetch('/api/audit')).json();
+        out.textContent = j.output || '';
+        if (!j.running) {
+          clearInterval(auditPoll); auditPoll = null;
+          btn.disabled = false;
+          const ok = /"verdict"\s*:\s*"PASS"/.test(j.output);
+          status.textContent = ok ? 'PASS — verdict written' : 'finished';
+          status.className = 'status ' + (ok ? 'ok' : 'err');
+          updateAuditFromState();
+          refresh();
+        }
+      } catch { /* keep polling */ }
+    }, 1500);
+  } catch (e) {
+    status.textContent = 'network error'; status.className = 'status err'; btn.disabled = false;
+  }
+}
+
+/* ---- Tab dot helpers ---- */
+function setDot(tab, state) {
+  const el = document.getElementById('dot-' + tab);
+  if (!el) return;
+  el.className = 'dot ' + (state || '');
+}
+
 refresh();
-if (!location.pathname.includes('public-snapshot')) setInterval(refresh, 5000);
+updateAuditFromState();
+setInterval(refresh, 5000);
+setInterval(updateAuditFromState, 8000);
 </script>
 </body>
 </html>
