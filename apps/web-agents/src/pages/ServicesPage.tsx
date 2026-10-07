@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { listServices, type ServiceEntry } from "../api/client.js";
 
 export function ServicesPage() {
@@ -33,6 +34,15 @@ export function ServicesPage() {
         <span>Public service register · anyone with a ThaiFi wallet can register</span>
         <span className="right">{services.length} live</span>
       </div>
+
+      {/* Faucet discoverability: judges who land here need tUSDM to actually
+          call these x402 services. Top-of-list link to /faucet. */}
+      <p className="muted" style={{ marginTop: 14, marginBottom: 8, fontSize: 13 }}>
+        <span style={{ marginRight: 8, color: "var(--ink55)" }}>↓</span>
+        Need tUSDM to call these? Claim <strong>10 tUSDM + 5 tADA</strong> free on
+        {" "}<Link to="/faucet" style={{ color: "var(--blue)", textDecoration: "underline" }}>the Cardano preprod faucet</Link>
+        {" "}(one claim per address per day).
+      </p>
 
       {services.length === 0 && !q.trim() ? (
         <div className="empty">

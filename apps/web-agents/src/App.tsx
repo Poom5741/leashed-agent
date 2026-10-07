@@ -34,8 +34,11 @@ export default function App() {
             <Link to="/agents" style={{ color: "var(--blue-pale)", marginRight: 18 }}>
               agents
             </Link>
-            <Link to="/services" style={{ color: "var(--blue-pale)" }}>
+            <Link to="/services" style={{ color: "var(--blue-pale)", marginRight: 18 }}>
               services
+            </Link>
+            <Link to="/faucet" style={{ color: "var(--blue-pale)" }}>
+              get tokens
             </Link>
           </span>
         </div>

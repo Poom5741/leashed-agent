@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { API_BASE } from "../api/client.js";
 
 const ADDR_RE = /^addr_test1[02-9ac-hj-np-z]{53,}$/;
@@ -85,7 +86,26 @@ export function FaucetPage() {
         </p>
       )}
       {state === "done" && (
-        <p style={{ color: "var(--success, #23663C)" }}>{message}</p>
+        <>
+          <p style={{ color: "var(--success, #23663C)" }}>{message}</p>
+          {/* Discoverability loop: after claiming, judges need to know where
+              to actually USE the tokens. Point at the marketplace. */}
+          <p style={{ marginTop: 12 }}>
+            <Link
+              to="/services"
+              style={{
+                color: "var(--blue)",
+                textDecoration: "underline",
+                fontWeight: 600,
+              }}
+            >
+              → Now try the marketplace
+            </Link>
+            <span style={{ color: "var(--ink55)", marginLeft: 8 }}>
+              (4 live services, in tokened tUSDM/USDM/THCFI)
+            </span>
+          </p>
+        </>
       )}
       {state === "error" && (
         <p style={{ color: "var(--danger, #9C3B2C)" }}>{message}</p>
