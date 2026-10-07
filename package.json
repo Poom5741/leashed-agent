@@ -13,6 +13,7 @@
     "probe": "tsx probes/run-all.ts"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",

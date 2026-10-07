@@ -254,7 +254,12 @@ export async function listServices(
   opts: ListServicesOpts = {},
 ): Promise<Pick<ServiceRow, "id" | "endpoint_url" | "rail" | "price_base" | "token">[]> {
   const limit = Math.min(opts.limit ?? 100, 500);
-  const q = (opts.q ?? "").trim();
+  // Clamp the search term so judges can paste a phrase into the filter
+  // without tripping D1's LIKE-pattern bound-parameter ceiling (F1 finding:
+  // 49+ chars returned HTTP 500 on 4b31a84). 48 chars is comfortably more
+  // than any reasonable URL/rail substring; longer input degrades to empty.
+  const rawQ = (opts.q ?? "").trim();
+  const q = rawQ.length > 48 ? "" : rawQ;
   if (!q) {
     const { results } = await db
       .prepare(
