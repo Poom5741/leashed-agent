@@ -133,15 +133,19 @@ export function AuthorizedApps() {
   return (
     <div>
       <p className="muted" style={{ marginBottom: 12 }}>
-        Apps and CLIs authorized to sign for your wallet. Spending is capped
-        on-chain per key.
+        Leashed Agents authorized to sign for this wallet — read from the
+        platform /agents register. Spending is capped per agent (limit /
+        period / expiry), and any revoke lives on-chain instantly.
       </p>
 
       {error && <p className="error-text">{error}</p>}
       {pairs && pairs.length === 0 && (
         <p className="history-empty">
-          No authorized apps yet. Run <code>thaifi login</code> in your terminal
-          and approve the pairing here.
+          No authorized apps for this device yet. Create one on the{" "}
+          <a href="https://leashed-agent-platform.pages.dev/agents" style={{ color: "var(--blue)" }}>
+            platform SPA
+          </a>{" "}
+          (it's the canonical manager — this wallet is the viewer).
         </p>
       )}
 

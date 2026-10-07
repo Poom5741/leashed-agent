@@ -32,6 +32,13 @@ export interface HistoryItem {
   amount: string;
 }
 
+// Platform API origin. VITE_API_BASE is set at build time so the SPA
+// bundle never embeds the worker file path. Falls back to the deployed
+// workers.dev origin so the wallet SPA can fetch from any environment.
+const PLATFORM_API =
+  (import.meta.env.VITE_API_BASE as string | undefined) ??
+  "https://leashed-api-agents.poom-a1d.workers.dev";
+
 async function parse<T>(res: Response): Promise<T> {
   if (!res.ok) {
     const data = (await res.json().catch(() => ({}))) as { error?: string };
@@ -82,14 +89,49 @@ export const api = {
     fetch(`/api/history?address=${encodeURIComponent(address)}`, { credentials: "include" }).then((r) =>
       parse<{ items: HistoryItem[] }>(r),
     ),
+  // The upstream ThaiFi wallet fork ships /api/agent/* on its own CF worker,
+  // which isn't deployed for the Leashed fork (different account). Instead
+  // we hit the platform's /api/agents with the stub-user header used by the
+  // platform SPA. Both shapes are compatible (keyId, expiry, limitAmount,
+  // limitPeriod, userAddress, createdAt) — we map `template`→`name` and
+  // synthesize `keyType` from the platform record.
   listPairs: () =>
-    fetch("/api/agent/pairs", { credentials: "include" }).then((r) =>
-      parse<{ pairs: AgentPair[] }>(r),
-    ),
-  deletePair: (id: string) =>
-    fetch(`/api/agent/pairs/${id}`, { method: "DELETE", credentials: "include" }).then((r) =>
-      parse<{ ok: boolean }>(r),
-    ),
+    fetch(`${PLATFORM_API}/api/agents`, {
+      headers: { "X-Stub-User": "wallet-device" },
+    }).then(async (r) => {
+      const body = (await r.json().catch(() => ({}))) as {
+        agents?: Array<{
+          id: string;
+          keyId: string;
+          template: string;
+          status: string;
+          userAddress: string | null;
+          expiry: number | null;
+          limitAmount: string | null;
+          limitPeriod: number | null;
+          createdAt: number;
+        }>;
+      };
+      const pairs: AgentPair[] = (body.agents ?? []).map((a) => ({
+        id: a.id,
+        keyId: a.keyId,
+        keyType: "p256",
+        name: a.template,
+        userAddress: a.userAddress,
+        expiry: a.expiry,
+        limitAmount: a.limitAmount,
+        limitPeriod: a.limitPeriod,
+        createdAt: a.createdAt,
+      }));
+      return { pairs };
+    }),
+  deletePair: async (_id: string) => {
+    // Manage agent pairs on the platform SPA (/agents) — the wallet is
+    // a viewer for the Leashed Agent allowance, not the manager.
+    throw new Error(
+      "Manage agent allowances on the platform SPA → https://leashed-agent-platform.pages.dev/agents",
+    );
+  },
   paysoOrder: (amount: number, address: string, token: string) =>
     post<PaysoOrder>("/api/payso/order", { amount, address, token }),
   paysoOrderStatus: (referenceNo: string) =>

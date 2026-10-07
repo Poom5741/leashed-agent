@@ -115,6 +115,17 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     isPlatformAuthenticatorAvailable().then(setPlatformAuthAvailable);
   }, []);
 
+  // Publish wallet state to window + emit a custom event so the AuthContext
+  // (which is mounted above this provider) can derive the displayName from
+  // the on-device address + guard type. Default payload is "no wallet yet".
+  useEffect(() => {
+    const payload = storedWallet
+      ? { address: storedWallet.address, guard: storedWallet.guard }
+      : undefined;
+    (window as unknown as { __leashedWallet?: unknown }).__leashedWallet = payload;
+    window.dispatchEvent(new CustomEvent("leashed:wallet-changed"));
+  }, [storedWallet]);
+
   /** PIN prompt with verification — resolves the raw PIN, or rejects on cancel. */
   const requestPin = useCallback(
     (opts?: { title?: string; message?: ReactNode }) =>
