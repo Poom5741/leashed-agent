@@ -119,7 +119,7 @@ export function AgentsListPage() {
                 <code className="keyId">{a.keyId} · p256</code>
                 <div className="row">
                   <span>limit</span>
-                  <b>{(Number(a.limitAmount) / 1_000_000).toFixed(2)} THCFI</b>
+                  <b>{(Number(a.limitAmount) / 1_000_000).toFixed(2)} tUSDM</b>
                 </div>
                 <div className="row">
                   <span>period</span>

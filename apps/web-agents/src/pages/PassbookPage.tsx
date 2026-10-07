@@ -88,17 +88,17 @@ export function PassbookPage() {
       <div className="summary">
         <div>
           <div className="k">credit line remaining</div>
-          <div className="v">{remaining.toFixed(6)} <small>THCFI</small></div>
+          <div className="v">{remaining.toFixed(6)} <small>tUSDM</small></div>
           <div className="s">cap {limit.toFixed(2)} / 30 d · chain-enforced</div>
         </div>
         <div>
           <div className="k">wallet balance</div>
-          <div className="v">{remaining.toFixed(6)} <small>THCFI</small></div>
-          <div className="s">top up 1 THB = 1 THCFI via QR</div>
+          <div className="v">{remaining.toFixed(6)} <small>tUSDM</small></div>
+          <div className="s">top up via the /faucet (10 tUSDM + 5 tADA per address / day)</div>
         </div>
         <div>
           <div className="k">charged this leaf</div>
-          <div className="v">{spent.toFixed(6)} <small>THCFI</small></div>
+          <div className="v">{spent.toFixed(6)} <small>tUSDM</small></div>
           <div className="s">{pb.receipts.length} receipts · both paid</div>
         </div>
       </div>
