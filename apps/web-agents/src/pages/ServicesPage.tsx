@@ -39,7 +39,7 @@ export function ServicesPage() {
           call these x402 services. Top-of-list link to /faucet. */}
       <p className="muted" style={{ marginTop: 14, marginBottom: 8, fontSize: 13 }}>
         <span style={{ marginRight: 8, color: "var(--ink55)" }}>↓</span>
-        Need tUSDM to call these? Claim <strong>10 tUSDM + 5 tADA</strong> free on
+        Need tUSDM to call these? Claim <strong>1,000 tUSDM + 5 tADA</strong> free on
         {" "}<Link to="/faucet" style={{ color: "var(--blue)", textDecoration: "underline" }}>the Cardano preprod faucet</Link>
         {" "}(one claim per address per day).
       </p>

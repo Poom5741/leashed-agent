@@ -24,7 +24,7 @@ export function FaucetPage() {
       if (!res.ok || !data.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
       setState("done");
       setMessage(
-        "10 tUSDM + 5 tADA granted — they arrive on Cardano preprod within a few minutes. Search your address on preprod.cardanoscan.io to verify.",
+        "1,000 tUSDM + 5 tADA granted — they arrive on Cardano preprod within a few minutes. Search your address on preprod.cardanoscan.io to verify.",
       );
     } catch (err) {
       setState("error");
@@ -39,7 +39,7 @@ export function FaucetPage() {
       <p className="muted" style={{ maxWidth: "64ch" }}>
         Judges and new users need funds to try the marketplace. Enter a Cardano
         <strong> preprod testnet</strong> address (<code>addr_test1…</code>) and
-        we grant <strong>10 tUSDM</strong> (test stablecoin, 1:1 USD — the same
+        we grant <strong>1,000 tUSDM</strong> (test stablecoin, 1:1 USD — the same
         asset the x402 marketplace quotes) plus <strong>5 tADA</strong> for
         fees. One claim per address per day. Real on-chain transfers on the
         Cardano preprod testnet — verify everything on{" "}
@@ -75,7 +75,7 @@ export function FaucetPage() {
           disabled={!valid || state === "pending"}
           style={{ opacity: !valid || state === "pending" ? 0.5 : 1 }}
         >
-          {state === "pending" ? "Claiming…" : "Claim 10 tUSDM"}
+          {state === "pending" ? "Claiming…" : "Claim 1,000 tUSDM"}
         </button>
       </div>
       {!valid && address.length > 0 && (

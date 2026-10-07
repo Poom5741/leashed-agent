@@ -32,6 +32,7 @@ import {
 import { auditReceipts, type AuditVerdict } from "./auditor.js";
 import { makeServiceId } from "./services.js";
 import faucetCardanoApp from "./faucet-cardano.js";
+import cardanoBalanceApp from "./cardano-balance.js";
 
 export type Bindings = { DB: D1Database; ALLOWED_ORIGINS?: string };
 export type Variables = { userId: string };
@@ -235,6 +236,7 @@ app.post("/api/audit", async (c) => {
 });
 
 app.route("/", faucetCardanoApp);
+app.route("/", cardanoBalanceApp);
 
 app.get("/api/healthz", (c) => c.json({ ok: true }));
 

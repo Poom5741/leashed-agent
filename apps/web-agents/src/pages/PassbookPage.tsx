@@ -94,7 +94,7 @@ export function PassbookPage() {
         <div>
           <div className="k">wallet balance</div>
           <div className="v">{remaining.toFixed(6)} <small>tUSDM</small></div>
-          <div className="s">top up via the /faucet (10 tUSDM + 5 tADA per address / day)</div>
+          <div className="s">top up via the /faucet (1,000 tUSDM + 5 tADA per address / day)</div>
         </div>
         <div>
           <div className="k">charged this leaf</div>
