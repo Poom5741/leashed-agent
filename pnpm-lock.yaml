@@ -49,6 +49,15 @@ importers:
 
   apps/api-agents:
     dependencies:
+      '@x402/cardano':
+        specifier: 2.28.0
+        version: 2.28.0
+      '@x402/core':
+        specifier: 2.28.0
+        version: 2.28.0
+      '@x402/hono':
+        specifier: 2.28.0
+        version: 2.28.0(hono@4.13.13)(typescript@5.9.3)
       hono:
         specifier: ^4.6.0
         version: 4.13.13
@@ -1372,6 +1381,15 @@ packages:
 
   '@x402/extensions@2.28.0':
     resolution: {integrity: sha512-M3SVxO8DJnx7gpok/ODQp803jr21s1XrCMholNw0hSgOVvSPRksfTZ+CUNfJwteNaHmaAxGjPelXWBhTCMD9oQ==}
+
+  '@x402/hono@2.28.0':
+    resolution: {integrity: sha512-tR/AegvCpluj4AX1uYpqt0Ak7e3RcA2QE9GYrPCzwZTxv2z7gYUl7xE/olaxxDEiEb/yRmlsNAxmL81cARjeKw==}
+    peerDependencies:
+      '@x402/paywall': ^2.28.0
+      hono: ^4.0.0
+    peerDependenciesMeta:
+      '@x402/paywall':
+        optional: true
 
   '@x402/fetch@2.28.0':
     resolution: {integrity: sha512-kF5IjZIz/izg2TD/Zav+SVj0jtC0zBDfE7WcKCnMZWIsZcLCyL2GgvwXCn7CCSsNjpQ/z3Rz4OqTCA4AaeKySQ==}
@@ -3069,6 +3087,17 @@ snapshots:
       tweetnacl: 1.0.3
       viem: 2.57.3(typescript@5.9.3)(zod@3.25.76)
       zod: 3.25.76
+    transitivePeerDependencies:
+      - bufferutil
+      - ethers
+      - typescript
+      - utf-8-validate
+
+  '@x402/hono@2.28.0(hono@4.13.13)(typescript@5.9.3)':
+    dependencies:
+      '@x402/core': 2.28.0
+      '@x402/extensions': 2.28.0(typescript@5.9.3)
+      hono: 4.13.13
     transitivePeerDependencies:
       - bufferutil
       - ethers

@@ -33,8 +33,9 @@ import { auditReceipts, type AuditVerdict } from "./auditor.js";
 import { makeServiceId } from "./services.js";
 import faucetCardanoApp from "./faucet-cardano.js";
 import cardanoBalanceApp from "./cardano-balance.js";
+import receiptSellerApp, { type SellerBindings } from "./receipt-seller.js";
 
-export type Bindings = { DB: D1Database; ALLOWED_ORIGINS?: string };
+export type Bindings = SellerBindings & { ALLOWED_ORIGINS?: string };
 export type Variables = { userId: string };
 
 const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
@@ -72,7 +73,8 @@ app.use(
       // Known origin but untrusted → deny explicitly
       return null;
     },
-    allowHeaders: ["Content-Type", "X-Stub-User"],
+    allowHeaders: ["Content-Type", "X-Stub-User", "Payment-Signature", "X-Payment"],
+    exposeHeaders: ["Payment-Required", "Payment-Response", "X-Payment-Response"],
     allowMethods: ["GET", "POST", "DELETE", "OPTIONS"],
     maxAge: 86400,
     credentials: false,
@@ -237,6 +239,7 @@ app.post("/api/audit", async (c) => {
 
 app.route("/", faucetCardanoApp);
 app.route("/", cardanoBalanceApp);
+app.route("/", receiptSellerApp);
 
 app.get("/api/healthz", (c) => c.json({ ok: true }));
 

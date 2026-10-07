@@ -45,7 +45,7 @@ export function createCardanoPayer(opts: CardanoPayerOptions) {
       const response = await fetchWithPay(url, init);
       const body = await response.text();
       let settlement: { transaction?: string; success?: boolean } | null = null;
-      const header = response.headers.get("x-payment-response");
+      const header = response.headers.get("payment-response") ?? response.headers.get("x-payment-response");
       if (header) {
         try {
           settlement = decodePaymentResponseHeader(header) as { transaction?: string; success?: boolean };
