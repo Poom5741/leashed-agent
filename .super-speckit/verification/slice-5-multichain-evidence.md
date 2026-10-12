@@ -26,3 +26,9 @@ Date: 2026-10-12 · Feature: docs/slice5-multichain-spec.md · Builder: autonomo
 - Tempo default USDC address is the well-known x402 TIP-20 address; override with `TEMPO_USDC_ADDRESS` if Moderato differs.
 - `seller/health` `payTo` shows only explicitly-configured addresses; the 402 always carries the derived address.
 - Env keys in `apps/api-agents/.dev.vars` are throwaway dev keys, git-ignored.
+
+## PRODUCTION DEPLOY (2026-10-12, post wrangler login)
+
+- Secrets set on worker `leashed-api-agents`: SOLANA_SELLER_KEYPAIR, SOLANA_SELLER_ADDRESS, TEMPO_SELLER_KEY (dev/testnet keys from /tmp/seller-test-env.txt).
+- `wrangler deploy` → Version 77379389-f4db-4f3b-89e7-48afb06f4a59.
+- Live checks: `/api/healthz` ok; `/api/chains` all 3 networks `configured:true`; `/seller/health` 200 with Solana payTo; unpaid `POST /verify-receipt` → 402; junk Payment-Signature → 402 (facilitator rejects, no verdict).

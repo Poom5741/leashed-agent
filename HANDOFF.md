@@ -8,7 +8,7 @@
 
 - **Shipped & pushed** (commit `c33be00`, on GitHub): `apps/api-agents` now accepts x402 payments on **three** networks — Cardano preprod (unchanged), **Solana devnet** (`@x402/svm`, USDC `4zMMC9…ncDU`), **Tempo Moderato testnet** (`@x402/evm`, `eip155:42431`, TIP-20 USDC `0x20c0…8b50`). New `GET /api/chains` discovery; `/seller/health` per-network; 402 `accepts` lists one entry per configured network. Networks appear only when their seller key env is set: `SOLANA_SELLER_KEYPAIR` (base64 of 64-byte secretKey) and `TEMPO_SELLER_KEY` (0x hex), plus optional `SOLANA_SELLER_ADDRESS`, `TEMPO_USDC_ADDRESS`, `TEMPO_RPC_URL`.
 - **Evidence**: 40/40 tests (`npx tsx --test test/*.test.ts`, node 22), typecheck clean, wrangler-dev runtime transcript in `.super-speckit/verification/slice-5-multichain-evidence.md`. Spec: `docs/slice5-multichain-spec.md`.
-- **Blocked — production deploy**: no Cloudflare credentials on this machine. Run `npx wrangler login` in `apps/api-agents`, then add the env keys above as Worker secrets (`npx wrangler secret put SOLANA_SELLER_KEYPAIR` etc.) and `npx wrangler deploy`. Until then the live worker still serves the Cardano-only build (commit 9e8c2611).
+- **Production deploy DONE** (2026-10-12): `wrangler login` + secrets + deploy, Version 77379389. Live worker now serves all 3 networks (`/api/chains` all configured:true). Deploy marker commit: this one.
 - **Honest limitation**: on-chain settlement on Solana/Tempo not executed (needs a funded devnet/testnet buyer); advertise + reject paths proven live.
 - Tooling note: this machine has **bun 1.4 but no node/npm/pnpm**; a standalone node 22 was installed at `/tmp/node-v22.14.0-darwin-arm64/bin` (ephemeral). `bun test` crashes on this suite — use node+tsx.
 
