@@ -247,8 +247,8 @@ app.get("/api/healthz", (c) => c.json({ ok: true }));
 // Slice 5 — multi-chain payment discovery for the SPA/CLI.
 app.get("/api/chains", (c) => {
   return c.json({
-    chains: paymentNetworks(c.env).map(({ network, label, family, token, priceBase, configured }) => ({
-      network, label, family, token, priceBase, configured,
+    chains: paymentNetworks(c.env).map(({ network, label, family, token, priceBase, configured, assets, payTo }) => ({
+      network, label, family, token, priceBase, configured, assets, payTo,
     })),
   });
 });

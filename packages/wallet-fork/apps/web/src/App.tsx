@@ -4,7 +4,6 @@ import { CreateWallet } from "./components/CreateWallet";
 import { UnlockWallet } from "./components/UnlockWallet";
 import { Dashboard } from "./components/Dashboard";
 import { PairApprove } from "./components/PairApprove";
-import { CardanoBalance } from "./components/CardanoBalance";
 import "./App.css";
 
 // Derive /wallet mount once at module load (App.tsx is the only entry point
@@ -69,7 +68,7 @@ function WalletFlow() {
     return (
       <div className="app-root">
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 16px" }}>
-          <CardanoBalance />
+          {/* Cardano balance checker hidden (slice 5d): faucet rails are now Solana/Tempo self-serve. */}
           <CreateWallet />
         </div>
       </div>

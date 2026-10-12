@@ -7,6 +7,7 @@ import { renderSVG } from "uqr";
 import { useWallet } from "../contexts/WalletContext";
 import { TOKENS } from "../config/tokens";
 import { Ico } from "./icons";
+import { PlatformTopup } from "./PlatformTopup";
 
 export function Deposit() {
   const { storedWallet } = useWallet();
@@ -24,6 +25,7 @@ export function Deposit() {
     <div className="form-section">
       <h3>Receive</h3>
       <ReceiveSection address={storedWallet.address} copied={copied} onCopy={copyAddress} />
+      <PlatformTopup />
     </div>
   );
 }

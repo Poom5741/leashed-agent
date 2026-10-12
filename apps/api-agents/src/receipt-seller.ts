@@ -163,16 +163,37 @@ export function createReceiptSeller(facilitatorFactory: (env: SellerBindings) =>
         payTo: sellerAddress,
         maxTimeoutSeconds: 180,
       });
+      // PYUSD on Solana: mint supplied via env (no PayPal-issued devnet mint exists).
+      if (env.SOLANA_PYUSD_MINT) {
+        accepts.push({
+          scheme: "exact",
+          network: SOLANA_DEVNET,
+          price: { amount: SELLER_PRICE_BASE, asset: env.SOLANA_PYUSD_MINT },
+          payTo: sellerAddress,
+          maxTimeoutSeconds: 180,
+        });
+      }
     }
     if (isHexKey(env.TEMPO_SELLER_KEY)) {
       resourceServer.register(TEMPO_TESTNET_CAIP2, new EvmServer());
+      const tempoPayTo = env.TEMPO_SELLER_ADDRESS ?? privateKeyToAccount(env.TEMPO_SELLER_KEY).address;
       accepts.push({
         scheme: "exact",
         network: TEMPO_TESTNET_CAIP2,
         price: { amount: SELLER_PRICE_BASE, asset: (env.TEMPO_USDC_ADDRESS ?? DEFAULT_TEMPO_USDC) as `0x${string}` },
-        payTo: privateKeyToAccount(env.TEMPO_SELLER_KEY).address,
+        payTo: tempoPayTo,
         maxTimeoutSeconds: 180,
       });
+      // PYUSD on Tempo: TIP-20 address supplied via env until officially published.
+      if (env.PYUSD_ADDRESS) {
+        accepts.push({
+          scheme: "exact",
+          network: TEMPO_TESTNET_CAIP2,
+          price: { amount: SELLER_PRICE_BASE, asset: env.PYUSD_ADDRESS as `0x${string}` },
+          payTo: tempoPayTo,
+          maxTimeoutSeconds: 180,
+        });
+      }
     }
 
     return paymentMiddleware({

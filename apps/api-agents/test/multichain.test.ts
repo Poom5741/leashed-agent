@@ -113,6 +113,23 @@ test("GET /api/chains exposes multi-chain discovery", async () => {
   assert.equal(byNet.get(SELLER_NETWORK)!.configured, false);
 });
 
+test("PYUSD assets appear only when their env addresses are set", async () => {
+  const { paymentNetworks } = await import("../src/chains.js");
+  const base = { SOLANA_SELLER_KEYPAIR: solanaEnv.SOLANA_SELLER_KEYPAIR, TEMPO_SELLER_KEY: TEMPO_KEY };
+  assert.deepEqual(paymentNetworks(base).map((n) => n.assets), [[], [], []]);
+  const withPyusd = paymentNetworks({ ...base, SOLANA_PYUSD_MINT: "PYUSD111111111111111111111111111111111111111", PYUSD_ADDRESS: "0x" + "22".repeat(20) });
+  assert.deepEqual(withPyusd.find((n) => n.family === "svm")!.assets, ["PYUSD"]);
+  assert.deepEqual(withPyusd.find((n) => n.family === "evm")!.assets, ["PYUSD"]);
+});
+
+test("accepts carries a PYUSD entry on Tempo when PYUSD_ADDRESS is set", async () => {
+  const res = await makeSeller({ TEMPO_SELLER_KEY: TEMPO_KEY, PYUSD_ADDRESS: "0x" + "33".repeat(20), TEMPO_SELLER_ADDRESS: "0x" + "44".repeat(20) }, [TEMPO_TESTNET_CAIP2]);
+  const body = decodeRequired(res);
+  const tempoEntries = body.accepts.filter((a) => a.network === TEMPO_TESTNET_CAIP2);
+  assert.equal(tempoEntries.length, 2); // USDC + PYUSD
+  assert.match(tempoEntries[1]!.asset, /^0x33/);
+});
+
 test("key format validators reject garbage without throwing", () => {
   assert.equal(isHexKey("0x1234"), false);
   assert.equal(isHexKey(undefined), false);

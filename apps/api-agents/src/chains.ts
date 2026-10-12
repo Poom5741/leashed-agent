@@ -24,6 +24,9 @@ export interface SellerEnv {
   TEMPO_SELLER_KEY?: string;
   TEMPO_USDC_ADDRESS?: string;
   TEMPO_RPC_URL?: string;
+  /** Optional PYUSD support: EVM (Tempo) TIP-20 address + Solana devnet mint. */
+  PYUSD_ADDRESS?: string;
+  SOLANA_PYUSD_MINT?: string;
 }
 
 export interface NetworkInfo {
@@ -34,6 +37,8 @@ export interface NetworkInfo {
   priceBase: string;
   configured: boolean;
   payTo: string | null;
+  /** Extra stablecoin assets accepted on this rail (e.g. PYUSD). */
+  assets: string[];
 }
 
 /** 0x-hex 32-byte private key (EVM-style). */
@@ -69,6 +74,7 @@ export function paymentNetworks(env: SellerEnv): NetworkInfo[] {
       priceBase: "100000",
       configured: cardanoConfigured,
       payTo: cardanoConfigured ? env.CARDANO_SELLER_ADDRESS ?? null : null,
+      assets: [],
     },
     {
       network: SOLANA_DEVNET_CAIP2,
@@ -78,6 +84,7 @@ export function paymentNetworks(env: SellerEnv): NetworkInfo[] {
       priceBase: "100000",
       configured: solanaConfigured,
       payTo: solanaConfigured ? env.SOLANA_SELLER_ADDRESS ?? null : null,
+      assets: env.SOLANA_PYUSD_MINT ? ["PYUSD"] : [],
     },
     {
       network: TEMPO_TESTNET_CAIP2,
@@ -87,6 +94,7 @@ export function paymentNetworks(env: SellerEnv): NetworkInfo[] {
       priceBase: "100000",
       configured: tempoConfigured,
       payTo: tempoConfigured ? env.TEMPO_SELLER_ADDRESS ?? null : null,
+      assets: env.PYUSD_ADDRESS ? ["PYUSD"] : [],
     },
   ];
 }

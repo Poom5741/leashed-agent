@@ -1,127 +1,82 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { API_BASE } from "../api/client.js";
-
-const ADDR_RE = /^addr_test1[02-9ac-hj-np-z]{53,}$/;
+/** Get testnet tokens — self-serve guide (slice 5d).
+ *
+ * The old Cardano tUSDM claim form is removed: judges source testnet
+ * stablecoins for the Solana and Tempo rails themselves. This page tells
+ * them exactly where to go; the platform never custodies faucet tokens. */
 
 export function FaucetPage() {
-  const [address, setAddress] = useState("");
-  const [state, setState] = useState<"idle" | "pending" | "done" | "error">("idle");
-  const [message, setMessage] = useState<string | null>(null);
-
-  const valid = ADDR_RE.test(address.trim());
-
-  const claim = async () => {
-    setState("pending");
-    setMessage(null);
-    try {
-      const res = await fetch(`${API_BASE}/v1/faucet/cardano`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address: address.trim() }),
-      });
-      const data = (await res.json()) as { ok: boolean; error?: string };
-      if (!res.ok || !data.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
-      setState("done");
-      setMessage(
-        "1,000 tUSDM + 5 tADA granted — they arrive on Cardano preprod within a few minutes. Search your address on preprod.cardanoscan.io to verify.",
-      );
-    } catch (err) {
-      setState("error");
-      setMessage(err instanceof Error ? err.message : "claim failed");
-    }
-  };
-
   return (
-    <section className="card">
-      <span className="fig-tag">FAUCET · REAL TOKENS</span>
-      <h2 style={{ marginTop: 0 }}>Get test tokens — Cardano preprod</h2>
-      <p className="muted" style={{ maxWidth: "64ch" }}>
-        Judges and new users need funds to try the marketplace. Enter a Cardano
-        <strong> preprod testnet</strong> address (<code>addr_test1…</code>) and
-        we grant <strong>1,000 tUSDM</strong> (test stablecoin, 1:1 USD — the same
-        asset the x402 marketplace quotes) plus <strong>5 tADA</strong> for
-        fees. One claim per address per day. Real on-chain transfers on the
-        Cardano preprod testnet — verify everything on{" "}
-        <a
-          href="https://preprod.cardanoscan.io"
-          target="_blank"
-          rel="noreferrer"
-        >
-          preprod.cardanoscan.io
-        </a>
-        .
-      </p>
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", margin: "14px 0 8px" }}>
-        <input
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder="addr_test1…"
-          spellCheck={false}
-          style={{
-            flex: "1 1 380px",
-            background: "var(--card-2, #E9EBEC)",
-            border: "1.5px solid var(--blue, #1F4E79)",
-            color: "var(--ink, #17222E)",
-            fontFamily: "var(--mono, monospace)",
-            fontSize: 13,
-            padding: "10px 12px",
-            outline: "none",
-          }}
-        />
-        <button
-          className="btn-primary"
-          onClick={claim}
-          disabled={!valid || state === "pending"}
-          style={{ opacity: !valid || state === "pending" ? 0.5 : 1 }}
-        >
-          {state === "pending" ? "Claiming…" : "Claim 1,000 tUSDM"}
-        </button>
+    <>
+      <div className="trust-bar">
+        <span><span className="live-dot" />GET TESTNET TOKENS</span>
+        <span>Self-serve · Solana devnet + Tempo Moderato · find your own faucet</span>
+        <span className="right">stablecoin testnets</span>
       </div>
-      {!valid && address.length > 0 && (
-        <p className="muted" style={{ color: "var(--danger, #9C3B2C)" }}>
-          Address must be a Cardano <strong>preprod testnet</strong> address
-          starting with <code>addr_test1</code> — create one in Lace or Eternl
-          (testnet mode), or paste one you already have.
-        </p>
-      )}
-      {state === "done" && (
-        <>
-          <p style={{ color: "var(--success, #23663C)" }}>{message}</p>
-          {/* Discoverability loop: after claiming, judges need to know where
-              to actually USE the tokens. Point at the marketplace. */}
-          <p style={{ marginTop: 12 }}>
-            <Link
-              to="/services"
-              style={{
-                color: "var(--blue)",
-                textDecoration: "underline",
-                fontWeight: 600,
-              }}
-            >
-              → Now try the marketplace
-            </Link>
-            <span style={{ color: "var(--ink55)", marginLeft: 8 }}>
-              (4 live services, in tokened tUSDM/USDM/THCFI)
-            </span>
-          </p>
-        </>
-      )}
-      {state === "error" && (
-        <p style={{ color: "var(--danger, #9C3B2C)" }}>{message}</p>
-      )}
-      <p className="muted" style={{ marginTop: 18, fontSize: 12.5 }}>
-        Need a wallet?{" "}
-        <a href="https://www.lace.io/" target="_blank" rel="noreferrer">
-          Lace
-        </a>{" "}
-        or{" "}
-        <a href="https://eternl.io/" target="_blank" rel="noreferrer">
-          Eternl
-        </a>{" "}
-        both support preprod testnet mode. The claim is powered by Moneta's
-        public CIP-99 testnet campaign — no registration, no mainnet funds.
+
+      <div className="fig-label">FIG. 4 · Testnet token sourcing guide</div>
+      <hr className="section-rule" />
+
+      <p className="muted" style={{ fontSize: 13 }}>
+        The platform accepts x402 payments in <strong>USDC</strong> and
+        {" "}<strong>PYUSD</strong> on two testnets. Claims are not custodied
+        here — use the official faucets below, then send tokens to the deposit
+        addresses shown on the <strong>wallet top-up page</strong> or pay
+        per-call directly via x402.
       </p>
-    </section>
+
+      <div className="services-register" style={{ marginTop: 14 }}>
+        <div className="service-row">
+          <div className="id">◎ SOL</div>
+          <div className="url">
+            <a href="https://faucet.solana.com" target="_blank" rel="noreferrer">faucet.solana.com</a>
+            <div className="desc">Solana devnet SOL airdrop — needed for gas/fees</div>
+          </div>
+          <div><span className="rail">devnet</span></div>
+          <div className="mono">free</div>
+          <div className="mono" style={{ fontWeight: 600 }}>SOL</div>
+        </div>
+        <div className="service-row">
+          <div className="id">◎ USDC</div>
+          <div className="url">
+            <a href="https://faucet.circle.com" target="_blank" rel="noreferrer">faucet.circle.com</a>
+            <div className="desc">Circle's official devnet USDC faucet (mint 4zMMC…ncDU)</div>
+          </div>
+          <div><span className="rail">devnet</span></div>
+          <div className="mono">free</div>
+          <div className="mono" style={{ fontWeight: 600 }}>USDC</div>
+        </div>
+        <div className="service-row">
+          <div className="id">◆ TPO</div>
+          <div className="url">
+            <a href="https://docs.tempo.xyz" target="_blank" rel="noreferrer">docs.tempo.xyz</a>
+            <div className="desc">Tempo Moderato testnet access &amp; token faucet per Tempo docs</div>
+          </div>
+          <div><span className="rail">moderato</span></div>
+          <div className="mono">free</div>
+          <div className="mono" style={{ fontWeight: 600 }}>USDC</div>
+        </div>
+        <div className="service-row">
+          <div className="id">$ PY</div>
+          <div className="url">
+            <a href="https://www.paypal.com/pyusd" target="_blank" rel="noreferrer">paypal.com/pyusd</a>
+            <div className="desc">
+              PYUSD is accepted on both rails once its testnet address is
+              configured (PYUSD_ADDRESS / SOLANA_PYUSD_MINT env). No
+              PayPal-issued testnet faucet exists yet — source PYUSD
+              mainnet facts here.
+            </div>
+          </div>
+          <div><span className="rail">both</span></div>
+          <div className="mono">—</div>
+          <div className="mono" style={{ fontWeight: 600 }}>PYUSD</div>
+        </div>
+      </div>
+
+      <p className="muted" style={{ marginTop: 14, fontSize: 13 }}>
+        After claiming, paste the platform deposit address from the wallet
+        {" "}<strong>Top up</strong> section and send — the x402 seller holds
+        no buyer keys and settlement is on-chain.
+      </p>
+    </>
   );
 }

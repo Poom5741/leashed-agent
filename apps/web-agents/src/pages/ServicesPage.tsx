@@ -43,13 +43,13 @@ export function ServicesPage() {
         <span className="right">{services.length} live</span>
       </div>
 
-      {/* Multi-chain payment rails (slice 5) + faucet discoverability. */}
+      {/* Multi-chain payment rails (slice 5) — self-serve testnet tokens via /faucet guide. */}
       <ChainsStrip />
       <p className="muted" style={{ marginTop: 8, marginBottom: 8, fontSize: 13 }}>
         <span style={{ marginRight: 8, color: "var(--ink55)" }}>↓</span>
-        On Cardano? Claim <strong>1,000 tUSDM + 5 tADA</strong> free on
-        {" "}<Link to="/faucet" style={{ color: "var(--blue)", textDecoration: "underline" }}>the Cardano preprod faucet</Link>
-        {" "}(one claim per address per day). Solana uses devnet USDC; Tempo uses testnet USDC.
+        Pay in <strong>USDC</strong> on Solana devnet or Tempo Moderato —
+        {" "}<Link to="/faucet" style={{ color: "var(--blue)", textDecoration: "underline" }}>get testnet tokens yourself</Link>
+        {" "}via the official faucets; PYUSD supported once configured.
       </p>
 
       {services.length === 0 && !q.trim() ? (
