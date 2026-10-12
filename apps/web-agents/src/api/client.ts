@@ -104,3 +104,18 @@ export async function listServices(q?: string): Promise<ServiceEntry[]> {
   const body = await jsonOrThrow<{ services: ServiceEntry[] }>(res);
   return body.services;
 }
+// Slice 5 — multi-chain payment network discovery (GET /api/chains).
+export interface ChainInfo {
+  network: string;
+  label: string;
+  family: "cardano" | "svm" | "evm";
+  token: string;
+  priceBase: string;
+  configured: boolean;
+}
+
+export async function listChains(): Promise<ChainInfo[]> {
+  const res = await fetch(`${BASE}/api/chains`);
+  const body = (await res.json()) as { chains: ChainInfo[] };
+  return body.chains;
+}

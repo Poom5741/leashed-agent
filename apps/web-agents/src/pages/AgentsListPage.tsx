@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { listAgents, revokeAgent, type Agent } from "../api/client.js";
+import { ChainsStrip } from "./ChainsStrip.js";
 
 // Tiny inline SVG glyphs for the status pills
 const GlyphCheck = () => (
@@ -69,8 +70,9 @@ export function AgentsListPage() {
       <div className="trust-bar">
         <span><span className="live-dot" />LIVE REGISTER</span>
         <span>Trust layer · leash + receipts + audit + funding</span>
-        <span className="right">06 Oct · v2.1</span>
+        <span className="right">12 Oct · v3 multi-chain</span>
       </div>
+      <ChainsStrip />
 
       {agents.length === 0 ? (
         <div className="empty">

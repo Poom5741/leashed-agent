@@ -781,3 +781,41 @@ input[type="search"]::placeholder { color: var(--ink55); font-style: italic; }
     margin-left: 12px;
   }
 }
+/* ── Slice 5 · multi-chain payment rails strip ─────────────────────────── */
+.chain-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 4px;
+  font-size: 12px;
+}
+.chain-strip-label {
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink55);
+  margin-right: 4px;
+}
+.chain-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px dashed var(--ink55);
+  color: var(--ink55);
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: transparent;
+}
+.chain-badge.live {
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  background: rgba(31, 78, 121, 0.06);
+  font-weight: 600;
+}
+.chain-badge .token {
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  opacity: 0.75;
+}

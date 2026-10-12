@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { listServices, type ServiceEntry } from "../api/client.js";
+import { ChainsStrip } from "./ChainsStrip.js";
+
+const RAIL_DESC: Record<string, string> = {
+  "thaifi-mpp": "ThaiFi MPP endpoint",
+  "cardano-x402": "Cardano x402 endpoint",
+  "solana-x402": "Solana x402 endpoint",
+  "tempo-x402": "Tempo x402 endpoint",
+};
 
 export function ServicesPage() {
   const [q, setQ] = useState("");
@@ -35,13 +43,13 @@ export function ServicesPage() {
         <span className="right">{services.length} live</span>
       </div>
 
-      {/* Faucet discoverability: judges who land here need tUSDM to actually
-          call these x402 services. Top-of-list link to /faucet. */}
-      <p className="muted" style={{ marginTop: 14, marginBottom: 8, fontSize: 13 }}>
+      {/* Multi-chain payment rails (slice 5) + faucet discoverability. */}
+      <ChainsStrip />
+      <p className="muted" style={{ marginTop: 8, marginBottom: 8, fontSize: 13 }}>
         <span style={{ marginRight: 8, color: "var(--ink55)" }}>↓</span>
-        Need tUSDM to call these? Claim <strong>1,000 tUSDM + 5 tADA</strong> free on
+        On Cardano? Claim <strong>1,000 tUSDM + 5 tADA</strong> free on
         {" "}<Link to="/faucet" style={{ color: "var(--blue)", textDecoration: "underline" }}>the Cardano preprod faucet</Link>
-        {" "}(one claim per address per day).
+        {" "}(one claim per address per day). Solana uses devnet USDC; Tempo uses testnet USDC.
       </p>
 
       {services.length === 0 && !q.trim() ? (
@@ -91,9 +99,7 @@ export function ServicesPage() {
                   <div className="id">{s.id.slice(0, 8)}…</div>
                   <div className="url">
                     <a href={s.endpointUrl} target="_blank" rel="noreferrer">{s.endpointUrl}</a>
-                    <div className="desc">
-                      {s.rail === "thaifi-mpp" ? "ThaiFi MPP endpoint" : "Cardano x402 endpoint"}
-                    </div>
+                    <div className="desc">{RAIL_DESC[s.rail] ?? "x402 endpoint"}</div>
                   </div>
                   <div><span className="rail">{s.rail}</span></div>
                   <div className="mono">{(Number(s.priceBase) / 1_000_000).toFixed(2)}</div>
