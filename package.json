@@ -21,5 +21,11 @@
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3"
-  }
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "workflows/*",
+    "probes"
+  ]
 }

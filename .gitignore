@@ -40,3 +40,6 @@ apps/api-agents/.wrangler/
 # Agent skill entry points (just symlinks, not project history)
 .agents/skills/
 .codex/skills/
+
+.dev.vars
+bun.lock

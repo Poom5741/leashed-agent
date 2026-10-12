@@ -34,6 +34,7 @@ import { makeServiceId } from "./services.js";
 import faucetCardanoApp from "./faucet-cardano.js";
 import cardanoBalanceApp from "./cardano-balance.js";
 import receiptSellerApp, { type SellerBindings } from "./receipt-seller.js";
+import { paymentNetworks } from "./chains.js";
 
 export type Bindings = SellerBindings & { ALLOWED_ORIGINS?: string };
 export type Variables = { userId: string };
@@ -242,6 +243,15 @@ app.route("/", cardanoBalanceApp);
 app.route("/", receiptSellerApp);
 
 app.get("/api/healthz", (c) => c.json({ ok: true }));
+
+// Slice 5 — multi-chain payment discovery for the SPA/CLI.
+app.get("/api/chains", (c) => {
+  return c.json({
+    chains: paymentNetworks(c.env).map(({ network, label, family, token, priceBase, configured }) => ({
+      network, label, family, token, priceBase, configured,
+    })),
+  });
+});
 
 // ---------- Slice 4 — public marketplace services registry ----------
 //

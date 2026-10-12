@@ -12,7 +12,7 @@ function harness(valid = true, settled = true) {
     verify: async () => ({ isValid: valid, ...(valid ? {} : { invalidReason: "invalid_payment" }) }),
     settle: async () => { settlements++; return { success: settled, transaction: "a".repeat(64), network: SELLER_NETWORK, ...(settled ? {} : { errorReason: "settlement_failed" }) }; },
   };
-  const seller = createReceiptSeller(() => facilitator);
+  const seller = createReceiptSeller(async () => facilitator);
   const env = { BLOCKFROST_API_KEY_PREPROD: "test-only" };
   const request = (body: unknown, payment?: unknown) => seller.request("https://seller.example/verify-receipt", {
     method: "POST", headers: { "Content-Type": "application/json", ...(payment ? { "Payment-Signature": Buffer.from(JSON.stringify(payment)).toString("base64") } : {}) }, body: JSON.stringify(body),
